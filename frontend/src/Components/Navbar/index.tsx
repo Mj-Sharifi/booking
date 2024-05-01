@@ -1,7 +1,150 @@
-import React from 'react'
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import HamburgerMenu from "./HamburgerMenu";
 
+const activePage = (path: string): string => {
+  switch (path) {
+    case "/":
+      return "Home";
+    case "/tours":
+      return "Tour";
+    case "/blog":
+      return "Blog";
+    default:
+      return "";
+  }
+};
+const pages = [
+  { title: "Home", link: "/" },
+  { title: "Tour", link: "/tours" },
+  { title: "Blog", link: "/blog" },
+];
 export default function Navbar() {
+  const pathName = usePathname();
+  // Handle Hamburger Menu
+  const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
+  const openHamburgerMenu = (event: React.MouseEvent<SVGSVGElement>):void => {
+    setHamburgerMenu(true);
+  };
+  const closeHamburgerMenu = () => {
+    setHamburgerMenu(false);
+  };
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (!(e.target as HTMLElement).closest(".hamburgerMenu")) {
+        closeHamburgerMenu()
+      }
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 1024) {
+          closeHamburgerMenu()
+        }
+      });
+    });
+  }, []);
+  // Nav BackgroundColor
+  const [bgWhite,setBgWhite] = useState<boolean>(false)
+  useEffect(()=>{
+    window.addEventListener("scroll",()=>{
+      window.scrollY>0?setBgWhite(true):setBgWhite(false)
+    })
+  },[])
   return (
-    <div>Navbar</div>
-  )
+    <>
+      <nav className={`fixed z-40 top-0 left-0 right-0 h-22 transition-all duration-300 ${bgWhite?"bg-white shadow-nav":"bg-transparent"}`}>
+        <div className="container mx-auto h-full flexBetween px-2">
+          <div className="flexCenter gap-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="hamburgerMenu hidden md:block lg:hidden w-7 h-7 cursor-pointer"
+              onClick={(e) => openHamburgerMenu(e)}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
+              />
+            </svg>
+
+            <Image
+              src="/assets/images/navbar/tour-booking-logo-2.png"
+              alt="logo"
+              width={70}
+              height={70}
+            />
+            <ul className="hidden lg:flexCenter gap-3">
+              {pages.map((page, index) => (
+                <li key={index}>
+                  <Link
+                    className={`text-md font-medium ${
+                      page.title === activePage(pathName)
+                        ? "text-darkblue"
+                        : "text-dark"
+                    }`}
+                    href={page.link}
+                  >
+                    {page.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="hidden md:flexCenter gap-2">
+            <Link
+              href={""}
+              className="flexCenter duration-300 rounded-md bg-white hover:bg-darkblue h-12 px-4 text-dark hover:text-white text-md font-normal"
+            >
+              Become An Expert
+            </Link>
+            <Link
+              href={""}
+              className="flexCenter duration-300 rounded-md border border-white bg-transparent hover:bg-white h-12 px-4 text-white hover:text-dark text-md font-normal"
+            >
+              Sign In / Register
+            </Link>
+          </div>
+          <div className="flexCenter gap-3 md:hidden">
+            <Link href={""}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-7 h-7 "
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+              </svg>
+            </Link>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="hamburgerMenu w-7 h-7 cursor-pointer"
+              onClick={(e) => openHamburgerMenu(e)}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
+              />
+            </svg>
+          </div>
+        </div>
+      </nav>
+      <HamburgerMenu open={hamburgerMenu} pages={pages} closeHamburgerMenu={closeHamburgerMenu}/>
+    </>
+  );
 }

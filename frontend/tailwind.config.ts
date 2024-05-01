@@ -7,11 +7,26 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily:{
+      "jost":["Jost"],
+      "Sevillana":["Sevillana"]
+    },
+    colors:{
+      transparent:"transparent",
+      dark:"#051036",
+      black:"#000",
+      white:"#fff",
+      darkblue:"#3554d1",
+      yellow:"#f8d448",
+      border:"#ddd",
+      light:"#697488"
+    },
+    boxShadow:{
+      "nav":"0 10px 30px 0 rgba(5,16,54,0.31)",
+    },
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      height: {
+        "22": "5.5rem",
       },
     },
   },
