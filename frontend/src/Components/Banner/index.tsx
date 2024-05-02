@@ -1,11 +1,83 @@
 "use client";
-import React, { useState } from "react";
-import DatePicker, { DateObject, Calendar } from "react-multi-date-picker";
+import React, { useEffect, useState } from "react";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
-import styles from "./style.module.css";
+import opacity from "react-element-popper/animations/opacity";
+import transition from "react-element-popper/animations/transition";
+import "./style.css";
+import axios from "axios";
+const minusSVG = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="currentColor"
+    className="w-5 h-5 text-darkblue"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+  </svg>
+);
+const plusSVG = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="currentColor"
+    className="w-5 h-5 text-darkblue"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M12 4.5v15m7.5-7.5h-15"
+    />
+  </svg>
+);
+type locations = {
+  id: number;
+  attributes: {
+    city: string;
+    country: string;
+  };
+};
 export default function Banner() {
+  //Location
+  const [locations, setLocations] = useState<locations[]>();
+  useEffect(() => {
+    axios
+      .get(process.env.NEXT_PUBLIC_API + "locations")
+      .then((data) => setLocations(data?.data?.data))
+      .catch((err) => console.log(err));
+  }, []);
+  const [destination, setDestination] = useState<string>();
+  const [locationEl, setLocationEl] = useState<boolean>(false);
+  useEffect(() => {
+    document.addEventListener("click", (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest(".location-selection")) {
+        setLocationEl(false);
+      }
+    });
+  }, []);
   //DatePicker
-  const [dateRange, setDateRange] = useState<Value>(new Date());
+  const [dateRange, setDateRange] = useState<Value>([
+    new DateObject().add(7, "days"),
+    new DateObject().add(12, "days"),
+  ]);
+  // Guest Number
+  const [guestEl, setGuestEl] = useState<boolean>(false);
+  const [guest, setGuest] = useState<{
+    adult: number;
+    children: number;
+    rooms: number;
+  }>({ adult: 2, children: 1, rooms: 1 });
+  useEffect(() => {
+    document.addEventListener("click", (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest(".guest-selection")) {
+        setGuestEl(false);
+      }
+    });
+  }, []);
   return (
     <div className="font-jost relative pt-24 md:pt-56 xl:pt-64 pb-14 md:pb-40 xl:pb-52">
       <div className="absolute left-0 top-0 h-full w-full md:w-7/12">
@@ -15,10 +87,10 @@ export default function Banner() {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="container px-2 sm:px-6 mx-auto w-full relative z-10">
-        <div className="w-full ">
-          <div className="flex items-start md:w-2/3 lg:w-3/5 text-2xl sm:text-4xl md:text-5xl font-semibold">
-            Best Travel &nbsp;
+      <div className="container px-3 sm:px-6 mx-auto w-full relative z-10">
+        <div className="w-full">
+          <div className="flex items-start md:w-[600px] lg:w-3/5 text-2xl sm:text-4xl md:text-5xl font-semibold">
+            Best Travel&nbsp;
             <span className="relative text-darkblue">
               Experience
               <span className="absolute -bottom-1/4 left-0 w-full">
@@ -29,20 +101,37 @@ export default function Banner() {
               </span>
             </span>
           </div>
-          <p className="mt-6 text-light md:w-2/3 lg:w-3/5">
+          <p className="mt-8 text-light md:w-2/3 lg:w-3/5">
             Experience the various exciting tour and travel packages and Make
             hotel reservations, find vacation packages, search cheap hotels and
             events
           </p>
-          <div className="bg-white rounded-md w-full xl:w-4/5 p-5 flex flex-col lg:flex-row">
-            <div className="flex flex-col gap-3">
+          <div className="bg-white rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12">
+            {/* Location */}
+            <div className="flex flex-col gap-2 pb-4 lg:pb-0 lg:pr-8">
               <span className="font-semibold">Location</span>
               <input
-                className="border-none outline-none"
+                className="location-selection border-none outline-none"
                 placeholder="Where are you going?"
+                onClick={() => setLocationEl(true)}
               />
+              <div
+                className={`guest-selection absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 transition-all duration-300 overflow-hidden ${
+                  locationEl ? "visible animate-fadeUp" : "invisible"
+                }`}
+              >
+                <ul className="flex flex-col gap-4 max-h-64 md:max-h-96 overflow-y-scroll text-dark">
+                  {locations?.map((e) => (
+                    <li key={e?.id} className="flex flex-col gap-2">
+                      <span>{e?.attributes?.city}</span>
+                      <span>{e?.attributes?.country}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="flex flex-col gap-3 border-x border-border">
+            {/* Date Picker */}
+            <div className="flex flex-col gap-2 border-y lg:border-y-0 lg:border-x border-border py-6 lg:py-0 lg:px-12">
               <span className="font-semibold">Check in - Check out</span>
               <DatePicker
                 value={dateRange}
@@ -50,13 +139,131 @@ export default function Banner() {
                 format="MMMM DD"
                 range
                 numberOfMonths={2}
-                // containerClassName={styles["date-picker"]}
+                inputClass="outline-none border-none text-light text-sm"
+                animations={[
+                  opacity(),
+                  transition({
+                    from: 15,
+                    transition: "all 0.5s ease",
+                  }),
+                ]}
               />
             </div>
-            <div className="flex flex-col gap-3">
+            {/* Number of Guest */}
+            <div className="flex flex-col gap-2 relative py-4 lg:py-0 lg:px-8">
               <span className="font-semibold">Guest</span>
-              <span className="text-nowrap">Where are you going?</span>
+              <span
+                className="guest-selection text-light text-sm"
+                onClick={() => setGuestEl(true)}
+              >
+                {guest.adult} Adults - {guest.children} Children - {guest.rooms}{" "}
+                Rooms
+              </span>
+              <div
+                className={`guest-selection absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 transition-all duration-300 overflow-hidden ${
+                  guestEl ? "visible animate-fadeUp" : "invisible"
+                }`}
+              >
+                <div className="flexBetween pb-4">
+                  <span>Adults</span>
+                  <div className="flexBetween w-32 ">
+                    <button
+                      className="border border-darkblue rounded p-2"
+                      onClick={() =>
+                        setGuest({
+                          ...guest,
+                          adult:
+                            guest.adult > 1 ? guest.adult - 1 : guest.adult,
+                        })
+                      }
+                    >
+                      {minusSVG}
+                    </button>
+                    <span className="text-lg">{guest.adult}</span>
+                    <button
+                      className="border border-darkblue rounded p-2"
+                      onClick={() =>
+                        setGuest({ ...guest, adult: guest.adult + 1 })
+                      }
+                    >
+                      {plusSVG}
+                    </button>
+                  </div>
+                </div>
+                <div className="flexBetween py-4 border-y border-border">
+                  <span>Children</span>
+                  <div className="flexBetween w-32">
+                    <button
+                      className="border border-darkblue rounded p-2"
+                      onClick={() =>
+                        setGuest({
+                          ...guest,
+                          children:
+                            guest.children > 0
+                              ? guest.children - 1
+                              : guest.children,
+                        })
+                      }
+                    >
+                      {minusSVG}
+                    </button>
+                    <span className="text-lg">{guest.children}</span>
+                    <button
+                      className="border border-darkblue rounded p-2"
+                      onClick={() =>
+                        setGuest({ ...guest, children: guest.children + 1 })
+                      }
+                    >
+                      {plusSVG}
+                    </button>
+                  </div>
+                </div>
+                <div className="flexBetween pt-4">
+                  <span>Rooms</span>
+                  <div className="flexBetween w-32">
+                    <button
+                      className="border border-darkblue rounded p-2"
+                      onClick={() =>
+                        setGuest({
+                          ...guest,
+                          rooms:
+                            guest.rooms > 1 ? guest.rooms - 1 : guest.rooms,
+                        })
+                      }
+                    >
+                      {minusSVG}
+                    </button>
+                    <span className="text-lg">{guest.rooms}</span>
+                    <button
+                      className="border border-darkblue rounded p-2"
+                      onClick={() =>
+                        setGuest({ ...guest, rooms: guest.rooms + 1 })
+                      }
+                    >
+                      {plusSVG}
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+            {/* Search Button */}
+            <button className="w-full lg:w-36 h-16 transition-all duration-300 bg-darkblue hover:bg-dark text-white rounded flexCenter gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-5 h-5 text-white"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
+              Search
+            </button>
           </div>
         </div>
       </div>

@@ -11,6 +11,11 @@ const config: Config = {
       "jost":["Jost"],
       "Sevillana":["Sevillana"]
     },
+    keyframes:{
+      fadeUp:{"from":{"transform":"translateY(10%)","opacity":"0.2"},"to":{"transform":"translateY(0)","opacity":"1"}},
+      downup:{"from":{"height":"auto"},"to":{"height":"0px"}}
+    },
+    animation:{"fadeUp":"fadeUp 0.5s ease","downup":"downup 0.3s"},
     colors:{
       transparent:"transparent",
       dark:"#051036",
@@ -28,6 +33,13 @@ const config: Config = {
       height: {
         "22": "5.5rem",
       },
+      zIndex:{
+        "60":"60",
+        "70":"70",
+        "80":"80",
+        "100":"100",
+        "1000":"1000",
+      }
     },
   },
   plugins: [],

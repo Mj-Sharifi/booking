@@ -13,7 +13,7 @@ export default function HamburgerMenu({
 }) {
   return (
     <div
-      className={`hamburgerMenu absolute z-50 top-0 h-full ${
+      className={`hamburgerMenu absolute z-70 top-0 h-full ${
         open ? "left-0" : "-left-72"
       } transition-all duration-300 border-r border-darkblue w-72  bg-white py-4 flex flex-col`}
     >

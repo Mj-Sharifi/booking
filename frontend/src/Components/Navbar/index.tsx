@@ -26,34 +26,60 @@ export default function Navbar() {
   const pathName = usePathname();
   // Handle Hamburger Menu
   const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
-  const openHamburgerMenu = (event: React.MouseEvent<SVGSVGElement>):void => {
+  const openHamburgerMenu = (event: React.MouseEvent<SVGSVGElement>): void => {
     setHamburgerMenu(true);
+    document.body.classList.add(
+      "before:content-['']",
+      "before:absolute",
+      "before:top-0",
+      "before:bottom-0",
+      "before:right-0",
+      "before:left-0",
+      "before:bg-black",
+      "before:opacity-0",
+      "before:z-60"
+    );
   };
   const closeHamburgerMenu = () => {
     setHamburgerMenu(false);
+    document.body.classList.remove(
+      "before:content-['']",
+      "before:absolute",
+      "before:top-0",
+      "before:bottom-0",
+      "before:right-0",
+      "before:left-0",
+      "before:bg-black",
+      "before:opacity-60",
+      "before:z-60"
+    );
   };
   useEffect(() => {
     document.addEventListener("click", (e) => {
       if (!(e.target as HTMLElement).closest(".hamburgerMenu")) {
-        closeHamburgerMenu()
+        closeHamburgerMenu();
       }
       window.addEventListener("resize", () => {
         if (window.innerWidth > 1024) {
-          closeHamburgerMenu()
+          closeHamburgerMenu();
         }
       });
     });
   }, []);
   // Nav BackgroundColor
-  const [bgWhite,setBgWhite] = useState<boolean>(false)
-  useEffect(()=>{
-    window.addEventListener("scroll",()=>{
-      window.scrollY>0?setBgWhite(true):setBgWhite(false)
-    })
-  },[])
+  const [bgWhite, setBgWhite] = useState<boolean>(false);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      window.scrollY > 0 ? setBgWhite(true) : setBgWhite(false);
+    });
+  }, []);
   return (
     <>
-      <nav className={`fixed z-40 top-0 left-0 right-0 h-22 transition-all duration-300 ${bgWhite?"bg-white shadow-nav":"bg-transparent"}`}>
+      <nav
+        className={`fixed z-40 top-0 left-0 right-0 h-22 transition-all duration-300 ${
+          bgWhite ? "bg-white shadow-nav" : "bg-transparent"
+        }`}
+      >
         <div className="container mx-auto h-full flexBetween px-2">
           <div className="flexCenter gap-4">
             <svg
@@ -62,7 +88,7 @@ export default function Navbar() {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="hamburgerMenu hidden md:block lg:hidden w-7 h-7 cursor-pointer"
+              className="hamburgerMenu hidden md:block lg:hidden w-7 h-7 cursor-pointer before:bg-dark"
               onClick={(e) => openHamburgerMenu(e)}
             >
               <path
@@ -144,7 +170,11 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-      <HamburgerMenu open={hamburgerMenu} pages={pages} closeHamburgerMenu={closeHamburgerMenu}/>
+      <HamburgerMenu
+        open={hamburgerMenu}
+        pages={pages}
+        closeHamburgerMenu={closeHamburgerMenu}
+      />
     </>
   );
 }
