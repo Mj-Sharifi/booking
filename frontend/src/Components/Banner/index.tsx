@@ -1,11 +1,34 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
 import opacity from "react-element-popper/animations/opacity";
 import transition from "react-element-popper/animations/transition";
 import "./style.css";
 import axios from "axios";
+import Dropdown from "../Dropdown";
+
+const locationSVG = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="w-6 h-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+    />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+    />
+  </svg>
+);
 const minusSVG = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +73,9 @@ export default function Banner() {
       .then((data) => setLocations(data?.data?.data))
       .catch((err) => console.log(err));
   }, []);
-  const [destination, setDestination] = useState<string>();
+  const [destination, setDestination] = useState<string>(
+    "Where are you going?"
+  );
   const [locationEl, setLocationEl] = useState<boolean>(false);
   useEffect(() => {
     document.addEventListener("click", (e: MouseEvent) => {
@@ -89,7 +114,7 @@ export default function Banner() {
       </div>
       <div className="container px-3 sm:px-6 mx-auto w-full relative z-10">
         <div className="w-full">
-          <div className="flex items-start md:w-[600px] lg:w-3/5 text-2xl sm:text-4xl md:text-5xl font-semibold">
+          <div className="flex items-start md:w-[600px] lg:w-[750px] text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
             Best Travel&nbsp;
             <span className="relative text-darkblue">
               Experience
@@ -101,30 +126,44 @@ export default function Banner() {
               </span>
             </span>
           </div>
-          <p className="mt-8 text-light md:w-2/3 lg:w-3/5">
+          <p className="mt-8 text-light md:w-2/3 lg:w-3/5 md:text-lg">
             Experience the various exciting tour and travel packages and Make
             hotel reservations, find vacation packages, search cheap hotels and
             events
           </p>
           <div className="bg-white rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12">
             {/* Location */}
-            <div className="flex flex-col gap-2 pb-4 lg:pb-0 lg:pr-8">
+            <div className="flex flex-col gap-2 pb-4 lg:pb-0 lg:pr-8 relative">
               <span className="font-semibold">Location</span>
-              <input
+              <span
                 className="location-selection border-none outline-none"
-                placeholder="Where are you going?"
                 onClick={() => setLocationEl(true)}
-              />
+              >
+                {destination}
+              </span>
               <div
-                className={`guest-selection absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 transition-all duration-300 overflow-hidden ${
+                className={`absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
                   locationEl ? "visible animate-fadeUp" : "invisible"
                 }`}
               >
-                <ul className="flex flex-col gap-4 max-h-64 md:max-h-96 overflow-y-scroll text-dark">
+                <ul className="flex flex-col gap-3 max-h-64 md:max-h-96 overflow-y-scroll text-dark">
                   {locations?.map((e) => (
-                    <li key={e?.id} className="flex flex-col gap-2">
-                      <span>{e?.attributes?.city}</span>
-                      <span>{e?.attributes?.country}</span>
+                    <li
+                      key={e?.id}
+                      className="flex align-top justify-start gap-2 hover:bg-hoverlight py-2 px-3 transition-all duration-300"
+                      onClick={(event, value: string) =>
+                        setDestination(e?.attributes?.city)
+                      }
+                    >
+                      {locationSVG}
+                      <div className="flex flex-col gap-1">
+                        <span className="text-black">
+                          {e?.attributes?.city}
+                        </span>
+                        <span className="text-light text-sm">
+                          {e?.attributes?.country}
+                        </span>
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -139,7 +178,7 @@ export default function Banner() {
                 format="MMMM DD"
                 range
                 numberOfMonths={2}
-                inputClass="outline-none border-none text-light text-sm"
+                inputClass="outline-none border-none text-light text-sm p-0"
                 animations={[
                   opacity(),
                   transition({
@@ -160,7 +199,7 @@ export default function Banner() {
                 Rooms
               </span>
               <div
-                className={`guest-selection absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 transition-all duration-300 overflow-hidden ${
+                className={`guest-selection absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
                   guestEl ? "visible animate-fadeUp" : "invisible"
                 }`}
               >

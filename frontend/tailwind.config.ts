@@ -5,6 +5,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
     fontFamily:{
@@ -24,7 +25,8 @@ const config: Config = {
       darkblue:"#3554d1",
       yellow:"#f8d448",
       border:"#ddd",
-      light:"#697488"
+      light:"#697488",
+      hoverlight:"rgba(53, 84, 209, .05) !important"
     },
     boxShadow:{
       "nav":"0 10px 30px 0 rgba(5,16,54,0.31)",
@@ -42,6 +44,6 @@ const config: Config = {
       }
     },
   },
-  plugins: [],
+  plugins: [ require('flowbite/plugin')],
 };
 export default config;

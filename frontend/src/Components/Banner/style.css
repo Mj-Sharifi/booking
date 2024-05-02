@@ -1,17 +1,3 @@
-
-@keyframes updown {
-  from {
-    height: 0;
-  }
-  to {
-    height: auto;
-  }
-}
-.updown{
-    animation-name: updown;
-    animation-duration: 0.3s;
-    animation-timing-function: linear;
-}
 .rmdp-wrapper {
   overflow: hidden;
 }

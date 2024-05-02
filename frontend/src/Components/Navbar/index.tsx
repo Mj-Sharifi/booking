@@ -97,7 +97,6 @@ export default function Navbar() {
                 d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
               />
             </svg>
-
             <Image
               src="/assets/images/navbar/tour-booking-logo-2.png"
               alt="logo"
@@ -124,13 +123,21 @@ export default function Navbar() {
           <div className="hidden md:flexCenter gap-2">
             <Link
               href={""}
-              className="flexCenter duration-300 rounded-md bg-white hover:bg-darkblue h-12 px-4 text-dark hover:text-white text-md font-normal"
+              className={`flexCenter duration-300 rounded-md ${
+                bgWhite
+                  ? "bg-dark hover:bg-darkblue text-white"
+                  : "bg-white hover:bg-darkblue text-dark hover:text-white"
+              }   h-12 px-4 text-md font-normal`}
             >
               Become An Expert
             </Link>
             <Link
               href={""}
-              className="flexCenter duration-300 rounded-md border border-white bg-transparent hover:bg-white h-12 px-4 text-white hover:text-dark text-md font-normal"
+              className={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-4 ${
+                bgWhite
+                  ? "text-dark border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"
+                  : "text-white border-white hover:bg-white hover:text-dark"
+              } text-md font-normal`}
             >
               Sign In / Register
             </Link>
