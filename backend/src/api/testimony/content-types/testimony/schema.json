@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "testimonies",
+  "info": {
+    "singularName": "testimony",
+    "pluralName": "testimonies",
+    "displayName": "Testimony"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "skill": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "place": {
+      "type": "string"
+    }
+  }
+}

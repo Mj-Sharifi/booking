@@ -17,7 +17,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-element-popper": "^2.1.6",
-    "react-multi-date-picker": "^4.4.1"
+    "react-multi-date-picker": "^4.4.1",
+    "swiper": "^11.1.1"
   },
   "devDependencies": {
     "@types/node": "^20",

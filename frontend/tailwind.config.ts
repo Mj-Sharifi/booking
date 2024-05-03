@@ -15,6 +15,7 @@ const config: Config = {
       "xl": "1280px",
       "2xl": "1536px",
     },
+    
     fontFamily: {
       jost: ["Jost"],
       Sevillana: ["Sevillana"],
@@ -34,6 +35,7 @@ const config: Config = {
       white: "#fff",
       darkblue: "#3554d1",
       yellow: "#f8d448",
+      violet:"#7e53f9",
       border: "#ddd",
       light: "#697488",
       hoverlight: "rgba(53, 84, 209, .05) !important",
@@ -52,6 +54,11 @@ const config: Config = {
         "80": "80",
         "100": "100",
         "1000": "1000",
+      },
+      spacing:{
+        "100":"25rem",
+        "112":"28rem",
+        "128":"32rem"
       },
     },
   },

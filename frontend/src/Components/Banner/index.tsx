@@ -57,7 +57,7 @@ const plusSVG = (
     />
   </svg>
 );
-type locations = {
+type fetchData = {
   id: number;
   attributes: {
     city: string;
@@ -66,7 +66,7 @@ type locations = {
 };
 export default function Banner() {
   //Location
-  const [locations, setLocations] = useState<locations[]>();
+  const [locations, setLocations] = useState<fetchData[]>();
   useEffect(() => {
     axios
       .get(process.env.NEXT_PUBLIC_API + "locations")
@@ -104,7 +104,7 @@ export default function Banner() {
     });
   }, []);
   return (
-    <div className="font-jost relative pt-24 md:pt-56 xl:pt-64 pb-14 md:pb-40 xl:pb-52">
+    <section className="font-jost relative pt-24 md:pt-56 xl:pt-64 pb-14 md:pb-40 xl:pb-52">
       <div className="absolute left-0 top-0 h-full w-full md:w-7/12">
         <img
           src="/assets/images/banner/bg-1.svg"
@@ -313,6 +313,6 @@ export default function Banner() {
           className="w-full h-full object-cover"
         />
       </div>
-    </div>
+    </section>
   );
 }

@@ -56,7 +56,7 @@ export function instagramSVG(
 ) {
   return (
     <svg
-    className={`${width} ${height} ${bgColor} ${color}`}
+      className={`${width} ${height} ${bgColor} ${color}`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -81,7 +81,7 @@ export function linkedinSVG(
 ) {
   return (
     <svg
-    className={`${width} ${height} ${bgColor} ${color}`}
+      className={`${width} ${height} ${bgColor} ${color}`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -95,6 +95,46 @@ export function linkedinSVG(
         clipRule="evenodd"
       />
       <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
+    </svg>
+  );
+}
+export function rightArrowSVG(
+  style: string
+) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.2}
+      stroke="currentColor"
+      className={`${style}`}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+      />
+    </svg>
+  );
+}
+export function leftArrowSVG(
+  style: string
+) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.2}
+      stroke="currentColor"
+      className={`${style}`}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+      />
     </svg>
   );
 }

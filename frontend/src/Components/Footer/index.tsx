@@ -130,7 +130,7 @@ export default function Footer() {
               <p className="font-semibold mb-2">Get Updates & More</p>
               <div className="relative w-full">
                 <input
-                  className="bg-white text-dark w-full px-3 py-5 border-none outline-none rounded placeholder:text-"
+                  className="bg-white text-dark w-full p-5 border-none outline-none rounded"
                   placeholder="Your Email"
                 />
                 <button className="absolute right-4 h-full top-1/2 -translate-y-1/2 underline text-dark font-semibold">
