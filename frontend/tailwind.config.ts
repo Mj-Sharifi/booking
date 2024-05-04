@@ -9,25 +9,28 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      "sm": "580px",
-      "md": "768px",
-      "lg": "1024px",
-      "xl": "1280px",
+      sm: "580px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
       "2xl": "1536px",
     },
-    
+
     fontFamily: {
       jost: ["Jost"],
       Sevillana: ["Sevillana"],
     },
     keyframes: {
       fadeUp: {
-        from: { transform: "translateY(10%)", opacity: "0.2" },
+        from: { transform: "translateY(60px)", opacity: "0.2" },
         to: { transform: "translateY(0)", opacity: "1" },
       },
-      downup: { from: { height: "auto" }, to: { height: "0px" } },
     },
-    animation: { fadeUp: "fadeUp 0.5s ease", downup: "downup 0.3s" },
+    animation: {
+      fadeUp200: "fadeUp 1s linear 0.2s",
+      fadeUp400: "fadeUp 1s linear 4s",
+      fadeUp600: "fadeUp 1s linear 10s",
+    },
     colors: {
       transparent: "transparent",
       dark: "#051036",
@@ -35,7 +38,7 @@ const config: Config = {
       white: "#fff",
       darkblue: "#3554d1",
       yellow: "#f8d448",
-      violet:"#7e53f9",
+      violet: "#7e53f9",
       border: "#ddd",
       light: "#697488",
       hoverlight: "rgba(53, 84, 209, .05) !important",
@@ -55,10 +58,10 @@ const config: Config = {
         "100": "100",
         "1000": "1000",
       },
-      spacing:{
-        "100":"25rem",
-        "112":"28rem",
-        "128":"32rem"
+      spacing: {
+        "100": "25rem",
+        "112": "28rem",
+        "128": "32rem",
       },
     },
   },

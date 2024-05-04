@@ -98,9 +98,7 @@ export function linkedinSVG(
     </svg>
   );
 }
-export function rightArrowSVG(
-  style: string
-) {
+export function rightArrowSVG(style: string) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -118,9 +116,7 @@ export function rightArrowSVG(
     </svg>
   );
 }
-export function leftArrowSVG(
-  style: string
-) {
+export function leftArrowSVG(style: string) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -134,6 +130,24 @@ export function leftArrowSVG(
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+      />
+    </svg>
+  );
+}
+export function upRightSVG(style: string) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.2}
+      stroke="currentColor"
+      className={`${style}`}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
       />
     </svg>
   );

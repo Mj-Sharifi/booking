@@ -7,7 +7,6 @@ import transition from "react-element-popper/animations/transition";
 import "./style.css";
 import axios from "axios";
 
-
 const locationSVG = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -103,35 +102,47 @@ export default function Banner() {
       }
     });
   }, []);
+  // Entrance Animation
+  const [startAnimation,setStartAnimation] = useState<boolean>(false)
+  const banner = useRef<HTMLDivElement>(null)
+  useEffect(()=>{
+      const bannerTop = banner.current?.getBoundingClientRect().top;
+      const scrollY = window.scrollY;
+      if (bannerTop) {
+        if (bannerTop >= scrollY) {
+          setStartAnimation(true);
+        }
+      }
+  },[])
   return (
     <section className="font-jost relative pt-24 md:pt-56 xl:pt-64 pb-14 md:pb-40 xl:pb-52">
       <div className="absolute left-0 top-0 h-full w-full md:w-7/12">
         <img
-          src="/assets/images/banner/bg-1.svg"
+          src="/assets/images/home/banner/bg-1.svg"
           alt="bg-banner"
           className="w-full h-full object-cover"
         />
       </div>
       <div className="container px-3 sm:px-6 mx-auto w-full relative z-10">
-        <div className="w-full">
-          <div className="flex items-start md:w-[600px] lg:w-[750px] text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
+        <div ref={banner} className="w-full">
+          <div className={`flex items-start md:w-[600px] lg:w-[750px] text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold transition-all duration-700 ${startAnimation?"translate-y-0 opacity-100":"translate-y-10 opacity-0"} `}>
             Best Travel&nbsp;
             <span className="relative text-darkblue">
               Experience
               <span className="absolute -bottom-1/4 left-0 w-full">
                 <img
-                  src="/assets/images/banner/line.png"
+                  src="/assets/images/home/banner/line.png"
                   className="w-full object-cover"
                 />
               </span>
             </span>
           </div>
-          <p className="mt-8 text-light md:w-2/3 lg:w-3/5 md:text-lg">
+          <p className={`mt-8 text-light md:w-2/3 lg:w-3/5 md:text-lg transition-all duration-700 delay-200 ${startAnimation?"translate-y-0":"translate-y-10"}`}>
             Experience the various exciting tour and travel packages and Make
             hotel reservations, find vacation packages, search cheap hotels and
             events
           </p>
-          <div className="bg-white rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12">
+          <div className={`bg-white rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12 transition-all duration-700 delay-500 ${startAnimation?"translate-y-0":"translate-y-12"}`}>
             {/* Location */}
             <div className="flex flex-col gap-2 pb-4 lg:pb-0 lg:pr-8 relative">
               <span className="font-semibold">Location</span>
@@ -308,7 +319,7 @@ export default function Banner() {
       </div>
       <div className="absolute hidden md:block right-0 top-0 h-full w-5/12">
         <img
-          src="/assets/images/banner/bg-2.jpg"
+          src="/assets/images/home/banner/bg-2.jpg"
           alt="bg-banner"
           className="w-full h-full object-cover"
         />
