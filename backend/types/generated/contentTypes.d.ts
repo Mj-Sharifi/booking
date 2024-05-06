@@ -794,6 +794,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'Category';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -802,7 +803,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     title: Attribute.String;
     tours: Attribute.Relation<
       'api::category.category',
-      'oneToMany',
+      'manyToMany',
       'api::tour.tour'
     >;
     createdAt: Attribute.DateTime;
@@ -904,7 +905,6 @@ export interface ApiTourTour extends Schema.CollectionType {
     place: Attribute.String;
     imagePrimary: Attribute.Media & Attribute.Required;
     isPopular: Attribute.Boolean & Attribute.DefaultTo<false>;
-    duration: Attribute.Integer;
     rating: Attribute.Integer &
       Attribute.SetMinMax<
         {
@@ -914,12 +914,14 @@ export interface ApiTourTour extends Schema.CollectionType {
         number
       > &
       Attribute.DefaultTo<4>;
-    category: Attribute.Relation<
+    images: Attribute.Media;
+    price: Attribute.Integer;
+    duration: Attribute.String;
+    categories: Attribute.Relation<
       'api::tour.tour',
-      'manyToOne',
+      'manyToMany',
       'api::category.category'
     >;
-    images: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

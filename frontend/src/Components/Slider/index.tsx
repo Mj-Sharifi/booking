@@ -91,8 +91,7 @@ export default function Slider({
   return (
     <Swiper
       slidesPerView={swiperParam.slidesPerView}
-      // breakpoints={swiperParam.breakpoints}
-      
+      breakpoints={swiperParam.breakpoints}
       className="mySwiper"
       onActiveIndexChange={(e) => setActiveIndex(e.activeIndex)}
     >

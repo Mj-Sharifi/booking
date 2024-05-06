@@ -4,18 +4,15 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 //Slider
 import Slider from "../Slider";
 import { SwiperSlide } from "swiper/react";
-type fetchData = {
-  id: number;
-  attributes;
-};
+import { APIResponseCollection, APIResponseData } from "@/types/types";
 
 export default function Testimony() {
   // Getting Data
-  const [testimonies, setTestimonies] = useState<fetchData[]>();
+  const [testimonies, setTestimonies] = useState<APIResponseCollection<"api::testimony.testimony">>();
   useEffect(() => {
     axios
       .get(process.env.NEXT_PUBLIC_API + "testimonies?populate=*")
-      .then((res) => setTestimonies(res.data.data))
+      .then((res) => setTestimonies(res.data))
       .catch((err) => console.log(err));
   }, []);
   // Entrance Animation
@@ -54,10 +51,10 @@ export default function Testimony() {
         </p>
         {testimonies && (
           <Slider
-            number={testimonies?.length}
+            number={testimonies.data?.length}
             swiperParam={{slidesPerView:1}}
           >
-            {testimonies?.map((e, i) => (
+            {testimonies.data?.map((e, i) => (
               <SwiperSlide key={i}>
                 <div className="flex flex-col items-center px-2 sm:px-0 sm:w-96 md:w-112 lg:w-128">
                   <div className="relative mb-5">

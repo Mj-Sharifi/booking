@@ -1,57 +1,15 @@
-"use client";
 import Banner from "@/Components/Banner";
-import Slider from "@/Components/Slider";
+import PopularTours from "@/Components/PopularTours";
 import Testimony from "@/Components/Testimony";
 import { upRightSVG } from "@/Utils/svg";
-import axios from "axios";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { SwiperSlide } from "swiper/react";
 
-type fetchData = {
-  id: number;
-  attributes;
-};
 export default function Home() {
-  // Popular Tours
-  const [popularTours, setPopularTours] = useState<fetchData[]>();
-  useEffect(() => {
-    axios
-      .get(
-        process.env.NEXT_PULIC_API +
-          "tours?populate=*?filter[isPopular][$eq]=true"
-      )
-      .then((res) => setPopularTours(res.data.data))
-      .catch((err) => console.log(err));
-  }, []);
+
   return (
     <>
       <Banner />
-      <section className="container mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-7 sm:pb-10 md:pb-14 lg:pb-16">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
-          Most Popular Tours
-        </h2>
-        <p className="text-light mb-8">
-          Interdum et malesuada fames ac ante ipsum
-        </p>
-        {popularTours && (
-          <Slider
-            number={popularTours.length}
-            swiperParam={{
-              slidesPerView: 1,
-              spaceBetween: 20,
-              breakpoints: {
-                [580]: { slidesPerView: 2, spaceBetween: 20 },
-                [1024]: { slidesPerView: 4 },
-              },
-            }}
-          >
-            {popularTours.map((e) => (
-              <SwiperSlide key={e.id}></SwiperSlide>
-            ))}
-          </Slider>
-        )}
-      </section>
+      <PopularTours/>
       <section className="bg-border grid grid-cols-1 md:grid-cols-5 w-full">
         <div className="md:col-span-2 order-1 md:order-2">
           <img
@@ -60,43 +18,43 @@ export default function Home() {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="md:col-span-3 flex flex-col py-10 order-2 md:order-1">
-          <div className="mx-auto">
+        <div className="md:col-span-3 flex flex-col justify-center py-10 order-2 md:order-1">
+          <div className="mx-auto px-2">
             <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
               Why be a Local Expert
             </h4>
             <p className="text-light mb-8">
               These popular destinations have a lot to offer
             </p>
-            <div className="mb-5 flexCenter gap-2">
+            <div className="mb-5 flexCenter gap-4">
               <img
                 src="/assets/images/home/1.svg"
                 alt=""
                 className="w-12 sm:w-14"
               />
-              <div className="flex flex-col items-start justify-between">
+              <div className="flex flex-col items-start justify-between max-w-72">
                 <h5 className="md:text-lg font-medium">Best Price Guarantee</h5>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
-            <div className="mb-5 flexCenter gap-2">
+            <div className="mb-5 flexCenter gap-4">
               <img
                 src="/assets/images/home/2.svg"
                 alt=""
                 className="w-12 sm:w-14"
               />
-              <div className="flex flex-col items-start justify-between">
+              <div className="flex flex-col items-start justify-between max-w-72">
                 <h5 className="md:text-lg font-medium">Easy & Quick Booking</h5>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
-            <div className="mb-5 flexCenter gap-2">
+            <div className="mb-5 flexCenter gap-4">
               <img
                 src="/assets/images/home/3.svg"
                 alt=""
                 className="w-12 sm:w-14"
               />
-              <div className="flex flex-col items-start justify-between">
+              <div className="flex flex-col items-start justify-between max-w-72">
                 <h5 className="md:text-lg font-medium">Customer Care 24/7</h5>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>

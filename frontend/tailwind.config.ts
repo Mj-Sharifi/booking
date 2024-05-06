@@ -44,9 +44,7 @@ const config: Config = {
       hoverlight: "rgba(53, 84, 209, .05) !important",
       glass: "#ffffff10",
     },
-    boxShadow: {
-      nav: "0 10px 30px 0 rgba(5,16,54,0.31)",
-    },
+
     extend: {
       height: {
         "22": "5.5rem",
@@ -62,6 +60,9 @@ const config: Config = {
         "100": "25rem",
         "112": "28rem",
         "128": "32rem",
+      },
+      boxShadow: {
+        nav: "0 10px 30px 0 rgba(5,16,54,0.31)",
       },
     },
   },

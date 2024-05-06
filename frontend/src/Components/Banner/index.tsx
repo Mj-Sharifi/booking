@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { MouseEventHandler, useEffect, useRef, useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
 import opacity from "react-element-popper/animations/opacity";
 import transition from "react-element-popper/animations/transition";
 import "./style.css";
 import axios from "axios";
+import { APIResponseCollection, APIResponseData } from "@/types/types";
 
 const locationSVG = (
   <svg
@@ -56,20 +57,14 @@ const plusSVG = (
     />
   </svg>
 );
-type fetchData = {
-  id: number;
-  attributes: {
-    city: string;
-    country: string;
-  };
-};
+
 export default function Banner() {
   //Location
-  const [locations, setLocations] = useState<fetchData[]>();
+  const [locations, setLocations] = useState<APIResponseCollection<"api::location.location">>();
   useEffect(() => {
     axios
       .get(process.env.NEXT_PUBLIC_API + "locations")
-      .then((data) => setLocations(data?.data?.data))
+      .then((res) => setLocations(res.data))
       .catch((err) => console.log(err));
   }, []);
   const [destination, setDestination] = useState<string>(
@@ -158,12 +153,12 @@ export default function Banner() {
                 }`}
               >
                 <ul className="flex flex-col gap-3 max-h-64 md:max-h-96 overflow-y-scroll text-dark">
-                  {locations?.map((e) => (
+                  {locations?.data.map((e) => (
                     <li
                       key={e?.id}
                       className="flex align-top justify-start gap-2 hover:bg-hoverlight py-2 px-3 transition-all duration-300"
-                      onClick={(event, value: string) =>
-                        setDestination(e?.attributes?.city)
+                      onClick={(event:MouseEventHandler<HTMLLIElement>, value: string) =>
+                        setDestination(event,e?.attributes?.city)
                       }
                     >
                       {locationSVG}

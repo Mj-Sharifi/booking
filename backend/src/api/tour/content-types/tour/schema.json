@@ -31,27 +31,31 @@
       "default": false,
       "required": false
     },
-    "duration": {
-      "type": "integer"
-    },
     "rating": {
       "type": "integer",
       "default": 4,
       "max": 5,
       "min": 0
     },
-    "category": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "tours"
-    },
     "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "price": {
+      "type": "integer"
+    },
+    "duration": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "tours"
     }
   }
 }

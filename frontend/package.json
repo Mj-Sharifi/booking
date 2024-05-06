@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@strapi/strapi": "^4.24.1",
+    "@strapi/types": "^4.24.1",
     "axios": "^1.6.8",
     "boxicons": "^2.1.4",
     "flowbite": "^2.3.0",
