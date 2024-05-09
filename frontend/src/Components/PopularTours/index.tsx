@@ -1,20 +1,20 @@
 "use client";
+import React from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { SwiperSlide } from "swiper/react";
 import Slider from "@/Components/Slider";
-import {
-  APIResponse,
-  APIResponseCollection,
-  APIResponseData,
-} from "@/types/types";
 import { favoriteSVG } from "@/Utils/svg";
 
+// Import Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "./style.css";
 export default function PopularTours() {
   // Getting Data
-  const [popularTours, setPopularTours] =
-    useState<APIResponseCollection<"api::tour.tour">>();
+  const [popularTours, setPopularTours] = useState();
   useEffect(() => {
     axios
       .get(
@@ -49,21 +49,33 @@ export default function PopularTours() {
             <SwiperSlide key={e.id}>
               <div className="group duration-300 relative h-72 flex flex-col items-center shadow rounded ">
                 <div className="overflow-hidden w-full aspect-[0.9]">
-                  <img
-                    src={
-                      process.env.NEXT_PUBLIC_URL +
-                      e?.attributes?.imagePrimary?.data?.attributes.url
-                    }
-                    alt={e?.attributes?.title}
-                    className="duration-300 w-full group-hover:scale-110"
-                  />
+                  <Swiper
+                    spaceBetween={20}
+                    navigation={true}
+                    modules={[Navigation]}
+                    className="mySwiper popularTourSwiper"
+                  >
+                    {e.attributes.images?.data.map((m, n) => (
+                      <SwiperSlide key={n}>
+                        <img
+                          src={process.env.NEXT_PUBLIC_URL + m?.attributes?.url}
+                          alt={e?.attributes?.title}
+                          className="duration-300 w-full group-hover:scale-110"
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
                 </div>
-                <div className="flex flex-col items-center justify-evenly px-2 h-full">
-                  <div className="text-light text-sm flexCenter gap-1">
-                    {e?.attributes?.duration}
-                    <div className="w-1 h-1 bg-dark rounded-full"></div>
-                    {e?.attributes?.category?.data.map((m, n) => (
-                      <p>{m.attributes.title}</p>
+                <div className="flex flex-col text-sm items-center justify-evenly px-2 h-full">
+                  {e?.attributes?.duration}
+                  <div className="text-light flexCenter gap-1 text-base">
+                    {e?.attributes?.categories?.data.map((m, n) => (
+                      <React.Fragment key={n}>
+                        <p>{m.attributes.title}</p>
+                        {n !== e?.attributes?.categories?.data.length - 1 && (
+                          <div className="w-1 h-1 bg-dark rounded-full"></div>
+                        )}
+                      </React.Fragment>
                     ))}
                   </div>
                   <h2 className="text-lg font-semibold text-center">

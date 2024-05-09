@@ -2,10 +2,11 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { leftArrowSVG, rightArrowSVG } from "@/Utils/svg";
 
 //Import Swiper
-import { Swiper,  useSwiper } from "swiper/react";
-import { SwiperOptions } from 'swiper/types';
+import { Swiper, useSwiper } from "swiper/react";
+import { SwiperOptions } from "swiper/types";
 import "swiper/css";
-
+import { Pagination } from "swiper/modules";
+import "./style.css"
 const SwiperButtonNext = ({
   activeIndex,
   lastSlideIndex,
@@ -56,36 +57,16 @@ const SwiperButtonPrev = ({ activeIndex }: { activeIndex: number }) => {
     </button>
   );
 };
-const SwiperPagination = ({ number }: { number: number }) => {
-  const swiper = useSwiper();
-  return (
-    <ul className="flexCenter gap-2">
-      {Array(number)
-        .fill(true)
-        .map((e, i) => (
-          <li
-            key={i}
-            className={`cursor-pointer transition-all duration-200 h-[6px] w-[6px] ${
-              i === swiper.activeIndex
-                ? " bg-violet scale-150 opacity-100"
-                : " bg-light opacity-80"
-            } rounded-full`}
-            onClick={() => swiper.slideTo(i)}
-          ></li>
-        ))}
-    </ul>
-  );
-};
+
 export default function Slider({
   children,
   number,
-  // slidesPerView=1
-  swiperParam
+  swiperParam,
 }: {
   children: ReactNode;
   number: number;
-  // slidesPerView?:number
-  swiperParam:SwiperOptions
+  slidesPerView?: number;
+  swiperParam: SwiperOptions;
 }) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   return (
@@ -94,15 +75,24 @@ export default function Slider({
       breakpoints={swiperParam.breakpoints}
       className="mySwiper"
       onActiveIndexChange={(e) => setActiveIndex(e.activeIndex)}
+      pagination={{
+        el: ".swiperPagination",
+        clickable: true,
+        type: "bullets",
+        bulletActiveClass:
+          "swiperPaginationBulletActive",
+        bulletClass: "swiperPaginationBullet",
+      }}
+      modules={[Pagination]}
     >
       {children}
       {children && (
         <div className="flexCenter gap-6 mt-10">
           <SwiperButtonPrev activeIndex={activeIndex} />
-          <SwiperPagination number={number} />
+          <div className="swiperPagination flex gap-2"></div>
           <SwiperButtonNext
             activeIndex={activeIndex}
-            lastSlideIndex={number-1}
+            lastSlideIndex={number - 1}
           />
         </div>
       )}
