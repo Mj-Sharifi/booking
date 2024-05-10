@@ -20,6 +20,13 @@
       "relation": "manyToMany",
       "target": "api::tour.tour",
       "mappedBy": "categories"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

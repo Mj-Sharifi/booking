@@ -24,7 +24,6 @@ export default function PopularTours() {
       .then((res) => setPopularTours(res.data))
       .catch((err) => console.log(err));
   }, []);
-  console.log(popularTours);
   return (
     <section className="container mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-7 sm:pb-10 md:pb-14 lg:pb-16">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">

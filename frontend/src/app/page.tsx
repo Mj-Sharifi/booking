@@ -1,6 +1,7 @@
 import Banner from "@/Components/Banner";
 import PopularTours from "@/Components/PopularTours";
 import Testimony from "@/Components/Testimony";
+import TourTypeSelection from "@/Components/TourTypeSelection";
 import { upRightSVG } from "@/Utils/svg";
 import Link from "next/link";
 
@@ -10,6 +11,7 @@ export default function Home() {
     <>
       <Banner />
       <PopularTours/>
+      <TourTypeSelection/>
       <section className="bg-border grid grid-cols-1 md:grid-cols-5 w-full">
         <div className="md:col-span-2 order-1 md:order-2">
           <img
