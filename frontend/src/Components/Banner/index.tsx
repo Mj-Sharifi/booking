@@ -2,8 +2,6 @@
 import React, { MouseEventHandler, useEffect, useRef, useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
-import opacity from "react-element-popper/animations/opacity";
-import transition from "react-element-popper/animations/transition";
 import "./style.css";
 import axios from "axios";
 import { APIResponseCollection, APIResponseData } from "@/types/types";
@@ -150,15 +148,15 @@ export default function Banner() {
               <div
                 className={`absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
                   locationEl ? "visible animate-fadeUp" : "invisible"
-                }`}
+                } z-20`}
               >
                 <ul className="flex flex-col gap-3 max-h-64 md:max-h-96 overflow-y-scroll text-dark">
                   {locations?.data.map((e) => (
                     <li
                       key={e?.id}
                       className="flex align-top justify-start gap-2 hover:bg-hoverlight py-2 px-3 transition-all duration-300"
-                      onClick={(event:MouseEventHandler<HTMLLIElement>, value: string) =>
-                        setDestination(event,e?.attributes?.city)
+                      onClick={() =>
+                        setDestination(e?.attributes?.city)
                       }
                     >
                       {locationSVG}
@@ -185,13 +183,7 @@ export default function Banner() {
                 range
                 numberOfMonths={2}
                 inputClass="outline-none border-none text-light text-sm p-0"
-                animations={[
-                  opacity(),
-                  transition({
-                    from: 15,
-                    transition: "all 0.5s ease",
-                  }),
-                ]}
+
               />
             </div>
             {/* Number of Guest */}

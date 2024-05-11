@@ -41,7 +41,7 @@ const config: Config = {
       violet: "#7e53f9",
       border: "#ddd",
       light: "#697488",
-      hoverlight: "rgba(53, 84, 209, .05) !important",
+      hoverlight: "#F5F6FD",
       glass: "#ffffff10",
     },
 

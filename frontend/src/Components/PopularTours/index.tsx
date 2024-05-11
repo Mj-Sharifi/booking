@@ -2,7 +2,7 @@
 import React from "react";
 import axios from "axios";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Slider from "@/Components/Slider";
 import { favoriteSVG } from "@/Utils/svg";
 
@@ -24,6 +24,22 @@ export default function PopularTours() {
       .then((res) => setPopularTours(res.data))
       .catch((err) => console.log(err));
   }, []);
+  // Entrance Animation
+  const [startAnimation, setStartAnimation] = useState<boolean>(false);
+  const popularTour = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (popularTour) {
+      window.addEventListener("scroll", () => {
+        const popularTourTop = popularTour.current?.getBoundingClientRect().top;
+        const scrollY = window.scrollY;
+        if (popularTourTop) {
+          if (0.6 * popularTourTop <= scrollY) {
+            setStartAnimation(true);
+          }
+        }
+      });
+    }
+  }, [popularTours]);
   return (
     <section className="container mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-7 sm:pb-10 md:pb-14 lg:pb-16">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
@@ -44,9 +60,17 @@ export default function PopularTours() {
             },
           }}
         >
-          {popularTours.data.map((e) => (
+          {popularTours.data.map((e, i: number) => (
             <SwiperSlide key={e.id}>
-              <div className="group duration-300 relative h-72 flex flex-col items-center shadow rounded ">
+              <div
+                ref={popularTour}
+                className="group duration-300 relative h-72 flex flex-col items-center shadow rounded"
+                style={{
+                  transition: "all 1.5s",
+                  transitionDelay: `${i*0.1+0.1}s`,
+                  opacity: `${startAnimation ? "1" : "0"}`,
+                }}
+              >
                 <div className="overflow-hidden w-full aspect-[0.9]">
                   <Swiper
                     spaceBetween={20}
