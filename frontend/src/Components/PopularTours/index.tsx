@@ -12,25 +12,27 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./style.css";
+import { tourData } from "@/types/types";
 export default function PopularTours() {
   // Getting Data
-  const [popularTours, setPopularTours] = useState();
+  const [popularTours, setPopularTours] = useState<tourData[]>();
   useEffect(() => {
     axios
       .get(
         process.env.NEXT_PUBLIC_API +
           "tours?populate=*&filters[isPopular][$eq]=true"
       )
-      .then((res) => setPopularTours(res.data))
+      .then((res) => setPopularTours(res.data.data))
       .catch((err) => console.log(err));
   }, []);
   // Entrance Animation
   const [startAnimation, setStartAnimation] = useState<boolean>(false);
-  const popularTour = useRef<HTMLDivElement>(null);
+  const popularTourDiv = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    if (popularTour) {
+    if (popularTourDiv) {
       window.addEventListener("scroll", () => {
-        const popularTourTop = popularTour.current?.getBoundingClientRect().top;
+        const popularTourTop = popularTourDiv.current?.getBoundingClientRect().top;
         const scrollY = window.scrollY;
         if (popularTourTop) {
           if (0.6 * popularTourTop <= scrollY) {
@@ -50,7 +52,7 @@ export default function PopularTours() {
       </p>
       {popularTours && (
         <Slider
-          number={popularTours.data.length}
+          number={popularTours.length}
           swiperParam={{
             slidesPerView: 1,
             spaceBetween: 20,
@@ -60,10 +62,10 @@ export default function PopularTours() {
             },
           }}
         >
-          {popularTours.data.map((e, i: number) => (
+          {popularTours.map((e, i: number) => (
             <SwiperSlide key={e.id}>
               <div
-                ref={popularTour}
+                ref={popularTourDiv}
                 className="group duration-300 relative h-72 flex flex-col items-center shadow rounded"
                 style={{
                   transition: "all 1.5s",
@@ -78,10 +80,10 @@ export default function PopularTours() {
                     modules={[Navigation]}
                     className="mySwiper popularTourSwiper"
                   >
-                    {e.attributes.images?.data.map((m, n) => (
+                    {e.attributes.images.data.map((m, n) => (
                       <SwiperSlide key={n}>
                         <img
-                          src={process.env.NEXT_PUBLIC_URL + m?.attributes?.url}
+                          src={process.env.NEXT_PUBLIC_URL + m.attributes.url}
                           alt={e?.attributes?.title}
                           className="duration-300 w-full group-hover:scale-110"
                         />
@@ -123,3 +125,29 @@ export default function PopularTours() {
   );
 }
 // top-[2%] right-[2%]
+
+// useEffect(() => {
+//   const observer = new IntersectionObserver(
+//     (entries) => {
+//       entries.forEach((entry) => {
+//         if (entry.isIntersecting) {
+//           // entry.target.classList.add('animate');
+//           setStartAnimation(true)
+//         }
+//       });
+//     },
+//     {
+//       threshold: 0.5, // Adjust this value as needed
+//     }
+//   );
+
+//   if (popularTourDiv.current) {
+//     observer.observe(popularTourDiv.current);
+//   }
+
+//   return () => {
+//     if (popularTourDiv.current) {
+//       observer.unobserve(popularTourDiv.current);
+//     }
+//   };
+// }, []);

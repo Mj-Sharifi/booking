@@ -4,7 +4,7 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
 import "./style.css";
 import axios from "axios";
-import { APIResponseCollection, APIResponseData } from "@/types/types";
+import { APIResponseCollection, APIResponseData, locationData } from "@/types/types";
 
 const locationSVG = (
   <svg
@@ -58,16 +58,18 @@ const plusSVG = (
 
 export default function Banner() {
   //Location
-  const [locations, setLocations] = useState<APIResponseCollection<"api::location.location">>();
+  const [locations, setLocations] = useState<locationData[]>();
   useEffect(() => {
     axios
       .get(process.env.NEXT_PUBLIC_API + "locations")
-      .then((res) => setLocations(res.data))
+      .then((res) => setLocations(res.data.data))
       .catch((err) => console.log(err));
   }, []);
+  console.log(locations)
   const [destination, setDestination] = useState<string>(
     "Where are you going?"
   );
+
   const [locationEl, setLocationEl] = useState<boolean>(false);
   useEffect(() => {
     document.addEventListener("click", (e: MouseEvent) => {
@@ -151,12 +153,12 @@ export default function Banner() {
                 } z-20`}
               >
                 <ul className="flex flex-col gap-3 max-h-64 md:max-h-96 overflow-y-scroll text-dark">
-                  {locations?.data.map((e) => (
+                  {locations?.map((e) => (
                     <li
                       key={e?.id}
                       className="flex align-top justify-start gap-2 hover:bg-hoverlight py-2 px-3 transition-all duration-300"
                       onClick={() =>
-                        setDestination(e?.attributes?.city)
+                        setDestination(e?.attributes.city)
                       }
                     >
                       {locationSVG}

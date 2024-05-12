@@ -5,33 +5,34 @@ import axios from "axios";
 import Slider from "@/Components/Slider";
 import { SwiperSlide } from "swiper/react";
 import Link from "next/link";
+import { categoryData } from "@/types/types";
 
 const icons = [];
 export default function TourTypeSelection() {
-  const [tourCategories, setTourCategories] = useState();
+  const [tourCategories, setTourCategories] = useState<categoryData[]>();
   useEffect(() => {
     axios
       .get(process.env.NEXT_PUBLIC_API + "categories?populate=*")
-      .then((res) => setTourCategories(res.data))
+      .then((res) => setTourCategories(res.data.data))
       .catch((err) => console.log(err));
   }, []);
   // Entrance Animation
   const [startAnimation, setStartAnimation] = useState<boolean>(false);
-  const tourCategory = useRef<HTMLDivElement>(null);
+  const tourCategoryDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (tourCategories) {
-      window.addEventListener("scroll", () => {
-        const tourCategoriesTop =
-          tourCategory.current?.getBoundingClientRect().top;
-        const scrollY = window.scrollY;
-        if (tourCategoriesTop) {
-          if (0.4 * tourCategoriesTop <= scrollY) {
-            setStartAnimation(true);
-          }
+  if (tourCategories) {
+    window.addEventListener("scroll", () => {
+      const tourCategoriesTop =
+        tourCategoryDiv.current?.getBoundingClientRect().top;
+      const scrollY = window.scrollY;
+      if (tourCategoriesTop) {
+        if (0.4 * tourCategoriesTop <= scrollY) {
+          setStartAnimation(true);
         }
-      });
-    }
-  }, [tourCategories]);
+      }
+    });
+  }
+}, [tourCategories]);
   return (
     <>
       {tourCategories && (
@@ -43,7 +44,7 @@ export default function TourTypeSelection() {
             Interdum et malesuada fames ac ante ipsum
           </p>
           <Slider
-            number={tourCategories.data.length}
+            number={tourCategories.length}
             swiperParam={{
               slidesPerView: 1,
               spaceBetween: 20,
@@ -54,10 +55,10 @@ export default function TourTypeSelection() {
               },
             }}
           >
-            {tourCategories.data.map((e, i: number) => (
+            {tourCategories.map((e, i: number) => (
               <SwiperSlide key={e.id}>
                 <div
-                  ref={tourCategory}
+                  ref={tourCategoryDiv}
                   className="group bg-hoverlight shadow rounded"
                   style={{
                     transition: "all 1.5s",
@@ -89,3 +90,30 @@ export default function TourTypeSelection() {
     </>
   );
 }
+
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting) {
+  //           // When the div enters the viewport, set the animate state to true
+  //           setStartAnimation(true);
+  //           observer.unobserve(entry.target); // Stop observing once animation starts
+  //         }
+  //       });
+  //     },
+  //     {
+  //       threshold: 0.5,
+  //     }
+  //   );
+
+  //   if (tourCategoryDiv.current) {
+  //     observer.observe(tourCategoryDiv.current);
+  //   }
+
+  //   return () => {
+  //     if (tourCategoryDiv.current) {
+  //       observer.unobserve(tourCategoryDiv.current);
+  //     }
+  //   };
+  // }, []);
