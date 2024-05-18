@@ -7,7 +7,6 @@ import { SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { categoryData } from "@/types/types";
 
-const icons = [];
 export default function TourTypeSelection() {
   const [tourCategories, setTourCategories] = useState<categoryData[]>();
   useEffect(() => {
@@ -20,29 +19,29 @@ export default function TourTypeSelection() {
   const [startAnimation, setStartAnimation] = useState<boolean>(false);
   const tourCategoryDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
-  if (tourCategories) {
-    window.addEventListener("scroll", () => {
-      const tourCategoriesTop =
-        tourCategoryDiv.current?.getBoundingClientRect().top;
-      const scrollY = window.scrollY;
-      if (tourCategoriesTop) {
-        if (0.4 * tourCategoriesTop <= scrollY) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
           setStartAnimation(true);
         }
-      }
-    });
-  }
-}, [tourCategories]);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (tourCategoryDiv.current) {
+      observer.observe(tourCategoryDiv.current);
+    }
+  }, []);
   return (
-    <>
-      {tourCategories && (
-        <section className="container mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-7 sm:pb-10 md:pb-14 lg:pb-16">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
-            Choose Tour Types
-          </h2>
-          <p className="text-light mb-8">
-            Interdum et malesuada fames ac ante ipsum
-          </p>
+    <section className="container mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-7 sm:pb-10 md:pb-14 lg:pb-16">
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
+        Choose Tour Types
+      </h2>
+      <p className="text-light mb-8">
+        Interdum et malesuada fames ac ante ipsum
+      </p>
+      <div className="w-full" ref={tourCategoryDiv}>
+        {tourCategories && (
           <Slider
             number={tourCategories.length}
             swiperParam={{
@@ -58,7 +57,6 @@ export default function TourTypeSelection() {
             {tourCategories.map((e, i: number) => (
               <SwiperSlide key={e.id}>
                 <div
-                  ref={tourCategoryDiv}
                   className="group bg-hoverlight shadow rounded"
                   style={{
                     transition: "all 1.5s",
@@ -85,35 +83,8 @@ export default function TourTypeSelection() {
               </SwiperSlide>
             ))}
           </Slider>
-        </section>
-      )}
-    </>
+        )}
+      </div>
+    </section>
   );
 }
-
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       entries.forEach((entry) => {
-  //         if (entry.isIntersecting) {
-  //           // When the div enters the viewport, set the animate state to true
-  //           setStartAnimation(true);
-  //           observer.unobserve(entry.target); // Stop observing once animation starts
-  //         }
-  //       });
-  //     },
-  //     {
-  //       threshold: 0.5,
-  //     }
-  //   );
-
-  //   if (tourCategoryDiv.current) {
-  //     observer.observe(tourCategoryDiv.current);
-  //   }
-
-  //   return () => {
-  //     if (tourCategoryDiv.current) {
-  //       observer.unobserve(tourCategoryDiv.current);
-  //     }
-  //   };
-  // }, []);

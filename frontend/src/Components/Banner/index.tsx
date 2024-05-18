@@ -65,7 +65,6 @@ export default function Banner() {
       .then((res) => setLocations(res.data.data))
       .catch((err) => console.log(err));
   }, []);
-  console.log(locations)
   const [destination, setDestination] = useState<string>(
     "Where are you going?"
   );

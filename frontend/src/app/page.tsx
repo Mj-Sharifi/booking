@@ -1,4 +1,5 @@
 import Banner from "@/Components/Banner";
+import HomeBlogSection from "@/Components/HomeBlogSection";
 import PopularTours from "@/Components/PopularTours";
 import Testimony from "@/Components/Testimony";
 import TourTypeSelection from "@/Components/TourTypeSelection";
@@ -65,6 +66,7 @@ export default function Home() {
         </div>
       </section>
       <Testimony />
+      <HomeBlogSection/>
       <section className="container mx-auto flex flex-col gap-y-4 lg:flexBetween pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24 md:pb-32 px-4 sm:px-6 md:px-8">
         <div>
           <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
