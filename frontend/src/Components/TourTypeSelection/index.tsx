@@ -5,10 +5,10 @@ import axios from "axios";
 import Slider from "@/Components/Slider";
 import { SwiperSlide } from "swiper/react";
 import Link from "next/link";
-import { categoryData } from "@/types/types";
+import { tourCategoryData } from "@/types/types";
 
 export default function TourTypeSelection() {
-  const [tourCategories, setTourCategories] = useState<categoryData[]>();
+  const [tourCategories, setTourCategories] = useState<tourCategoryData[]>();
   useEffect(() => {
     axios
       .get(process.env.NEXT_PUBLIC_API + "categories?populate=*")

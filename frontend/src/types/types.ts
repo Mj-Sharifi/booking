@@ -1,4 +1,3 @@
-
 export type locationData = {
   id: number;
   attributes: {
@@ -33,7 +32,7 @@ export type imageData = {
 export type tourData = {
   id: number;
   attributes: {
-    categories: { data: categoryData[] };
+    categories: { data: tourCategoryData[] };
     isPopular: boolean;
     place: string;
     price: number;
@@ -47,7 +46,7 @@ export type tourData = {
     imagePrimary: { data: imageData };
   };
 };
-export type categoryData = {
+export type tourCategoryData = {
   id: number;
   attributes: {
     createdAt: string;
@@ -69,5 +68,14 @@ export type testimonyData = {
     createdAt: string;
     description: string;
     image: { data: imageData };
+  };
+};
+export type blogCategoryDate = {
+  id: number;
+  attributes: {
+    createdAt: string;
+    publishedAt: string;
+    title: string;
+    updatedAt: string;
   };
 };
