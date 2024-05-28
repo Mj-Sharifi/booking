@@ -79,3 +79,15 @@ export type blogCategoryDate = {
     updatedAt: string;
   };
 };
+export type blogData = {
+  id: number;
+  attributes: {
+    blog_categories: { data: { id: number; attributes: blogCategoryDate } };
+    createdAt: string;
+    image: { data: imageData };
+    publishedAt: string;
+    release_date: string;
+    title: string;
+    updatedAt: string;
+  };
+};
