@@ -4,5 +4,5 @@ export default function rootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <main className="pt-32">{children}</main>;
+  return <>{children}</>;
 }

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function HamburgerMenu({
   open,
@@ -11,9 +11,10 @@ export default function HamburgerMenu({
   pages: { title: string; link: string }[];
   closeHamburgerMenu: () => void;
 }) {
+
   return (
     <div
-      className={`hamburgerMenu absolute z-70 top-0 h-full ${
+      className={`hamburgerMenu absolute z-70 top-0 bottom-0 ${
         open ? "left-0" : "-left-72"
       } transition-all duration-300 border-r border-darkblue w-72  bg-white py-4 flex flex-col`}
     >

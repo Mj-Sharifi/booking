@@ -2,14 +2,18 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 
 type dropdownProps = {
   label: string;
-  animation?:string
+  animation?: string;
   renderElement: ReactNode;
 };
-export default function Dropdown({ label,animation, renderElement }: dropdownProps) {
+export default function Dropdown({
+  label,
+  animation,
+  renderElement,
+}: dropdownProps) {
   const dropdownButton = useRef<HTMLSpanElement>(null);
   const dropdownList = useRef<HTMLDivElement>(null);
 
-  const [dropdown,setDropdown] = useState<boolean>(false)
+  const [dropdown, setDropdown] = useState<boolean>(false);
   useEffect(() => {
     document.addEventListener("click", (e: MouseEvent) => {
       if (!(e.target as HTMLElement).closest(".dropdown")) {
@@ -46,10 +50,21 @@ export default function Dropdown({ label,animation, renderElement }: dropdownPro
   }, []);
   return (
     <div className="flex flex-col gap-2 relative py-4 lg:py-0 lg:px-8">
-      <span ref={dropdownButton} className="dropdown text-light text-sm" onClick={()=>setDropdown(true)}>
+      <span
+        ref={dropdownButton}
+        className="dropdown text-light text-sm"
+        onClick={() => setDropdown(true)}
+      >
         {label}
       </span>
-      <div ref={dropdownList} className={`dropdown ${dropdown?`${animation} visible`:"invisible"} bg-transparent overflow-hidden `}>{renderElement}</div>
+      <div
+        ref={dropdownList}
+        className={`dropdown ${
+          dropdown ? `${animation} visible` : "invisible"
+        } bg-transparent overflow-hidden `}
+      >
+        {renderElement}
+      </div>
     </div>
   );
 }

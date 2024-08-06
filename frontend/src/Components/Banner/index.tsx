@@ -1,10 +1,10 @@
 "use client";
-import React, { MouseEventHandler, useEffect, useRef, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
 import "./style.css";
 import axios from "axios";
-import { APIResponseCollection, APIResponseData, locationData } from "@/types/types";
+import { locationData } from "@/types/types";
 
 const locationSVG = (
   <svg

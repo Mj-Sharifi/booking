@@ -28,50 +28,40 @@ export default function Navbar() {
   const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
   const openHamburgerMenu = (event: React.MouseEvent<SVGSVGElement>): void => {
     setHamburgerMenu(true);
-    document.body.classList.add(
-      "before:content-['']",
-      "before:absolute",
-      "before:top-0",
-      "before:bottom-0",
-      "before:right-0",
-      "before:left-0",
-      "before:bg-black",
-      "before:opacity-0",
-      "before:z-60"
-    );
+    document.body.classList.add("body-wrapper");
   };
   const closeHamburgerMenu = () => {
     setHamburgerMenu(false);
-    document.body.classList.remove(
-      "before:content-['']",
-      "before:absolute",
-      "before:top-0",
-      "before:bottom-0",
-      "before:right-0",
-      "before:left-0",
-      "before:bg-black",
-      "before:opacity-60",
-      "before:z-60"
-    );
+    document.body.classList.remove("body-wrapper");
   };
   useEffect(() => {
-    document.addEventListener("click", (e) => {
+    const clickEvent = (e: MouseEvent) => {
       if (!(e.target as HTMLElement).closest(".hamburgerMenu")) {
         closeHamburgerMenu();
       }
-      window.addEventListener("resize", () => {
-        if (window.innerWidth > 1024) {
-          closeHamburgerMenu();
-        }
-      });
-    });
-  }, []);
+    };
+    document.addEventListener("click", (e) => clickEvent(e));
+    const resizeEvent = () => {
+      if (window.innerWidth > 1024) {
+        closeHamburgerMenu();
+      }
+    };
+    window.addEventListener("resize", resizeEvent);
+
+    return () => {
+      document.removeEventListener("click", (e) => clickEvent(e));
+      window.removeEventListener("resize", resizeEvent);
+    };
+  }, [])
+
   // Nav BackgroundColor
   const [bgWhite, setBgWhite] = useState<boolean>(false);
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    const scrollEvent = ()=>{
       window.scrollY > 0 ? setBgWhite(true) : setBgWhite(false);
-    });
+    }
+    window.addEventListener("scroll", scrollEvent);
+    return(window.removeEventListener("scroll",scrollEvent))
   }, []);
   return (
     <>

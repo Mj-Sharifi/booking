@@ -39,9 +39,9 @@ export default function Blog() {
 
 
   return (
-    <section className="container mx-auto flex flex-col md:flex-row sm:gap-6 lg:gap-8">
+    <section className="container mx-auto flex flex-col md:flex-row sm:gap-6 lg:gap-8 py-24 lg:py-28 px-2 md:px-4">
       <div className="md:w-1/4 md:order-2">
-        <BlogSidebar handleCategory={handleCategory} />
+        <BlogSidebar handleCategory={handleCategory} category={category}/>
       </div>
       <div className="w-full md:w-3/4 flex flex-col gap-6 px-6 sm:px-2">
         {blog &&
