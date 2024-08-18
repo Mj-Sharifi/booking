@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
-import { leftArrowSVG, rightArrowSVG } from "@/Utils/svg";
+import { leftArrowSVG, rightArrowSVG } from "@/utils/svg";
 
 //Import Swiper
 import { Swiper, useSwiper } from "swiper/react";

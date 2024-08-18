@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-import Slider from "@/Components/Slider";
+import Slider from "@/components/Slider";
 import { SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { tourCategoryData } from "@/types/types";

@@ -3,7 +3,7 @@ import {
   instagramSVG,
   linkedinSVG,
   twitterSVG,
-} from "@/Utils/svg";
+} from "@/utils/svg";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

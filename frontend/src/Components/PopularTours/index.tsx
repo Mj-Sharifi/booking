@@ -3,8 +3,8 @@ import React from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-import Slider from "@/Components/Slider";
-import { favoriteSVG } from "@/Utils/svg";
+import Slider from "@/components/Slider";
+import { favoriteSVG } from "@/utils/svg";
 import { tourData } from "@/types/types";
 // Import Swiper
 import { Swiper, SwiperSlide } from "swiper/react";

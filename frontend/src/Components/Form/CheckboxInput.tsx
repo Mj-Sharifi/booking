@@ -1,4 +1,4 @@
-import { checkedSVG } from "@/Utils/svg";
+import { checkedSVG } from "@/utils/svg";
 import React, { ReactNode } from "react";
 
 type props = {
