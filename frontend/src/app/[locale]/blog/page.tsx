@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import BlogSidebar from "./BlogSidebar";
+import BlogSidebar from "./components/BlogSidebar";
 import axios from "axios";
 import { blogData } from "@/types/types";
-import PostCard from "./PostCard";
+import PostCard from "./components/PostCard";
 
 export default function Blog() {
   const [blog, setBlog] = useState<blogData[]>();

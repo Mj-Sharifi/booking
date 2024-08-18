@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 // i18n
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
+import {getLangDir} from 'rtl-detect';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,14 +17,18 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params:{locale}
 }: Readonly<{
   children: React.ReactNode;
+  params: {locale: string};
 }>) {
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
+  const direction = getLangDir(locale)
+  console.log("locale: ",locale);
   return (
-    <html lang="en">
+    <html lang={locale} dir={direction}>
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
           <Navbar />

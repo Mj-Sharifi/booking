@@ -2,7 +2,6 @@
 import React, { useState, useEffect, ChangeEventHandler } from "react";
 import axios from "axios";
 import { blogCategoryDate, blogData } from "@/types/types";
-import { title } from "process";
 import CheckboxInput from "@/components/Form/CheckboxInput";
 import Link from "next/link";
 type props = {
