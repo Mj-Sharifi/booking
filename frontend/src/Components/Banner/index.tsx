@@ -5,6 +5,7 @@ import type { Value } from "react-multi-date-picker";
 import "./style.css";
 import axios from "axios";
 import { locationData } from "@/types/types";
+import { useTranslations } from "next-intl";
 
 const locationSVG = (
   <svg
@@ -57,6 +58,8 @@ const plusSVG = (
 );
 
 export default function Banner() {
+  // Translation
+  const t = useTranslations("common")
   //Location
   const [locations, setLocations] = useState<locationData[]>();
   useEffect(() => {
@@ -78,7 +81,7 @@ export default function Banner() {
     });
   }, []);
   //DatePicker
-  const [dateRange, setDateRange] = useState<Value>([
+  const [dateRange, setDateRange] = useState<Value[]>([
     new DateObject().add(7, "days"),
     new DateObject().add(12, "days"),
   ]);
@@ -139,7 +142,7 @@ export default function Banner() {
           <div className={`bg-white rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12 transition-all duration-700 delay-500 ${startAnimation?"translate-y-0":"translate-y-12"}`}>
             {/* Location */}
             <div className="flex flex-col gap-2 pb-4 lg:pb-0 lg:pr-8 relative">
-              <span className="font-semibold">Location</span>
+              <span className="font-semibold">{t("location")}</span>
               <span
                 className="location-selection border-none outline-none"
                 onClick={() => setLocationEl(true)}
@@ -189,13 +192,13 @@ export default function Banner() {
             </div>
             {/* Number of Guest */}
             <div className="flex flex-col gap-2 relative py-4 lg:py-0 lg:px-8">
-              <span className="font-semibold">Guest</span>
+              <span className="font-semibold">{t("guest")}</span>
               <span
                 className="guest-selection text-light text-sm"
                 onClick={() => setGuestEl(true)}
               >
-                {guest.adult} Adults - {guest.children} Children - {guest.rooms}{" "}
-                Rooms
+                {guest.adult} {t("adults")} - {guest.children} {t("children")} - {guest.rooms}{" "}
+                {t("rooms")}
               </span>
               <div
                 className={`guest-selection absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${

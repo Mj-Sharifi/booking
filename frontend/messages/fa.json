@@ -1,5 +1,11 @@
 {
-    "About": {
-      "title": "درباره ما"
-    }
+  "common": {
+    "location": "Location",
+    "guest":"مهمان",
+    "adults":"بزرگسال",
+    "children":"کودک",
+    "rooms":"اتاق",
+    "fa":"فارسی",
+    "en":"انگلیسی"
+  }
   }
