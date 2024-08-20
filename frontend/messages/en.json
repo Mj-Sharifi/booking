@@ -5,7 +5,12 @@
       "adults":"Adults",
       "children":"Children",
       "rooms":"Rooms",
+      "search":"search",
       "fa":"Farsi",
       "en":"English"
+    },
+    "banner":{
+      "title":"Best Travel <span1>Experience<span2><img></img></span2></span1>",
+      "description":"Experience the different fascinating tour and travel packages, Make hotel reservations, browse vacation packages, search for cheap hotels and events."
     }
   }

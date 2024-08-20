@@ -18,7 +18,8 @@ const config: Config = {
 
     fontFamily: {
       jost: ["Jost"],
-      Sevillana: ["Sevillana"],
+      vazir:["Vazir"],
+      nastaliq:["IranNastaliq"]
     },
     keyframes: {
       fadeUp: {

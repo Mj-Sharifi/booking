@@ -8,7 +8,7 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import {getLangDir} from 'rtl-detect';
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tour Booking",
@@ -26,10 +26,10 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
   const direction = getLangDir(locale)
-  console.log("locale: ",locale);
+
   return (
     <html lang={locale} dir={direction}>
-      <body className={inter.className}>
+      <body>
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           <main>{children}</main>

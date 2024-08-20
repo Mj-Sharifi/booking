@@ -1,6 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+@import "/assets/fonts/Jost-Regular.ttf";
+@import "@/assets/fonts/Vazir.ttf";
 
 @tailwind base;
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 500;
+  src: url(/assets/fonts/Jost-Regular.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'Vazir';
+  font-style: normal;
+  font-weight: 500;
+  src: url(/assets/fonts/Vazir.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'IranNastaliq';
+  font-style: normal;
+  font-weight: 500;
+  src: url(/assets/fonts/IranNastaliq.ttf) format('ttf');
+}
 h1,h2,h3,h4,h5,h6,p,span,a,div{
   @apply font-jost
 }
@@ -11,6 +30,13 @@ input::placeholder{
 @tailwind utilities;
 
 @layer utilities {
+  /* *[dir='ltr'] {
+    @apply font-jost !important;
+  }
+ 
+ *[dir='rtl'] {
+    @apply font-nastaliq !important;
+  } */
   .flexCenter {
     @apply flex flex-row justify-center items-center;
   }

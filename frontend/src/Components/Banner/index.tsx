@@ -1,11 +1,12 @@
 "use client";
-import React, {  useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
 import "./style.css";
 import axios from "axios";
 import { locationData } from "@/types/types";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const locationSVG = (
   <svg
@@ -59,7 +60,7 @@ const plusSVG = (
 
 export default function Banner() {
   // Translation
-  const t = useTranslations("common")
+  const t = useTranslations();
   //Location
   const [locations, setLocations] = useState<locationData[]>();
   useEffect(() => {
@@ -100,49 +101,73 @@ export default function Banner() {
     });
   }, []);
   // Entrance Animation
-  const [startAnimation,setStartAnimation] = useState<boolean>(false)
-  const banner = useRef<HTMLDivElement>(null)
-  useEffect(()=>{
-      const bannerTop = banner.current?.getBoundingClientRect().top;
-      const scrollY = window.scrollY;
-      if (bannerTop) {
-        if (bannerTop >= scrollY) {
-          setStartAnimation(true);
-        }
+  const [startAnimation, setStartAnimation] = useState<boolean>(false);
+  const banner = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const bannerTop = banner.current?.getBoundingClientRect().top;
+    const scrollY = window.scrollY;
+    if (bannerTop) {
+      if (bannerTop >= scrollY) {
+        setStartAnimation(true);
       }
-  },[])
+    }
+  }, []);
   return (
-    <section className="font-jost relative pt-24 md:pt-56 xl:pt-64 pb-14 md:pb-40 xl:pb-52">
-      <div className="absolute left-0 top-0 h-full w-full md:w-7/12">
-        <img
+    <section className="relative pt-24 md:pt-56 xl:pt-64 pb-14 md:pb-40 xl:pb-52">
+      <div className="absolute ltr:left-0 rtl:right-0 top-0 h-full w-full md:w-7/12">
+        <Image
           src="/assets/images/home/banner/bg-1.svg"
           alt="bg-banner"
+          width={1115}
+          height={760}
           className="w-full h-full object-cover"
         />
       </div>
       <div className="container px-3 sm:px-6 mx-auto w-full relative z-10">
         <div ref={banner} className="w-full">
-          <div className={`flex items-start md:w-[600px] lg:w-[750px] text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold transition-all duration-700 ${startAnimation?"translate-y-0 opacity-100":"translate-y-10 opacity-0"} `}>
-            Best Travel&nbsp;
-            <span className="relative text-darkblue">
-              Experience
-              <span className="absolute -bottom-1/4 left-0 w-full">
-                <img
+          <div
+            className={`flex items-start md:w-[600px] lg:w-[750px] text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold transition-all duration-700 ${
+              startAnimation
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            } `}
+          >
+            {t.rich("banner.title", {
+              span1: (chunks) => (
+                <span className="relative text-darkblue before:content-['\00a0']">{chunks}</span>
+              ),
+              span2: (chunks) => (
+                <span className="absolute -bottom-1/4 left-0 w-full">
+                  {chunks}
+                </span>
+              ),
+              img: (chunks) => (
+                <Image
                   src="/assets/images/home/banner/line.png"
+                  alt="banner-line"
+                  width={295}
+                  height={18}
                   className="w-full object-cover"
                 />
-              </span>
-            </span>
+              ),
+            })}
+           
           </div>
-          <p className={`mt-8 text-light md:w-2/3 lg:w-3/5 md:text-lg transition-all duration-700 delay-200 ${startAnimation?"translate-y-0":"translate-y-10"}`}>
-            Experience the various exciting tour and travel packages and Make
-            hotel reservations, find vacation packages, search cheap hotels and
-            events
+          <p
+            className={`mt-8 text-light md:w-2/3 lg:w-3/5 md:text-lg transition-all duration-700 delay-200 ${
+              startAnimation ? "translate-y-0" : "translate-y-10"
+            }`}
+          >
+            {t("banner.description")}
           </p>
-          <div className={`bg-white rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12 transition-all duration-700 delay-500 ${startAnimation?"translate-y-0":"translate-y-12"}`}>
+          <div
+            className={`bg-white rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12 transition-all duration-700 delay-500 ${
+              startAnimation ? "translate-y-0" : "translate-y-12"
+            }`}
+          >
             {/* Location */}
             <div className="flex flex-col gap-2 pb-4 lg:pb-0 lg:pr-8 relative">
-              <span className="font-semibold">{t("location")}</span>
+              <span className="font-semibold">{t("common.location")}</span>
               <span
                 className="location-selection border-none outline-none"
                 onClick={() => setLocationEl(true)}
@@ -159,9 +184,7 @@ export default function Banner() {
                     <li
                       key={e?.id}
                       className="flex align-top justify-start gap-2 hover:bg-hoverlight py-2 px-3 transition-all duration-300"
-                      onClick={() =>
-                        setDestination(e?.attributes.city)
-                      }
+                      onClick={() => setDestination(e?.attributes.city)}
                     >
                       {locationSVG}
                       <div className="flex flex-col gap-1">
@@ -187,18 +210,17 @@ export default function Banner() {
                 range
                 numberOfMonths={2}
                 inputClass="outline-none border-none text-light text-sm p-0"
-
               />
             </div>
             {/* Number of Guest */}
             <div className="flex flex-col gap-2 relative py-4 lg:py-0 lg:px-8">
-              <span className="font-semibold">{t("guest")}</span>
+              <span className="font-semibold">{t("common.guest")}</span>
               <span
                 className="guest-selection text-light text-sm"
                 onClick={() => setGuestEl(true)}
               >
-                {guest.adult} {t("adults")} - {guest.children} {t("children")} - {guest.rooms}{" "}
-                {t("rooms")}
+                {guest.adult} {t("common.adults")} - {guest.children}{" "}
+                {t("common.children")} - {guest.rooms} {t("common.rooms")}
               </span>
               <div
                 className={`guest-selection absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
@@ -206,7 +228,7 @@ export default function Banner() {
                 }`}
               >
                 <div className="flexBetween pb-4">
-                  <span>Adults</span>
+                  <span>{t("common.adults")}</span>
                   <div className="flexBetween w-32 ">
                     <button
                       className="border border-darkblue rounded p-2"
@@ -232,7 +254,7 @@ export default function Banner() {
                   </div>
                 </div>
                 <div className="flexBetween py-4 border-y border-border">
-                  <span>Children</span>
+                  <span>{t("common.children")}</span>
                   <div className="flexBetween w-32">
                     <button
                       className="border border-darkblue rounded p-2"
@@ -260,7 +282,7 @@ export default function Banner() {
                   </div>
                 </div>
                 <div className="flexBetween pt-4">
-                  <span>Rooms</span>
+                  <span>{t("common.rooms")}</span>
                   <div className="flexBetween w-32">
                     <button
                       className="border border-darkblue rounded p-2"
@@ -303,15 +325,17 @@ export default function Banner() {
                   d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
                 />
               </svg>
-              Search
+              {t("common.search")}
             </button>
           </div>
         </div>
       </div>
-      <div className="absolute hidden md:block right-0 top-0 h-full w-5/12">
-        <img
+      <div className="absolute hidden md:block ltr:right-0 rtl:left-0 top-0 h-full w-5/12">
+        <Image
           src="/assets/images/home/banner/bg-2.jpg"
           alt="bg-banner"
+          height={805}
+          width={760}
           className="w-full h-full object-cover"
         />
       </div>
