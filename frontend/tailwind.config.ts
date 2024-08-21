@@ -15,12 +15,11 @@ const config: Config = {
       xl: "1280px",
       "2xl": "1536px",
     },
-
     fontFamily: {
-      jost: ["Jost"],
-      vazir:["Vazir"],
-      nastaliq:["IranNastaliq"]
+      jost: ["jsot"],
+      vazir: ["vazir"],
     },
+
     keyframes: {
       fadeUp: {
         from: { transform: "translateY(60px)", opacity: "0.2" },
