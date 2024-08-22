@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import HamburgerMenu from "./HamburgerMenu";
+import { useTranslations } from "next-intl";
 
 const activePage = (path: string): string => {
   switch (path) {
@@ -17,12 +18,14 @@ const activePage = (path: string): string => {
       return "";
   }
 };
-const pages = [
-  { title: "Home", link: "/" },
-  { title: "Tour", link: "/tours" },
-  { title: "Blog", link: "/blog" },
-];
+
 export default function Navbar() {
+  const t = useTranslations("common");
+  const pages = [
+    { title: t("home"), link: "/" },
+    { title: t("tour"), link: "/tours" },
+    { title: t("blog"), link: "/blog" },
+  ];
   const pathName = usePathname();
   // Handle Hamburger Menu
   const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
@@ -52,16 +55,16 @@ export default function Navbar() {
       document.removeEventListener("click", (e) => clickEvent(e));
       window.removeEventListener("resize", resizeEvent);
     };
-  }, [])
+  }, []);
 
   // Nav BackgroundColor
   const [bgWhite, setBgWhite] = useState<boolean>(false);
   useEffect(() => {
-    const scrollEvent = ()=>{
+    const scrollEvent = () => {
       window.scrollY > 0 ? setBgWhite(true) : setBgWhite(false);
-    }
+    };
     window.addEventListener("scroll", scrollEvent);
-    return(window.removeEventListener("scroll",scrollEvent))
+    return window.removeEventListener("scroll", scrollEvent);
   }, []);
   return (
     <>
@@ -129,7 +132,7 @@ export default function Navbar() {
                   : "text-white border-white hover:bg-white hover:text-dark"
               } text-md font-normal`}
             >
-              Sign In / Register
+              {t("login")} / {t("register")}
             </Link>
           </div>
           <div className="flexCenter gap-3 md:hidden">

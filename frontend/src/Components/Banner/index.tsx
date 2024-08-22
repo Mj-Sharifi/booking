@@ -1,12 +1,16 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
+import persian_fa from "react-date-object/locales/persian_fa";
+import gregorian_en from "react-date-object/locales/gregorian_en"
 import type { Value } from "react-multi-date-picker";
 import "./style.css";
 import axios from "axios";
-import { locationData } from "@/types/types";
+
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { locationData } from "@/types/response";
+import { useParams } from "next/navigation";
 
 const locationSVG = (
   <svg
@@ -60,6 +64,7 @@ const plusSVG = (
 
 export default function Banner() {
   // Translation
+  const {locale}=useParams()
   const t = useTranslations();
   //Location
   const [locations, setLocations] = useState<locationData[]>();
@@ -70,7 +75,7 @@ export default function Banner() {
       .catch((err) => console.log(err));
   }, []);
   const [destination, setDestination] = useState<string>(
-    "Where are you going?"
+    t("banner.where_u_going")
   );
 
   const [locationEl, setLocationEl] = useState<boolean>(false);
@@ -134,7 +139,9 @@ export default function Banner() {
           >
             {t.rich("banner.title", {
               span1: (chunks) => (
-                <span className="relative text-darkblue before:content-['\00a0']">{chunks}</span>
+                <span className="relative text-darkblue before:content-['\00a0']">
+                  {chunks}
+                </span>
               ),
               span2: (chunks) => (
                 <span className="absolute -bottom-1/4 left-0 w-full">
@@ -151,7 +158,6 @@ export default function Banner() {
                 />
               ),
             })}
-           
           </div>
           <p
             className={`mt-8 text-light md:w-2/3 lg:w-3/5 md:text-lg transition-all duration-700 delay-200 ${
@@ -202,8 +208,12 @@ export default function Banner() {
             </div>
             {/* Date Picker */}
             <div className="flex flex-col gap-2 border-y lg:border-y-0 lg:border-x border-border py-6 lg:py-0 lg:px-12">
-              <span className="font-semibold">Check in - Check out</span>
+              <span className="font-semibold">
+                {t("common.checkin")} - {t("common.checkout")}
+              </span>
               <DatePicker
+                // calendar={persian}
+                locale={locale=="fa"?persian_fa:gregorian_en}
                 value={dateRange}
                 onChange={setDateRange}
                 format="MMMM DD"

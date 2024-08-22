@@ -806,7 +806,7 @@ export interface ApiBlogBlog extends Schema.CollectionType {
       'manyToMany',
       'api::blog-category.blog-category'
     >;
-    image: Attribute.Media;
+    image: Attribute.Media<'images'>;
     release_date: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -829,8 +829,18 @@ export interface ApiBlogCategoryBlogCategory extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     blogs: Attribute.Relation<
       'api::blog-category.blog-category',
       'manyToMany',
@@ -851,6 +861,12 @@ export interface ApiBlogCategoryBlogCategory extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::blog-category.blog-category',
+      'oneToMany',
+      'api::blog-category.blog-category'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -872,7 +888,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'manyToMany',
       'api::tour.tour'
     >;
-    image: Attribute.Media;
+    image: Attribute.Media<'images'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -934,7 +950,7 @@ export interface ApiTestimonyTestimony extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String;
-    image: Attribute.Media;
+    image: Attribute.Media<'images'>;
     skill: Attribute.String;
     description: Attribute.Text;
     place: Attribute.String;
@@ -970,7 +986,7 @@ export interface ApiTourTour extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     place: Attribute.String;
-    imagePrimary: Attribute.Media & Attribute.Required;
+    imagePrimary: Attribute.Media<'images'> & Attribute.Required;
     isPopular: Attribute.Boolean & Attribute.DefaultTo<false>;
     rating: Attribute.Integer &
       Attribute.SetMinMax<
@@ -981,7 +997,7 @@ export interface ApiTourTour extends Schema.CollectionType {
         number
       > &
       Attribute.DefaultTo<4>;
-    images: Attribute.Media;
+    images: Attribute.Media<'images', true>;
     price: Attribute.Integer;
     duration: Attribute.String;
     categories: Attribute.Relation<

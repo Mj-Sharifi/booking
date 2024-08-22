@@ -1,16 +1,24 @@
 {
-    "common": {
-      "location": "Location",
-      "guest":"Guest",
-      "adults":"Adults",
-      "children":"Children",
-      "rooms":"Rooms",
-      "search":"search",
-      "fa":"Farsi",
-      "en":"English"
-    },
-    "banner":{
-      "title":"Best Travel <span1>Experience<span2><img></img></span2></span1>",
-      "description":"Experience the different fascinating tour and travel packages, Make hotel reservations, browse vacation packages, search for cheap hotels and events."
-    }
+  "common": {
+    "location": "Location",
+    "guest": "Guest",
+    "adults": "Adults",
+    "children": "Children",
+    "rooms": "Rooms",
+    "search": "search",
+    "checkin": "Check-in",
+    "checkout": "Check-out",
+    "fa": "Farsi",
+    "en": "English",
+    "blog": "Blog",
+    "tour": "Tour",
+    "home": "Home",
+    "login": "Login",
+    "register": "Register"
+  },
+  "banner": {
+    "title": "Best Travel <span1>Experience<span2><img></img></span2></span1>",
+    "description": "Experience the different fascinating tour and travel packages, Make hotel reservations, browse vacation packages, search for cheap hotels and events.",
+    "where_u_going": "Where are you going?"
   }
+}

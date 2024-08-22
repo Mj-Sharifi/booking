@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import BlogSidebar from "./components/BlogSidebar";
 import axios from "axios";
-import { blogData } from "@/types/types";
 import PostCard from "./components/PostCard";
+import { blogData } from "@/types/response";
+import { useParams } from "next/navigation";
 
 export default function Blog() {
+  const {locale}=useParams()
   const [blog, setBlog] = useState<blogData[]>();
   // Handle Category
   const [category, setCategory] = useState<string[]>([""]);
@@ -33,7 +35,7 @@ export default function Blog() {
       return categoryQuery.join("");
     };
     axios
-      .get(process.env.NEXT_PUBLIC_API + `blogs?populate=*${filterQuery()}`)
+      .get(process.env.NEXT_PUBLIC_API + `blogs?populate=*&locale=${locale}${filterQuery()}`)
       .then((res) => setBlog(res.data.data));
   }, [category]);
 
