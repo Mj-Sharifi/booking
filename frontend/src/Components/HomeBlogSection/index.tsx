@@ -1,19 +1,20 @@
 // import React, { useEffect, useState, useRef } from "react";
+import { locale } from "@/types/types";
 import axios from "axios";
 // import Slider from "@/Components/Slider";
 // import { SwiperSlide } from "swiper/react";
 // import Link from "next/link";
 
-const fetchData=async(url:string)=>{
-    const res = await axios.get(process.env.NEXT_PUBLIC_API + url)
-    if(!res.data){
-        throw new Error('Failed to fetch data')
-    }
-    return res.data
-}
-export default async function HomeBlogSection() {
-    const data = await fetchData("testimonies?populate=*")
-    console.log(data)
+type props = { locale:locale};
+const fetchData = async (url: string) => {
+  const res = await axios.get(process.env.NEXT_PUBLIC_API + url);
+  if (!res.data) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.data;
+};
+export default async function HomeBlogSection({ locale }:props) {
+  const data = await fetchData(`testimonies?populate=*&locale=${locale}`);
   return (
     <div className="container mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-7 sm:pb-10 md:pb-14 lg:pb-16">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
@@ -92,5 +93,5 @@ export default async function HomeBlogSection() {
         </Slider>
       )} */}
     </div>
-  )
+  );
 }

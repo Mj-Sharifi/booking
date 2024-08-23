@@ -34,11 +34,11 @@ export default function Blog() {
           : [""];
       return categoryQuery.join("");
     };
+    console.log(process.env.NEXT_PUBLIC_API + `blogs?populate=*&locale=${locale}${filterQuery()}`);
     axios
       .get(process.env.NEXT_PUBLIC_API + `blogs?populate=*&locale=${locale}${filterQuery()}`)
       .then((res) => setBlog(res.data.data));
   }, [category]);
-
 
   return (
     <section className="container mx-auto flex flex-col md:flex-row sm:gap-6 lg:gap-8 py-24 lg:py-28 px-2 md:px-4">

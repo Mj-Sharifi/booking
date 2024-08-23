@@ -4,14 +4,18 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 //Slider
 import Slider from "../Slider";
 import { SwiperSlide } from "swiper/react";
-import { testimonyData } from "@/types/types";
+import { testimonyData } from "@/types/response";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function Testimony() {
+  const t =useTranslations("testimony")
+  const {locale}=useParams()
   // Getting Data
   const [testimonies, setTestimonies] = useState<testimonyData[]>();
   useEffect(() => {
     axios
-      .get(process.env.NEXT_PUBLIC_API + "testimonies?populate=*")
+      .get(process.env.NEXT_PUBLIC_API + `testimonies?populate=*&locale=${locale}`)
       .then((res) => setTestimonies(res.data.data))
       .catch((err) => console.log(err));
   }, []);
@@ -32,7 +36,6 @@ export default function Testimony() {
       observer.observe(testimonyDiv.current);
     }
   }, []);
-
   return (
     <section className="relative flexCenter pt-12">
       <img
@@ -49,7 +52,7 @@ export default function Testimony() {
         }}
       >
         <h5 className="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-1">
-          Customer Reviews
+          {t("customer_review")}
         </h5>
         <p className="text-light text-center text-">
           Interdum et malesuada fames ac ante ipsum

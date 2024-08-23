@@ -49,11 +49,11 @@ export default function Navbar() {
         closeHamburgerMenu();
       }
     };
-    window.addEventListener("resize", resizeEvent);
+    document.addEventListener("resize", resizeEvent);
 
     return () => {
       document.removeEventListener("click", (e) => clickEvent(e));
-      window.removeEventListener("resize", resizeEvent);
+      document.removeEventListener("resize", resizeEvent);
     };
   }, []);
 
@@ -61,10 +61,11 @@ export default function Navbar() {
   const [bgWhite, setBgWhite] = useState<boolean>(false);
   useEffect(() => {
     const scrollEvent = () => {
+      console.log("scroll");
       window.scrollY > 0 ? setBgWhite(true) : setBgWhite(false);
     };
-    window.addEventListener("scroll", scrollEvent);
-    return window.removeEventListener("scroll", scrollEvent);
+    document.addEventListener("scroll", scrollEvent);
+    return document.removeEventListener("scroll", scrollEvent);
   }, []);
   return (
     <>

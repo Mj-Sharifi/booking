@@ -1,35 +1,39 @@
 "use client";
 import React, { useState, useEffect, ChangeEventHandler } from "react";
 import axios from "axios";
-import { blogCategoryDate, blogData } from "@/types/types";
 import CheckboxInput from "@/components/Form/CheckboxInput";
 import Link from "next/link";
+import { blogCategoryData, blogData } from "@/types/response";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 type props = {
   handleCategory: (c: string) => void;
   category: string[];
 };
 export default function BlogSidebar({ handleCategory, category }: props) {
-  const [allCategories, setAllCategories] = useState<blogCategoryDate[]>();
+  const t = useTranslations()
+  const {locale}=useParams()
+  const [allCategories, setAllCategories] = useState<blogCategoryData[]>();
   useEffect(() => {
     axios
-      .get(process.env.NEXT_PUBLIC_API + "blog-categories")
+      .get(process.env.NEXT_PUBLIC_API + `blog-categories?locale=${locale}`)
       .then((res) => setAllCategories(res.data.data));
+
   }, []);
   const [recentPosts, setRecentPost] = useState<blogData[]>();
   useEffect(() => {
     axios
       .get(
         process.env.NEXT_PUBLIC_API +
-          `blogs?populate=*&sort[0]=release_date:desc`
+          `blogs?populate=*&loale=${locale}&sort[0]=release_date:desc`
       )
       .then((res) => setRecentPost(res.data.data));
   }, []);
-  console.log(recentPosts)
   return (
     <div>
       <div className="flex flex-col gap-6">
         <div>
-          <span className="font-semibold md:text-lg">Categories</span>
+          <span className="font-semibold md:text-lg">{t("common.categories")}</span>
           {allCategories && (
             <ul className="mt-2">
               <li>
@@ -37,7 +41,7 @@ export default function BlogSidebar({ handleCategory, category }: props) {
                   onChange={() => handleCategory("all")}
                   value={"all"}
                   checked={category.length === 1 && category[0] === ""}
-                  label={"All Categories"}
+                  label={t("common.all_categories")}
                 />
               </li>
               {allCategories?.map((e) => (
@@ -58,7 +62,7 @@ export default function BlogSidebar({ handleCategory, category }: props) {
           )}
         </div>
         <div>
-          <span className="font-semibold md:text-lg mb-2">Recent Posts</span>
+          <span className="font-semibold md:text-lg mb-2">{t("blog.recent_posts")}</span>
           <ul className="mt-2"> 
             {recentPosts?.slice(0, 5)?.map((e) => (
               <li key={e.id} className="mb-4">

@@ -70,7 +70,7 @@ export default function Banner() {
   const [locations, setLocations] = useState<locationData[]>();
   useEffect(() => {
     axios
-      .get(process.env.NEXT_PUBLIC_API + "locations")
+      .get(process.env.NEXT_PUBLIC_API + `locations?locale=${locale}`)
       .then((res) => setLocations(res.data.data))
       .catch((err) => console.log(err));
   }, []);
@@ -181,7 +181,7 @@ export default function Banner() {
                 {destination}
               </span>
               <div
-                className={`absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
+                className={`absolute rounded-sm bg-white shadow-nav p-7 ltr:left-0 rtl:right-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
                   locationEl ? "visible animate-fadeUp" : "invisible"
                 } z-20`}
               >

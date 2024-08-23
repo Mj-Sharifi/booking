@@ -1,26 +1,30 @@
 "use client";
 import React from "react";
 import axios from "axios";
-import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import Slider from "@/components/Slider";
 import { favoriteSVG } from "@/utils/svg";
-import { tourData } from "@/types/types";
+
 // Import Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./style.css";
+import { tourData } from "@/types/response";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 export default function PopularTours() {
+  const {locale} = useParams()
+  const t = useTranslations("tour")
   // Getting Data
   const [popularTours, setPopularTours] = useState<tourData[]>();
   useEffect(() => {
     axios
       .get(
         process.env.NEXT_PUBLIC_API +
-          "tours?populate=*&filters[isPopular][$eq]=true"
+          `tours?populate=*&locale=${locale}&filters[isPopular][$eq]=true`
       )
       .then((res) => setPopularTours(res.data.data))
       .catch((err) => console.log(err));
@@ -44,7 +48,7 @@ export default function PopularTours() {
   return (
     <div className="container mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-7 sm:pb-10 md:pb-14 lg:pb-16">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
-        Most Popular Tours
+        {t("most_popular_tours")}
       </h2>
       <p className="text-light mb-8">
         Interdum et malesuada fames ac ante ipsum
@@ -92,7 +96,7 @@ export default function PopularTours() {
                     </Swiper>
                   </div>
                   <div className="flex flex-col text-sm items-center justify-evenly px-2 h-full">
-                    {e?.attributes?.duration}
+                    {e?.attributes?.duration} {t("days")}
                     <div className="text-light flexCenter gap-1 text-base">
                       {e?.attributes?.categories?.data.map((m, n) => (
                         <React.Fragment key={n}>
@@ -125,30 +129,4 @@ export default function PopularTours() {
     </div>
   );
 }
-// top-[2%] right-[2%]
 
-// useEffect(() => {
-//   const observer = new IntersectionObserver(
-//     (entries) => {
-//       entries.forEach((entry) => {
-//         if (entry.isIntersecting) {
-//           // entry.target.classList.add('animate');
-//           setStartAnimation(true)
-//         }
-//       });
-//     },
-//     {
-//       threshold: 0.5, // Adjust this value as needed
-//     }
-//   );
-
-//   if (popularTourDiv.current) {
-//     observer.observe(popularTourDiv.current);
-//   }
-
-//   return () => {
-//     if (popularTourDiv.current) {
-//       observer.unobserve(popularTourDiv.current);
-//     }
-//   };
-// }, []);

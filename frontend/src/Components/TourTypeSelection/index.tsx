@@ -5,13 +5,17 @@ import axios from "axios";
 import Slider from "@/components/Slider";
 import { SwiperSlide } from "swiper/react";
 import Link from "next/link";
-import { tourCategoryData } from "@/types/types";
+import { useParams } from "next/navigation";
+import { tourCategoryData } from "@/types/response";
+import { useTranslations } from "next-intl";
 
 export default function TourTypeSelection() {
+  const t = useTranslations("tour")
+  const {locale}=useParams()
   const [tourCategories, setTourCategories] = useState<tourCategoryData[]>();
   useEffect(() => {
     axios
-      .get(process.env.NEXT_PUBLIC_API + "categories?populate=*")
+      .get(process.env.NEXT_PUBLIC_API + `categories?populate=*&locale=${locale}`)
       .then((res) => setTourCategories(res.data.data))
       .catch((err) => console.log(err));
   }, []);
@@ -35,7 +39,7 @@ export default function TourTypeSelection() {
   return (
     <section className="container mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-7 sm:pb-10 md:pb-14 lg:pb-16">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
-        Choose Tour Types
+        {t("choose_tour_type")}
       </h2>
       <p className="text-light mb-8">
         Interdum et malesuada fames ac ante ipsum
@@ -77,7 +81,7 @@ export default function TourTypeSelection() {
                       className="w-1/2"
                     />
                     <h2>{e.attributes.title}</h2>
-                    <h4>{e.attributes.tours.data.length} tours</h4>
+                    <h4>{e.attributes.tours.data.length} {t("tours")}</h4>
                   </Link>
                 </div>
               </SwiperSlide>

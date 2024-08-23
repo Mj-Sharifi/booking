@@ -6,7 +6,8 @@ import TourTypeSelection from "@/components/TourTypeSelection";
 import { upRightSVG } from "@/utils/svg";
 import Link from "next/link";
 
-export default function Home() {
+type props = { params: { locale: string } };
+export default function Home({params}:props) {
 
   return (
     <>
@@ -66,7 +67,7 @@ export default function Home() {
         </div>
       </section>
       <Testimony />
-      <HomeBlogSection/>
+      <HomeBlogSection locale={params.locale}/>
       <section className="container mx-auto flex flex-col gap-y-4 lg:flexBetween pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24 md:pb-32 px-4 sm:px-6 md:px-8">
         <div>
           <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">

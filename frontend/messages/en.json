@@ -14,11 +14,25 @@
     "tour": "Tour",
     "home": "Home",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "categories":"Categories",
+    "all_categories":"All Categories"
   },
   "banner": {
     "title": "Best Travel <span1>Experience<span2><img></img></span2></span1>",
     "description": "Experience the different fascinating tour and travel packages, Make hotel reservations, browse vacation packages, search for cheap hotels and events.",
     "where_u_going": "Where are you going?"
+  },
+  "blog":{
+    "recent_posts":"Recent Posts"
+  },
+  "tour":{
+    "tours":"Tours",
+    "most_popular_tours":"Most Popular Tours",
+    "choose_tour_type":"Choose Tour Types",
+    "days":"days"
+  },
+  "testimony":{
+    "customer_review":"Customer reviews"
   }
 }

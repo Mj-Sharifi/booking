@@ -6,10 +6,11 @@ export default createMiddleware({
   locales,
   // Used when no locale matches
   defaultLocale: 'en',
-  localePrefix:"as-needed"
+  localePrefix:"as-needed",
+  
 });
  
 export const config = {
   // Match only internationalized pathnames
-  matcher: ['/','/blog','/tour', '/(fa|en)/:path*']
+  matcher: ['/','/blog','/tours', '/(fa|en)/:path*']
 };

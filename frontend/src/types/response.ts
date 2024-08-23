@@ -50,7 +50,7 @@ export type tourCategoryData = {
   id: number;
   attributes: {
     createdAt: string;
-    image: { data: { id: number; attributes: imageData } };
+    image: { data: imageData };
     publishedAt: string;
     title: string;
     tours: { data: tourData[] };
@@ -70,7 +70,7 @@ export type testimonyData = {
     image: { data: imageData };
   };
 };
-export type blogCategoryDate = {
+export type blogCategoryData = {
   id: number;
   attributes: {
     createdAt: string;
