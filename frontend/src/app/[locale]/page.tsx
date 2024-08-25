@@ -27,7 +27,7 @@ export default function Home({params}:props) {
             <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
               Why be a Local Expert
             </h4>
-            <p className="text-light mb-8">
+            <p className="text-light dark:text-lighter mb-8">
               These popular destinations have a lot to offer
             </p>
             <div className="mb-5 flexCenter gap-4">
@@ -73,7 +73,7 @@ export default function Home({params}:props) {
           <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
             Not a Member Yet?
           </h4>
-          <p className="text-light mb-8">
+          <p className="text-light dark:text-lighter mb-8">
             Join us! Our members can access savings of up to 50% and earn Trip
             Coins while booking.
           </p>

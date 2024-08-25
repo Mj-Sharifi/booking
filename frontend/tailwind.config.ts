@@ -7,6 +7,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/flowbite/**/*.js",
   ],
+  darkMode:"selector",
   theme: {
     screens: {
       sm: "580px",
@@ -37,10 +38,12 @@ const config: Config = {
       black: "#000",
       white: "#fff",
       darkblue: "#3554d1",
+      lightblue:"#A4CAFE",
       yellow: "#f8d448",
       violet: "#7e53f9",
       border: "#ddd",
       light: "#697488",
+      lighter:"#B0B6C0",
       hoverlight: "#F5F6FD",
       glass: "#ffffff10",
     },

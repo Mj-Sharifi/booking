@@ -1,31 +1,27 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import HamburgerMenu from "./HamburgerMenu";
 import { useTranslations } from "next-intl";
+import { localeFlag, locales } from "@/utils/utils";
+import { HiChevronDown } from "react-icons/hi";
+import Popup from "../Popup/Popup";
+import LangSwitcher from "./LangSwitcher";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import RadioInput from "../Form/RadioInput";
+import NavigationLink from "../link/NavigationLink";
 
-const activePage = (path: string): string => {
-  switch (path) {
-    case "/":
-      return "Home";
-    case "/tours":
-      return "Tour";
-    case "/blog":
-      return "Blog";
-    default:
-      return "";
-  }
-};
-
+// const pages = [
+//   { title: "home", href: "/" },
+//   { title: "tour", href: "tour" },
+//   { title: "blog", href: "blog" },
+// ];'
+const pages = ["home","tour","blog"]
 export default function Navbar() {
+  const { locale } = useParams();
   const t = useTranslations("common");
-  const pages = [
-    { title: t("home"), link: "/" },
-    { title: t("tour"), link: "/tours" },
-    { title: t("blog"), link: "/blog" },
-  ];
   const pathName = usePathname();
   // Handle Hamburger Menu
   const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
@@ -58,20 +54,40 @@ export default function Navbar() {
   }, []);
 
   // Nav BackgroundColor
-  const [bgWhite, setBgWhite] = useState<boolean>(false);
+  const [bgEffect, setBgEffect] = useState<boolean>(false);
   useEffect(() => {
+    setBgEffect(false);
     const scrollEvent = () => {
-      console.log("scroll");
-      window.scrollY > 0 ? setBgWhite(true) : setBgWhite(false);
+      window.scrollY > 0 ? setBgEffect(true) : setBgEffect(false);
     };
-    document.addEventListener("scroll", scrollEvent);
-    return document.removeEventListener("scroll", scrollEvent);
-  }, []);
+    if (pathName == "/" || pathName == "/fa") {
+      window.addEventListener("scroll", scrollEvent);
+      return () => {
+        window.removeEventListener("scroll", scrollEvent);
+      };
+    } else {
+      setBgEffect(true);
+    }
+  }, [pathName]);
+  // Lang Switcher
+  const [showLangSwitcher, setShowLangSwitcher] = useState(false);
+  // Theme Switcher
+  const themeSwitcher = (theme: "light" | "dark") => {
+    localStorage.theme = theme;
+    if (theme == "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  };
+  console.log(locale);
   return (
     <>
       <nav
-        className={`fixed z-40 top-0 left-0 right-0 h-22 transition-all duration-300 ${
-          bgWhite ? "bg-white shadow-nav" : "bg-transparent"
+        className={`fixed z-40 top-0 left-0 right-0 h-22 transition-all duration-300 text-dark ${
+          bgEffect
+            ? "bg-white dark:bg-dark dark:text-white shadow-nav dark:shadow-lighter"
+            : "bg-transparent dark:bg-dark"
         }`}
       >
         <div className="container mx-auto h-full flexBetween px-2">
@@ -97,29 +113,64 @@ export default function Navbar() {
               width={70}
               height={70}
             />
-            <ul className="hidden lg:flexCenter gap-3">
-              {pages.map((page, index) => (
-                <li key={index}>
-                  <Link
-                    className={`text-md font-medium ${
-                      page.title === activePage(pathName)
-                        ? "text-darkblue"
-                        : "text-dark"
-                    }`}
-                    href={page.link}
-                  >
-                    {page.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <button
+              type="button"
+              className="duration-300 px-2 py-1 flex gap-1 items-center text-xs md:text-sm hover:text-darkblue dark:hover:text-lightblue text-dark dark:text-white"
+              onClick={() => setShowLangSwitcher(true)}
+            >
+              {t(`${locale}`)}{" "}
+              <Image
+                src={`/assets/images/navbar/${
+                  localeFlag[locale as "en" | "fa"]
+                }`}
+                alt={locale as string}
+                width={32}
+                height={20}
+                className="rounded"
+              />
+              <HiChevronDown size={20} />
+            </button>
+            <RadioInput
+              values={["light", "dark"]}
+              initialValue={localStorage.getItem("theme") || "light"}
+              onChange={themeSwitcher}
+              rightLabel={t("light_mode")}
+              leftLabel={t("dark_mode")}
+              rightIcon={<MdOutlineLightMode size={22} />}
+              leftIcon={<MdOutlineDarkMode size={22} />}
+            />
           </div>
+          <ul className="hidden lg:flexCenter gap-8 text-lg">
+            {pages.map((page, index) => (
+              <li key={index}>
+                <NavigationLink
+                  className={`duration-300 text-md font-medium ${
+                    locales.some(
+                      (locale) =>
+                        pathName ===
+                        `${locale == "en" ? "" :"/"+locale}${
+                          page == "home"
+                            ? `${locale == "en"?"/":""}`
+                            : "/" + page
+                        }`
+                    )
+                      ? "text-darkblue dark:text-lightblue"
+                      : "text-dark dark:text-white hover:text-darkblue/70 dark:hover:text-lightblue/70"
+                  }`}
+                  // @ts-ignore
+                  href={page==="home"?"/":"/"+page}
+                >
+                  {t(page)}
+                </NavigationLink>
+              </li>
+            ))}
+          </ul>
           <div className="hidden md:flexCenter gap-2">
             <Link
               href={""}
               className={`flexCenter duration-300 rounded-md ${
-                bgWhite
-                  ? "bg-dark hover:bg-darkblue text-white"
+                bgEffect
+                  ? "bg-dark dark:bg-white hover:bg-darkblue dark:hover:text-white text-white dark:text-dark"
                   : "bg-white hover:bg-darkblue text-dark hover:text-white"
               }   h-12 px-4 text-md font-normal`}
             >
@@ -128,8 +179,8 @@ export default function Navbar() {
             <Link
               href={""}
               className={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-4 ${
-                bgWhite
-                  ? "text-dark border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"
+                bgEffect
+                  ? "text-dark dark:text-white dark:hover:text-dark dark:border-white dark:hover:bg-white border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"
                   : "text-white border-white hover:bg-white hover:text-dark"
               } text-md font-normal`}
             >
@@ -176,6 +227,11 @@ export default function Navbar() {
         pages={pages}
         closeHamburgerMenu={closeHamburgerMenu}
       />
+      {showLangSwitcher && (
+        <Popup show={showLangSwitcher} onClose={setShowLangSwitcher}>
+          <LangSwitcher />
+        </Popup>
+      )}
     </>
   );
 }

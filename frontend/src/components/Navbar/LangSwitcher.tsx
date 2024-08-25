@@ -1,9 +1,11 @@
+import { usePathname,useRouter } from "@/navigation";
 import { locale } from "@/types/types";
 import { locales } from "@/utils/utils";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useParams, usePathname, useRouter } from "next/navigation";
-import React, { ChangeEvent, useTransition } from "react";
+import { useParams } from "next/navigation";
+import React, { useTransition } from "react";
+import { FiCheckCircle, FiCircle } from "react-icons/fi";
 
 export default function LangSwitcher() {
   const t = useTranslations("common");
@@ -13,7 +15,6 @@ export default function LangSwitcher() {
   const params = useParams();
 
   const onSelectChange = (nextLocale: locale) => {
-    console.log(nextLocale);
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
@@ -25,21 +26,31 @@ export default function LangSwitcher() {
     });
   };
   return (
-    <div className="flex flex-col px-4 rounded-lg shadow-md">
+    <div className="flex flex-wrap justify-center gap-8 py-4 px-2 rounded-lg shadow-md bg-white dark:bg-dark">
       {locales.map((locale, i) => (
         <button
           type="button"
           key={i}
-          className="flex justify-between"
-          onClick={()=>onSelectChange(locale)}
+          className={`font-semibold flex items-center justify-between gap-1 w-36 p-1 py-2 rounded-md border-2 border-darkblue dark:border-lightblue ${
+            params.locale == locale
+              ? " text-white dark:text-dark bg-darkblue shadow-darkblue/70 dark:bg-lightblue dark:shadow-lightblue/70 shadow-md"
+              : ""
+          }`}
+          onClick={() => onSelectChange(locale)}
         >
           <span>{t(locale)}</span>
           <Image
-            src={`@/assets/images/flag/${locale}.svg`}
+            src={`/assets/images/navbar/${locale}.svg`}
             alt={`lang-${locale}`}
-            width={45}
-            height={30}
+            width={40}
+            height={25}
+            className="rounded"
           />
+          {params.locale == locale ? (
+            <FiCheckCircle size={20} className="dark:text-dark"/>
+          ) : (
+            <FiCircle size={20} className="text-darkblue dark:text-lightblue"/>
+          )}
         </button>
       ))}
     </div>

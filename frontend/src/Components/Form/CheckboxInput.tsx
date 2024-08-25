@@ -17,7 +17,7 @@ export default function CheckboxInput({
   checked,
 }: props) {
   return (
-    <label className={`${labelClassNames} flex gap-2 duration-300 group`}>
+    <label className={`${labelClassNames} text-light dark:text-lighter flex gap-2 duration-300 group`}>
       <input
         hidden
         type="checkbox"
@@ -26,7 +26,13 @@ export default function CheckboxInput({
         checked={checked}
         className="hidden "
       />
-      <div className={`duration-300 transition-all w-5 h-5 rounded-md border border-blue-500 group-hover:scale-105 group-hover:bg-blue-300 ${checked?"bg-blue-300":""}`}>{checked ? checkedSVG("text-white") : ""}</div>
+      <div
+        className={`duration-300 transition-all w-5 h-5 rounded-md border border-darkblue dark:border-lightblue group-hover:scale-105 group-hover:bg-darkblue/50 group-dark:hover:bg-lightblue/50 ${
+          checked ? "bg-darkblue/50 dark:bg-lightblue/50" : ""
+        }`}
+      >
+        {checked ? checkedSVG("text-white") : ""}
+      </div>
       {label}
     </label>
   );

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/Styles/global.css";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 // i18n
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import {getLangDir} from 'rtl-detect';
+import Config from "@/components/config/Config";
+import Navbar from "@/components/Navbar";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -31,11 +32,12 @@ export default async function RootLayout({
     <html lang={locale} dir={direction}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <Navbar />
+          <Navbar/>
           <main>{children}</main>
-          <Footer />
+          <Footer locale={locale as "en"|"fa"}/>
         </NextIntlClientProvider>
       </body>
+      <Config/>
     </html>
   );
 }

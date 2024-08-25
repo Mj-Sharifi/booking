@@ -25,7 +25,7 @@ export default function BlogSidebar({ handleCategory, category }: props) {
     axios
       .get(
         process.env.NEXT_PUBLIC_API +
-          `blogs?populate=*&loale=${locale}&sort[0]=release_date:desc`
+          `blogs?populate=*&locale=${locale}&sort[0]=release_date:desc`
       )
       .then((res) => setRecentPost(res.data.data));
   }, []);
@@ -65,7 +65,7 @@ export default function BlogSidebar({ handleCategory, category }: props) {
           <span className="font-semibold md:text-lg mb-2">{t("blog.recent_posts")}</span>
           <ul className="mt-2"> 
             {recentPosts?.slice(0, 5)?.map((e) => (
-              <li key={e.id} className="mb-4">
+              <li key={e.id} className="mb-4 text-light dark:text-lighter">
                <Link href={""}>{e.attributes.title}</Link> 
               </li>
             ))}

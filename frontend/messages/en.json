@@ -1,5 +1,9 @@
 {
   "common": {
+    "lorem_ipsum_short":"Lorem ipsum is placeholder text commonly used in site.",
+    "lorem_ipsum_long":"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione atque voluptatum voluptatibus quisquam reiciendis veniam dolorum? Pariatur dicta ad quam?",
+    "light_mode":"Light Mode",
+    "dark_mode":"Dark Mode",
     "location": "Location",
     "guest": "Guest",
     "adults": "Adults",
@@ -24,6 +28,7 @@
     "where_u_going": "Where are you going?"
   },
   "blog":{
+    "travel_articles":"Travel Articles",
     "recent_posts":"Recent Posts"
   },
   "tour":{

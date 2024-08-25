@@ -26,6 +26,9 @@
   input::placeholder {
     @apply text-dark opacity-70 text-sm;
   }
+  body{
+    @apply duration-300 scroller dark:text-white dark:bg-dark
+  }
 }
 
 @layer utilities {
@@ -37,5 +40,31 @@
   }
   .body-wrapper {
     @apply max-h-screen overflow-y-hidden before:absolute before:top-0 before:bottom-0 before:right-0 before:left-0 before:z-50 before:bg-black/70;
+  }
+
+  .scroller{
+    &::-webkit-scrollbar{
+      @apply w-2
+    }
+    &::-webkit-scrollbar-thumb{
+      @apply bg-darkblue  rounded-full
+    }
+    &::-webkit-scrollbar-track{
+      @apply bg-lighter rounded-full
+    }
+  }
+  .bg-fade-popup {
+    animation: bg-popup forwards;
+    animation-duration: 200ms
+  }
+
+  @keyframes bg-popup {
+    0% {
+      @apply bg-dark/0 
+    }
+
+    100% {
+      @apply bg-dark/60 
+    }
   }
 }

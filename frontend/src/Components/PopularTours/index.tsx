@@ -17,7 +17,7 @@ import { useParams } from "next/navigation";
 
 export default function PopularTours() {
   const {locale} = useParams()
-  const t = useTranslations("tour")
+  const t = useTranslations()
   // Getting Data
   const [popularTours, setPopularTours] = useState<tourData[]>();
   useEffect(() => {
@@ -48,10 +48,10 @@ export default function PopularTours() {
   return (
     <div className="container mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-7 sm:pb-10 md:pb-14 lg:pb-16">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
-        {t("most_popular_tours")}
+        {t("tour.most_popular_tours")}
       </h2>
-      <p className="text-light mb-8">
-        Interdum et malesuada fames ac ante ipsum
+      <p className="text-light dark:text-lighter mb-8">
+      {t("common.lorem_ipsum_short")}
       </p>
       <div className="w-full" ref={popularTourDiv}>
         {popularTours && (
@@ -96,8 +96,8 @@ export default function PopularTours() {
                     </Swiper>
                   </div>
                   <div className="flex flex-col text-sm items-center justify-evenly px-2 h-full">
-                    {e?.attributes?.duration} {t("days")}
-                    <div className="text-light flexCenter gap-1 text-base">
+                    {e?.attributes?.duration} {t("tour.days")}
+                    <div className="text-light dark:text-lighter flexCenter gap-1 text-base">
                       {e?.attributes?.categories?.data.map((m, n) => (
                         <React.Fragment key={n}>
                           <p>{m.attributes.title}</p>
@@ -110,7 +110,7 @@ export default function PopularTours() {
                     <h2 className="text-lg font-semibold text-center">
                       {e?.attributes?.title}
                     </h2>
-                    <h4 className="text-light text-sm ">
+                    <h4 className="text-light dark:text-lighter text-sm ">
                       {e?.attributes?.place}
                     </h4>
                     <div className="flex justify-between font-medium">

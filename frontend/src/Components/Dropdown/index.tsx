@@ -52,7 +52,7 @@ export default function Dropdown({
     <div className="flex flex-col gap-2 relative py-4 lg:py-0 lg:px-8">
       <span
         ref={dropdownButton}
-        className="dropdown text-light text-sm"
+        className="dropdown text-light dark:text-lighter text-sm"
         onClick={() => setDropdown(true)}
       >
         {label}

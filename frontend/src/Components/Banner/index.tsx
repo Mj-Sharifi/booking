@@ -131,10 +131,9 @@ export default function Banner() {
       <div className="container px-3 sm:px-6 mx-auto w-full relative z-10">
         <div ref={banner} className="w-full">
           <div
-            className={`flex items-start md:w-[600px] lg:w-[750px] text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold transition-all duration-700 ${
+            className={`flex text-dark items-start md:w-[600px] lg:w-[750px] text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold transition-all duration-700 ${
               startAnimation
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
+                ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
             } `}
           >
             {t.rich("banner.title", {
@@ -160,22 +159,22 @@ export default function Banner() {
             })}
           </div>
           <p
-            className={`mt-8 text-light md:w-2/3 lg:w-3/5 md:text-lg transition-all duration-700 delay-200 ${
-              startAnimation ? "translate-y-0" : "translate-y-10"
+            className={`mt-8 text-light dark:text-lighter md:w-2/3 lg:w-3/5 md:text-lg transition-all duration-700 delay-200 ${
+              startAnimation ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
             }`}
           >
             {t("banner.description")}
           </p>
           <div
-            className={`bg-white rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12 transition-all duration-700 delay-500 ${
-              startAnimation ? "translate-y-0" : "translate-y-12"
+            className={`bg-white dark:bg-dark rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12 transition-all duration-700 delay-500 ${
+              startAnimation ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
             }`}
           >
             {/* Location */}
             <div className="flex flex-col gap-2 pb-4 lg:pb-0 lg:pr-8 relative">
               <span className="font-semibold">{t("common.location")}</span>
               <span
-                className="location-selection border-none outline-none"
+                className="location-selection border-none outline-none text-light dark:text-lighter"
                 onClick={() => setLocationEl(true)}
               >
                 {destination}
@@ -185,7 +184,7 @@ export default function Banner() {
                   locationEl ? "visible animate-fadeUp" : "invisible"
                 } z-20`}
               >
-                <ul className="flex flex-col gap-3 max-h-64 md:max-h-96 overflow-y-scroll text-dark">
+                <ul className="flex flex-col gap-3 max-h-64 md:max-h-96 overflow-y-scroll scroller text-dark">
                   {locations?.map((e) => (
                     <li
                       key={e?.id}
@@ -197,7 +196,7 @@ export default function Banner() {
                         <span className="text-black">
                           {e?.attributes?.city}
                         </span>
-                        <span className="text-light text-sm">
+                        <span className="text-light dark:text-lighter text-sm">
                           {e?.attributes?.country}
                         </span>
                       </div>
@@ -219,14 +218,14 @@ export default function Banner() {
                 format="MMMM DD"
                 range
                 numberOfMonths={2}
-                inputClass="outline-none border-none text-light text-sm p-0"
+                inputClass="duration-700 delay-500 transition-all outline-none border-none text-light dark:text-lighter dark:bg-dark text-sm p-0"
               />
             </div>
             {/* Number of Guest */}
             <div className="flex flex-col gap-2 relative py-4 lg:py-0 lg:px-8">
               <span className="font-semibold">{t("common.guest")}</span>
               <span
-                className="guest-selection text-light text-sm"
+                className="guest-selection text-light dark:text-lighter text-sm"
                 onClick={() => setGuestEl(true)}
               >
                 {guest.adult} {t("common.adults")} - {guest.children}{" "}

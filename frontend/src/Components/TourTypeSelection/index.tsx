@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-
 import Slider from "@/components/Slider";
 import { SwiperSlide } from "swiper/react";
 import Link from "next/link";
@@ -10,7 +9,7 @@ import { tourCategoryData } from "@/types/response";
 import { useTranslations } from "next-intl";
 
 export default function TourTypeSelection() {
-  const t = useTranslations("tour")
+  const t = useTranslations()
   const {locale}=useParams()
   const [tourCategories, setTourCategories] = useState<tourCategoryData[]>();
   useEffect(() => {
@@ -39,10 +38,10 @@ export default function TourTypeSelection() {
   return (
     <section className="container mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-7 sm:pb-10 md:pb-14 lg:pb-16">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
-        {t("choose_tour_type")}
+        {t("tour.choose_tour_type")}
       </h2>
-      <p className="text-light mb-8">
-        Interdum et malesuada fames ac ante ipsum
+      <p className="text-light dark:text-lighter mb-8">
+      {t("common.lorem_ipsum_short")}
       </p>
       <div className="w-full" ref={tourCategoryDiv}>
         {tourCategories && (
@@ -61,7 +60,7 @@ export default function TourTypeSelection() {
             {tourCategories.map((e, i: number) => (
               <SwiperSlide key={e.id}>
                 <div
-                  className="group bg-hoverlight shadow rounded"
+                  className="group bg-hoverlight shadow rounded-md dark:text-dark"
                   style={{
                     transition: "all 1.5s",
                     transitionDelay: `${i * 0.1 + 0.1}s`,
@@ -81,7 +80,7 @@ export default function TourTypeSelection() {
                       className="w-1/2"
                     />
                     <h2>{e.attributes.title}</h2>
-                    <h4>{e.attributes.tours.data.length} {t("tours")}</h4>
+                    <h4>{e.attributes.tours.data.length} {t("tour.tours")}</h4>
                   </Link>
                 </div>
               </SwiperSlide>

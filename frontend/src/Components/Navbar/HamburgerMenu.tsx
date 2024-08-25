@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
@@ -8,15 +9,16 @@ export default function HamburgerMenu({
   closeHamburgerMenu,
 }: {
   open: boolean;
-  pages: { title: string; link: string }[];
+  // pages: {title:string,href:string}[];
+  pages: string[];
   closeHamburgerMenu: () => void;
 }) {
-
+  const t = useTranslations("common");
   return (
     <div
       className={`hamburgerMenu absolute z-70 top-0 bottom-0 ${
-        open ? "left-0" : "-left-72"
-      } transition-all duration-300 border-r border-darkblue w-72  bg-white py-4 flex flex-col`}
+        open ? "ltr:left-0 rtl:right-0" : "ltr:-left-72 rtl:-right-72"
+      } transition-all duration-300 ltr:border-r rtl:border-l border-darkblue w-72 bg-white py-4 flex flex-col`}
     >
       <div className="flexBetween px-3 pb-4 border-b border-border">
         <Image
@@ -45,8 +47,11 @@ export default function HamburgerMenu({
         <ul className="flex flex-col gap-5">
           {pages.map((page, index) => (
             <li key={index}>
-              <Link href={page.link} className="text-lg">
-                {page.title}
+              <Link
+                href={page === "home" ? "/" : "/" + page}
+                className="text-lg"
+              >
+                {t(page)}
               </Link>
             </li>
           ))}
@@ -55,11 +60,16 @@ export default function HamburgerMenu({
       <div className="py-4 px-3">
         <div className="mb-5">
           <span className="block">Toll Free Customer Care</span>
-          <Link href={""} className="font-semibold">+(98) 9039104679</Link>
+          <Link href={""} className="font-semibold">
+            +(98) 9039104679
+          </Link>
         </div>
         <div className="mb-5">
           <span className="block">Need live support?</span>
-          <Link href={"mailto:mj.sharifimanesh@gmail.com"} className="font-semibold">
+          <Link
+            href={"mailto:mj.sharifimanesh@gmail.com"}
+            className="font-semibold"
+          >
             mj.sharifimanesh@gmail.com
           </Link>
         </div>
@@ -137,9 +147,10 @@ export default function HamburgerMenu({
               </svg>
             </li>
           </ul>
-          
         </div>
-        <a className="w-full h-12 rounded-md bg-darkblue text-white text-sm flexCenter">Become An Expert</a>
+        <a className="w-full h-12 rounded-md bg-darkblue text-white text-sm flexCenter">
+          Become An Expert
+        </a>
       </div>
     </div>
   );

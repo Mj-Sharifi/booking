@@ -19,17 +19,17 @@ const SwiperButtonNext = ({
     <button
       disabled={activeIndex === lastSlideIndex}
       className={`duration-200 ${
-        activeIndex === 0
-          ? "hover:translate-x-. hover:scale-100"
-          : "hover:translate-x-2 hover:scale-125"
+        activeIndex === lastSlideIndex
+          ? "hover:translate-x-0 hover:scale-100"
+          : "ltr:hover:translate-x-2 rtl:hover:-translate-x-2 hover:scale-110"
       }`}
       onClick={() => swiper.slideNext()}
     >
       {rightArrowSVG(
-        `duration-200 w-6 h-6 text-dark hover:text-violet ${
+        `rtl:rotate-180 duration-200 w-6 h-6 text-dark hover:text-violet ${
           activeIndex === lastSlideIndex
-            ? "text-light hover:text-light"
-            : "text-dark hover:text-violet"
+            ? "text-light dark:text-light/80 hover:text-light"
+            : "text-dark dark:text-light hover:text-violet"
         }`
       )}
     </button>
@@ -43,15 +43,15 @@ const SwiperButtonPrev = ({ activeIndex }: { activeIndex: number }) => {
       className={`duration-200 ${
         activeIndex === 0
           ? "hover:translate-x-0 hover:scale-100"
-          : "hover:translate-x-2 hover:scale-125"
+          : "ltr:hover:-translate-x-2 rtl:hover:translate-x-2 hover:scale-110"
       }`}
       onClick={() => swiper.slidePrev()}
     >
       {leftArrowSVG(
-        `duration-200 w-6 h-6 ${
+        `rtl:rotate-180 duration-200 w-6 h-6 ${
           activeIndex === 0
-            ? "text-light hover:text-light"
-            : " text-dark hover:text-violet"
+            ? "text-light dark:text-light/80 hover:text-light"
+            : " text-dark dark:text-light hover:text-violet"
         }`
       )}
     </button>
@@ -87,7 +87,7 @@ export default function Slider({
     >
       {children}
       {children && (
-        <div className="flexCenter gap-6 mt-10">
+        <div className="flexCenter gap-4 mt-10">
           <SwiperButtonPrev activeIndex={activeIndex} />
           <div className="swiperPagination flex gap-2"></div>
           <SwiperButtonNext
