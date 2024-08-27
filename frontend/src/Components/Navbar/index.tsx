@@ -18,7 +18,7 @@ import NavigationLink from "../link/NavigationLink";
 //   { title: "tour", href: "tour" },
 //   { title: "blog", href: "blog" },
 // ];'
-const pages = ["home","tour","blog"]
+const pages = ["home", "tour", "blog"];
 export default function Navbar() {
   const { locale } = useParams();
   const t = useTranslations("common");
@@ -80,7 +80,6 @@ export default function Navbar() {
       document.body.classList.remove("dark");
     }
   };
-  console.log(locale);
   return (
     <>
       <nav
@@ -107,15 +106,22 @@ export default function Navbar() {
                 d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
               />
             </svg>
-            <Image
-              src="/assets/images/navbar/tour-booking-logo-2.png"
-              alt="logo"
-              width={70}
-              height={70}
-            />
+            <NavigationLink href={"/"}>
+              <Image
+                src="/assets/images/navbar/tour-booking-logo-2.png"
+                alt="logo"
+                width={70}
+                height={70}
+              />
+            </NavigationLink>
             <button
               type="button"
-              className="duration-300 px-2 py-1 flex gap-1 items-center text-xs md:text-sm hover:text-darkblue dark:hover:text-lightblue text-dark dark:text-white"
+              disabled={pathName.includes("/blog/")}
+              className={`duration-300 px-2 py-1 flex gap-1 items-center text-xs md:text-sm ${
+                pathName.includes("/blog/")
+                  ? ""
+                  : "hover:text-darkblue dark:hover:text-lightblue"
+              } text-dark dark:text-white`}
               onClick={() => setShowLangSwitcher(true)}
             >
               {t(`${locale}`)}{" "}
@@ -128,7 +134,7 @@ export default function Navbar() {
                 height={20}
                 className="rounded"
               />
-              <HiChevronDown size={20} />
+              {!pathName.includes("/blog/") && <HiChevronDown size={20} />}
             </button>
             <RadioInput
               values={["light", "dark"]}
@@ -148,9 +154,9 @@ export default function Navbar() {
                     locales.some(
                       (locale) =>
                         pathName ===
-                        `${locale == "en" ? "" :"/"+locale}${
+                        `${locale == "en" ? "" : "/" + locale}${
                           page == "home"
-                            ? `${locale == "en"?"/":""}`
+                            ? `${locale == "en" ? "/" : ""}`
                             : "/" + page
                         }`
                     )
@@ -158,7 +164,7 @@ export default function Navbar() {
                       : "text-dark dark:text-white hover:text-darkblue/70 dark:hover:text-lightblue/70"
                   }`}
                   // @ts-ignore
-                  href={page==="home"?"/":"/"+page}
+                  href={page === "home" ? "/" : "/" + page}
                 >
                   {t(page)}
                 </NavigationLink>

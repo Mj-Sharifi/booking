@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 
 import { GrAppleAppStore } from "react-icons/gr";
+import NavigationLink from "../link/NavigationLink";
 const companyMenu = [
   { title: "About Us", href: "/about" },
   { title: "Careers", href: "" },
@@ -53,7 +54,7 @@ const socialMediaMenu = [
     title: <FaLinkedin size={24} />,
     href: "",
   },
-]
+];
 type props = {
   locale: "fa" | "en";
 };
@@ -65,27 +66,31 @@ export default function Footer({ locale }: props) {
       <div className="container mx-auto px-4 sm:px-12 md:px-4">
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-6 gap-y-10">
           <div className="lg:col-span-3 xl:col-span-2">
-            <Image
-              src="/assets/images/navbar/tour-booking-logo-1.png"
-              alt="logo"
-              width={80}
-              height={80}
-              className="mb-5"
-            />
+            <NavigationLink href="/">
+              <Image
+                src="/assets/images/navbar/tour-booking-logo-1.png"
+                alt="logo"
+                width={80}
+                height={80}
+                className="mb-5"
+              />
+            </NavigationLink>
             <div className="grid gric-cols-1 sm:grid-cols-2 gap-y-8 mb-10 sm:mb-14">
               <div className="flex flex-col gap-1">
-                <span className="text-sm">Toll Free Customer Care</span>
-                <Link href="tel:+989039104679">(+98) 903 910 4679</Link>
+                <span className="text-sm">
+                  {t("footer.free_customer_care")}
+                </span>
+                <Link dir="ltr" href="tel:+989039104679" className="rtl:text-end">(+98) 903 910 4679</Link>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm">Need live support?</span>
-                <a href="mailto:mj.sharifimanesh@gmail.com">
+                <span className="text-sm">{t("footer.live_support")}</span>
+                <Link dir="ltr" href="mailto:mj.sharifimanesh@gmail.com" className="rtl:text-end">
                   mj.sharifimanesh@gmail.com
-                </a>
+                </Link>
               </div>
             </div>
             <div className="flex flex-col items-start gap-4 mb-10 sm:mb-14">
-              <p>Your all-in-one travel app</p>
+              <p>{t("footer.your_app")}</p>
               <div className="flex flex-wrap gap-x-10 gap-y-4 text-white">
                 <Link
                   href=""
@@ -94,8 +99,10 @@ export default function Footer({ locale }: props) {
                   <GrAppleAppStore size={32} />
 
                   <div className="ltr:hover:translate-x-2 rtl:hover:-translate-x-2 duration-200 text-sm">
-                    <span className="block">Download on the</span>
-                    <span className="block font-semibold">Apple Store</span>
+                    {t.rich("footer.download_apple",{
+                      span1:(chunks)=> <span className="block">{chunks}</span>,
+                      span2:(chunks)=><span className="block font-semibold">{chunks}</span>
+                    })}
                   </div>
                 </Link>
                 <Link
@@ -105,14 +112,18 @@ export default function Footer({ locale }: props) {
                   <FaGooglePlay size={28} />
 
                   <div className="ltr:hover:translate-x-2 rtl:hover:-translate-x-2 duration-200 text-sm">
-                    <span className="block">Get it on</span>
-                    <span className="block font-semibold">Google Play</span>
+                  {t.rich("footer.download_google",{
+                      span1:(chunks)=> <span className="block">{chunks}</span>,
+                      span2:(chunks)=><span className="block font-semibold">{chunks}</span>
+                    })}
+                    {/* <span className="block">Get it on</span>
+                    <span className="block font-semibold">Google Play</span> */}
                   </div>
                 </Link>
               </div>
             </div>
             <div className="flex flex-col items-start gap-4 ">
-              <span>Follow us on social media</span>
+              <span>{t("footer.follow_us")}</span>
               <ul className="flexCenter gap-6 text-white dark:text-darkblue">
                 {socialMediaMenu.map((r, i) => (
                   <li className="duration-200 ltr:hover:translate-x-2 rtl:hover:-translate-x-2">
@@ -124,14 +135,14 @@ export default function Footer({ locale }: props) {
           </div>
           <div className="lg:col-span-3 xl:col-start-4">
             <div className="mb-10 sm:mb-14">
-              <p className="font-semibold mb-2">Get Updates & More</p>
+              <p className="font-semibold mb-2">{t("footer.get_updates")}</p>
               <div className="relative w-full">
                 <input
                   className="bg-white text-dark w-full p-5 border-none outline-none rounded"
-                  placeholder="Your Email"
+                  placeholder={t("footer.your_email")}
                 />
                 <button className="absolute ltr:right-4 rtl:left-4 h-full top-1/2 -translate-y-1/2 underline text-dark font-semibold">
-                  Subscribe
+                  {t("footer.subscribe")}
                 </button>
               </div>
             </div>
@@ -205,12 +216,10 @@ export default function Footer({ locale }: props) {
           <div className="flexCenter gap-6">
             <div className="flexCenter gap-2">
               <Image
-                src={`/assets/images/navbar/${
-                  localeFlag[locale]
-                }`}
+                src={`/assets/images/navbar/${localeFlag[locale]}`}
                 alt={locale as string}
                 width={28}
-                height={18 }
+                height={18}
                 className="rounded"
               />
               <span className="underline font-semibold">

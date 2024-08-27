@@ -6,7 +6,7 @@ import TourTypeSelection from "@/components/TourTypeSelection";
 import { upRightSVG } from "@/utils/svg";
 import Link from "next/link";
 
-type props = { params: { locale: string } };
+type props = { params: { locale: "en"|"fa" } };
 export default function Home({params}:props) {
 
   return (

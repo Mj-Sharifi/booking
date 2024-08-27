@@ -36,10 +36,7 @@ export default function Blog() {
           : [""];
       return categoryQuery.join("");
     };
-    console.log(
-      process.env.NEXT_PUBLIC_API +
-        `blogs?populate=*&locale=${locale}${filterQuery()}`
-    );
+
     axios
       .get(
         process.env.NEXT_PUBLIC_API +
@@ -48,6 +45,7 @@ export default function Blog() {
       .then((res) => setBlog(res.data.data));
   }, [category]);
 
+  console.log(blog);
   return (
     <>
       <h3 className="text-center font-semibold text-lg sm:text-xl lg:text-2xl xl:text-3xl">{t("blog.travel_articles")}</h3>
@@ -61,6 +59,7 @@ export default function Blog() {
             blog?.map((e, i) => (
               <PostCard
                 key={i}
+                id={e.id}
                 release_Date={e.attributes.release_date}
                 image={e.attributes.image.data.attributes.url}
                 title={e.attributes.title}
