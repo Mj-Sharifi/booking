@@ -20,7 +20,11 @@
     "login": "Login",
     "register": "Register",
     "categories": "Categories",
-    "all_categories": "All Categories"
+    "all_categories": "All Categories",
+    "contact": "Contact",
+    "about_us": "About US",
+    "become_expert":"Become An Expert"
+
   },
   "banner": {
     "title": "Best Travel <span1>Experience<span2><img></img></span2></span1>",
@@ -31,7 +35,7 @@
     "travel_articles": "Travel Articles",
     "recent_posts": "Recent Posts",
     "p1": "Sed viverra ipsum nunc aliquet bibendum enim facilisis gravida. Diam phasellus vestibulum lorem sed risus ultricies. Magna sit amet purus gravida quis blandit. Arcu cursus vitae congue mauris. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Semper risus in hendrerit gravida rutrum quisque non. At urna condimentum mattis pellentesque id nibh tortor. A erat nam at lectus urna duis convallis convallis tellus. Sit amet mauris commodo quis imperdiet massa. Vitae congue eu consequat ac felis.",
-    "p2":"Donec purus posuere nullam lacus aliquam egestas arcu. A egestas a, tellus massa, ornare vulputate. Erat enim eget laoreet ullamcorper lectus aliquet nullam tempus id. Dignissim convallis quam aliquam rhoncus, lectus nullam viverra. Bibendum dignissim tortor, phasellus pellentesque commodo, turpis vel eu. Donec consectetur ipsum nibh lobortis elementum mus velit tincidunt elementum. Ridiculus eu convallis eu mattis iaculis et, in dolor. Sem libero, tortor suspendisse et, purus euismod posuere sit. Risus dui ut viverra venenatis ipsum tincidunt non, proin. Euismod pharetra sit ac nisi. Erat lacus, amet quisque urna faucibus. Rhoncus praesent faucibus rhoncus nec adipiscing tristique sed facilisis velit.",
+    "p2": "Donec purus posuere nullam lacus aliquam egestas arcu. A egestas a, tellus massa, ornare vulputate. Erat enim eget laoreet ullamcorper lectus aliquet nullam tempus id. Dignissim convallis quam aliquam rhoncus, lectus nullam viverra. Bibendum dignissim tortor, phasellus pellentesque commodo, turpis vel eu. Donec consectetur ipsum nibh lobortis elementum mus velit tincidunt elementum. Ridiculus eu convallis eu mattis iaculis et, in dolor. Sem libero, tortor suspendisse et, purus euismod posuere sit. Risus dui ut viverra venenatis ipsum tincidunt non, proin. Euismod pharetra sit ac nisi. Erat lacus, amet quisque urna faucibus. Rhoncus praesent faucibus rhoncus nec adipiscing tristique sed facilisis velit.",
     "p3": "Neque nulla porta ut urna rutrum. Aliquam cursus arcu tincidunt mus dictum sit euismod cum id. Dictum integer ultricies arcubfermentum fermentum sem consectetur. Consectetur eleifend aenean eu neque euismod amet parturient turpis vitae. Faucibus ipsum felis et duis fames.",
     "caption": "Donec purus posuere nullam lacus aliquam."
   },
@@ -44,17 +48,41 @@
   "testimony": {
     "customer_review": "Customer reviews"
   },
-  "footer":{
-    "free_customer_care":"Toll Free Customer Care",
-    "live_support":"Need live support?",
-    "your_app":"Your all-in-one travel app",
-    "download_apple":"<span1>Download on the</span1><span2>Apple Store</span2>",
-    "download_google":"<span1>Get it on</span1><span2>Google Play</span2>",
-    "follow_us":"Follow us on social media",
-    "subscribe":"Subscribe",
-    "get_updates":"Get Updates and More",
+  "footer": {
+    "free_customer_care": "Toll Free Customer Care",
+    "live_support": "Need live support?",
+    "your_app": "Your all-in-one travel app",
+    "download_apple": "<span1>Download on the</span1><span2>Apple Store</span2>",
+    "download_google": "<span1>Get it on</span1><span2>Google Play</span2>",
+    "follow_us": "Follow us on social media",
+    "subscribe": "Subscribe",
+    "get_updates": "Get Updates and More",
+    "your_email": "Your Email",
+    "usd": "USD",
+    "company": "Company",
+    "support": "Support",
+    "other_services": "Other Services",
+    "car_hire": "Car Hire",
+    "activity_finder": "Activity Finder",
+    "tour_list": "Tour List",
+    "flight_finder": "Flight Finder",
+    "cruise_ticket": "Cruise Ticket",
+    "holiday_rental": "Holiday Rental",
+    "travel_agents": "Travel Agents",
+    "gift_cards": "Gift Cards",
+    "press": "Press",
+    "careers": "Careers",
+    "about_us": "About US",
+    "blog": "Blog",
+    "contact": "Contact",
+    "legal_notice":"Legal Notice",
+    "privacy_policy":"Privacy Policy",
+    "terms_conditions":"Terms and Condition",
+    "sitemap":"Sitemap",
+    "privacy":"Privacy",
+    "terms":"Terms",
+    "developed":"Developed by"
 
-    "your_email":"Your Email"
 
   }
 }

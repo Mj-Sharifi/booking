@@ -17,8 +17,8 @@ const config: Config = {
       "2xl": "1536px",
     },
     fontFamily: {
-      jost: ["jsot"],
-      vazir: ["vazir"],
+      jost: ["jsot","sans-serif"],
+      vazir: ["vazir","sans-serif"],
     },
 
     keyframes: {

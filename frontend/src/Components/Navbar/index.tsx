@@ -180,7 +180,7 @@ export default function Navbar() {
                   : "bg-white hover:bg-darkblue text-dark hover:text-white"
               }   h-12 px-4 text-md font-normal`}
             >
-              Become An Expert
+              {t("become_expert")}
             </Link>
             <Link
               href={""}

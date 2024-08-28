@@ -114,7 +114,7 @@ export default function PopularTours() {
                       {e?.attributes?.place}
                     </h4>
                     <div className="flex justify-between font-medium">
-                      {e?.attributes?.price} $
+                      {e?.attributes?.price} {t("footer.usd")}
                     </div>
                     <div className="p-1 rounded-full absolute top-[2%] right-[2%] z-20 duration-300 transition-all text-black hover:text-white bg-white hover:bg-darkblue">
                       {favoriteSVG("w-5 h-5")}
