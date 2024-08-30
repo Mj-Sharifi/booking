@@ -1,4 +1,4 @@
-import {Pathnames, LocalePrefix} from 'next-intl/routing';
+import { Pathnames, LocalePrefix } from 'next-intl/routing';
 import { locales } from './utils/utils';
 
 
@@ -11,6 +11,21 @@ export const pathnames = {
   '/blog': {
     en: '/blog',
     fa: '/blog'
+  },
+  "/blog/:id": {
+    en: "/blog/:id",
+    fa: "/blog/:id"
+  },
+  "/login": {
+    en: "/login",
+    fa: "/login"
+  },
+  "/register": {
+    en: "/register",
+    fa: "/register"
+  }, "/become-expert": {
+    en: "/become-expert",
+    fa: "/become-expert"
   }
 } satisfies Pathnames<typeof locales>;
 

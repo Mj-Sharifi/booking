@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 //Slider
-import Slider from "../Slider";
+import Slider from "../../Slider";
 import { SwiperSlide } from "swiper/react";
 import { testimonyData } from "@/types/response";
 import { useParams } from "next/navigation";

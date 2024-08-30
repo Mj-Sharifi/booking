@@ -73,11 +73,13 @@ export default function Navbar() {
   const [showLangSwitcher, setShowLangSwitcher] = useState(false);
   // Theme Switcher
   const themeSwitcher = (theme: "light" | "dark") => {
-    localStorage.theme = theme;
-    if (theme == "dark") {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
+    if (typeof localStorage !== "undefined") {
+      localStorage.theme = theme;
+      if (theme == "dark") {
+        document.body.classList.add("dark");
+      } else {
+        document.body.classList.remove("dark");
+      }
     }
   };
   return (
@@ -85,7 +87,7 @@ export default function Navbar() {
       <nav
         className={`fixed z-40 top-0 left-0 right-0 h-22 transition-all duration-300 text-dark ${
           bgEffect
-            ? "bg-white dark:bg-dark dark:text-white shadow-nav dark:shadow-lighter"
+            ? "bg-white dark:bg-dark dark:text-white shadow-nav dark:shadow-md dark:shadow-lighter"
             : "bg-transparent dark:bg-dark"
         }`}
       >
@@ -172,8 +174,8 @@ export default function Navbar() {
             ))}
           </ul>
           <div className="hidden md:flexCenter gap-2">
-            <Link
-              href={""}
+            <NavigationLink
+              href={"/become-expert"}
               className={`flexCenter duration-300 rounded-md ${
                 bgEffect
                   ? "bg-dark dark:bg-white hover:bg-darkblue dark:hover:text-white text-white dark:text-dark"
@@ -181,9 +183,9 @@ export default function Navbar() {
               }   h-12 px-4 text-md font-normal`}
             >
               {t("become_expert")}
-            </Link>
-            <Link
-              href={""}
+            </NavigationLink>
+            <NavigationLink
+              href={"/register"}
               className={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-4 ${
                 bgEffect
                   ? "text-dark dark:text-white dark:hover:text-dark dark:border-white dark:hover:bg-white border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"
@@ -191,10 +193,10 @@ export default function Navbar() {
               } text-md font-normal`}
             >
               {t("login")} / {t("register")}
-            </Link>
+            </NavigationLink>
           </div>
           <div className="flexCenter gap-3 md:hidden">
-            <Link href={""}>
+            <NavigationLink href={"/"}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -209,7 +211,7 @@ export default function Navbar() {
                   d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                 />
               </svg>
-            </Link>
+            </NavigationLink>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

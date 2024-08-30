@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import BlogSidebar from "./components/BlogSidebar";
+import BlogSidebar from "../../../components/Blog/BlogSidebar";
 import axios from "axios";
-import PostCard from "./components/PostCard";
+import PostCard from "../../../components/Blog/PostCard";
 import { blogData } from "@/types/response";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";

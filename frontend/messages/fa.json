@@ -23,7 +23,9 @@
     "all_categories": "همه دسته‌بندی‌ها",
     "contact": "تماس با ما",
     "about_us": "درباره ما",
-    "become_expert":"حرفه‌ای شو"
+    "become_expert": "حرفه‌ای شو",
+    "welcome": "خوش آمدید",
+    "welcome_back": "خوش برگشتید"
   },
   "banner": {
     "title": "بهترین تجربه <span1>سفر<span2><img></img></span2></span1>",
@@ -68,20 +70,42 @@
     "cruise_ticket": "بلیط کروز",
     "holiday_rental": "رزرو تعطیلات",
     "travel_agents": "آژانس‌های مسافرتی",
-    "gift_cards":"کارت هدیه",
-    "press":"مطبوعات",
-    "careers":"مشاغل و مهارت‌ها",
-    "about_us":"درباره ما",
+    "gift_cards": "کارت هدیه",
+    "press": "مطبوعات",
+    "careers": "مشاغل و مهارت‌ها",
+    "about_us": "درباره ما",
     "blog": "بلاگ",
     "contact": "تماس با ما",
-    "legal_notice":"اطلاعیه حقوقی",
-    "privacy_policy":"سیاست حفظ حریم خصوصی",
-    "terms_conditions":"شرایط و ضوابط",
-    "sitemap":"نقشه سایت",
-    "privacy":"حریم خصوصی",
-    "terms":"شرایط",
-    "developed":"توسعه با"
-
-
+    "legal_notice": "اطلاعیه حقوقی",
+    "privacy_policy": "سیاست حفظ حریم خصوصی",
+    "terms_conditions": "شرایط و ضوابط",
+    "sitemap": "نقشه سایت",
+    "privacy": "حریم خصوصی",
+    "terms": "شرایط",
+    "developed": "توسعه با"
+  },
+  "become-expert": {
+    "why_local_expert": "چرا یک متخصص محلی باشم؟",
+    "main_title": "بیا زیبایی شهرت رو به همه نشان بدیم",
+    "secondary_title": "شگفت‌انگیزترین مکان‌ها رو با بهترین قیمت پیدا کن",
+    "best_price_gurantee": "تضمین بهترین قیمت",
+    "easy_booking": "رزرو آسان و سریع",
+    "24/7": "پشتیبانی 24/7",
+    "watch_video": "تماشا کن",
+    "sign_up": "ثبت نام کنید",
+    "add_service": "خدمات خود رو اضافه کنید",
+    "get_booking": "رزرو کنید",
+    "how_work": "فرایند انجام کار"
+  },
+  "profile": {
+    "firstname": "نام",
+    "lastname": "نام خانوادگی",
+    "email": "ایمیل",
+    "password": "گذرواژه",
+    "confirm_password": "تکرار گذرواژه",
+    "forget_your_password": "فراموشی رمز عبور",
+    "already_have_account": "قبلا ثبت‌نام کرده‌ام",
+    "dont_have_account": "هنوز ثبت‌نام نکرده‌ام",
+    "free_register": "رایگان ثبت‌نام کنید"
   }
 }

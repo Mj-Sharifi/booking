@@ -7,7 +7,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/flowbite/**/*.js",
   ],
-  darkMode:"selector",
+  darkMode: "selector",
   theme: {
     screens: {
       sm: "580px",
@@ -17,8 +17,8 @@ const config: Config = {
       "2xl": "1536px",
     },
     fontFamily: {
-      jost: ["jsot","sans-serif"],
-      vazir: ["vazir","sans-serif"],
+      jost: ["jsot", "sans-serif"],
+      vazir: ["vazir", "sans-serif"],
     },
 
     keyframes: {
@@ -38,12 +38,13 @@ const config: Config = {
       black: "#000",
       white: "#fff",
       darkblue: "#3554d1",
-      lightblue:"#A4CAFE",
-      yellow: "#f8d448",
+      lightblue: "#A4CAFE",
+      myyellow: "#f8d448",
       violet: "#7e53f9",
+      lightgreen:"#ebfcea",
       border: "#ddd",
       light: "#697488",
-      lighter:"#B0B6C0",
+      lighter: "#B0B6C0",
       hoverlight: "#F5F6FD",
       glass: "#ffffff10",
     },
@@ -60,6 +61,7 @@ const config: Config = {
         "1000": "1000",
       },
       spacing: {
+        "22": "5.5rem",
         "100": "25rem",
         "112": "28rem",
         "128": "32rem",
