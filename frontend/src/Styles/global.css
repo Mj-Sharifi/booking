@@ -23,6 +23,7 @@
   *[dir="rtl"] {
     @apply font-vazir !important;
   }
+
   input::placeholder {
     @apply text-dark opacity-70 text-sm;
   }
