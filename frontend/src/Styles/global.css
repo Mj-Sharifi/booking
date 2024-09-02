@@ -1,7 +1,7 @@
 /* React Toastify */
 @import 'react-toastify/dist/ReactToastify.min.css';
 
-:root {
+/* :root {
   --toastify-color-info: #2F80ED;
   --toastify-color-success: #727a17;
   --toastify-color-warning: #FF8008;
@@ -10,7 +10,7 @@
   --toastify-text-color-success: #fff;
   --toastify-text-color-warning: #fff;
   --toastify-text-color-error: #fff;
-};
+}; */
 
 
 /* Tailwind CSS */
@@ -61,7 +61,7 @@
 
   .scroller{
     &::-webkit-scrollbar{
-      @apply w-2
+      @apply w-2 
     }
     &::-webkit-scrollbar-thumb{
       @apply bg-darkblue  rounded-full
@@ -70,6 +70,18 @@
       @apply bg-lighter rounded-full
     }
   }
+  .scroller-horizontal{
+    &::-webkit-scrollbar:horizontal{
+      @apply !h-1 !w-1
+    }
+    &::-webkit-scrollbar-thumb{
+      @apply bg-darkblue rounded-full
+    }
+    &::-webkit-scrollbar-track{
+      @apply bg-lighter rounded-full
+    }
+  }
+
   .bg-fade-popup {
     animation: bg-popup forwards;
     animation-duration: 200ms

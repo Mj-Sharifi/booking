@@ -25,7 +25,7 @@ export default function RadioInput({
   return (
     <div
       data-value={value}
-      className="duration-300 w-14 h-7 rounded-full relative bg-white border border-darkblue m-4"
+      className="duration-300 w-14 h-7 rounded-full relative bg-white !border border-solid border-darkblue m-4"
       onClick={() => {
         setValue(value == values[0] ? values[1] : values[0]);
       }}

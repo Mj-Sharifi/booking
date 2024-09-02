@@ -26,6 +26,15 @@ export const pathnames = {
   }, "/become-expert": {
     en: "/become-expert",
     fa: "/become-expert"
+  }, "/profile/dashboard": {
+    en: "/profile/dashboard",
+    fa: "/profile/dashboard"
+  }, "/profile/personal-information": {
+    en: "/profile/personal-information",
+    fa: "/profile/personal-information"
+  }, "/profile/location-information": {
+    en: "/profile/location-information",
+    fa: "/profile/location-information"
   }
 } satisfies Pathnames<typeof locales>;
 

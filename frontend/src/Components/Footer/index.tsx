@@ -64,8 +64,8 @@ export default function Footer({ locale }: props) {
 
   return (
     <div className="bg-darkblue text-white dark:bg-lightblue dark:text-dark pt-10">
-      <div className="container mx-auto px-4 sm:px-12 md:px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-6 gap-y-10">
+      <div className="contner mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-6 sm:gap-x-6 gap-y-10 px-4 sm:px-12 md:px-4">
           <div className="lg:col-span-3 xl:col-span-2">
             <NavigationLink href="/">
               <Image
@@ -157,12 +157,13 @@ export default function Footer({ locale }: props) {
               <p className="font-semibold mb-2">{t("footer.get_updates")}</p>
               <div className="relative w-full">
                 <input
-                  className="bg-white text-dark w-full p-5 border-none outline-none rounded"
+                type="email"
+                  className=" text-dark p-5 border-none outline-none rounded !w-full bg-white overflow-x-hidden"
                   placeholder={t("footer.your_email")}
                 />
                 <button
                   type="button"
-                  className="absolute ltr:right-4 rtl:left-4 h-full top-1/2 -translate-y-1/2 underline text-dark font-semibold"
+                  className="absolute border-none ltr:right-4 rtl:left-4 h-full top-1/2 -translate-y-1/2 underline text-dark font-semibold"
                 >
                   {t("footer.subscribe")}
                 </button>
@@ -217,7 +218,7 @@ export default function Footer({ locale }: props) {
             </div>
           </div>
         </div>
-        <div className="border-t border-white mt-10 py-4 text-sm flex flex-wrap justify-between w-full gap-x-10">
+        <div className="border-t border-white mt-10 py-4 text-sm flex flex-wrap justify-between gap-x-10 px-4 sm:px-12 md:px-4">
           <div className="py-4 text-sm flex flex-wrap sm:gap-6 md:gap-10 gap-y-5">
             <span>
               {t("footer.developed")}{" "}

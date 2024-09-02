@@ -119,7 +119,7 @@ export default function Navbar() {
             <button
               type="button"
               disabled={pathName.includes("/blog/")}
-              className={`duration-300 px-2 py-1 flex gap-1 items-center text-xs md:text-sm ${
+              className={`duration-300 border-none px-2 py-1 flex gap-1 items-center text-xs md:text-sm ${
                 pathName.includes("/blog/")
                   ? ""
                   : "hover:text-darkblue dark:hover:text-lightblue"
