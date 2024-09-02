@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "@/Styles/global.css";
 import Footer from "@/components/Footer";
 // i18n
-import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
-import {getLangDir} from 'rtl-detect';
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { getLangDir } from "rtl-detect";
 import Config from "@/components/config/Config";
 import Navbar from "@/components/Navbar";
-
-// const inter = Inter({ subsets: ["latin"] });
+import Notification from "@/components/Notification";
 
 export const metadata: Metadata = {
   title: "Tour Booking",
@@ -18,26 +16,26 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params:{locale}
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
-  params: {locale: string};
+  params: { locale: string };
 }>) {
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
-  const direction = getLangDir(locale)
-
+  const direction = getLangDir(locale);
   return (
     <html lang={locale} dir={direction}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <Navbar/>
+          <Navbar />
           <main>{children}</main>
-          <Footer locale={locale as "en"|"fa"}/>
+          <Footer locale={locale as "en" | "fa"} />
         </NextIntlClientProvider>
+        <Notification />
       </body>
-      <Config/>
+      <Config />
     </html>
   );
 }

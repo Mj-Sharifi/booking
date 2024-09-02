@@ -2,19 +2,69 @@
 import TextInput from "@/components/Form/TextInput";
 import { useTranslations } from "next-intl";
 import React from "react";
-import { Form, Formik, useFormik } from "formik";
+import { Form, Formik } from "formik";
 import { registerInitVals, registerVldSchema } from "@/utils/auth";
 import NavigationLink from "@/components/link/NavigationLink";
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import { registerResponce } from "@/types/response";
+import { showNotif } from "@/utils/notification";
 
+const x = {
+  message: "Request failed with status code 400",
+  name: "AxiosError",
+  stack:
+    "AxiosError: Request failed with status code 400\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_999991._.js:1914:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_999991._.js:2458:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_999991._.js:3153:49)",
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false,
+    },
+    adapter: ["xhr", "http", "fetch"],
+    transformRequest: [null],
+    transformResponse: [null],
+    timeout: 0,
+    xsrfCookieName: "XSRF-TOKEN",
+    xsrfHeaderName: "X-XSRF-TOKEN",
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: {},
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+    method: "post",
+    url: "http://localhost:1337/api/auth/local/register",
+    data: '{"username":"mj74mj","email":"mj74mj@gmail.com","password":"zaq123"}',
+  },
+  code: "ERR_BAD_REQUEST",
+  status: 400,
+};
 export default function Register() {
   const t = useTranslations();
-
+  const [cookie, setCookie] = useCookies();
   return (
     <>
       <Formik
         initialValues={registerInitVals}
         validationSchema={registerVldSchema}
-        onSubmit={(e) => console.log(e)}
+        onSubmit={(e) =>
+          axios
+            .post<registerResponce>(process.env.NEXT_PUBLIC_API + "auth/local/register", {
+              username: e.username,
+              email: e.email,
+              password: e.password,
+            })
+            .then((res) => {
+              if (res.status == 200 && res.data) {
+                setCookie("user_info", res.data.jwt, { path: "/" });
+              }
+            })
+            .catch((err) => {
+              showNotif(err.response.data.error.message)
+            })
+        }
       >
         {({ touched, errors, setFieldValue, setFieldTouched }) => (
           <Form
@@ -33,7 +83,7 @@ export default function Register() {
                 {t("common.login")}
               </NavigationLink>
             </span>
-            <TextInput
+            {/* <TextInput
               name="firstname"
               label={t("profile.firstname")}
               errorMessage={
@@ -52,6 +102,16 @@ export default function Register() {
               }
               onChange={(v) => setFieldValue("lastname", v.target.value)}
               onBlur={() => setFieldTouched("lastname", true)}
+            /> */}
+            <TextInput
+              name="username"
+              label={t("profile.username")}
+              errorMessage={
+                errors.username ? t(`error.${errors.username}`) : ""
+              }
+              touched={touched.username || false}
+              onChange={(v) => setFieldValue("username", v.target.value)}
+              onBlur={() => setFieldTouched("username", true)}
             />
             <TextInput
               type="email"

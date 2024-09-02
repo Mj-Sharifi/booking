@@ -1,3 +1,19 @@
+/* React Toastify */
+@import 'react-toastify/dist/ReactToastify.min.css';
+
+:root {
+  --toastify-color-info: #2F80ED;
+  --toastify-color-success: #727a17;
+  --toastify-color-warning: #FF8008;
+  --toastify-color-error: #e53935;
+  --toastify-text-color-info: #fff;
+  --toastify-text-color-success: #fff;
+  --toastify-text-color-warning: #fff;
+  --toastify-text-color-error: #fff;
+};
+
+
+/* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

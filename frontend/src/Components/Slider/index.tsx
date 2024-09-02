@@ -6,7 +6,7 @@ import { Swiper, useSwiper } from "swiper/react";
 import { SwiperOptions } from "swiper/types";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
-import "./style.css"
+import "./style.css";
 const SwiperButtonNext = ({
   activeIndex,
   lastSlideIndex,
@@ -17,6 +17,7 @@ const SwiperButtonNext = ({
   const swiper = useSwiper();
   return (
     <button
+      type="button"
       disabled={activeIndex === lastSlideIndex}
       className={`duration-200 ${
         activeIndex === lastSlideIndex
@@ -39,6 +40,7 @@ const SwiperButtonPrev = ({ activeIndex }: { activeIndex: number }) => {
   const swiper = useSwiper();
   return (
     <button
+      type="button"
       disabled={activeIndex == 0}
       className={`duration-200 ${
         activeIndex === 0
@@ -79,8 +81,7 @@ export default function Slider({
         el: ".swiperPagination",
         clickable: true,
         type: "bullets",
-        bulletActiveClass:
-          "swiperPaginationBulletActive",
+        bulletActiveClass: "swiperPaginationBulletActive",
         bulletClass: "swiperPaginationBullet",
       }}
       modules={[Pagination]}

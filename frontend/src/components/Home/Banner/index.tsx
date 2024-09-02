@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian_fa from "react-date-object/locales/persian_fa";
-import gregorian_en from "react-date-object/locales/gregorian_en"
+import gregorian_en from "react-date-object/locales/gregorian_en";
 import type { Value } from "react-multi-date-picker";
 import "./style.css";
 import axios from "axios";
@@ -64,7 +64,7 @@ const plusSVG = (
 
 export default function Banner() {
   // Translation
-  const {locale}=useParams()
+  const { locale } = useParams();
   const t = useTranslations();
   //Location
   const [locations, setLocations] = useState<locationData[]>();
@@ -133,7 +133,8 @@ export default function Banner() {
           <div
             className={`flex text-dark items-start md:w-[600px] lg:w-[750px] text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold transition-all duration-700 ${
               startAnimation
-                ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
+                ? "translate-y-0 opacity-100"
+                : "translate-y-12 opacity-0"
             } `}
           >
             {t.rich("banner.title", {
@@ -160,14 +161,18 @@ export default function Banner() {
           </div>
           <p
             className={`mt-8 text-light dark:text-lighter md:w-2/3 lg:w-3/5 md:text-lg transition-all duration-700 delay-200 ${
-              startAnimation ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
+              startAnimation
+                ? "translate-y-0 opacity-100"
+                : "translate-y-12 opacity-0"
             }`}
           >
             {t("banner.description")}
           </p>
           <div
             className={`bg-white dark:bg-dark rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12 transition-all duration-700 delay-500 ${
-              startAnimation ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
+              startAnimation
+                ? "translate-y-0 opacity-100"
+                : "translate-y-12 opacity-0"
             }`}
           >
             {/* Location */}
@@ -212,7 +217,7 @@ export default function Banner() {
               </span>
               <DatePicker
                 // calendar={persian}
-                locale={locale=="fa"?persian_fa:gregorian_en}
+                locale={locale == "fa" ? persian_fa : gregorian_en}
                 value={dateRange}
                 onChange={setDateRange}
                 format="MMMM DD"
@@ -240,6 +245,7 @@ export default function Banner() {
                   <span>{t("common.adults")}</span>
                   <div className="flexBetween w-32 ">
                     <button
+                      type="button"
                       className="border border-darkblue rounded p-2"
                       onClick={() =>
                         setGuest({
@@ -253,6 +259,7 @@ export default function Banner() {
                     </button>
                     <span className="text-lg">{guest.adult}</span>
                     <button
+                      type="button"
                       className="border border-darkblue rounded p-2"
                       onClick={() =>
                         setGuest({ ...guest, adult: guest.adult + 1 })
@@ -266,6 +273,7 @@ export default function Banner() {
                   <span>{t("common.children")}</span>
                   <div className="flexBetween w-32">
                     <button
+                      type="button"
                       className="border border-darkblue rounded p-2"
                       onClick={() =>
                         setGuest({
@@ -281,6 +289,7 @@ export default function Banner() {
                     </button>
                     <span className="text-lg">{guest.children}</span>
                     <button
+                      type="button"
                       className="border border-darkblue rounded p-2"
                       onClick={() =>
                         setGuest({ ...guest, children: guest.children + 1 })
@@ -294,6 +303,7 @@ export default function Banner() {
                   <span>{t("common.rooms")}</span>
                   <div className="flexBetween w-32">
                     <button
+                      type="button"
                       className="border border-darkblue rounded p-2"
                       onClick={() =>
                         setGuest({
@@ -307,6 +317,7 @@ export default function Banner() {
                     </button>
                     <span className="text-lg">{guest.rooms}</span>
                     <button
+                      type="button"
                       className="border border-darkblue rounded p-2"
                       onClick={() =>
                         setGuest({ ...guest, rooms: guest.rooms + 1 })
@@ -319,7 +330,10 @@ export default function Banner() {
               </div>
             </div>
             {/* Search Button */}
-            <button className="w-full lg:w-36 h-16 transition-all duration-300 bg-darkblue hover:bg-dark text-white rounded flexCenter gap-2">
+            <button
+              type="button"
+              className="w-full lg:w-36 h-16 transition-all duration-300 bg-darkblue hover:bg-dark text-white rounded flexCenter gap-2"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

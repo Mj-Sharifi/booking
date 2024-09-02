@@ -61,6 +61,8 @@ export default function TextInput({
       </label>
       {type == "password" && (
         <button
+        tabIndex={-1}
+        type="button"
           className={`duration-300 absolute top-1/2 -translate-y-1/2 ltr:right-3 rtl:left-3 ${
             eye == "text" ? "opacity-90" : "opacity-60"
           }`}

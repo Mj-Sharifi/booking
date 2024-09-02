@@ -82,7 +82,7 @@ export type blogCategoryData = {
 export type blogData = {
   id: number;
   attributes: {
-    blog_categories: { data: { id: number; attributes: blogCategoryDate } };
+    blog_categories: { data: { id: number; attributes: blogCategoryData } };
     createdAt: string;
     image: { data: imageData };
     publishedAt: string;
@@ -91,3 +91,17 @@ export type blogData = {
     updatedAt: string;
   };
 };
+
+export type registerResponce = {
+  "jwt": string,
+  "user": {
+    "id": number,
+    "username": string,
+    "email": string,
+    "provider": string,
+    "confirmed": boolean,
+    "blocked": boolean,
+    "createdAt": string,
+    "updatedAt": string
+  }
+}

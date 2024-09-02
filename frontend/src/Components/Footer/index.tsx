@@ -81,11 +81,21 @@ export default function Footer({ locale }: props) {
                 <span className="text-sm">
                   {t("footer.free_customer_care")}
                 </span>
-                <Link dir="ltr" href="tel:+989039104679" className="rtl:text-end">(+98) 903 910 4679</Link>
+                <Link
+                  dir="ltr"
+                  href="tel:+989039104679"
+                  className="rtl:text-end"
+                >
+                  (+98) 903 910 4679
+                </Link>
               </div>
               <div className="flex flex-col gap-1">
                 <span className="text-sm">{t("footer.live_support")}</span>
-                <Link dir="ltr" href="mailto:mj.sharifimanesh@gmail.com" className="rtl:text-end">
+                <Link
+                  dir="ltr"
+                  href="mailto:mj.sharifimanesh@gmail.com"
+                  className="rtl:text-end"
+                >
                   mj.sharifimanesh@gmail.com
                 </Link>
               </div>
@@ -99,9 +109,13 @@ export default function Footer({ locale }: props) {
                 >
                   <GrAppleAppStore size={32} />
                   <div className="ltr:hover:translate-x-2 rtl:hover:-translate-x-2 duration-200 text-sm">
-                    {t.rich("footer.download_apple",{
-                      span1:(chunks)=> <span className="block">{chunks}</span>,
-                      span2:(chunks)=><span className="block font-semibold">{chunks}</span>
+                    {t.rich("footer.download_apple", {
+                      span1: (chunks) => (
+                        <span className="block">{chunks}</span>
+                      ),
+                      span2: (chunks) => (
+                        <span className="block font-semibold">{chunks}</span>
+                      ),
                     })}
                   </div>
                 </Link>
@@ -112,9 +126,13 @@ export default function Footer({ locale }: props) {
                   <FaGooglePlay size={28} />
 
                   <div className="ltr:hover:translate-x-2 rtl:hover:-translate-x-2 duration-200 text-sm">
-                  {t.rich("footer.download_google",{
-                      span1:(chunks)=> <span className="block">{chunks}</span>,
-                      span2:(chunks)=><span className="block font-semibold">{chunks}</span>
+                    {t.rich("footer.download_google", {
+                      span1: (chunks) => (
+                        <span className="block">{chunks}</span>
+                      ),
+                      span2: (chunks) => (
+                        <span className="block font-semibold">{chunks}</span>
+                      ),
                     })}
                   </div>
                 </Link>
@@ -123,8 +141,11 @@ export default function Footer({ locale }: props) {
             <div className="flex flex-col items-start gap-4 ">
               <span>{t("footer.follow_us")}</span>
               <ul className="flexCenter gap-6 text-white dark:text-darkblue">
-                {socialMediaMenu.map(({title,href}, i) => (
-                  <li key={i} className="duration-200 ltr:hover:translate-x-2 rtl:hover:-translate-x-2">
+                {socialMediaMenu.map(({ title, href }, i) => (
+                  <li
+                    key={i}
+                    className="duration-200 ltr:hover:translate-x-2 rtl:hover:-translate-x-2"
+                  >
                     <Link href={href}>{title}</Link>
                   </li>
                 ))}
@@ -139,16 +160,21 @@ export default function Footer({ locale }: props) {
                   className="bg-white text-dark w-full p-5 border-none outline-none rounded"
                   placeholder={t("footer.your_email")}
                 />
-                <button className="absolute ltr:right-4 rtl:left-4 h-full top-1/2 -translate-y-1/2 underline text-dark font-semibold">
+                <button
+                  type="button"
+                  className="absolute ltr:right-4 rtl:left-4 h-full top-1/2 -translate-y-1/2 underline text-dark font-semibold"
+                >
                   {t("footer.subscribe")}
                 </button>
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 ">
               <div>
-                <span className="block mb-5 font-bold">{t("footer.company")}</span>
+                <span className="block mb-5 font-bold">
+                  {t("footer.company")}
+                </span>
                 <ul>
-                  {companyMenu.map(({title,href}, i) => (
+                  {companyMenu.map(({ title, href }, i) => (
                     <li
                       key={i}
                       className="duration-200 ltr:translate-x-2 rtl:-translate-x-2 mb-3"
@@ -159,9 +185,11 @@ export default function Footer({ locale }: props) {
                 </ul>
               </div>
               <div>
-                <span className="block mb-5 font-bold">{t("footer.support")}</span>
+                <span className="block mb-5 font-bold">
+                  {t("footer.support")}
+                </span>
                 <ul>
-                  {supportMenu.map(({title,href}, i) => (
+                  {supportMenu.map(({ title, href }, i) => (
                     <li
                       key={i}
                       className="duration-200 ltr:translate-x-2 rtl:-translate-x-2 mb-3"
@@ -172,9 +200,11 @@ export default function Footer({ locale }: props) {
                 </ul>
               </div>
               <div>
-                <span className="block mb-5 font-bold">{t("footer.other_services")}</span>
+                <span className="block mb-5 font-bold">
+                  {t("footer.other_services")}
+                </span>
                 <ul>
-                  {otherServicesMenu.map(({title,href}, i) => (
+                  {otherServicesMenu.map(({ title, href }, i) => (
                     <li
                       key={i}
                       className="duration-200 ltr:translate-x-2 rtl:-translate-x-2 mb-3"
@@ -200,7 +230,7 @@ export default function Footer({ locale }: props) {
                 { title: "privacy", href: "#" },
                 { title: "terms", href: "#" },
                 { title: "sitemap", href: "#" },
-              ].map(({title,href}, i) => (
+              ].map(({ title, href }, i) => (
                 <Link
                   key={i}
                   href={href}
@@ -225,7 +255,8 @@ export default function Footer({ locale }: props) {
               </span>
             </div>
             <div className="flexCenter gap-1">
-              $ &nbsp; <span className="underline font-semibold">{t("footer.usd")}</span>
+              $ &nbsp;{" "}
+              <span className="underline font-semibold">{t("footer.usd")}</span>
             </div>
           </div>
         </div>
