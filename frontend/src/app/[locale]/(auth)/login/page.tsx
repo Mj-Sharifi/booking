@@ -6,12 +6,16 @@ import { showNotif } from "@/utils/notification";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import { useTranslations } from "next-intl";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { useCookies } from "react-cookie";
 
 export default function Login() {
   const t = useTranslations();
   const [cookie, setCookie] = useCookies();
+  // Navigating
+  const {locale} = useParams()
+  const router = useRouter()
   return (
     <>
       <Formik
@@ -25,15 +29,16 @@ export default function Login() {
             })
             .then((res) => {
               if (res && res.data) {
-             setCookie("user_info", res.data.jwt, { path: "/" });
+             setCookie("user_info", res.data, { path: "/" });
              showNotif(t(`notif.login_successful`),"success");   
               }
+              router.push("/")
             })
             .catch((err) => showNotif(err.response.data.error.message))
         }
       >
         {({ errors, touched, setFieldTouched, setFieldValue }) => (
-          <Form className="duration-300 rounded-md bg-white text-dark dark:bg-dark dark:text-white flex flex-col gap-y-4 w-80 sm:w-96 lg:w-100 p-2 sm:p-6 lg:p-10">
+          <Form className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-8 w-80 sm:w-96 lg:w-100 p-2 sm:p-6 lg:p-10">
             <span className="md:text-lg xl:text-xl font-semibold">
               {t("common.welcome_back")}
             </span>

@@ -19,6 +19,7 @@
     "home": "Home",
     "login": "Login",
     "register": "Register",
+    "profile":"Profile",
     "categories": "Categories",
     "all_categories": "All Categories",
     "contact": "Contact",
@@ -26,9 +27,10 @@
     "become_expert": "Become An Expert",
     "welcome": "Welcome",
     "welcome_back": "Welcome back",
-    "dashboard":"Dashboard",
-    "personal_information":"Personal Information",
-    "location_information":"Location Information"
+    "dashboard": "Dashboard",
+    "personal_information": "Personal Information",
+    "location_information": "Location Information",
+    "apply": "Apply"
   },
   "banner": {
     "title": "Best Travel <span1>Experience<span2><img></img></span2></span1>",
@@ -110,29 +112,34 @@
     "already_have_account": "Already have an account?",
     "dont_have_account": "Don't have an account yet?",
     "free_register": "Register for free",
-    "username":"Username"
+    "username": "Username",
+    "old_password": "Old password",
+    "new_password": "New password",
+    "change_password":"Change Password"
   },
   "error": {
+    "is_required": "{field} is required",
     "firstname_required": "Firstname is required",
     "lastname_required": "Lastname is required",
-    "email_required":"Email is required",
-    "username_required":"Username is required",
-    "password_required":"Password is required",
-    "must_match_password":"Must match password",
-    "firstname_min_limit":"Firstname must be longer than 2 letters",
-    "lastname_min_limit":"Lastname must be longer than 2 letters",
-    "firstname_max_limit":"Lastname must be shorter than 50 letters",
-    "lastname_max_limit":"Lastname must be shorter than 50 letters",
-    "password_min_limit":"Password must contains more than 6 characters",
-    "username_min_limit":"Username must be longer than 5 letters",
-    "username_max_limit":"Username must be shorter than 20 letters",
-    "must_have_letter_number":"Password must contains at least one letter and one number",
-    "email_not_valid":"Email is not valid",
-    "only_letter":"It must only contain letters"
+    "email_required": "Email is required",
+    "username_required": "Username is required",
+    "password_required": "Password is required",
+    "must_match_password": "Must match password",
+    "firstname_min_limit": "Firstname must be longer than 2 letters",
+    "lastname_min_limit": "Lastname must be longer than 2 letters",
+    "firstname_max_limit": "Lastname must be shorter than 50 letters",
+    "lastname_max_limit": "Lastname must be shorter than 50 letters",
+    "password_min_limit": "Password must contains more than 6 characters",
+    "username_min_limit": "Username must be longer than 5 letters",
+    "username_max_limit": "Username must be shorter than 20 letters",
+    "must_have_letter_number": "Password must contains at least one letter and one number",
+    "email_not_valid": "Email is not valid",
+    "only_letter": "It must only contain letters",
+    "old_password_required": "Old password is required",
+    "new_password_required":"New password is required"
   },
-  "notif":{
-    "login_successful":"You have logged in successfully",
-    "register_successful":"You have registered in successfully"
-
+  "notif": {
+    "login_successful": "You have logged in successfully",
+    "register_successful": "You have registered in successfully"
   }
 }

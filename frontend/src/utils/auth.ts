@@ -4,10 +4,10 @@ const generateError = (errText: string, title?: string): string => {
     return title ? `${title}_${errText}` : errText
 }
 const validationRules = {
-    username:(name:string)=>yup.string().trim().required("username_required").min(5, generateError("min_limit", name)).max(20, generateError("max_limit", name)),
+    username: (name: string) => yup.string().trim().required("username_required").min(5, generateError("min_limit", name)).max(20, generateError("max_limit", name)),
     name: (name: string, required = false) => {
         return yup.lazy((value) => {
-            let valid = yup.string().trim().matches(/^[A-Za-z\s]+$/,"only_letter")
+            let valid = yup.string().trim().matches(/^[A-Za-z\s]+$/, "only_letter")
             if (required || (!required && value?.length > 0)) {
                 valid = valid.min(3, generateError("min_limit", name)).max(50, generateError("max_limit", name))
 
@@ -25,31 +25,42 @@ const validationRules = {
         }
         return valid
     },
-    password: yup.string().required("password_required").min(6, "password_min_limit").matches(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/,"must_have_letter_number"),
+    password: (name: string = "password") => yup.string().required(generateError("required", name)).min(6, "password_min_limit").matches(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/, "must_have_letter_number"),
     confirmPassword: (name: string) =>
         yup.string().oneOf([yup.ref(name)], "must_match_password"),
+    string: yup.string().trim()
 }
+
+// Login
 export const loginInitVals = {
     email: "",
     password: ""
 }
 export const loginVldSchema = yup.object().shape({
     email: validationRules.email(true),
-    password: validationRules.password
+    password: validationRules.password()
 })
+// Register
 export const registerInitVals = {
-    // firstname: "",
-    // lastname: "",
-    username:"",
+    username: "",
     email: "",
     password: "",
     confirm_password: ""
 }
 export const registerVldSchema = yup.object().shape({
-    // firstname: validationRules.name("firstname", true),
-    // lastname: validationRules.name("lastname", true),
-    username:validationRules.username("username"),
+    username: validationRules.username("username"),
     email: validationRules.email(true),
-    password: validationRules.password,
+    password: validationRules.password(),
     confirm_password: validationRules.confirmPassword("password")
+})
+// Change Password
+export const changePassInitVals = {
+    old_password: "",
+    new_password: "",
+    confirm_password: ""
+}
+export const changePassVldSchema = yup.object().shape({
+    old_password: validationRules.password("old_password"),
+    new_password: validationRules.password("new_password"),
+    confirm_password: validationRules.confirmPassword("new_password")
 })

@@ -20,13 +20,16 @@ export default function ProfileTabs() {
       <ul className="flex justify-start sm:justify-center gap-x-2 md:gap-x-4 text-sm md:text-base py-2 !scroller-horizontal sticky top-0">
         {profileRoutes.map(({ title, href }, i) => (
           <li
+            key={i}
             className={`duration-300 p-2 rounded text-nowrap ${
               pathname.includes(href)
                 ? "bg-darkblue text-white dark:bg-lightblue dark:text-dark"
                 : "hover:bg-border dark:hover:bg-lighter"
             }`}
           >
-            <NavigationLink href={`/profile/${href}`}>{t(`common.${title}`)}</NavigationLink>
+            <NavigationLink href={`/profile/${href}`}>
+              {t(`common.${title}`)}
+            </NavigationLink>
           </li>
         ))}
       </ul>

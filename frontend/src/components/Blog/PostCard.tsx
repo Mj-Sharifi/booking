@@ -4,20 +4,25 @@ import Image from "next/image";
 import React from "react";
 
 type props = {
-  id:number;
+  id: number;
   release_Date: string;
   image: string;
   title: string;
 };
 
-export default function PostCard({ id,release_Date, image, title }: props) {
+export default function PostCard({ id, release_Date, image, title }: props) {
   const t = useTranslations("common");
   const date = new Date(release_Date);
   const formattedDate = new Intl.DateTimeFormat(undefined, {
     dateStyle: "long",
   }).format(date);
   return (
-    <NavigationLink href={`/blog/${id}`}>
+    <NavigationLink
+      href={{
+        pathname: "/blog/[id]",
+        params: { id },
+      }}
+    >
       <div className="flex flex-col items-center sm:flex-row gap-4 lg:max-h-60">
         <div className="rounded-lg overflow-hidden h-full md:min-w-40 lg:min-w-60 aspect-square">
           <Image

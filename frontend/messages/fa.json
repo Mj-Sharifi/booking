@@ -19,13 +19,18 @@
     "home": "خانه",
     "login": "ورود",
     "register": "ثبت نام",
+    "profile":"پنل کاربری",
     "categories": "دسته‌بندی‌ها",
     "all_categories": "همه دسته‌بندی‌ها",
     "contact": "تماس با ما",
     "about_us": "درباره ما",
     "become_expert": "حرفه‌ای شو",
     "welcome": "خوش آمدید",
-    "welcome_back": "خوش برگشتید"
+    "welcome_back": "خوش برگشتید",
+    "dashboard": "داشبورد",
+    "personal_information": "اطلاعات هویتی",
+    "location_information": "اطلاعات آدرس",
+    "apply":"تایید"
   },
   "banner": {
     "title": "بهترین تجربه <span1>سفر<span2><img></img></span2></span1>",
@@ -100,12 +105,42 @@
   "profile": {
     "firstname": "نام",
     "lastname": "نام خانوادگی",
+    "username": "نام کاربری",
     "email": "ایمیل",
     "password": "گذرواژه",
     "confirm_password": "تکرار گذرواژه",
     "forget_your_password": "فراموشی رمز عبور",
-    "already_have_account": "قبلا ثبت‌نام کرده‌ام",
-    "dont_have_account": "هنوز ثبت‌نام نکرده‌ام",
-    "free_register": "رایگان ثبت‌نام کنید"
+    "already_have_account": "قبلا ثبت‌نام کرده‌ام.",
+    "dont_have_account": "هنوز ثبت‌نام نکرده‌ام.",
+    "free_register": "رایگان ثبت‌نام کنید",
+    "old_password": "پسورد قدیمی",
+    "new_password": "پسورد جدید",
+    "change_password":"تغییر گذرواژه"
+  },
+  "error": {
+    "is_required": "{field} الزامی است",
+    "firstname_required": "نام الزامی است",
+    "lastname_required": "نام خانوادگی الزامی است",
+    "email_required": "ایمیل الزامی است",
+    "username_required": "نام کاربری الزامی است",
+    "password_required": "گذرواژه الزامی است",
+    "must_match_password": "باید با پسورد یکی باشد",
+    "firstname_min_limit": "Firstname must be longer than 2 letters",
+    "lastname_min_limit": "Lastname must be longer than 2 letters",
+    "firstname_max_limit": "Lastname must be shorter than 50 letters",
+    "lastname_max_limit": "Lastname must be shorter than 50 letters",
+    "password_min_limit": "Password must contains more than 6 characters",
+    "username_min_limit": "Username must be longer than 5 letters",
+    "username_max_limit": "Username must be shorter than 20 letters",
+    "must_have_letter_number": "Password must contains at least one letter and one number",
+    "email_not_valid": "Email is not valid",
+    "only_letter": "It must only contain letters",
+    "old_password_required":"گذرواژه قدیمی الزامی است",
+    "new_password_required":"گذرواژه جدید الزامی است"
+
+  },
+  "notif": {
+    "login_successful": "You have logged in successfully",
+    "register_successful": "You have registered in successfully"
   }
 }

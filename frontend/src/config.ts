@@ -4,38 +4,15 @@ import { locales } from './utils/utils';
 
 export const pathnames = {
   '/': '/',
-  '/tour': {
-    en: '/tour',
-    fa: '/tour'
-  },
-  '/blog': {
-    en: '/blog',
-    fa: '/blog'
-  },
-  "/blog/:id": {
-    en: "/blog/:id",
-    fa: "/blog/:id"
-  },
-  "/login": {
-    en: "/login",
-    fa: "/login"
-  },
-  "/register": {
-    en: "/register",
-    fa: "/register"
-  }, "/become-expert": {
-    en: "/become-expert",
-    fa: "/become-expert"
-  }, "/profile/dashboard": {
-    en: "/profile/dashboard",
-    fa: "/profile/dashboard"
-  }, "/profile/personal-information": {
-    en: "/profile/personal-information",
-    fa: "/profile/personal-information"
-  }, "/profile/location-information": {
-    en: "/profile/location-information",
-    fa: "/profile/location-information"
-  }
+  '/tour': '/tour',
+  '/blog': '/blog',
+  "/blog/[id]": "/blog/[id]",
+  "/login": "/login",
+  "/register": "/register",
+  "/become-expert": "/become-expert",
+  "/profile/dashboard": "/profile/dashboard",
+  "/profile/personal-information": "/profile/personal-information",
+  "/profile/location-information": "/profile/location-information"
 } satisfies Pathnames<typeof locales>;
 
 export const localePrefix: LocalePrefix<typeof locales> = 'as-needed';
@@ -44,3 +21,22 @@ export const port = process.env.PORT || 3000;
 export const host = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : `http://localhost:${port}`;
+
+  
+  // export const pathnames = {
+  //   // If all locales use the same pathname, a
+  //   // single external path can be provided.
+  //   '/': '/',
+  //   '/blog': '/blog',
+    
+  //   // If locales use different paths, you can
+  //   // specify each external path per locale.
+  //   '/blog/[slug]': {
+  //     en: '/blog/[slug]',
+  //     it: '/blog/[slug]',
+  //     es: '/blog/[slug]',
+  //     fr: '/blog/[slug]',
+  //   },
+  
+  //   '[...rest]': '[...rest]',
+  // } satisfies Pathnames<typeof locales>;

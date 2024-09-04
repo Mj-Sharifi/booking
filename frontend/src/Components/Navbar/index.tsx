@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import HamburgerMenu from "./HamburgerMenu";
@@ -12,6 +11,7 @@ import LangSwitcher from "./LangSwitcher";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import RadioInput from "../Form/RadioInput";
 import NavigationLink from "../link/NavigationLink";
+import { useCookies } from "react-cookie";
 
 // const pages = [
 //   { title: "home", href: "/" },
@@ -20,6 +20,8 @@ import NavigationLink from "../link/NavigationLink";
 // ];'
 const pages = ["home", "tour", "blog"];
 export default function Navbar() {
+  4;
+  const [{ user_info }] = useCookies(["user_info"]);
   const { locale } = useParams();
   const t = useTranslations("common");
   const pathName = usePathname();
@@ -87,9 +89,10 @@ export default function Navbar() {
       <nav
         className={`fixed z-40 top-0 left-0 right-0 h-22 transition-all duration-300 text-dark ${
           bgEffect
-            ? "bg-white dark:bg-dark dark:text-white shadow-nav dark:shadow-md dark:shadow-lighter"
+            ? "bg-white dark:bg-dark dark:text-white"
             : "bg-transparent dark:bg-dark"
         }`}
+        // shadow-nav dark:shadow-md dark:shadow-lighter
       >
         <div className="container mx-auto h-full flexBetween px-2">
           <div className="flexCenter gap-4">
@@ -185,14 +188,16 @@ export default function Navbar() {
               {t("become_expert")}
             </NavigationLink>
             <NavigationLink
-              href={"/register"}
+              href={user_info?.jwt ? "/profile/dashboard" : "/register"}
               className={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-4 ${
                 bgEffect
                   ? "text-dark dark:text-white dark:hover:text-dark dark:border-white dark:hover:bg-white border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"
                   : "text-white border-white hover:bg-white hover:text-dark"
               } text-md font-normal`}
             >
-              {t("login")} / {t("register")}
+              {user_info?.jwt
+                ? t("profile")
+                : `${t("login") + " / " + t("register")}`}
             </NavigationLink>
           </div>
           <div className="flexCenter gap-3 md:hidden">

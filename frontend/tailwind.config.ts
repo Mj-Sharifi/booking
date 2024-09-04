@@ -47,6 +47,8 @@ const config: Config = {
       lighter: "#B0B6C0",
       hoverlight: "#F5F6FD",
       glass: "#ffffff10",
+      profile_light:"#f5f5f5",
+      profile_dark:"#2E3B61"
     },
 
     extend: {

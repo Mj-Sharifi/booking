@@ -54,7 +54,7 @@ export default function Blog() {
         <div className="col-span-1 md:order-2">
           <BlogSidebar handleCategory={handleCategory} category={category} />
         </div>
-        <div className="col-span-1 md:col-span-3 flex flex-col gap-6 px-6 sm:px-2">
+        <div className="col-span-1 md:col-span-3 flex flex-col gap-y-6 px-6 sm:px-2">
           {blog &&
             blog?.map((e, i) => (
               <PostCard

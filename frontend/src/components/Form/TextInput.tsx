@@ -27,7 +27,7 @@ export default function TextInput({
   return (
     <div
       className={`duration-300 relative rounded-md w-full ${
-        focus ? "border-2 border-dark dark:border-white" : "border"
+        focus ? "border-2 border-dark dark:border-white" : "border border-light dark:border-lighter"
       } ${
         touched
           ? errorMessage
@@ -54,7 +54,7 @@ export default function TextInput({
       <label
         htmlFor={`text-input-id-${label}`}
         className={`text-xs md:text-sm duration-300 absolute ltr:left-6 rtl:right-6 top-1/2 text-light dark:text-lighter ${
-          focus ? "-translate-y-full" : "-translate-y-2/3"
+          focus ? "-translate-y-[125%]" : "-translate-y-[85%]"
         }`}
       >
         {label}

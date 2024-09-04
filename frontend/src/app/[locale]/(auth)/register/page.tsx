@@ -58,7 +58,7 @@ export default function Register() {
             })
             .then((res) => {
               if (res.status == 200 && res.data) {
-                setCookie("user_info", res.data.jwt, { path: "/" });
+                setCookie("user_info", res.data, { path: "/" });
               }
             })
             .catch((err) => {
@@ -69,7 +69,7 @@ export default function Register() {
         {({ touched, errors, setFieldValue, setFieldTouched }) => (
           <Form
             // onSubmit={handleSubmit}
-            className="duration-300 rounded-md bg-white text-dark dark:bg-dark dark:text-white flex flex-col gap-y-10 sm:gap-y-8 w-11/12 sm:w-96 lg:w-128 py-6 px-4 sm:p-6 lg:p-10"
+            className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-8 w-11/12 sm:w-96 lg:w-128 py-6 px-4 sm:p-6 lg:p-10"
           >
             <span className="md:text-lg xl:text-xl font-semibold">
               {t("common.welcome")}
@@ -83,26 +83,7 @@ export default function Register() {
                 {t("common.login")}
               </NavigationLink>
             </span>
-            {/* <TextInput
-              name="firstname"
-              label={t("profile.firstname")}
-              errorMessage={
-                errors.firstname ? t(`error.${errors.firstname}`) : ""
-              }
-              touched={touched.firstname || false}
-              onChange={(v) => setFieldValue("firstname", v.target.value)}
-              onBlur={() => setFieldTouched("firstname", true)}
-            />
-            <TextInput
-              name="lastname"
-              label={t("profile.lastname")}
-              touched={touched.lastname || false}
-              errorMessage={
-                errors.lastname ? t(`error.${errors.lastname}`) : ""
-              }
-              onChange={(v) => setFieldValue("lastname", v.target.value)}
-              onBlur={() => setFieldTouched("lastname", true)}
-            /> */}
+
             <TextInput
               name="username"
               label={t("profile.username")}
