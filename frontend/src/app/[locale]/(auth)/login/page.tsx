@@ -37,7 +37,7 @@ export default function Login() {
             .catch((err) => showNotif(err.response.data.error.message))
         }
       >
-        {({ errors, touched, setFieldTouched, setFieldValue }) => (
+        {({values, errors, touched, setFieldTouched, setFieldValue }) => (
           <Form className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-8 w-80 sm:w-96 lg:w-100 p-2 sm:p-6 lg:p-10">
             <span className="md:text-lg xl:text-xl font-semibold">
               {t("common.welcome_back")}
@@ -54,7 +54,8 @@ export default function Login() {
             <TextInput
               name="email"
               label={t("profile.email")}
-              onChange={(v) => setFieldValue("email", v.target.value)}
+              value={values.email}
+              onChange={(v) => setFieldValue("email", v)}
               onBlur={() => setFieldTouched("email", true)}
               touched={touched.email || false}
               errorMessage={errors.email ? t(`error.${errors.email}`) : ""}
@@ -63,7 +64,9 @@ export default function Login() {
               type="password"
               name="password"
               label={t("profile.password")}
-              onChange={(v) => setFieldValue("password", v.target.value)}
+              onChange={(v) => setFieldValue("password", v)}
+              value={values.password}
+
               onBlur={() => setFieldTouched("password", true)}
               touched={touched.password || false}
               errorMessage={

@@ -19,7 +19,7 @@
     "home": "Home",
     "login": "Login",
     "register": "Register",
-    "profile":"Profile",
+    "profile": "Profile",
     "categories": "Categories",
     "all_categories": "All Categories",
     "contact": "Contact",
@@ -115,7 +115,16 @@
     "username": "Username",
     "old_password": "Old password",
     "new_password": "New password",
-    "change_password":"Change Password"
+    "change_password": "Change Password",
+    "address": "Address",
+    "city": "City",
+    "country": "Country",
+    "zipcode": "ZIP Code",
+    "gender": "Gender",
+    "phone": "Phone Number",
+    "birthday": "Birthday",
+    "about_yourself": "About yourself",
+    "avatar": "Avatar"
   },
   "error": {
     "is_required": "{field} is required",
@@ -136,7 +145,9 @@
     "email_not_valid": "Email is not valid",
     "only_letter": "It must only contain letters",
     "old_password_required": "Old password is required",
-    "new_password_required":"New password is required"
+    "new_password_required": "New password is required",
+    "phone_min_limit": "Phone number must be more than 10 digits.",
+    "phone_required": "Phone number is requires."
   },
   "notif": {
     "login_successful": "You have logged in successfully",

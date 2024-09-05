@@ -1,14 +1,16 @@
 "use client";
+import { onlyNumbers } from "@/utils/utils";
 import React, { ChangeEvent, useState } from "react";
 import { FaEye } from "react-icons/fa6";
 
 type props = {
   name: string;
   label: string;
-  onChange: (value: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  onChange: (e:string) => void;
   onBlur?: Function;
   onFocus?: Function;
-  type?: "password" | "email" | "text";
+  type?: "password" | "email" | "text" | "number";
   touched?: boolean;
   errorMessage?: string;
 };
@@ -16,6 +18,7 @@ export default function TextInput({
   name,
   label,
   type,
+  value,
   touched,
   errorMessage,
   onChange,
@@ -27,7 +30,9 @@ export default function TextInput({
   return (
     <div
       className={`duration-300 relative rounded-md w-full ${
-        focus ? "border-2 border-dark dark:border-white" : "border border-light dark:border-lighter"
+        focus
+          ? "border-2 border-dark dark:border-white"
+          : "border border-light dark:border-lighter"
       } ${
         touched
           ? errorMessage
@@ -39,7 +44,8 @@ export default function TextInput({
       <input
         name={name}
         id={`text-input-id-${label}`}
-        type={type == "password" ? eye : type}
+        value={value}
+        type={type == "password" ? eye : type == "number" ? "tel" : type}
         className="w-full border-none outline-none pt-7 pb-2 px-6 bg-transparent focus:!outline-none focus:!ring-0 focus:!border-0 "
         onFocus={() => {
           setFocus(true);
@@ -49,7 +55,13 @@ export default function TextInput({
           setFocus(false);
           onBlur && onBlur();
         }}
-        onChange={(e) => onChange(e)}
+        onChange={(e) => {
+          if (type == "number") {
+            onChange(onlyNumbers(e.target.value))
+          } else {
+            onChange(e.target.value);
+          }
+        }}
       />
       <label
         htmlFor={`text-input-id-${label}`}
@@ -61,8 +73,8 @@ export default function TextInput({
       </label>
       {type == "password" && (
         <button
-        tabIndex={-1}
-        type="button"
+          tabIndex={-1}
+          type="button"
           className={`duration-300 absolute top-1/2 -translate-y-1/2 ltr:right-3 rtl:left-3 ${
             eye == "text" ? "opacity-90" : "opacity-60"
           }`}
@@ -73,11 +85,13 @@ export default function TextInput({
           <FaEye size={16} />
         </button>
       )}
-      {touched && errorMessage ?(
+      {touched && errorMessage ? (
         <span className="absolute z-[2] top-[calc(100%+6px)] ltr:left-1 rtl:right-1 text-xs lg:text-sm text-red-600 dark:text-red-400">
           {errorMessage}
         </span>
-      ):""}
+      ) : (
+        ""
+      )}
     </div>
   );
 }

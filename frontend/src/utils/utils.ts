@@ -12,7 +12,10 @@ export const isTarget = (e: any, classnames: Array<string> = []) => {
     }
   }
 };
-export const getCookie = (cname:string) => {
+export const onlyNumbers = (value: string): string => {
+  return value.replace(/[^0-9]/g, "");
+}
+export const getCookie = (cname: string) => {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
   let ca = decodedCookie.split(';');

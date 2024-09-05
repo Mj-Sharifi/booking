@@ -105,3 +105,18 @@ export type registerResponce = {
     "updatedAt": string
   }
 }
+export type userInfo = {
+  jwt:string;
+  user:{
+    username:string;
+    firstname:string;
+    lastname:string;
+    address:string;
+    city:string
+    country:string
+    phone:string
+    email:string
+    birthday:string
+    gender:boolean
+  }
+}

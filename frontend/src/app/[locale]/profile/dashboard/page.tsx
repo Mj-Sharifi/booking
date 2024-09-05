@@ -42,7 +42,7 @@ export default function Profile() {
           .catch((err) => console.log(err));
       }}
     >
-      {({ setFieldValue, errors, touched, setFieldTouched }) => (
+      {({ values,setFieldValue, errors, touched, setFieldTouched }) => (
         <Form className="flex flex-col items-center gap-y-8">
           <div className="flex gap-2 w-full ">
             <FaLock size={24} />
@@ -55,8 +55,9 @@ export default function Profile() {
               type="password"
               name="old_password"
               label={t("profile.old_password")}
+              value={values.old_password}
               touched={touched.old_password || false}
-              onChange={(e) => setFieldValue("old_password", e.target.value)}
+              onChange={(e) => setFieldValue("old_password", e)}
               errorMessage={
                 errors.old_password ? t(`error.${errors.old_password}`) : ""
               }
@@ -67,7 +68,8 @@ export default function Profile() {
               name="new_password"
               label={t("profile.new_password")}
               touched={touched.new_password || false}
-              onChange={(e) => setFieldValue("new_password", e.target.value)}
+              value={values.new_password}
+              onChange={(e) => setFieldValue("new_password", e)}
               errorMessage={
                 errors.new_password ? t(`error.${errors.new_password}`) : ""
               }
@@ -78,8 +80,9 @@ export default function Profile() {
               name="confirm_password"
               label={t("profile.confirm_password")}
               touched={touched.confirm_password || false}
+              value={values.confirm_password}
               onChange={(e) =>
-                setFieldValue("confirm_password", e.target.value)
+                setFieldValue("confirm_password", e)
               }
               errorMessage={
                 errors.confirm_password

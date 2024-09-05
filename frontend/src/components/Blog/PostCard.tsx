@@ -1,6 +1,7 @@
 import NavigationLink from "@/components/link/NavigationLink";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import React from "react";
 
 type props = {
@@ -12,8 +13,9 @@ type props = {
 
 export default function PostCard({ id, release_Date, image, title }: props) {
   const t = useTranslations("common");
+  const {locale}=useParams()
   const date = new Date(release_Date);
-  const formattedDate = new Intl.DateTimeFormat(undefined, {
+  const formattedDate = new Intl.DateTimeFormat(locale, {
     dateStyle: "long",
   }).format(date);
   return (
