@@ -71,6 +71,9 @@ const config: Config = {
       boxShadow: {
         nav: "0 10px 30px 0 rgba(5,16,54,0.31)",
       },
+      transitionProperty:{
+        "height":"max-height"
+      }
     },
   },
   plugins: [require("flowbite/plugin")],

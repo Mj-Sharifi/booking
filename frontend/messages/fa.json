@@ -19,7 +19,7 @@
     "home": "خانه",
     "login": "ورود",
     "register": "ثبت نام",
-    "profile":"پنل کاربری",
+    "profile": "پنل کاربری",
     "categories": "دسته‌بندی‌ها",
     "all_categories": "همه دسته‌بندی‌ها",
     "contact": "تماس با ما",
@@ -30,7 +30,7 @@
     "dashboard": "داشبورد",
     "personal_information": "اطلاعات هویتی",
     "location_information": "اطلاعات آدرس",
-    "apply":"تایید"
+    "apply": "تایید"
   },
   "banner": {
     "title": "بهترین تجربه <span1>سفر<span2><img></img></span2></span1>",
@@ -115,16 +115,16 @@
     "free_register": "رایگان ثبت‌نام کنید",
     "old_password": "پسورد قدیمی",
     "new_password": "پسورد جدید",
-    "change_password":"تغییر گذرواژه",
-    "address":"آدرس",
-    "city":"شهر",
-    "country":"کشور",
-    "zipcode":"کد پستی",
-    "gender":"جنسیت",
-    "phone":"شماره همراه",
-    "birthday":"تاریخ تولد",
-    "about_yourself":"درباره خود بنویسید",
-    "avatar":"آواتار"
+    "change_password": "تغییر گذرواژه",
+    "address": "آدرس",
+    "city": "شهر",
+    "country": "کشور",
+    "zipcode": "کد پستی",
+    "gender": "جنسیت",
+    "phone": "شماره همراه",
+    "birthday": "تاریخ تولد",
+    "about_yourself": "درباره خود بنویسید",
+    "avatar": "آواتار"
   },
   "error": {
     "is_required": "{field} الزامی است",
@@ -144,13 +144,26 @@
     "must_have_letter_number": "گذرواژه باید شامل حداقل یک حرف و یک عدد باشد.",
     "email_not_valid": "ایمیل معتبر نیست.",
     "only_letter": "فقط باید شامل حروف باشد.",
-    "old_password_required":"گذرواژه قدیمی الزامی است.",
-    "new_password_required":"گذرواژه جدید الزامی است.",
-    "phone_min_limit":"شماره همراه باید از ده رقم بیشتر باشد.",
-    "phone_required":"شماره همراه الزامی است."
+    "old_password_required": "گذرواژه قدیمی الزامی است.",
+    "new_password_required": "گذرواژه جدید الزامی است.",
+    "phone_min_limit": "شماره همراه باید از ده رقم بیشتر باشد.",
+    "phone_required": "شماره همراه الزامی است.",
+    "zipcode_only_number": "کد پستی فقط باید شامل اعداد باشد.",
+    "no_item_found":"چیزی یافت نشد"
   },
   "notif": {
     "login_successful": "با موفقیت وارد شدید.",
     "register_successful": "ثبت نام با موفقیت انجام شد."
+  },
+  "country":{
+    "iri":"ایران",
+    "china":"چیم",
+    "usa":"ایالات متحده آمریکا",
+    "gb":"انگلستان",
+    "germany":"آلمان",
+    "france":"فرانسه",
+    "spain":"اسپانیا",
+    "italy":"ایتالیا",
+    "ukraine":"اوکراین"
   }
 }

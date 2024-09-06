@@ -46,7 +46,7 @@ export default function TextInput({
         id={`text-input-id-${label}`}
         value={value}
         type={type == "password" ? eye : type == "number" ? "tel" : type}
-        className="w-full border-none outline-none pt-7 pb-2 px-6 bg-transparent focus:!outline-none focus:!ring-0 focus:!border-0 "
+        className="w-full h-full border-none outline-none pt-7 pb-2 px-6 bg-transparent focus:!outline-none focus:!ring-0 focus:!border-0 "
         onFocus={() => {
           setFocus(true);
           onFocus && onFocus();

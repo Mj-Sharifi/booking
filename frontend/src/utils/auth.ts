@@ -43,7 +43,7 @@ const validationRules = {
     },
     phone: (required = false) => {
         return yup.lazy(value => {
-            let valid = yup.string().trim()
+            let valid = yup.string().trim().matches(/^\d+$/, "phone_only_numbers")
             if (required || (!required && value?.length > 0)) {
                 valid = valid.min(10, "phone_min_limit")
             }
@@ -55,7 +55,14 @@ const validationRules = {
 
     },
     string: yup.string().trim(),
-    number: yup.number(),
+    number: (name?: string, required = false) => {
+        let valid = yup.string().matches(/^\d+$/, generateError("only_number", name));
+
+        if (required) {
+            valid = valid.required(generateError("required", name))
+        }
+        return valid
+    }
 
 }
 
@@ -103,7 +110,7 @@ export const userLocationVldSchema = yup.object().shape({
     address: validationRules.string,
     city: validationRules.select("city", []),
     country: validationRules.select("country", []),
-    zipcode: validationRules.number
+    zipcode: validationRules.number("zipcode")
 })
 // Personal Information
 export const userInfoInitVals = {

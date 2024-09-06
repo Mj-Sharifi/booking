@@ -147,10 +147,23 @@
     "old_password_required": "Old password is required",
     "new_password_required": "New password is required",
     "phone_min_limit": "Phone number must be more than 10 digits.",
-    "phone_required": "Phone number is requires."
+    "phone_required": "Phone number is requires.",
+    "zipcode_only_number": "ZIP Code must only contain numbers.",
+    "no_item_found":"No item found"
   },
   "notif": {
     "login_successful": "You have logged in successfully",
     "register_successful": "You have registered in successfully"
+  },
+  "country": {
+    "iri": "Iran",
+    "china": "China",
+    "usa": "The United States",
+    "gb": "The Great Britain",
+    "germany": "Germany",
+    "france": "France",
+    "spain": "Spain",
+    "italy": "Italy",
+    "ukraine": "Ukraine"
   }
 }

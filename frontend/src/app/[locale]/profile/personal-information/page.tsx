@@ -58,7 +58,7 @@ export default function page() {
           .catch((err) => console.log(err));
       }}
     >
-      {({ values,setFieldValue, errors, touched, setFieldTouched }) => (
+      {({ values, setFieldValue, errors, touched, setFieldTouched }) => (
         <Form className="flex flex-col items-center gap-y-8">
           <div className="flex gap-2 w-full ">
             <FaClipboardUser size={24} />
@@ -126,7 +126,10 @@ export default function page() {
           <button
             type="submit"
             className="duration-300 px-6 py-2 rounded-md bg-darkblue dark:bg-lightblue text-white dark:text-dark hover:bg-dark dark:hover:bg-white"
-            onClick={(e) => console.log(errors)}
+            onClick={(e) => {
+              console.log(errors);
+              console.log(values);
+            }}
           >
             {t("common.apply")}
           </button>
