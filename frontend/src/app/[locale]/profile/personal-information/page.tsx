@@ -63,7 +63,7 @@ export default function page() {
           <div className="flex gap-2 w-full ">
             <FaClipboardUser size={24} />
             <h5 className="md:text-lg font-semibold">
-              {t("profile.change_password")}
+            {t("common.personal_information")}
             </h5>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-10 md:gap-y-8 w-full">

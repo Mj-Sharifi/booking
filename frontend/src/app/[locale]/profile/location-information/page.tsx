@@ -19,13 +19,17 @@ export default function page() {
   return (
     <Formik
       initialValues={{
+        // address: "",
+        // city: "",
+        // country: "",
+        // zipcode: "",
         address: (user_info?.user?.address as string) || "",
         city: (user_info?.user?.city as string) || "",
         country: (user_info?.user?.country as string) || "",
         zipcode: (user_info?.user?.zipcode as string) || "",
       }}
       validationSchema={userLocationVldSchema}
-      onSubmit={(e) => {
+      onSubmit={(e, f) => {
         axios
           .put(
             process.env.NEXT_PUBLIC_API + `users/${user_info?.user?.id}`,
@@ -50,28 +54,23 @@ export default function page() {
           .catch((err) => console.log(err));
       }}
     >
-      {({ values, setFieldValue, errors, touched, setFieldTouched }) => {
-        console.log(values);
-        console.log(
-          countries
-            .filter((cn) => cn.value == values.country)
-            .map((cn) => {
-              let options = [];
-              for (const city of cn.cities) {
-                options.push({
-                  text: locale == "fa" ? city.name_fa : city.name_en,
-                  value: city.value,
-                });
-              }
-              return options;
-            })
-        );
+      {({
+        values,
+        setFieldValue,
+        errors,
+        touched,
+        setFieldTouched,
+        handleSubmit,
+      }) => {
         return (
-          <Form className="flex flex-col items-center gap-y-8">
+          <Form
+            onSubmit={handleSubmit}
+            className="flex flex-col items-center gap-y-8"
+          >
             <div className="flex gap-2 w-full ">
               <FaLocationDot size={24} />
               <h5 className="md:text-lg font-semibold">
-                {t("profile.change_password")}
+                {t("common.location_information")}
               </h5>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-8 md:gap-y-10 w-full">
@@ -81,7 +80,7 @@ export default function page() {
                   label={t("profile.address")}
                   touched={touched.address || false}
                   value={values.address}
-                  onChange={(e) => setFieldValue("username", e)}
+                  onChange={(e) => setFieldValue("address", e)}
                   errorMessage={
                     errors.address ? t(`error.${errors.address}`) : ""
                   }
@@ -89,7 +88,11 @@ export default function page() {
                 />
               </div>
               <Select
-                onChange={(value) => setFieldValue("country", value)}
+                id="countrySelection"
+                onChange={(value) => {
+                  setFieldValue("country", value),
+                    console.log("selectValue: ", value);
+                }}
                 options={countries.map((cn) => {
                   return {
                     value: cn.value,
@@ -107,19 +110,22 @@ export default function page() {
                 label={t("profile.country")}
               />
               <Select
+                id="citySelection"
                 onChange={(value) => setFieldValue("city", value)}
-                options={countries
-                  .filter((cn) => cn.value == values.country)
-                  .map((cn) => {
-                    let options = [];
-                    for (const city of cn.cities) {
-                      options.push({
-                        text: locale == "fa" ? city.name_fa : city.name_en,
-                        value: city.value,
-                      });
-                    }
-                    return options;
-                  })[0]}
+                options={
+                  countries
+                    .filter((cn) => cn.value == values.country)
+                    .map((cn) => {
+                      let options = [];
+                      for (const city of cn.cities) {
+                        options.push({
+                          text: locale == "fa" ? city.name_fa : city.name_en,
+                          value: city.value,
+                        });
+                      }
+                      return options;
+                    })[0]
+                }
                 label={t("profile.city")}
               />
               <TextInput
@@ -135,9 +141,12 @@ export default function page() {
               />
             </div>
             <button
-              type="submit"
+              type="button"
               className="duration-300 px-6 py-2 rounded-md bg-darkblue dark:bg-lightblue text-white dark:text-dark hover:bg-dark dark:hover:bg-white"
-              onClick={(e) => console.log(errors)}
+              onClick={(e) => {
+                handleSubmit();
+                console.log("errors", errors);
+              }}
             >
               {t("common.apply")}
             </button>

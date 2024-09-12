@@ -27,11 +27,12 @@ export default function TextInput({
 }: props) {
   const [focus, setFocus] = useState(false);
   const [eye, setEye] = useState<"text" | "password">("password");
+  // console.log("value",value);
   return (
     <div
       className={`duration-300 relative rounded-md w-full ${
         focus
-          ? "border-2 border-dark dark:border-white"
+          ? "border border-dark outline outline-1 outline-dark dark:border-white"
           : "border border-light dark:border-lighter"
       } ${
         touched

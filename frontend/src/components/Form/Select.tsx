@@ -1,11 +1,18 @@
 "use client";
+import { isTarget } from "@/utils/utils";
 import { useTranslations } from "next-intl";
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, {
+  MouseEventHandler,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 type props = {
   id?: string;
   name?: string;
-  initialValue?:string
+  initialValue?: string;
   options: {
     value: string | number;
     text: string | number;
@@ -40,42 +47,49 @@ export default function Select({
       icon?: ReactNode;
     }[]
   >([]);
+  // const selectRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     options ? setSearchedOptions(options) : setSearchedOptions([]);
   }, [options]);
   // Move with arrows
   const [currentLi, setCurrentLi] = useState<number>(-1);
   const ulElement = useRef<HTMLUListElement>(null); // Ref for the scrollable container
+  const selectRef = useRef<HTMLDivElement>(null);
+  const handleMove = (e: KeyboardEvent) => {
 
-  useEffect(() => {
-    
-    const handleKeyDown = (e: KeyboardEvent) => {
-      e.preventDefault();
-      if (options?.length) {
-        const lastIndex = options?.length - 1;
-        switch (e.key) {
-          case "ArrowDown":
-            setCurrentLi((prev) =>
-              prev === -1 || prev === lastIndex ? 0 : prev + 1
-            );
-            break;
-          case "ArrowUp":
-            setCurrentLi((prev) => (prev < 1 ? lastIndex : prev - 1));
-            break;
-          case "Escape":
-            setOpen(false);
-            setCurrentLi(-1);
-            break;
-        }
+    setTimeout(() => {
+      if (["ArrowDown", "ArrowUp", "Enter", "Escape"].includes(e.key)) {
+        console.log(e.key);
+        e.preventDefault()
       }
-    };
+      const lastIndex = searchedOptions?.length - 1;
 
-    document.addEventListener("keydown", handleKeyDown);
+      switch (e.key) {
+        case "ArrowDown":
+          setCurrentLi((prev) =>
+            prev === -1 || prev === lastIndex ? 0 : prev + 1
+          );
+          break;
+        case "ArrowUp":
+          setCurrentLi((prev) => (prev < 1 ? lastIndex : prev - 1));
+          break;
+        case "Enter":
+          setOpen(false);
+          setText(searchedOptions[currentLi].text);
+          onChange(searchedOptions[currentLi].value);
+          setFocus(false);
+          setValue("");
+          break;
+        case "Escape":
+          setOpen(false);
+          setCurrentLi(-1);
+          break;
+        default:
 
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown); // Clean up listener
-    };
-  }, [options]);
+      }
+    }, 0);
+  };
+
   useEffect(() => {
     if (currentLi !== -1 && ulElement.current) {
       const currentItem = ulElement.current.children[currentLi] as HTMLElement;
@@ -87,14 +101,31 @@ export default function Select({
         });
       }
     }
-  }, [currentLi]);
+
+    if (selectRef.current) {
+      selectRef.current.addEventListener("keydown", handleMove);
+    }
+    return () => {
+      selectRef.current?.removeEventListener("keydown", handleMove); // Clean up listener
+    };
+  }, [currentLi, ulElement, selectRef]);
+
+  useEffect(() => {
+    const closeList = (e: MouseEvent) => {
+      if (!e.target || !(e.target instanceof Element) || !e.target.closest(`#select_component-${id}`)) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener("click", (e) => closeList(e));
+    return () => window.removeEventListener("click", (e) => closeList(e));
+  }, []);
 
   return (
-    <div className="relative">
+    <div className={`relative`} id={`select_component-${id}`} ref={selectRef}>
       <div
         className={`duration-300 relative rounded-md w-full ${
           focus
-            ? "border-2 border-dark dark:border-white"
+            ? "border border-dark outline outline-1 outline-dark dark:border-white"
             : "border border-light dark:border-lighter"
         } ${
           isToched
@@ -115,9 +146,9 @@ export default function Select({
           value={value}
           onBlur={() => setFocus(false)}
           onChange={(e) => {
+            setCurrentLi(0)
             setText("");
             setValue(e.target.value);
-
             if (e.target.value.length > 2) {
               let newOptions = options.filter((v) =>
                 String(v.text)
@@ -132,7 +163,7 @@ export default function Select({
         />
         <label
           htmlFor={id || `select_component-${label}`}
-          className={`text-xs md:text-sm duration-300 absolute ltr:left-6 rtl:right-6 top-1/2 text-light dark:text-lighter ${
+          className={`bg-transparent text-xs md:text-sm duration-300 absolute ltr:left-6 rtl:right-6 top-1/2 text-light dark:text-lighter ${
             focus ? "-translate-y-[125%]" : "-translate-y-[85%]"
           }`}
         >

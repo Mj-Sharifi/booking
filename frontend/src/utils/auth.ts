@@ -1,5 +1,8 @@
 import * as yup from 'yup';
+import { countries } from './location';
+import { Cookies } from 'react-cookie';
 
+const cookie = new Cookies()
 const generateError = (errText: string, title?: string): string => {
     return title ? `${title}_${errText}` : errText
 }
@@ -106,12 +109,19 @@ export const userLocationInitVals = {
     country: "",
     zipcode: ""
 }
-export const userLocationVldSchema = yup.object().shape({
-    address: validationRules.string,
-    city: validationRules.select("city", []),
-    country: validationRules.select("country", []),
-    zipcode: validationRules.number("zipcode")
-})
+export const userLocationVldSchema = () => {
+    const lang = cookie.get("NEXT_LOCALE")
+    const countriesValue = countries.map(cn => lang == "en" ? cn.name_en : cn.name_fa)
+    return yup.object().shape({
+        address: validationRules.string,
+        country: validationRules.select("country", countriesValue),
+        city: yup.string().when("country", ([country]) => {
+            const citiesValue = countries.filter(cn => lang == "en" ? cn.name_en == country : cn.name_fa == country).map(ci => lang == "en" ? ci.name_en : ci.name_fa)
+            return validationRules.select("city", citiesValue)
+        }),
+        zipcode: validationRules.number("zipcode")
+    })
+}
 // Personal Information
 export const userInfoInitVals = {
     username: "",

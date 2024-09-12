@@ -13,8 +13,6 @@ import { useCookies } from "react-cookie";
 export default function Login() {
   const t = useTranslations();
   const [cookie, setCookie] = useCookies();
-  // Navigating
-  const {locale} = useParams()
   const router = useRouter()
   return (
     <>
