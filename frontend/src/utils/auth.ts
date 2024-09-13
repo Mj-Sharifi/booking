@@ -57,6 +57,20 @@ const validationRules = {
         })
 
     },
+    image: (name: string, supportedFormats: string[],width?:number,height?:number, required = false) => yup.mixed().required('required')
+        .test('fileFormat', 'Only PDF files are allowed', value => {
+            if (value) {
+      
+                return supportedFormats.includes(value.name.split('.').pop());
+            }
+            return true;
+        })
+        .test('fileSize', 'File size must be less than 3MB', value => {
+            if (value) {
+                return value.size <= 3145728;
+            }
+            return true;
+        }),
     string: yup.string().trim(),
     number: (name?: string, required = false) => {
         let valid = yup.string().matches(/^\d+$/, generateError("only_number", name));
@@ -111,13 +125,19 @@ export const userLocationInitVals = {
 }
 export const userLocationVldSchema = () => {
     const lang = cookie.get("NEXT_LOCALE")
-    const countriesValue = countries.map(cn => lang == "en" ? cn.name_en : cn.name_fa)
+    const countriesValue = countries.map(cn => cn.value)
     return yup.object().shape({
         address: validationRules.string,
         country: validationRules.select("country", countriesValue),
         city: yup.string().when("country", ([country]) => {
-            const citiesValue = countries.filter(cn => lang == "en" ? cn.name_en == country : cn.name_fa == country).map(ci => lang == "en" ? ci.name_en : ci.name_fa)
-            return validationRules.select("city", citiesValue)
+            if (country) {
+                const selectedCountry = countries?.filter(cn => cn.value == country);
+                const citiesValue = [...selectedCountry[0]?.cities.map(ci => ci.value)];
+                return validationRules.select("city", citiesValue)
+            } else {
+                return yup.string()
+            }
+
         }),
         zipcode: validationRules.number("zipcode")
     })

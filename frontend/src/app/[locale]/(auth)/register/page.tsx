@@ -9,9 +9,14 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { registerResponce } from "@/types/response";
 import { showNotif } from "@/utils/notification";
+import { useRouter } from "@/navigation";
+import { useParams } from "next/navigation";
+import { locale } from "@/types/types";
 
 export default function Register() {
   const t = useTranslations();
+  const {locale} = useParams<{locale:locale}>()
+  const router = useRouter()
   const [cookie, setCookie] = useCookies();
   return (
     <>
@@ -31,6 +36,7 @@ export default function Register() {
             .then((res) => {
               if (res.status == 200 && res.data) {
                 setCookie("user_info", res.data, { path: "/" });
+                router.replace("/profile/dashboard",{locale})
               }
             })
             .catch((err) => {
@@ -39,7 +45,7 @@ export default function Register() {
         }
       >
         {({ values, touched, errors, setFieldValue, setFieldTouched }) => (
-          <Form className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-8 w-11/12 sm:w-96 lg:w-128 py-6 px-4 sm:p-6 lg:p-10">
+          <Form className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-8 lg:gap-y-12 w-11/12 sm:w-96 lg:w-128 py-6 px-4 sm:p-6 lg:p-10">
             <span className="md:text-lg xl:text-xl font-semibold">
               {t("common.welcome")}
             </span>

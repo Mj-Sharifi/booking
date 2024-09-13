@@ -8,6 +8,7 @@ import { Form, Formik } from "formik";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { userInfo } from "os";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { FaLocationDot } from "react-icons/fa6";
@@ -15,14 +16,10 @@ import { FaLocationDot } from "react-icons/fa6";
 export default function page() {
   const { locale } = useParams();
   const t = useTranslations();
-  const [{ user_info }, setUserInfo] = useCookies(["user_info"]);
+  const [{ user_info }, setUserInfo, _, updateUserInfo] = useCookies(["user_info"]);
   return (
     <Formik
       initialValues={{
-        // address: "",
-        // city: "",
-        // country: "",
-        // zipcode: "",
         address: (user_info?.user?.address as string) || "",
         city: (user_info?.user?.city as string) || "",
         country: (user_info?.user?.country as string) || "",
@@ -35,9 +32,9 @@ export default function page() {
             process.env.NEXT_PUBLIC_API + `users/${user_info?.user?.id}`,
             {
               address: e.address,
-              city: e.city || "",
+              city: e.city || null,
               country: e.country || "",
-              zipcode: e.zipcode || "",
+              zipcode: e.zipcode || null,
             },
             {
               headers: {
@@ -48,7 +45,8 @@ export default function page() {
           )
           .then((res) => {
             if (res && res.data) {
-              console.log(res);
+
+              setUserInfo("user_info",{ ...userInfo, user: res.data },{path:"/"});
             }
           })
           .catch((err) => console.log(err));
@@ -90,13 +88,13 @@ export default function page() {
               <Select
                 id="countrySelection"
                 onChange={(value) => {
-                  setFieldValue("country", value),
-                    console.log("selectValue: ", value);
+                  setFieldValue("country", value);
                 }}
+                initialValue={values.country}
                 options={countries.map((cn) => {
                   return {
                     value: cn.value,
-                    text: locale == "fa" ? cn.name_fa : cn.name_en,
+                    title: locale == "fa" ? cn.name_fa : cn.name_en,
                     icon: (
                       <Image
                         src={`/assets/images/flag/${cn.isoCode}.svg`}
@@ -108,10 +106,16 @@ export default function page() {
                   };
                 })}
                 label={t("profile.country")}
+                isToched={touched.country}
+                errorMessage={
+                  errors.address ? t(`error.${errors.country}`) : ""
+                }
+                onBlur={() => setFieldTouched("country", true)}
               />
               <Select
                 id="citySelection"
                 onChange={(value) => setFieldValue("city", value)}
+                initialValue={values.city}
                 options={
                   countries
                     .filter((cn) => cn.value == values.country)
@@ -119,7 +123,7 @@ export default function page() {
                       let options = [];
                       for (const city of cn.cities) {
                         options.push({
-                          text: locale == "fa" ? city.name_fa : city.name_en,
+                          title: locale == "fa" ? city.name_fa : city.name_en,
                           value: city.value,
                         });
                       }
@@ -127,6 +131,9 @@ export default function page() {
                     })[0]
                 }
                 label={t("profile.city")}
+                isToched={touched.city}
+                errorMessage={errors.address ? t(`error.${errors.city}`) : ""}
+                onBlur={() => setFieldTouched("city", true)}
               />
               <TextInput
                 name="zipcode"
@@ -146,6 +153,7 @@ export default function page() {
               onClick={(e) => {
                 handleSubmit();
                 console.log("errors", errors);
+                console.log("values: ", values);
               }}
             >
               {t("common.apply")}

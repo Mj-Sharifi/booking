@@ -1,19 +1,22 @@
 "use client";
 import TextInput from "@/components/Form/TextInput";
 import NavigationLink from "@/components/link/NavigationLink";
+import { useRouter } from "@/navigation";
+import { locale } from "@/types/types";
 import { loginInitVals, loginVldSchema } from "@/utils/auth";
 import { showNotif } from "@/utils/notification";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import { useTranslations } from "next-intl";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import React from "react";
 import { useCookies } from "react-cookie";
 
 export default function Login() {
   const t = useTranslations();
   const [cookie, setCookie] = useCookies();
-  const router = useRouter()
+  const { locale } = useParams<{ locale: locale }>();
+  const router = useRouter();
   return (
     <>
       <Formik
@@ -27,16 +30,16 @@ export default function Login() {
             })
             .then((res) => {
               if (res && res.data) {
-             setCookie("user_info", res.data, { path: "/" });
-             showNotif(t(`notif.login_successful`),"success");   
+                setCookie("user_info", res.data, { path: "/" });
+                showNotif(t(`notif.login_successful`), "success");
+                router.replace("/profile/dashboard", { locale });
               }
-              router.push("/")
             })
             .catch((err) => showNotif(err.response.data.error.message))
         }
       >
-        {({values, errors, touched, setFieldTouched, setFieldValue }) => (
-          <Form className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-8 w-80 sm:w-96 lg:w-100 p-2 sm:p-6 lg:p-10">
+        {({ values, errors, touched, setFieldTouched, setFieldValue }) => (
+          <Form className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-8 lg:gap-y-12 w-80 sm:w-96 lg:w-100 p-2 sm:p-6 lg:p-10">
             <span className="md:text-lg xl:text-xl font-semibold">
               {t("common.welcome_back")}
             </span>
@@ -64,7 +67,6 @@ export default function Login() {
               label={t("profile.password")}
               onChange={(v) => setFieldValue("password", v)}
               value={values.password}
-
               onBlur={() => setFieldTouched("password", true)}
               touched={touched.password || false}
               errorMessage={

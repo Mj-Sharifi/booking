@@ -15,7 +15,7 @@ type props = {
   initialValue?: string;
   options: {
     value: string | number;
-    text: string | number;
+    title: string | number;
     icon?: ReactNode;
   }[];
   height?: number;
@@ -23,6 +23,7 @@ type props = {
   isToched?: boolean;
   errorMessage?: string;
   onChange: (value: string | number) => void;
+  onBlur?: (value: string | number) => void;
 };
 export default function Select({
   id,
@@ -30,6 +31,7 @@ export default function Select({
   initialValue,
   options,
   onChange,
+  onBlur,
   height,
   label,
   isToched,
@@ -38,12 +40,16 @@ export default function Select({
   const t = useTranslations("error");
   const [open, setOpen] = useState(false);
   const [focus, setFocus] = useState(false);
-  const [text, setText] = useState<string | number>("");
+  const [title, setTitle] = useState<string | number>(
+    initialValue
+      ? options.filter((cn) => cn.value == initialValue)[0].title
+      : ""
+  );
   const [value, setValue] = useState<string | number>();
   const [searchedOptions, setSearchedOptions] = useState<
     {
       value: string | number;
-      text: string | number;
+      title: string | number;
       icon?: ReactNode;
     }[]
   >([]);
@@ -51,19 +57,17 @@ export default function Select({
   useEffect(() => {
     options ? setSearchedOptions(options) : setSearchedOptions([]);
   }, [options]);
+
   // Move with arrows
   const [currentLi, setCurrentLi] = useState<number>(-1);
   const ulElement = useRef<HTMLUListElement>(null); // Ref for the scrollable container
   const selectRef = useRef<HTMLDivElement>(null);
   const handleMove = (e: KeyboardEvent) => {
-
     setTimeout(() => {
       if (["ArrowDown", "ArrowUp", "Enter", "Escape"].includes(e.key)) {
-        console.log(e.key);
-        e.preventDefault()
+        e.preventDefault();
       }
       const lastIndex = searchedOptions?.length - 1;
-
       switch (e.key) {
         case "ArrowDown":
           setCurrentLi((prev) =>
@@ -75,8 +79,9 @@ export default function Select({
           break;
         case "Enter":
           setOpen(false);
-          setText(searchedOptions[currentLi].text);
+          setTitle(searchedOptions[currentLi].title);
           onChange(searchedOptions[currentLi].value);
+          onBlur && onBlur(searchedOptions[currentLi].value);
           setFocus(false);
           setValue("");
           break;
@@ -85,7 +90,6 @@ export default function Select({
           setCurrentLi(-1);
           break;
         default:
-
       }
     }, 0);
   };
@@ -110,9 +114,14 @@ export default function Select({
     };
   }, [currentLi, ulElement, selectRef]);
 
+  // Close by clicking outside
   useEffect(() => {
     const closeList = (e: MouseEvent) => {
-      if (!e.target || !(e.target instanceof Element) || !e.target.closest(`#select_component-${id}`)) {
+      if (
+        !e.target ||
+        !(e.target instanceof Element) ||
+        !e.target.closest(`#select_component-${id}`)
+      ) {
         setOpen(false);
       }
     };
@@ -146,12 +155,12 @@ export default function Select({
           value={value}
           onBlur={() => setFocus(false)}
           onChange={(e) => {
-            setCurrentLi(0)
-            setText("");
+            setCurrentLi(0);
+            setTitle("");
             setValue(e.target.value);
             if (e.target.value.length > 2) {
               let newOptions = options.filter((v) =>
-                String(v.text)
+                String(v.title)
                   .toLowerCase()
                   .includes(e.target.value.toLowerCase())
               );
@@ -169,8 +178,15 @@ export default function Select({
         >
           {label}
         </label>
-        {text && (
-          <span className="absolute rtl:right-6 ltr:left-6 top-7">{text}</span>
+        {title && (
+          <span className="absolute rtl:right-6 ltr:left-6 top-7">{title}</span>
+        )}
+        {isToched && errorMessage ? (
+          <span className="absolute z-[2] top-[calc(100%+6px)] ltr:left-1 rtl:right-1 text-xs lg:text-sm text-red-600 dark:text-red-400">
+            {errorMessage}
+          </span>
+        ) : (
+          ""
         )}
       </div>
 
@@ -182,13 +198,14 @@ export default function Select({
         style={{ maxHeight: open ? `${height || 160}px` : "0" }}
       >
         {searchedOptions.length > 0 ? (
-          searchedOptions.map(({ value, text, icon }, i) => (
+          searchedOptions.map(({ value, title, icon }, i) => (
             <li
               key={i}
               onClick={() => {
                 setOpen(false);
-                setText(text);
+                setTitle(title);
                 onChange(value);
+                onBlur && onBlur(value);
                 setFocus(false);
                 setValue("");
               }}
@@ -197,7 +214,7 @@ export default function Select({
               }`}
             >
               {icon}
-              {text}
+              {title}
             </li>
           ))
         ) : (

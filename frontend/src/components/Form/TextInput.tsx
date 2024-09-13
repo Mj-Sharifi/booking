@@ -7,7 +7,7 @@ type props = {
   name: string;
   label: string;
   value: string;
-  onChange: (e:string) => void;
+  onChange: (e: string) => void;
   onBlur?: Function;
   onFocus?: Function;
   type?: "password" | "email" | "text" | "number";
@@ -27,20 +27,20 @@ export default function TextInput({
 }: props) {
   const [focus, setFocus] = useState(false);
   const [eye, setEye] = useState<"text" | "password">("password");
-  // console.log("value",value);
   return (
     <div
       className={`duration-300 relative rounded-md w-full ${
         focus
-          ? "border border-dark outline outline-1 outline-dark dark:border-white"
+          ? `border border-dark dark:border-white ${!touched?"outline outline-1 outline-dark":""}`
           : "border border-light dark:border-lighter"
       } ${
         touched
           ? errorMessage
-            ? "!border-red-600 dark:!border-red-400 !border-2"
-            : "!border-green-600 dark:!border-green-400 !border-2"
+            ? "!border-red-600 dark:!border-red-400 !border-2 outline-none"
+            : "!border-green-600 dark:!border-green-400 !border-2 outline-none"
           : ""
       }`}
+
     >
       <input
         name={name}
@@ -58,7 +58,7 @@ export default function TextInput({
         }}
         onChange={(e) => {
           if (type == "number") {
-            onChange(onlyNumbers(e.target.value))
+            onChange(onlyNumbers(e.target.value));
           } else {
             onChange(e.target.value);
           }

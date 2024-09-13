@@ -124,7 +124,10 @@
     "phone": "شماره همراه",
     "birthday": "تاریخ تولد",
     "about_yourself": "درباره خود بنویسید",
-    "avatar": "آواتار"
+    "avatar": "آواتار",
+    "browse":"جست‌وجو",
+        "avatar_title":"آواتار شما",
+    "avatar_description":"فرمت JPG و حداکثر طول و عرض 800 پیکسل"
   },
   "error": {
     "is_required": "{field} الزامی است",

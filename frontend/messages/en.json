@@ -124,7 +124,11 @@
     "phone": "Phone Number",
     "birthday": "Birthday",
     "about_yourself": "About yourself",
-    "avatar": "Avatar"
+    "avatar": "Avatar",
+    "browse":"Browse",
+    "avatar_title":"Your avatar",
+    "avatar_description":"JPG no bigger than 800px wide and tall."
+
   },
   "error": {
     "is_required": "{field} is required",

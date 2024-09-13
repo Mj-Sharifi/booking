@@ -1,4 +1,5 @@
 "use client";
+import FileUploader from "@/components/Form/FileUploader";
 import TextInput from "@/components/Form/TextInput";
 import { userInfoVldSchema } from "@/utils/auth";
 import axios from "axios";
@@ -14,6 +15,7 @@ export default function page() {
   return (
     <Formik
       initialValues={{
+        avatar: (user_info?.user?.avatar as string) || "",
         username: (user_info?.user?.username as string) || "",
         firstname: (user_info?.user?.firstname as string) || "",
         lastname: (user_info?.user.lastname as string) || "",
@@ -47,7 +49,7 @@ export default function page() {
           )
           .then((res) => {
             if (res && res.data) {
-              console.log(res);
+              console.log(res.data);
               setUserInfo(
                 "user_info",
                 { ...user_info, user: res.data },
@@ -63,10 +65,19 @@ export default function page() {
           <div className="flex gap-2 w-full ">
             <FaClipboardUser size={24} />
             <h5 className="md:text-lg font-semibold">
-            {t("common.personal_information")}
+              {t("common.personal_information")}
             </h5>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-10 md:gap-y-8 w-full">
+            <FileUploader
+              name="avatar"
+              accept=".jpg, .jpeg"
+              label={t("profile.avatar_title")}
+              description={t("profile.avatar_description")}
+              initialValue=""
+              onChange={(v) => setFieldValue("avatar", v?v[0]:null)}
+            />
+            <div></div>
             <TextInput
               name="username"
               label={t("profile.username")}
