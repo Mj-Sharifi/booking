@@ -57,20 +57,47 @@ const validationRules = {
         })
 
     },
-    image: (name: string, supportedFormats: string[],width?:number,height?:number, required = false) => yup.mixed().required('required')
-        .test('fileFormat', 'Only PDF files are allowed', value => {
-            if (value) {
-      
-                return supportedFormats.includes(value.name.split('.').pop());
+    image: (name: string, supportedFormats: string[], maxSize: number, maxWidth?: number, maxHeight?: number, required = false) => {
+        return (yup.lazy(value => {
+            let valid = yup.mixed<File>()
+            if (required || (!required && value.length > 0)) {
+                valid = valid.test('fileSize', 'Image size is too large', (file?: File) => {
+                    return file ? file.size <= maxSize : false;
+                }).test('fileFormat', 'Unsupported file format', (file?: File) => {
+                    return file ? supportedFormats.includes(file.type) : false;
+                })
+                if (maxWidth && maxHeight) {
+                    valid = valid.test('fileDimensions', 'Image dimensions are too large', (file?: File) => {
+                        if (!file) return Promise.resolve(false);
+
+                        const image = new Image();
+                        const url = URL.createObjectURL(file);
+
+                        return new Promise<boolean>((resolve) => {
+                            image.onload = () => {
+                                URL.revokeObjectURL(url);
+                                // Check if dimensions are valid
+                                if (image.width <= maxWidth && image.height <= maxHeight) {
+                                    resolve(true);
+                                } else {
+                                    resolve(false);
+                                }
+                            };
+                            image.onerror = () => {
+                                URL.revokeObjectURL(url);
+                                resolve(false); // reject invalid images
+                            };
+                            image.src = url;
+                        });
+                    })
+                }
             }
-            return true;
-        })
-        .test('fileSize', 'File size must be less than 3MB', value => {
-            if (value) {
-                return value.size <= 3145728;
+            if (required) {
+                valid = valid.required("image_required")
             }
-            return true;
-        }),
+            return valid
+        }))
+    },
     string: yup.string().trim(),
     number: (name?: string, required = false) => {
         let valid = yup.string().matches(/^\d+$/, generateError("only_number", name));

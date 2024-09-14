@@ -2,14 +2,15 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
 import { FaUpload } from "react-icons/fa6";
+import { MdDelete } from "react-icons/md";
 
 type props = {
   label?: string;
-  description?:string
+  description?: string;
   name: string;
   id?: string;
-  initialValue?: string;
-  accept:string
+  accept: string;
+  imageURL?: string;
   onChange: (value: FileList | null) => void;
   onBlur?: (value: string | number) => void;
   isToched?: boolean;
@@ -21,7 +22,7 @@ export default function FileUploader({
   name,
   accept,
   id,
-  initialValue,
+  imageURL,
   onChange,
   onBlur,
   isToched,
@@ -29,17 +30,21 @@ export default function FileUploader({
 }: props) {
   const t = useTranslations("profile");
   return (
-    <div className="grid grid-cols-2">
+    <div className={`grid ${imageURL ? "md:grid-cols-2" : ""}`}>
       <div className="flex flex-col gap-y-2 text-justify">
-        <span className="font-semibold md:text-lg">{label||"Your image"}</span>
-        <span className="text-sm md:text-base">{description||"Only jpeg"}</span>
+        <span className="font-semibold md:text-lg">
+          {label || "Your image"}
+        </span>
+        <span className="text-sm md:text-base">
+          {description || "Only jpeg"}
+        </span>
         <input
           id={id || `image_uploder_${name}`}
           name={name}
           type="file"
-          accept={accept||undefined}
+          accept={accept || undefined}
           onChange={(e) => onChange(e.target.files)}
-          // className="hidden"
+          className="hidden"
           hidden
         />
         <label
@@ -49,8 +54,12 @@ export default function FileUploader({
           {t("browse")} <FaUpload size={16} />
         </label>
       </div>
-      
-      {/* <Image/> */}
+      {imageURL && (
+        <div className="relative">
+          <Image src={imageURL} alt={name} width={400} height={600}/>
+          <MdDelete size={22} className="duration-300 absolute top-4 rtl:right-4 ltr:left-4 text-darkblue hover:text-dark"/>
+        </div>
+      )}
     </div>
   );
 }

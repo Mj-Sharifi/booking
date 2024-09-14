@@ -5,6 +5,7 @@ import { userInfoVldSchema } from "@/utils/auth";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { FaClipboardUser } from "react-icons/fa6";
@@ -74,10 +75,10 @@ export default function page() {
               accept=".jpg, .jpeg"
               label={t("profile.avatar_title")}
               description={t("profile.avatar_description")}
-              initialValue=""
-              onChange={(v) => setFieldValue("avatar", v?v[0]:null)}
+              onChange={(v) => setFieldValue("avatar", v ? v[0] : null)}
+              imageURL={values.avatar}
             />
-            <div></div>
+
             <TextInput
               name="username"
               label={t("profile.username")}
