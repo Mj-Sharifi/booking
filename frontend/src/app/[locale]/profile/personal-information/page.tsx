@@ -75,10 +75,15 @@ export default function page() {
               accept=".jpg, .jpeg"
               label={t("profile.avatar_title")}
               description={t("profile.avatar_description")}
-              onChange={(v) => setFieldValue("avatar", v ? v[0] : null)}
+              onChange={(v) => {
+                setFieldValue("avatar", v ? v[0] : null);
+                setFieldTouched("avatar", true);
+              }}
+              isToched={touched.avatar}
+              errorMessage={errors.avatar?t(`profile.${errors.avatar}`):""}
               imageURL={values.avatar}
             />
-
+            <div></div>
             <TextInput
               name="username"
               label={t("profile.username")}
@@ -139,8 +144,8 @@ export default function page() {
             type="submit"
             className="duration-300 px-6 py-2 rounded-md bg-darkblue dark:bg-lightblue text-white dark:text-dark hover:bg-dark dark:hover:bg-white"
             onClick={(e) => {
-              console.log(errors);
-              console.log(values);
+              console.log("errors: ", errors);
+              console.log("values: ", values);
             }}
           >
             {t("common.apply")}

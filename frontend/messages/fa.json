@@ -125,9 +125,10 @@
     "birthday": "تاریخ تولد",
     "about_yourself": "درباره خود بنویسید",
     "avatar": "آواتار",
-    "browse":"جست‌وجو",
-        "avatar_title":"آواتار شما",
-    "avatar_description":"فرمت JPG و حداکثر طول و عرض 800 پیکسل"
+    "browse": "جست‌وجو",
+    "avatar_title": "آواتار شما",
+    "avatar_description": "فرمت JPG و حداکثر طول و عرض 800 پیکسل",
+    "avatar_size_too_large":"حجم عکس زیاد است و باید کمتر از 100 کیلوبایت باشد."
   },
   "error": {
     "is_required": "{field} الزامی است",
@@ -152,21 +153,21 @@
     "phone_min_limit": "شماره همراه باید از ده رقم بیشتر باشد.",
     "phone_required": "شماره همراه الزامی است.",
     "zipcode_only_number": "کد پستی فقط باید شامل اعداد باشد.",
-    "no_item_found":"چیزی یافت نشد"
+    "no_item_found": "چیزی یافت نشد"
   },
   "notif": {
     "login_successful": "با موفقیت وارد شدید.",
     "register_successful": "ثبت نام با موفقیت انجام شد."
   },
-  "country":{
-    "iri":"ایران",
-    "china":"چیم",
-    "usa":"ایالات متحده آمریکا",
-    "gb":"انگلستان",
-    "germany":"آلمان",
-    "france":"فرانسه",
-    "spain":"اسپانیا",
-    "italy":"ایتالیا",
-    "ukraine":"اوکراین"
+  "country": {
+    "iri": "ایران",
+    "china": "چیم",
+    "usa": "ایالات متحده آمریکا",
+    "gb": "انگلستان",
+    "germany": "آلمان",
+    "france": "فرانسه",
+    "spain": "اسپانیا",
+    "italy": "ایتالیا",
+    "ukraine": "اوکراین"
   }
 }

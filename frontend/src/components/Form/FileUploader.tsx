@@ -12,7 +12,7 @@ type props = {
   accept: string;
   imageURL?: string;
   onChange: (value: FileList | null) => void;
-  onBlur?: (value: string | number) => void;
+  onBlur?: () => void;
   isToched?: boolean;
   errorMessage?: string;
 };
@@ -29,8 +29,10 @@ export default function FileUploader({
   errorMessage,
 }: props) {
   const t = useTranslations("profile");
+  console.log(isToched);
+  console.log(errorMessage);
   return (
-    <div className={`grid ${imageURL ? "md:grid-cols-2" : ""}`}>
+    <div className={"flex flex-col md:flex-row gap-3"}>
       <div className="flex flex-col gap-y-2 text-justify">
         <span className="font-semibold md:text-lg">
           {label || "Your image"}
@@ -53,13 +55,44 @@ export default function FileUploader({
         >
           {t("browse")} <FaUpload size={16} />
         </label>
+        {isToched && errorMessage ? (
+          <span className="text-sm lg:text-base text-red-600 dark:text-red-400">
+            {errorMessage}
+          </span>
+        ) : (
+          ""
+        )}
       </div>
-      {imageURL && (
-        <div className="relative">
-          <Image src={imageURL} alt={name} width={400} height={600}/>
-          <MdDelete size={22} className="duration-300 absolute top-4 rtl:right-4 ltr:left-4 text-darkblue hover:text-dark"/>
-        </div>
-      )}
+      <div
+        className={`"elative border max-w-[133px] max-h-[200px] ${
+          isToched && errorMessage
+            ? "border-red-600 dark:border-red-400 border-2"
+            : isToched && !errorMessage
+            ? "border-green-600 dark:border-green-400 border-2"
+            : !isToched && !errorMessage
+            ? "border-darkblue dark:border-lightblue"
+            : ""
+        }  rounded-2xl overflow-hidden`}
+      >
+        <Image
+          src={imageURL || "/assets/images/default_avatar.png"}
+          alt={imageURL ? name : "default_avatar"}
+          width={400}
+          height={600}
+        />
+        {
+          <button
+            type="button"
+            className="absolute top-4 rtl:right-4 ltr:left-4 p-1 rounded-full bg-white dark:bg-dark"
+            onClick={() => onChange(null)}
+          >
+            <MdDelete
+              size={26}
+              className="duration-300 text-darkblue dark:text-lightblue hover:text-dark dark:hover:bg-white"
+            />
+          </button>
+        }
+      </div>
     </div>
   );
 }

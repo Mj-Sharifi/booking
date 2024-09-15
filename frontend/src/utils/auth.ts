@@ -59,11 +59,14 @@ const validationRules = {
     },
     image: (name: string, supportedFormats: string[], maxSize: number, maxWidth?: number, maxHeight?: number, required = false) => {
         return (yup.lazy(value => {
-            let valid = yup.mixed<File>()
-            if (required || (!required && value.length > 0)) {
-                valid = valid.test('fileSize', 'Image size is too large', (file?: File) => {
+            console.log("image validation", value); let valid = yup.mixed<File>()
+            if (required || (!required && value)) {
+
+                valid = valid.test('fileSize', generateError("size_too_large",name), (file?: File) => {
+                    console.log("test size");
                     return file ? file.size <= maxSize : false;
                 }).test('fileFormat', 'Unsupported file format', (file?: File) => {
+                    console.log("test format");
                     return file ? supportedFormats.includes(file.type) : false;
                 })
                 if (maxWidth && maxHeight) {
@@ -187,4 +190,5 @@ export const userInfoVldSchema = yup.object().shape({
     phone: validationRules.phone(),
     birthday: validationRules.string,
     about: validationRules.string,
+    avatar: validationRules.image("avatar", [".jpg", ".jpeg"], 2 * 1024, 800, 800)
 })
