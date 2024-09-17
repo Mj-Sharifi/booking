@@ -775,12 +775,12 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     lastname: Attribute.String;
     about: Attribute.Text;
     birthday: Attribute.Date;
-    phone: Attribute.Integer;
     address: Attribute.Text;
     zipcode: Attribute.Integer;
     country: Attribute.String;
     city: Attribute.String;
     gender: Attribute.Boolean;
+    phone: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

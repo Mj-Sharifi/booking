@@ -1,3 +1,6 @@
+import axios from "axios";
+import { Cookies } from "react-cookie";
+
 export const defaultLocale = 'en' as const;
 export const locales = ['en', 'fa'] as const;
 export const localeFlag = {
@@ -29,4 +32,20 @@ export const getCookie = (cname: string) => {
     }
   }
   return "";
+}
+export const updateUser = () => {
+  const cookie = new Cookies
+  const user_info = cookie.get("user_info")
+  axios
+    .get(process.env.NEXT_PUBLIC_API + "users/me?populate=*", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user_info.jwt}`,
+      },
+    })
+    .then((res) => {
+      if (res && res.data) {
+        cookie.set("user_info", {...user_info,user:res.data}, { path: "/" })
+      }
+    });
 }

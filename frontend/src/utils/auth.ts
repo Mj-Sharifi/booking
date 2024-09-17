@@ -59,22 +59,22 @@ const validationRules = {
     },
     image: (name: string, supportedFormats: string[], maxSize: number, maxWidth?: number, maxHeight?: number, required = false) => {
         return (yup.lazy(value => {
-            console.log("image validation", value); let valid = yup.mixed<File>()
-            if (required || (!required && value)) {
+            let valid = yup.mixed<File>()
+  
+            if (required || (!required && !!value)) {
+                valid = valid.test('fileSize', generateError("size_too_large", name), (file?: File) => {
 
-                valid = valid.test('fileSize', generateError("size_too_large",name), (file?: File) => {
-                    console.log("test size");
                     return file ? file.size <= maxSize : false;
-                }).test('fileFormat', 'Unsupported file format', (file?: File) => {
-                    console.log("test format");
-                    return file ? supportedFormats.includes(file.type) : false;
+                }).test('fileFormat', generateError("must_be_jpg", name), (file?: File) => {
+
+                    return file ? supportedFormats.includes("." + file?.name?.split(".")[1]) : false;
                 })
                 if (maxWidth && maxHeight) {
-                    valid = valid.test('fileDimensions', 'Image dimensions are too large', (file?: File) => {
+                    valid = valid.test('fileDimensions', generateError("dimension_too_large", name), (file?: File) => {
                         if (!file) return Promise.resolve(false);
 
                         const image = new Image();
-                        const url = URL.createObjectURL(file);
+                        const url = URL?.createObjectURL(file);
 
                         return new Promise<boolean>((resolve) => {
                             image.onload = () => {
@@ -98,7 +98,7 @@ const validationRules = {
             if (required) {
                 valid = valid.required("image_required")
             }
-            return valid
+            return valid.nullable()
         }))
     },
     string: yup.string().trim(),
@@ -190,5 +190,5 @@ export const userInfoVldSchema = yup.object().shape({
     phone: validationRules.phone(),
     birthday: validationRules.string,
     about: validationRules.string,
-    avatar: validationRules.image("avatar", [".jpg", ".jpeg"], 2 * 1024, 800, 800)
+    avatar: validationRules.image("avatar", [".jpg", ".jpeg"], 120 * 1024, 800, 800)
 })

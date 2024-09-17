@@ -85,9 +85,6 @@
     "birthday": {
       "type": "date"
     },
-    "phone": {
-      "type": "integer"
-    },
     "address": {
       "type": "text"
     },
@@ -102,6 +99,9 @@
     },
     "gender": {
       "type": "boolean"
+    },
+    "phone": {
+      "type": "string"
     }
   }
 }

@@ -127,8 +127,8 @@
     "avatar": "آواتار",
     "browse": "جست‌وجو",
     "avatar_title": "آواتار شما",
-    "avatar_description": "فرمت JPG و حداکثر طول و عرض 800 پیکسل",
-    "avatar_size_too_large":"حجم عکس زیاد است و باید کمتر از 100 کیلوبایت باشد."
+    "avatar_description": "فرمت JPG و حداکثر طول و عرض 800 پیکسل"
+    
   },
   "error": {
     "is_required": "{field} الزامی است",
@@ -153,7 +153,10 @@
     "phone_min_limit": "شماره همراه باید از ده رقم بیشتر باشد.",
     "phone_required": "شماره همراه الزامی است.",
     "zipcode_only_number": "کد پستی فقط باید شامل اعداد باشد.",
-    "no_item_found": "چیزی یافت نشد"
+    "no_item_found": "چیزی یافت نشد",
+    "avatar_size_too_large": "حجم عکس زیاد است و باید کمتر از 120 کیلوبایت باشد.",
+    "avatar_must_bg_jpg": "فرمت عکس باید jpg باشد.",
+    "avatar_dimension_too_large": "طول و عرض عکس باید از 800 پیکسل کوچکتر باشد."
   },
   "notif": {
     "login_successful": "با موفقیت وارد شدید.",

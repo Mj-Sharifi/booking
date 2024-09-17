@@ -5,10 +5,13 @@ import { locale } from "@/types/types";
 import { getCookie } from "@/utils/utils";
 import { NextIntlClientProvider } from "next-intl";
 import Image from "next/image";
+import { Cookies } from "react-cookie";
 import { HiHome } from "react-icons/hi2";
 
 export default function NotFoundPage() {
-  const locale = getCookie("NEXT_LOCALE");
+  const cookie = new Cookies();
+  // const locale = getCookie("NEXT_LOCALE");
+  const locale = cookie.get("NEXT_LOCALE");
   const theme = window.localStorage.getItem("theme");
   const dict = {
     oops: {

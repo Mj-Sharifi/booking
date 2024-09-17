@@ -29,8 +29,7 @@ export default function FileUploader({
   errorMessage,
 }: props) {
   const t = useTranslations("profile");
-  console.log(isToched);
-  console.log(errorMessage);
+
   return (
     <div className={"flex flex-col md:flex-row gap-3"}>
       <div className="flex flex-col gap-y-2 text-justify">
@@ -64,7 +63,7 @@ export default function FileUploader({
         )}
       </div>
       <div
-        className={`"elative border max-w-[133px] max-h-[200px] ${
+        className={`relative border max-w-[133px] max-h-[200px] ${
           isToched && errorMessage
             ? "border-red-600 dark:border-red-400 border-2"
             : isToched && !errorMessage
@@ -83,8 +82,10 @@ export default function FileUploader({
         {
           <button
             type="button"
-            className="absolute top-4 rtl:right-4 ltr:left-4 p-1 rounded-full bg-white dark:bg-dark"
-            onClick={() => onChange(null)}
+            className="absolute top-2 rtl:right-2 ltr:left-2 p-1 rounded-full bg-white dark:bg-dark z-[2]"
+            onClick={() => onChange(null)
+              
+            }
           >
             <MdDelete
               size={26}

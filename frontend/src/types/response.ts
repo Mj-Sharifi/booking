@@ -8,26 +8,27 @@ export type locationData = {
     updatedAt: string;
   };
 };
-export type imageData = {
+export type imageAttributes = {
+  alternativeText: null;
+  caption: null;
+  createdAt: string;
+  ext: string;
+  formats: null;
+  hash: string;
+  height: 512;
+  mime: string;
+  name: string;
+  previewUrl: null;
+  provider: string;
+  provider_metadata: null;
+  size: number;
+  updatedAt: string;
+  url: string;
+  width: number;
+}
+type imageData = {
   id: number;
-  attributes: {
-    alternativeText: null;
-    caption: null;
-    createdAt: string;
-    ext: string;
-    formats: null;
-    hash: string;
-    height: 512;
-    mime: string;
-    name: string;
-    previewUrl: null;
-    provider: string;
-    provider_metadata: null;
-    size: number;
-    updatedAt: string;
-    url: string;
-    width: number;
-  };
+  attributes: imageAttributes
 };
 export type tourData = {
   id: number;
@@ -106,17 +107,25 @@ export type registerResponce = {
   }
 }
 export type userInfo = {
-  jwt:string;
-  user:{
-    username:string;
-    firstname:string;
-    lastname:string;
-    address:string;
-    city:string
-    country:string
-    phone:string
-    email:string
-    birthday:string
-    gender:boolean
+  jwt: string;
+  user: {
+    id:number
+    blocked:boolean
+    confirmed:boolean
+    username: string;
+    firstname: string;
+    lastname: string;
+    address: string;
+    city: string
+    country: string
+    phone: string
+    email: string
+    birthday: string
+    gender: boolean
+    about: string
+    avatar: imageAttributes & {id:number}
+    provider: string
+    createdAt:string
+    updatedAt: string
   }
 }

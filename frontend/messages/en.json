@@ -125,10 +125,9 @@
     "birthday": "Birthday",
     "about_yourself": "About yourself",
     "avatar": "Avatar",
-    "browse":"Browse",
-    "avatar_title":"Your avatar",
-    "avatar_description":"JPG no bigger than 800px wide and tall."
-
+    "browse": "Browse",
+    "avatar_title": "Your avatar",
+    "avatar_description": "JPG no bigger than 800px wide and tall."
   },
   "error": {
     "is_required": "{field} is required",
@@ -153,7 +152,10 @@
     "phone_min_limit": "Phone number must be more than 10 digits.",
     "phone_required": "Phone number is requires.",
     "zipcode_only_number": "ZIP Code must only contain numbers.",
-    "no_item_found":"No item found"
+    "no_item_found": "No item found",
+    "avatar_size_too_large": "The size of the image is large and must be less than 120 KB.",
+    "avatar_must_bg_jpg": "The image format must be jpg.",
+    "avatar_dimension_too_large": "The height and width of the photo must be smaller than 800 pixels."
   },
   "notif": {
     "login_successful": "You have logged in successfully",

@@ -3,6 +3,7 @@ import Select from "@/components/Form/Select";
 import TextInput from "@/components/Form/TextInput";
 import { userLocationVldSchema } from "@/utils/auth";
 import { countries } from "@/utils/location";
+import { updateUser } from "@/utils/utils";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import { useTranslations } from "next-intl";
@@ -16,7 +17,7 @@ import { FaLocationDot } from "react-icons/fa6";
 export default function page() {
   const { locale } = useParams();
   const t = useTranslations();
-  const [{ user_info }, setUserInfo, _, updateUserInfo] = useCookies(["user_info"]);
+  const [{ user_info }] = useCookies(["user_info"]);
   return (
     <Formik
       initialValues={{
@@ -31,9 +32,9 @@ export default function page() {
           .put(
             process.env.NEXT_PUBLIC_API + `users/${user_info?.user?.id}`,
             {
-              address: e.address,
+              address: e.address||null,
               city: e.city || null,
-              country: e.country || "",
+              country: e.country || null,
               zipcode: e.zipcode || null,
             },
             {
@@ -45,8 +46,7 @@ export default function page() {
           )
           .then((res) => {
             if (res && res.data) {
-
-              setUserInfo("user_info",{ ...userInfo, user: res.data },{path:"/"});
+              updateUser();
             }
           })
           .catch((err) => console.log(err));
