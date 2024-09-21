@@ -24,7 +24,7 @@ export default function Login() {
         validationSchema={loginVldSchema}
         onSubmit={(e) =>
           axios
-            .post(process.env.NEXT_PUBLIC_API + "auth/local?locale=fa", {
+            .post(process.env.NEXT_PUBLIC_API + "auth/local?populate=*&locale=fa", {
               identifier: e.email,
               password: e.password,
             })

@@ -57,25 +57,72 @@ const validationRules = {
         })
 
     },
-    image: (name: string, supportedFormats: string[], maxSize: number, maxWidth?: number, maxHeight?: number, required = false) => {
-        return (yup.lazy(value => {
-            let valid = yup.mixed<File>()
+    // image: (name: string, supportedFormats: string[], maxSize: number, maxWidth?: number, maxHeight?: number, required = false) => {
+    //     return (yup.lazy(value => {
+    //         let valid = yup.mixed<File>()
   
+    //         if (required || (!required && !!value)) {
+    //             valid = valid.test('fileSize', generateError("size_too_large", name), (file?: File) => {
+
+    //                 return file ? file.size <= maxSize : false;
+    //             }).test('fileFormat', generateError("must_be_jpg", name), (file?: File) => {
+
+    //                 return file ? supportedFormats.includes("." + file?.name?.split(".")[1]) : false;
+    //             })
+    //             if (maxWidth && maxHeight) {
+    //                 valid = valid.test('fileDimensions', generateError("dimension_too_large", name), (file?: File) => {
+    //                     if (!file) return Promise.resolve(false);
+
+    //                     const image = new Image();
+    //                     const url = URL?.createObjectURL(file);
+
+    //                     return new Promise<boolean>((resolve) => {
+    //                         image.onload = () => {
+    //                             URL.revokeObjectURL(url);
+    //                             // Check if dimensions are valid
+    //                             if (image.width <= maxWidth && image.height <= maxHeight) {
+    //                                 resolve(true);
+    //                             } else {
+    //                                 resolve(false);
+    //                             }
+    //                         };
+    //                         image.onerror = () => {
+    //                             URL.revokeObjectURL(url);
+    //                             resolve(false); // reject invalid images
+    //                         };
+    //                         image.src = url;
+    //                     });
+    //                 })
+    //             }
+    //         }
+    //         if (required) {
+    //             valid = valid.required("image_required")
+    //         }
+    //         return valid
+    //     }))
+    // },
+    image: (name: string, supportedFormats: string[], maxSize: number, maxWidth?: number, maxHeight?: number, required = false) => {
+        return yup.lazy(value => {
+            let valid = yup.mixed<File>().nullable();
+    
             if (required || (!required && !!value)) {
-                valid = valid.test('fileSize', generateError("size_too_large", name), (file?: File) => {
-
-                    return file ? file.size <= maxSize : false;
-                }).test('fileFormat', generateError("must_be_jpg", name), (file?: File) => {
-
-                    return file ? supportedFormats.includes("." + file?.name?.split(".")[1]) : false;
-                })
+                valid = valid
+                    .test('fileSize', generateError("size_too_large", name), (file?: File|null) => {
+                        if (!file) return !required; // Allow null/undefined when not required
+                        return file.size <= maxSize;
+                    })
+                    .test('fileFormat', generateError("must_be_jpg", name), (file?: File|null) => {
+                        if (!file) return !required; // Allow null/undefined when not required
+                        return supportedFormats.includes("." + file?.name?.split(".")[1]);
+                    });
+    
                 if (maxWidth && maxHeight) {
-                    valid = valid.test('fileDimensions', generateError("dimension_too_large", name), (file?: File) => {
-                        if (!file) return Promise.resolve(false);
-
+                    valid = valid.test('fileDimensions', generateError("dimension_too_large", name), (file?: File|null) => {
+                        if (!file) return !required; // Allow null/undefined when not required
+    
                         const image = new Image();
                         const url = URL?.createObjectURL(file);
-
+    
                         return new Promise<boolean>((resolve) => {
                             image.onload = () => {
                                 URL.revokeObjectURL(url);
@@ -92,14 +139,16 @@ const validationRules = {
                             };
                             image.src = url;
                         });
-                    })
+                    });
                 }
             }
+    
             if (required) {
-                valid = valid.required("image_required")
+                valid = valid.required("image_required");
             }
-            return valid.nullable()
-        }))
+    
+            return valid.nullable(); // Allow null values when not required
+        });
     },
     string: yup.string().trim(),
     number: (name?: string, required = false) => {

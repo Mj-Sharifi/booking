@@ -17,16 +17,17 @@ export default function page() {
   const [{ user_info }] = useCookies<"user_info", { user_info: userInfo }>([
     "user_info",
   ]);
-  console.log("usr_info: ", user_info?.user);
+  console.log("user_info: ", user_info?.user);
   return (
     <Formik
       initialValues={{
-        avatar:
-          ((process.env.NEXT_PUBLIC_URL +
-            user_info?.user?.avatar.url) as string) || "",
+        avatar: user_info?.user?.avatar
+          ? ((process.env.NEXT_PUBLIC_URL +
+              user_info?.user?.avatar?.url) as string)
+          : "",
         username: (user_info?.user?.username as string) || "",
         firstname: (user_info?.user?.firstname as string) || "",
-        lastname: (user_info?.user.lastname as string) || "",
+        lastname: (user_info?.user?.lastname as string) || "",
         email: (user_info?.user?.email as string) || "",
         phone: (user_info?.user?.phone as string) || "",
         birthday: (user_info?.user?.birthday as string) || "",
@@ -133,7 +134,7 @@ export default function page() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-10 md:gap-y-8 w-full">
             <FileUploader
-              id={`${user_info.user.avatar.id}`}
+              id={`${user_info?.user?.avatar?.id || ""}`}
               name="avatar"
               accept=".jpg, .jpeg"
               label={t("profile.avatar_title")}
