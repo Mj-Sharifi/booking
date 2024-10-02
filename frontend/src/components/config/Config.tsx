@@ -17,7 +17,7 @@ export default function Config() {
         document.body.classList.remove("dark");
       }
     }
-  }, [localStorage.getItem("theme")]);
+  }, [`${typeof localStorage !== "undefined"+"-"+localStorage?.getItem("theme")}`]);
 
   return <></>;
 }

@@ -1,5 +1,4 @@
 "use client";
-import AccordionContainer from "@/components/Accordion/AccordionContainer";
 import NavigationLink from "@/components/link/NavigationLink";
 import WhyLocalExpert from "@/components/WhyLocalExpert";
 import { useTranslations } from "next-intl";

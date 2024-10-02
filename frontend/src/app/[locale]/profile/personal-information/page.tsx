@@ -8,7 +8,7 @@ import { updateUser } from "@/utils/utils";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { FaClipboardUser } from "react-icons/fa6";
 
@@ -17,7 +17,18 @@ export default function page() {
   const [{ user_info }] = useCookies<"user_info", { user_info: userInfo }>([
     "user_info",
   ]);
-  console.log("user_info: ", user_info?.user);
+  useEffect(() => {
+    axios
+      .get(process.env.NEXT_PUBLIC_API + "users/me?populate=*", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user_info.jwt}`,
+        },
+      })
+      // .then((res) => console.log(res.data));
+  }, [user_info]);
+
+  // console.log("user_info: ", user_info?.user);
   return (
     <Formik
       initialValues={{

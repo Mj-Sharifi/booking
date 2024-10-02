@@ -29,7 +29,7 @@ export default function FileUploader({
   errorMessage,
 }: props) {
   const t = useTranslations("profile");
-  console.log("imgurl: ",imageURL);
+  // console.log("imgurl: ",imageURL);
   return (
     <div className={"flex flex-col md:flex-row gap-3"}>
       <div className="flex flex-col gap-y-2 text-justify">
