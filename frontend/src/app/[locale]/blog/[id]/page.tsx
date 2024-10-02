@@ -1,6 +1,11 @@
 "use client";
 import { blogData } from "@/types/response";
-import { locale } from "@/types/types";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+} from "react-icons/fa";
 import axios from "axios";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -8,7 +13,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function page() {
-  const t = useTranslations("blog");
+  const t = useTranslations();
   const { locale, id } = useParams();
   const [post, setPost] = useState<blogData>();
   useEffect(() => {
@@ -49,11 +54,16 @@ export default function page() {
             <h4 className="font-semibold text-sm sm:text-base lg:text-xl">
               What makes a good brand book?
             </h4>
-            <p className="text-justify text-xs sm:text-sm lg:text-lg my-4">
-              {t("p1")}
+            <p className="text-justify text-xs sm:text-sm lg:text-base my-4">
+              {t("blog.p1")}
             </p>
             <ul className="list-disc">
-              <li>
+              {Array(4)
+                .fill(true)
+                .map((_, i) => (
+                  <li>{t("common.lorem_ipsum_short")}</li>
+                ))}
+              {/* <li>
                 Sed viverra ipsum nunc aliquet bibendum enim facilisis gravida.
               </li>
               <li>
@@ -63,7 +73,7 @@ export default function page() {
               <li>Magna etiam tempor orci eu lobortis elementum.</li>
               <li>
                 Bibendum est ultricies integer quis. Semper eget duis at tellus.
-              </li>
+              </li> */}
             </ul>
             <div className="ltr:border-l-4 rtl:border-r-4 border-darkblue dark:border-lightblue flex gap-2 px-2 mx-2 md:mx-4 my-4">
               <Image
@@ -73,34 +83,88 @@ export default function page() {
                 height={60}
                 className="scale-90 md:scale-100"
               />
-              <p className="italic font-bold text-sm sm:text-base lg:text-xl">
-                “{t("p1")}“
+              <p className="italic font-bold text-sm sm:text-base lg:text-lg">
+                “{t("blog.p1")}“
               </p>
             </div>
-            <p className=" text-xs sm:text-sm lg:text-lg my-4">{t("p2")}</p>
-            <p className="text-justify text-xs sm:text-sm lg:text-lg mb-4">
-              {t("p3")}
+            <p className=" text-xs sm:text-sm lg:text-base my-4">
+              {t("blog.p2")}
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-4">
+            <p className="text-justify text-xs sm:text-sm lg:text-base mb-4">
+              {t("blog.p3")}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-4 lg:gap-4">
               {new Array(2).fill(2).map((e, i) => (
                 <div className="col-span-1">
                   <Image
-                    src={`/assets/images/blog/blog-${i+1}.jpg`}
-                    alt={`img1${i+1}`}
+                    src={`/assets/images/blog/blog-${i + 1}.jpg`}
+                    alt={`img1${i + 1}`}
                     width={410}
                     height={350}
+                    className="mx-auto"
                   />
-                  <span className="block text-center text-light dark:text-lighter">{t("caption")}</span>
+                  <span className="block text-center text-light dark:text-lighter text-xs md:text-sm mt-1">
+                    {t("blog.caption")}
+                  </span>
                 </div>
               ))}
-
             </div>
-            <p className=" text-xs sm:text-sm lg:text-lg my-4">
-             {t("p2")}
+            <p className=" text-xs sm:text-sm lg:text-base my-4">
+              {t("blog.p2")}
             </p>
-            <p className=" text-xs sm:text-sm lg:text-lg mb-4">
-            {t("p3")}
+            <p className=" text-xs sm:text-sm lg:text-base mb-4">
+              {t("blog.p3")}
             </p>
+            <div className="flex justify-between flex-col md:flex-row gap-y-3 my-6 md:my-12">
+              <div className="flex gap-4">
+                <span>{t("blog.share")}</span>
+                <button
+                  type="button"
+                  className="duration-300 p-1 rounded-full hover:bg-darkblue hover:text-white dark:hover:bg-lightblue dark:hover:text-dark"
+                >
+                  <FaFacebookF size={20} />
+                </button>
+                <button
+                  type="button"
+                  className="duration-300 p-1 rounded-full hover:bg-darkblue hover:text-white dark:hover:bg-lightblue dark:hover:text-dark"
+                >
+                  <FaTwitter size={20} />
+                </button>
+                <button
+                  type="button"
+                  className="duration-300 p-1 rounded-full hover:bg-darkblue hover:text-white dark:hover:bg-lightblue dark:hover:text-dark"
+                >
+                  <FaInstagram size={20} />
+                </button>
+                <button
+                  type="button"
+                  className="duration-300 p-1 rounded-full hover:bg-darkblue hover:text-white dark:hover:bg-lightblue dark:hover:text-dark"
+                >
+                  <FaLinkedin size={20} />
+                </button>
+              </div>
+              <div className="flex  gap-2 ">
+                <span className="dark:bg-lightblue dark:text-dark bg-darkblue text-white hover: px-2 py-1 rounded-full text-xs md:text-sm cursor-pointer font-semibold">
+                  {t("blog.family_holidays")}
+                </span>
+                <span className="dark:bg-lightblue dark:text-dark bg-darkblue text-white hover: px-2 py-1 rounded-full text-xs md:text-sm cursor-pointer font-semibold">
+                  {t("blog.beaches")}
+                </span>
+              </div>
+            </div>
+            <div className="border-t border-b border-light dark:border-lighter flex flex-col items-center md:flex-row gap-4 md:items-start py-4">
+              <Image
+                src="/assets/images/blog/author.png"
+                alt="author_avatar"
+                height={70}
+                width={70}
+              />
+              <div className="flex flex-col items-center md:items-start gap-1 text-xs sm:text-sm lg:text-base">
+                <h3 className="font-semibold">Brooklyn Simmons</h3>
+                <h5 className="text-light dark:text-lighter">{t("blog.content_creator")}</h5>
+                <p className="mt-2">{t("common.lorem_ipsum_long")}</p>
+              </div>
+            </div>
           </div>
         </>
       )}
