@@ -2,7 +2,7 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-import Slider from "@/components/Slider";
+// import Slider from "@/components/Slider";
 import { favoriteSVG } from "@/utils/svg";
 
 // Import Swiper
@@ -54,7 +54,7 @@ export default function PopularTours() {
       {t("common.lorem_ipsum_short")}
       </p>
       <div className="w-full" ref={popularTourDiv}>
-        {popularTours && (
+        {/* {popularTours && (
           <Slider
             number={popularTours.length}
             swiperParam={{
@@ -124,7 +124,7 @@ export default function PopularTours() {
               </SwiperSlide>
             ))}
           </Slider>
-        )}
+        )} */}
       </div>
     </div>
   );

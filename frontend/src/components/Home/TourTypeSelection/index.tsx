@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import Slider from "@/components/Slider";
+// import Slider from "@/components/Slider";
 import { SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -44,7 +44,7 @@ export default function TourTypeSelection() {
       {t("common.lorem_ipsum_short")}
       </p>
       <div className="w-full" ref={tourCategoryDiv}>
-        {tourCategories && (
+        {/* {tourCategories && (
           <Slider
             number={tourCategories.length}
             swiperParam={{
@@ -86,7 +86,7 @@ export default function TourTypeSelection() {
               </SwiperSlide>
             ))}
           </Slider>
-        )}
+        )} */}
       </div>
     </section>
   );

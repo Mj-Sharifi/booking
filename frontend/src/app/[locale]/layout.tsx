@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "@/Styles/global.css";
-import Footer from "@/components/Footer";
+// import Footer from "@/components/Footer";
 // i18n
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { getLangDir } from "rtl-detect";
 import Config from "@/components/config/Config";
-import Navbar from "@/components/Navbar";
+// import Navbar from "@/components/Navbar";
 import Notification from "@/components/Notification";
 
 export const metadata: Metadata = {
@@ -29,9 +29,9 @@ export default async function RootLayout({
     <html lang={locale} dir={direction}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <Navbar />
+          {/* <Navbar /> */}
           <main>{children}</main>
-          <Footer locale={locale as "en" | "fa"} />
+          {/* <Footer locale={locale as "en" | "fa"} /> */}
         </NextIntlClientProvider>
         <Notification />
       </body>

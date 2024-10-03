@@ -11,6 +11,8 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
+import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
 export default function page() {
   const t = useTranslations();
@@ -63,17 +65,6 @@ export default function page() {
                 .map((_, i) => (
                   <li>{t("common.lorem_ipsum_short")}</li>
                 ))}
-              {/* <li>
-                Sed viverra ipsum nunc aliquet bibendum enim facilisis gravida.
-              </li>
-              <li>
-                At urna condimentum mattis pellentesque id nibh. Laoreet non
-                curabitur
-              </li>
-              <li>Magna etiam tempor orci eu lobortis elementum.</li>
-              <li>
-                Bibendum est ultricies integer quis. Semper eget duis at tellus.
-              </li> */}
             </ul>
             <div className="ltr:border-l-4 rtl:border-r-4 border-darkblue dark:border-lightblue flex gap-2 px-2 mx-2 md:mx-4 my-4">
               <Image
@@ -161,9 +152,127 @@ export default function page() {
               />
               <div className="flex flex-col items-center md:items-start gap-1 text-xs sm:text-sm lg:text-base">
                 <h3 className="font-semibold">Brooklyn Simmons</h3>
-                <h5 className="text-light dark:text-lighter">{t("blog.content_creator")}</h5>
+                <h5 className="text-light dark:text-lighter">
+                  {t("blog.content_creator")}
+                </h5>
                 <p className="mt-2">{t("common.lorem_ipsum_long")}</p>
               </div>
+            </div>
+            <div className="flex justify-between py-4 border-b border-light dark:border-lighter">
+              <button type="button" className="flex gap-2 items-center group">
+                <HiArrowLeft
+                  size={18}
+                  className="duration-300 group-hover:-translate-x-1 rtl:rotate-180 rtl:group-hover:translate-x-1"
+                />
+                {t("blog.prev")}
+              </button>
+              <Image
+                src="/assets/images/blog/menu.svg"
+                alt="blog_menu"
+                width={20}
+                height={20}
+              />
+              <button type="button" className="flex gap-2 items-center group">
+                {t("blog.next")}
+                <HiArrowRight
+                  size={18}
+                  className="duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                />
+              </button>
+            </div>
+            {/* Guest Reviews */}
+            <div className="flex flex-col gap-y-10 py-4  border-b border-light dark:border-lighter">
+              <h4 className="md:text-lg font-semibold">
+                {t("blog.geust_reviews")}
+              </h4>
+              {/* Card */}
+              {Array(2)
+                .fill(true)
+                .map((_, i) => (
+                  <div key={i} className="flex flex-col gap-4">
+                    <div className="flex gap-4">
+                      <Image
+                        src={"/assets/images/blog/reviewer.png"}
+                        alt="reviewer"
+                        width={60}
+                        height={60}
+                      />
+                      <div className="flex flex-col gap-1">
+                        <span className="text-sm md:text-base">Tonko</span>
+                        <span className="text-light dark:text-lighter text-xs md:text-sm">
+                          {new Intl.DateTimeFormat(locale, {
+                            dateStyle: "medium",
+                          }).format(new Date("2022-02-15"))}
+                        </span>
+                      </div>
+                    </div>
+                    <h4 className="font-semibold md:text-lg text-darkblue dark:text-lightblue">
+                      9.2 {t("blog.superb")}
+                    </h4>
+                    <p className="text-sm md:text-base">
+                      {t("common.lorem_ipsum_long")}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {Array(4)
+                        .fill(true)
+                        .map((_, i) => (
+                          <Image
+                            key={i}
+                            src={`/assets/images/blog/review_${i + 1}.png`}
+                            alt="review_image"
+                            height={100}
+                            width={100}
+                            className="rounded-md"
+                          />
+                        ))}
+                    </div>
+                    <div className="flex gap-5">
+                      <button
+                        type="button"
+                        className="text-sm md:text-base flex gap-2 items-center text-darkblue dark:text-lightblue"
+                      >
+                        {t("blog.helpful")}
+                        <AiFillLike size={22} />{" "}
+                      </button>
+                      <button
+                        type="button"
+                        className="text-sm md:text-base flex gap-2 items-center text-light dark:text-lighter"
+                      >
+                        {t("blog.not_helpful")}
+                        <AiFillDislike size={22} />{" "}
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              <button
+                type="button"
+                className="duration-300 flex w-fit gap-2 rounded-md mt-2 py-2 px-3 border-2 border-darkblue dark:border-lightblue text-darkblue hover:text-white hover:bg-darkblue dark:text-lightblue dark:hover:text-dark dark:hover:bg-lightblue"
+              >
+                {t("blog.show_reviews")}
+                <HiArrowRight
+                  className="-rotate-45 rtl:rotate-[-135deg]"
+                  size={24}
+                />
+              </button>
+            </div>
+            {/* Reply */}
+            <div className="flex flex-col gap-6 py-4">
+              <h4 className="md:text-lg font-semibold">
+                {t("blog.reply")}
+              </h4>
+              <h6 className="text-xs md:text-sm text-light dark:text-lighter">
+                {t("blog.email_not_show")}
+              </h6>
+              <button
+                type="button"
+                className="duration-300 flex w-fit gap-2 rounded-md mt-2 py-2 px-3 border-2 border-darkblue bg-darkblue hover:border-dark hover:bg-dark text-white dark:bg-light-blue dark:hover:border-white dark:hover:bg-white dark:text-dark"
+              >
+                {t("blog.post_comment")}
+                <HiArrowRight
+                  className="-rotate-45 rtl:rotate-[-135deg]"
+                  size={24}
+                />
+              </button>
             </div>
           </div>
         </>

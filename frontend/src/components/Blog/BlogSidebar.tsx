@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useEffect, ChangeEventHandler } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import CheckboxInput from "@/components/Form/CheckboxInput";
+// import CheckboxInput from "@/components/Form/CheckboxInput";
 import Link from "next/link";
 import { blogCategoryData, blogData } from "@/types/response";
 import { useParams } from "next/navigation";
@@ -36,17 +36,17 @@ export default function BlogSidebar({ handleCategory, category }: props) {
           <span className="font-semibold md:text-lg">{t("common.categories")}</span>
           {allCategories && (
             <ul className="mt-2">
-              <li>
+              {/* <li>
                 <CheckboxInput
                   onChange={() => handleCategory("all")}
                   value={"all"}
                   checked={category.length === 1 && category[0] === ""}
                   label={t("common.all_categories")}
                 />
-              </li>
+              </li> */}
               {allCategories?.map((e) => (
                 <li key={e.id}>
-                  <CheckboxInput
+                  {/* <CheckboxInput
                     onChange={() =>
                       handleCategory(e.attributes.title.toLowerCase())
                     }
@@ -55,7 +55,7 @@ export default function BlogSidebar({ handleCategory, category }: props) {
                       e.attributes.title.toLowerCase()
                     )}
                     label={e.attributes.title}
-                  />
+                  /> */}
                 </li>
               ))}
             </ul>

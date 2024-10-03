@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 //Slider
-import Slider from "../../Slider";
+// import Slider from "../../Slider";
 import { SwiperSlide } from "swiper/react";
 import { testimonyData } from "@/types/response";
 import { useParams } from "next/navigation";
@@ -60,7 +60,7 @@ export default function Testimony() {
         <p className="text-light dark:text-lighter text-center text-">
           {t("common.lorem_ipsum_short")}
         </p>
-        {testimonies && (
+        {/* {testimonies && (
           <Slider
             number={testimonies?.length}
             swiperParam={{ slidesPerView: 1 }}
@@ -93,7 +93,7 @@ export default function Testimony() {
               </SwiperSlide>
             ))}
           </Slider>
-        )}
+        )} */}
       </div>
     </section>
   );
