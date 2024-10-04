@@ -13,10 +13,14 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
+import TextInput from "@/components/Form/TextInput";
+import TextAreaInput from "@/components/Form/TextAreaInput";
+import { Link, useRouter } from "@/navigation";
 
 export default function page() {
   const t = useTranslations();
   const { locale, id } = useParams();
+  const router = useRouter();
   const [post, setPost] = useState<blogData>();
   useEffect(() => {
     axios
@@ -29,7 +33,7 @@ export default function page() {
         }
       });
   }, []);
-
+  console.log(post);
   return (
     <>
       {post && (
@@ -135,12 +139,17 @@ export default function page() {
                 </button>
               </div>
               <div className="flex  gap-2 ">
-                <span className="dark:bg-lightblue dark:text-dark bg-darkblue text-white hover: px-2 py-1 rounded-full text-xs md:text-sm cursor-pointer font-semibold">
-                  {t("blog.family_holidays")}
-                </span>
-                <span className="dark:bg-lightblue dark:text-dark bg-darkblue text-white hover: px-2 py-1 rounded-full text-xs md:text-sm cursor-pointer font-semibold">
-                  {t("blog.beaches")}
-                </span>
+                {post.attributes.blog_categories.data.map((e, i) => (
+                  <Link
+                    key={i}
+                    // @ts-ignore
+                    href={`/blog?category=${e.attributes.title}`}
+                    className="dark:bg-lightblue dark:text-dark bg-darkblue text-white hover: px-2 py-1 rounded-full text-xs md:text-sm font-semibold"
+                  >
+                    {/* {t("blog.family_holidays")} */}
+                    {e.attributes.title}
+                  </Link>
+                ))}
               </div>
             </div>
             <div className="border-t border-b border-light dark:border-lighter flex flex-col items-center md:flex-row gap-4 md:items-start py-4">
@@ -257,12 +266,24 @@ export default function page() {
             </div>
             {/* Reply */}
             <div className="flex flex-col gap-6 py-4">
-              <h4 className="md:text-lg font-semibold">
-                {t("blog.reply")}
-              </h4>
+              <h4 className="md:text-lg font-semibold">{t("blog.reply")}</h4>
               <h6 className="text-xs md:text-sm text-light dark:text-lighter">
                 {t("blog.email_not_show")}
               </h6>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="">
+                  <TextInput name="name" label={t("blog.your_display_name")} />
+                </div>
+                <div className="">
+                  <TextInput name="email" label={t("footer.your_email")} />
+                </div>
+                <div className="col-span-2">
+                  <TextAreaInput
+                    name={"comment"}
+                    label={t("blog.write_comment")}
+                  />
+                </div>
+              </div>
               <button
                 type="button"
                 className="duration-300 flex w-fit gap-2 rounded-md mt-2 py-2 px-3 border-2 border-darkblue bg-darkblue hover:border-dark hover:bg-dark text-white dark:bg-light-blue dark:hover:border-white dark:hover:bg-white dark:text-dark"

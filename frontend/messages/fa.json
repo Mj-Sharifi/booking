@@ -57,7 +57,10 @@
     "show_reviews":"نشان دادن همه نظرات",
     "reply":"نظر بدهید",
     "email_not_show": "ایمیل شما نمایش داده نمی‌شود.",
-    "post_comment":"ثبت نظر"
+    "post_comment":"ثبت نظر",
+    "your_display_name":"نام نمایشی شما",
+    "write_comment":"نظر خود را بنویسید"
+
   },
   "tour": {
     "tours": "تور",

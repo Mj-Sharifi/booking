@@ -83,7 +83,7 @@ export type blogCategoryData = {
 export type blogData = {
   id: number;
   attributes: {
-    blog_categories: { data: { id: number; attributes: blogCategoryData } };
+    blog_categories: { data: blogCategoryData[] };
     createdAt: string;
     image: { data: imageData };
     publishedAt: string;

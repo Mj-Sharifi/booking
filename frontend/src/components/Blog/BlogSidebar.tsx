@@ -40,7 +40,7 @@ export default function BlogSidebar({ handleCategory, category }: props) {
                 <CheckboxInput
                   onChange={() => handleCategory("all")}
                   value={"all"}
-                  checked={category.length === 1 && category[0] === ""}
+                  checked={category.length === 0}
                   label={t("common.all_categories")}
                 />
               </li> */}

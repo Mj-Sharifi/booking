@@ -4,10 +4,10 @@ import React, { ChangeEvent, useState } from "react";
 import { FaEye } from "react-icons/fa6";
 
 type props = {
-  name: string;
+  name?: string;
   label: string;
-  value: string;
-  onChange: (e: string) => void;
+  value?: string;
+  onChange?: (e: string) => void;
   onBlur?: Function;
   onFocus?: Function;
   type?: "password" | "email" | "text" | "number";
@@ -31,7 +31,9 @@ export default function TextInput({
     <div
       className={`duration-300 relative rounded-md w-full ${
         focus
-          ? `border border-dark dark:border-white ${!touched?"outline outline-1 outline-dark":""}`
+          ? `border border-dark dark:border-white ${
+              !touched ? "outline outline-1 outline-dark" : ""
+            }`
           : "border border-light dark:border-lighter"
       } ${
         touched
@@ -40,7 +42,6 @@ export default function TextInput({
             : "!border-green-600 dark:!border-green-400 !border-2 outline-none"
           : ""
       }`}
-
     >
       <input
         name={name}
@@ -58,10 +59,12 @@ export default function TextInput({
           onBlur && onBlur();
         }}
         onChange={(e) => {
-          if (type == "number") {
-            onChange(onlyNumbers(e.target.value));
-          } else {
-            onChange(e.target.value);
+          if (onChange) {
+            if (type == "number") {
+              onChange(onlyNumbers(e.target.value));
+            } else {
+              onChange(e.target.value);
+            }
           }
         }}
       />

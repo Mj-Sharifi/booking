@@ -5,18 +5,19 @@ import BlogSidebar from "../../../components/Blog/BlogSidebar";
 import axios from "axios";
 import PostCard from "../../../components/Blog/PostCard";
 import { blogData } from "@/types/response";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 export default function Blog() {
   const { locale } = useParams();
   const [blog, setBlog] = useState<blogData[]>();
   const t =useTranslations()
+  const searchParams = useSearchParams()
   // Handle Category
-  const [category, setCategory] = useState<string[]>([""]);
+  const [category, setCategory] = useState<string[]>([]);
   const handleCategory = (c: string) => {
     if (c == "all") {
-      setCategory([""]);
+      setCategory([]);
     } else if (category.includes(c)) {
       const newList = category.filter((e) => {
         return !(e == c);
@@ -27,16 +28,21 @@ export default function Blog() {
     }
   };
   useEffect(() => {
+    window.history.pushState(
+      {},
+      "",
+      window.location.pathname +
+        `${category.length?`?category=${category.join(",")}`:""}`
+    );
     const filterQuery = () => {
       const categoryQuery: string[] =
-        category.length > 1
+        category.length > 0
           ? category.map((e, i) =>
               i > 0 ? `&filters[blog_categories][title][$contains]=${e}` : ""
             )
           : [""];
       return categoryQuery.join("");
     };
-
     axios
       .get(
         process.env.NEXT_PUBLIC_API +
@@ -45,7 +51,6 @@ export default function Blog() {
       .then((res) => setBlog(res.data.data));
   }, [category]);
 
-  console.log(blog);
   return (
     <>
       <h3 className="text-center font-semibold text-lg sm:text-xl lg:text-2xl xl:text-3xl">{t("blog.travel_articles")}</h3>

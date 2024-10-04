@@ -57,7 +57,9 @@
     "show_reviews": "Show all reviews",
     "reply": "Leave a Reply",
     "email_not_show": "Your email address will not be published.",
-    "post_comment":"Post comment"
+    "post_comment":"Post comment",
+    "your_display_name":"Your display name",
+    "write_comment":"Write your comment"
   },
   "tour": {
     "tours": "Tours",

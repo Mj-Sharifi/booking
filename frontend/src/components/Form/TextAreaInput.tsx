@@ -4,8 +4,8 @@ import React, { useState } from "react";
 type props = {
   name: string;
   label: string;
-  value: string;
-  onChange: (e: string) => void;
+  value?: string;
+  onChange?: (e: string) => void;
   rows?: number;
   cols?: number;
   onBlur?: Function;
@@ -47,7 +47,7 @@ export default function TextAreaInput({
         dir="auto"
         id={`text-input-id-${label}`}
         value={value}
-        rows={rows||7}
+        rows={rows || 7}
         cols={cols}
         className="w-full h-full border-none outline-none pt-7 pb-2 px-6 bg-transparent focus:!outline-none focus:!ring-0 focus:!border-0 scroller"
         onFocus={() => {
@@ -58,7 +58,7 @@ export default function TextAreaInput({
           setFocus(false);
           onBlur && onBlur();
         }}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange && onChange(e.target.value)}
       />
       <label
         htmlFor={`text-input-id-${label}`}
