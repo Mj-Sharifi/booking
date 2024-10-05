@@ -8,6 +8,8 @@ import { getLangDir } from "rtl-detect";
 import Config from "@/components/config/Config";
 // import Navbar from "@/components/Navbar";
 import Notification from "@/components/Notification";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Tour Booking",
@@ -29,9 +31,9 @@ export default async function RootLayout({
     <html lang={locale} dir={direction}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          {/* <Navbar /> */}
+          <Navbar />
           <main>{children}</main>
-          {/* <Footer locale={locale as "en" | "fa"} /> */}
+          <Footer locale={locale as "en" | "fa"} />
         </NextIntlClientProvider>
         <Notification />
       </body>

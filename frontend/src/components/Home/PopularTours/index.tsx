@@ -2,8 +2,7 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-// import Slider from "@/components/Slider";
-import { favoriteSVG } from "@/utils/svg";
+import Slider from "@/components/Slider";
 
 // Import Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,6 +13,8 @@ import "./style.css";
 import { tourData } from "@/types/response";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import { HiHeart } from "react-icons/hi2";
+import { FaRegHeart } from "react-icons/fa6";
 
 export default function PopularTours() {
   const {locale} = useParams()
@@ -54,7 +55,7 @@ export default function PopularTours() {
       {t("common.lorem_ipsum_short")}
       </p>
       <div className="w-full" ref={popularTourDiv}>
-        {/* {popularTours && (
+        {popularTours && (
           <Slider
             number={popularTours.length}
             swiperParam={{
@@ -117,14 +118,14 @@ export default function PopularTours() {
                       {e?.attributes?.price} {t("footer.usd")}
                     </div>
                     <div className="p-1 rounded-full absolute top-[2%] right-[2%] z-20 duration-300 transition-all text-black hover:text-white bg-white hover:bg-darkblue">
-                      {favoriteSVG("w-5 h-5")}
+                      <FaRegHeart size={16}/>
                     </div>
                   </div>
                 </div>
               </SwiperSlide>
             ))}
           </Slider>
-        )} */}
+        )}
       </div>
     </div>
   );
