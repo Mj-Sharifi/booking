@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { locationData } from "@/types/response";
 import { useParams } from "next/navigation";
+import { HiMagnifyingGlass } from "react-icons/hi2";
 
 const locationSVG = (
   <svg
@@ -169,14 +170,14 @@ export default function Banner() {
             {t("banner.description")}
           </p>
           <div
-            className={`bg-white dark:bg-dark rounded-md w-full xl:w-4/5 max-w-[960px] p-5 flex flex-col lg:flex-row lg:justify-between mt-12 transition-all duration-700 delay-500 ${
+            className={`bg-white dark:bg-dark rounded-md w-full xl:w-4/5 max-w-[960px] p-5 grid grid-cols-1 lg:grid-cols-12 mt-12 transition-all duration-700 delay-500 ${
               startAnimation
                 ? "translate-y-0 opacity-100"
                 : "translate-y-12 opacity-0"
             }`}
           >
             {/* Location */}
-            <div className="flex flex-col gap-2 pb-4 lg:pb-0 lg:pr-8 relative">
+            <div className="lg:col-span-3 flex flex-col gap-2 pb-4 lg:pb-0 lg:pr-8 relative">
               <span className="font-semibold">{t("common.location")}</span>
               <span
                 className="location-selection border-none outline-none text-light dark:text-lighter"
@@ -185,15 +186,15 @@ export default function Banner() {
                 {destination}
               </span>
               <div
-                className={`absolute rounded-sm bg-white shadow-nav p-7 ltr:left-0 rtl:right-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
-                  locationEl ? "visible animate-fadeUp" : "invisible"
+                className={`absolute rounded-sm bg-white shadow-nav p-7 ltr:left-0 rtl:right-0 top-full min-w-80 sm:min-w-96 overflow-hidden ${
+                  locationEl ? "animate-fadeInUp" : "invisible"
                 } z-20`}
               >
                 <ul className="flex flex-col gap-3 max-h-64 md:max-h-96 overflow-y-scroll scroller text-dark">
                   {locations?.map((e) => (
                     <li
                       key={e?.id}
-                      className="flex align-top justify-start gap-2 hover:bg-hoverlight py-2 px-3 transition-all duration-300"
+                      className="flex align-top justify-start gap-2 hover:bg-hoverlight py-2 px-3 transition-colors duration-300"
                       onClick={() => setDestination(e?.attributes.city)}
                     >
                       {locationSVG}
@@ -211,7 +212,7 @@ export default function Banner() {
               </div>
             </div>
             {/* Date Picker */}
-            <div className="flex flex-col gap-2 border-y lg:border-y-0 lg:border-x border-border py-6 lg:py-0 lg:px-12">
+            <div className="lg:col-span-3 flex flex-col gap-2 border-y lg:border-y-0 lg:border-x border-border py-6 lg:py-0 lg:px-8">
               <span className="font-semibold">
                 {t("common.checkin")} - {t("common.checkout")}
               </span>
@@ -227,7 +228,7 @@ export default function Banner() {
               />
             </div>
             {/* Number of Guest */}
-            <div className="flex flex-col gap-2 relative py-4 lg:py-0 lg:px-8">
+            <div className="lg:col-span-4 flex flex-col gap-2 relative py-4 lg:py-0 lg:px-8">
               <span className="font-semibold">{t("common.guest")}</span>
               <span
                 className="guest-selection text-light dark:text-lighter text-sm"
@@ -330,26 +331,15 @@ export default function Banner() {
               </div>
             </div>
             {/* Search Button */}
-            <button
-              type="button"
-              className="w-full lg:w-36 h-16 transition-all duration-300 bg-darkblue hover:bg-dark text-white rounded flexCenter gap-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-5 h-5 text-white"
+            <div className="lg:col-span-2">
+              <button
+                type="button"
+                className="w-full lg:w-36 h-16 transition-all duration-300 bg-darkblue hover:bg-dark text-white rounded flexCenter gap-2"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                />
-              </svg>
-              {t("common.search")}
-            </button>
+                <HiMagnifyingGlass size={20} />
+                {t("common.search")}
+              </button>
+            </div>
           </div>
         </div>
       </div>

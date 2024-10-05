@@ -65,7 +65,11 @@
     "tours": "Tours",
     "most_popular_tours": "Most Popular Tours",
     "choose_tour_type": "Choose Tour Types",
-    "days": "days"
+    "days": "days",
+    "duration":"Duration",
+    "near_public_transportation":"Near public transportation",
+    "free_cancellation":"Free cancellation",
+    "group_size":"Group size"
   },
   "testimony": {
     "customer_review": "Customer reviews"

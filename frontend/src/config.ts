@@ -5,6 +5,7 @@ import { locales } from './utils/utils';
 export const pathnames = {
   '/': '/',
   '/tour': '/tour',
+  '/tour/[id]/[title]':"/tour/[id]/[title]",
   '/blog': `/blog`,
   "/blog/[id]": "/blog/[id]",
   "/login": "/login",

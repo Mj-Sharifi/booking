@@ -12,7 +12,6 @@ export default function Blog() {
   const { locale } = useParams();
   const [blog, setBlog] = useState<blogData[]>();
   const t =useTranslations()
-  const searchParams = useSearchParams()
   // Handle Category
   const [category, setCategory] = useState<string[]>([]);
   const handleCategory = (c: string) => {
@@ -28,17 +27,13 @@ export default function Blog() {
     }
   };
   useEffect(() => {
-    window.history.pushState(
-      {},
-      "",
-      window.location.pathname +
-        `${category.length?`?category=${category.join(",")}`:""}`
-    );
+
     const filterQuery = () => {
+      console.log(category.length);
       const categoryQuery: string[] =
         category.length > 0
-          ? category.map((e, i) =>
-              i > 0 ? `&filters[blog_categories][title][$contains]=${e}` : ""
+          ? category.map((e) =>
+              `&filters[blog_categories][title][$contains]=${e}`
             )
           : [""];
       return categoryQuery.join("");

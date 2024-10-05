@@ -24,9 +24,9 @@ export default function PostCard({ id, release_Date, image, title }: props) {
         pathname: "/blog/[id]",
         params: { id },
       }}
-    >
-      <div className="flex flex-col items-center sm:flex-row gap-4 lg:max-h-60">
-        <div className="rounded-lg overflow-hidden h-full md:min-w-40 lg:min-w-60 aspect-square">
+    > 
+      <div className="flex flex-col items-center sm:flex-row gap-4 lg:max-h-60 overflow-hidden">
+        <div className="rounded-lg overflow-hidden md:min-w-40 lg:min-w-60 aspect-square">
           <Image
             src={process.env.NEXT_PUBLIC_URL + image}
             alt={title}

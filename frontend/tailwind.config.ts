@@ -22,15 +22,14 @@ const config: Config = {
     },
 
     keyframes: {
-      fadeUp: {
-        from: { transform: "translateY(60px)", opacity: "0.2" },
-        to: { transform: "translateY(0)", opacity: "1" },
+      fadeInUp: {
+        from: { transform: "translateY(60px)", opacity: "0.2",visibility:"visible" },
+        to: { transform: "translateY(0)", opacity: "1", },
       },
+
     },
     animation: {
-      fadeUp200: "fadeUp 1s linear 0.2s",
-      fadeUp400: "fadeUp 1s linear 4s",
-      fadeUp600: "fadeUp 1s linear 10s",
+      fadeInUp: "fadeInUp 0.5s linear 0s forwards",
     },
     colors: {
       transparent: "transparent",

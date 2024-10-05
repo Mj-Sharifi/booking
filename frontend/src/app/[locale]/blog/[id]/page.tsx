@@ -17,10 +17,9 @@ import TextInput from "@/components/Form/TextInput";
 import TextAreaInput from "@/components/Form/TextAreaInput";
 import { Link, useRouter } from "@/navigation";
 
-export default function page() {
+export default function SingleBlog() {
   const t = useTranslations();
   const { locale, id } = useParams();
-  const router = useRouter();
   const [post, setPost] = useState<blogData>();
   useEffect(() => {
     axios
@@ -33,7 +32,6 @@ export default function page() {
         }
       });
   }, []);
-  console.log(post);
   return (
     <>
       {post && (
@@ -286,7 +284,7 @@ export default function page() {
               </div>
               <button
                 type="button"
-                className="duration-300 flex w-fit gap-2 rounded-md mt-2 py-2 px-3 border-2 border-darkblue bg-darkblue hover:border-dark hover:bg-dark text-white dark:bg-light-blue dark:hover:border-white dark:hover:bg-white dark:text-dark"
+                className="duration-300 flex w-fit gap-2 rounded-md mt-2 py-2 px-3 border-2 border-darkblue dark:border-lightblue bg-darkblue dark:bg-lightblue hover:border-dark hover:bg-dark text-white dark:hover:border-white dark:hover:bg-white dark:text-dark"
               >
                 {t("blog.post_comment")}
                 <HiArrowRight

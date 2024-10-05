@@ -51,22 +51,25 @@
     "next": "بعدی",
     "prev": "قبلی",
     "geust_reviews": "نظرات کاربران",
-    "superb":"فوق‌العاده",
-    "helpful":"مفید",
-    "not_helpful":"غیر مفید",
-    "show_reviews":"نشان دادن همه نظرات",
-    "reply":"نظر بدهید",
+    "superb": "فوق‌العاده",
+    "helpful": "مفید",
+    "not_helpful": "غیر مفید",
+    "show_reviews": "نشان دادن همه نظرات",
+    "reply": "نظر بدهید",
     "email_not_show": "ایمیل شما نمایش داده نمی‌شود.",
-    "post_comment":"ثبت نظر",
-    "your_display_name":"نام نمایشی شما",
-    "write_comment":"نظر خود را بنویسید"
-
+    "post_comment": "ثبت نظر",
+    "your_display_name": "نام نمایشی شما",
+    "write_comment": "نظر خود را بنویسید"
   },
   "tour": {
     "tours": "تور",
     "most_popular_tours": "محبوب ترین تورها",
     "choose_tour_type": "انتخاب دسته تور",
-    "days": "روز"
+    "days": "روز",
+    "duration":"مدت سفر",
+    "near_public_transportation": "در نزدیکی حمل و نقل عمومی",
+    "free_cancellation": "لغو رایگان",
+    "group_size": "اندازه گروه"
   },
   "testimony": {
     "customer_review": "نظرات مشتریان"

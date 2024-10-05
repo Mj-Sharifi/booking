@@ -29,6 +29,7 @@ export default function BlogSidebar({ handleCategory, category }: props) {
       )
       .then((res) => setRecentPost(res.data.data));
   }, []);
+  
   return (
     <div>
       <div className="flex flex-col gap-6">
