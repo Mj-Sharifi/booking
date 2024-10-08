@@ -32,7 +32,7 @@ export default function Select({
   options,
   onChange,
   onBlur,
-  height,
+  height=160,
   label,
   isToched,
   errorMessage,
@@ -40,11 +40,7 @@ export default function Select({
   const t = useTranslations("error");
   const [open, setOpen] = useState(false);
   const [focus, setFocus] = useState(false);
-  const [title, setTitle] = useState<string | number>(
-    initialValue
-      ? options.filter((cn) => cn.value == initialValue)[0].title
-      : ""
-  );
+  const [title, setTitle] = useState<string | number>("");
   const [value, setValue] = useState<string | number>();
   const [searchedOptions, setSearchedOptions] = useState<
     {
@@ -55,9 +51,14 @@ export default function Select({
   >([]);
   // const selectRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
+    setTitle((
+      initialValue && !!options.filter((cn) => cn.value == initialValue).length
+        ? options.filter((cn) => cn.value == initialValue)[0]?.title
+        : ""
+    ))
     options ? setSearchedOptions(options) : setSearchedOptions([]);
   }, [options]);
-
+  // console.log(label,searchedOptions)
   // Move with arrows
   const [currentLi, setCurrentLi] = useState<number>(-1);
   const ulElement = useRef<HTMLUListElement>(null); // Ref for the scrollable container
@@ -66,6 +67,7 @@ export default function Select({
     setTimeout(() => {
       if (["ArrowDown", "ArrowUp", "Enter", "Escape"].includes(e.key)) {
         e.preventDefault();
+        ulElement.current?.focus()
       }
       const lastIndex = searchedOptions?.length - 1;
       switch (e.key) {
@@ -192,10 +194,10 @@ export default function Select({
 
       <ul
         ref={ulElement}
-        className={`text-sm md:text-base absolute z-20 top-full duration-300 transition-height overflow-y-auto overflow-x-hidden bg-transparent right-0 left-0 flex flex-col bg-white dark:bg-dark overflow-auto shadow-md rounded-b-lg ${
+        className={`text-sm md:text-base absolute z-20 top-full duration-300 transition-height overflow-y-auto overflow-x-hidden bg-transparent right-0 left-0 flex flex-col bg-white dark:bg-dark shadow-md rounded-b-lg ${
           open ? "border-2 border-t-0" : "border-0"
         }  border-dark dark:border-white`}
-        style={{ maxHeight: open ? `${height || 160}px` : "0" }}
+        style={{ maxHeight: open ? `${height}px` : "0" }}
       >
         {searchedOptions.length > 0 ? (
           searchedOptions.map(({ value, title, icon }, i) => (
