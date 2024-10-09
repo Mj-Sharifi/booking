@@ -72,6 +72,10 @@ const config: Config = {
       },
       transitionProperty:{
         "height":"max-height"
+      },
+      listStyleImage:{
+        "checkmark":'url("/assets/images/check-regular-16.png")',
+        "xmark":"url('/assets/images/x-regular-16.png')"
       }
     },
   },

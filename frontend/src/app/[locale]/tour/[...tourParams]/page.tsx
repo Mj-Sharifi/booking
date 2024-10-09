@@ -8,7 +8,6 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "@/styles/popularTourSlider.css";
-import { HiOutlineClock } from "react-icons/hi2";
 import { FaBus, FaRegClock, FaUsers } from "react-icons/fa6";
 import { TiCancel } from "react-icons/ti";
 import { useTranslations } from "next-intl";
@@ -59,7 +58,6 @@ export default function SingleTour() {
                 ))}
               </Swiper>
             </div>
-
             <div className="pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter grid grid-cols-6 md:grid-cols-12 gap-x-4 text-xs md:text-sm">
               <div className="flex gap-2 col-span-3 justify-center">
                 <FaRegClock
@@ -94,6 +92,63 @@ export default function SingleTour() {
                   className="text-darkblue dark:text-lightblue flex-none"
                 />
                 <span>{t("tour.free_cancellation")}</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-y-6 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
+              <h4 className="font-semibold text-sm sm:text-base lg:text-lg">
+                {t("tour.overview")}
+              </h4>
+              <p className="text-xs sm:text-sm lg:text-base">
+                {t("tour.text_1")}
+              </p>
+              <div className="grid md:grid-cols-2 gap-y-6 md:gap-x-8 xl:gap-x-12">
+                <div className="flex flex-col gap-y-1 md:gap-y-3">
+                  <h5 className="font-semibold">
+                    {t("tour.available_languages")}
+                  </h5>
+                  <p>{t("tour.languages")}</p>
+                </div>
+                <div className="flex flex-col gap-y-1 md:gap-y-3">
+                  <h5 className="font-semibold">
+                    {t("tour.cancellation_policy")}
+                  </h5>
+                  <p>{t("tour.cancellation_policy_text")}</p>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold">{t("tour.highlights")}</h4>
+                <ul className="list-disc list-inside mt-3">
+                  {Array(3)
+                    .fill(true)
+                    .map((_, i) => (
+                      <li key={i} className="text-xs sm:text-sm lg:text-base">
+                        {t("common.lorem_ipsum_short")}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </div>
+            <div className="flex flex-col gap-y-6 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
+              <h4 className="font-semibold text-sm sm:text-base lg:text-lg">
+                {t("tour.included")}
+              </h4>
+              <div className="grid md:grid-cols-2 gap-y-6 md:gap-x-8 xl:gap-x-12">
+                <ul className="list-inside list-image-checkmark">
+                  <li className="text-xs sm:text-sm lg:text-base">
+                    {t("common.lorem_ipsum_short")}
+                  </li>
+                  <li className="text-xs sm:text-sm lg:text-base">
+                    {t("common.lorem_ipsum_short")}
+                  </li>
+                </ul>
+                <ul className="list-inside list-image-xmark">
+                  <li className="text-xs sm:text-sm lg:text-base">
+                    {t("tour.food_drinks")}
+                  </li>
+                  <li className="text-xs sm:text-sm lg:text-base">
+                    {t("tour.gratuities")}
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

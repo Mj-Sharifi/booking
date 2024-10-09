@@ -76,11 +76,10 @@
     "text_1":"Unless you hire a car, visiting Stonehenge, Bath, and Windsor Castle in one day is next to impossible. Designed specifically for travelers with limited time in London, this tour allows you to check off a range of southern England‘s historical attractions in just one day by eliminating the hassle of traveling between each one independently. Travel by comfortable coach and witness your guide bring each UNESCO World Heritage Site to life with commentary. Plus, all admission tickets are included in the tour price.",
     "highlights":"Highlights",
     "available_languages":"Available Languages",
-    "english":"English",
-    "farsi":"persian",
-    "german":"German",
-    "french":"French",
-    "Chinese":"Chinese"
+    "languages":"English, German, Chinese, Portuguese, Japanese, French, Persian",
+    "included":"What‘s Included",
+    "food_drinks":"Food and Drinks",
+    "gratuities":"Gratuities"
   },
   "testimony": {
     "customer_review": "Customer reviews"
