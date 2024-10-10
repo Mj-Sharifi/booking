@@ -79,7 +79,21 @@
     "languages":"English, German, Chinese, Portuguese, Japanese, French, Persian",
     "included":"What‘s Included",
     "food_drinks":"Food and Drinks",
-    "gratuities":"Gratuities"
+    "gratuities":"Gratuities",
+    "important_info":"Important information",
+    "inclusions":"Inclusions",
+    "expert_guide":"Expert guide",
+    "admission_stonehenge":"Admission to Stonehenge",
+    "admission_Windsor_Castle":"Admission to Windsor Castle",
+    "departure_details":"Departure details",
+    "departure_time":"Departures from 01st April 2022: Tour departs at 8 am (boarding at 7.30 am), Victoria Coach Station Gate 1-5",
+    "exclusion":"Exclusion",
+    "hotel":"Hotel pick-up and drop-off",
+    "additional_info":"Additional information",
+    "additional_info_1":"As Windsor Castle is a working royal palace, sometimes the entire Castle or the State Apartments within the Castle need to be closed at short notice.",
+    "additional_info_2":"Stonehenge is closed on 21 June due to the Summer Solstice. During this time, we will instead visit the Avebury Stone Circle.",
+    "additional_info_3":"Please note: the tour itinerary and order may change"
+
   },
   "testimony": {
     "customer_review": "Customer reviews"
