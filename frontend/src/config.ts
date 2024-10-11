@@ -6,6 +6,7 @@ export const pathnames = {
   '/': '/',
   '/tour': '/tour',
   '/tour/[id]/[title]':"/tour/[id]/[title]",
+  "/booking":"/booking",
   '/blog': `/blog`,
   "/blog/[id]": "/blog/[id]",
   "/login": "/login",

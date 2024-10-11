@@ -30,7 +30,9 @@
     "dashboard": "Dashboard",
     "personal_information": "Personal Information",
     "location_information": "Location Information",
-    "apply": "Apply"
+    "apply": "Apply",
+    "from":"From",
+    "date":"Date"
   },
   "banner": {
     "title": "Best Travel <span1>Experience<span2><img></img></span2></span1>",
@@ -92,8 +94,9 @@
     "additional_info":"Additional information",
     "additional_info_1":"As Windsor Castle is a working royal palace, sometimes the entire Castle or the State Apartments within the Castle need to be closed at short notice.",
     "additional_info_2":"Stonehenge is closed on 21 June due to the Summer Solstice. During this time, we will instead visit the Avebury Stone Circle.",
-    "additional_info_3":"Please note: the tour itinerary and order may change"
-
+    "additional_info_3":"Please note: the tour itinerary and order may change",
+    "book_now":"Book now",
+    "travelers_number":"Number of travelers"
   },
   "testimony": {
     "customer_review": "Customer reviews"

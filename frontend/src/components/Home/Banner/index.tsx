@@ -1,18 +1,18 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import DatePicker, { DateObject } from "react-multi-date-picker";
-import persian_fa from "react-date-object/locales/persian_fa";
-import gregorian_en from "react-date-object/locales/gregorian_en";
-import type { Value } from "react-multi-date-picker";
 import "./style.css";
 import axios from "axios";
-
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { locationData } from "@/types/response";
 import { useParams } from "next/navigation";
-import { HiMagnifyingGlass } from "react-icons/hi2";
+import { HiMagnifyingGlass, HiMinus, HiPlus } from "react-icons/hi2";
 
+// React Multi Date Picker
+import DatePicker, { DateObject } from "react-multi-date-picker";
+import persian_fa from "react-date-object/locales/persian_fa";
+import gregorian_en from "react-date-object/locales/gregorian_en";
+import type { Value } from "react-multi-date-picker";
 const locationSVG = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -34,34 +34,7 @@ const locationSVG = (
     />
   </svg>
 );
-const minusSVG = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth="1.5"
-    stroke="currentColor"
-    className="w-5 h-5 text-darkblue"
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-  </svg>
-);
-const plusSVG = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth="1.5"
-    stroke="currentColor"
-    className="w-5 h-5 text-darkblue"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M12 4.5v15m7.5-7.5h-15"
-    />
-  </svg>
-);
+
 
 export default function Banner() {
   // Translation
@@ -256,7 +229,7 @@ export default function Banner() {
                         })
                       }
                     >
-                      {minusSVG}
+                      <HiMinus size={20} className="text-darkblue dark:text-lightblue" />
                     </button>
                     <span className="text-lg">{guest.adult}</span>
                     <button
@@ -266,7 +239,7 @@ export default function Banner() {
                         setGuest({ ...guest, adult: guest.adult + 1 })
                       }
                     >
-                      {plusSVG}
+                      <HiPlus size={20} className="text-darkblue dark:text-lightblue" />
                     </button>
                   </div>
                 </div>
@@ -286,7 +259,7 @@ export default function Banner() {
                         })
                       }
                     >
-                      {minusSVG}
+                      <HiMinus size={20} className="text-darkblue dark:text-lightblue" />
                     </button>
                     <span className="text-lg">{guest.children}</span>
                     <button
@@ -296,7 +269,7 @@ export default function Banner() {
                         setGuest({ ...guest, children: guest.children + 1 })
                       }
                     >
-                      {plusSVG}
+                      <HiPlus size={20} className="text-darkblue dark:text-lightblue" />
                     </button>
                   </div>
                 </div>
@@ -314,7 +287,7 @@ export default function Banner() {
                         })
                       }
                     >
-                      {minusSVG}
+                      <HiMinus size={20} className="text-darkblue dark:text-lightblue" />
                     </button>
                     <span className="text-lg">{guest.rooms}</span>
                     <button
@@ -324,7 +297,7 @@ export default function Banner() {
                         setGuest({ ...guest, rooms: guest.rooms + 1 })
                       }
                     >
-                      {plusSVG}
+                      <HiPlus size={20} className="text-darkblue dark:text-lightblue"/>
                     </button>
                   </div>
                 </div>
@@ -334,7 +307,7 @@ export default function Banner() {
             <div className="lg:col-span-2">
               <button
                 type="button"
-                className="w-full lg:w-36 h-16 transition-all duration-300 bg-darkblue hover:bg-dark text-white rounded flexCenter gap-2"
+                className="w-full lg:w-36 h-16 transition-all duration-300 bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark rounded flexCenter gap-2"
               >
                 <HiMagnifyingGlass size={20} />
                 {t("common.search")}

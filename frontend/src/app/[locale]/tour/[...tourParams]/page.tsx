@@ -2,7 +2,7 @@
 import { tourData } from "@/types/response";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -11,6 +11,13 @@ import "@/styles/popularTourSlider.css";
 import { FaBus, FaRegClock, FaUsers } from "react-icons/fa6";
 import { TiCancel } from "react-icons/ti";
 import { useTranslations } from "next-intl";
+// React Multi Date Picker
+import DatePicker, { DateObject } from "react-multi-date-picker";
+import type { Value } from "react-multi-date-picker";
+import persian_fa from "react-date-object/locales/persian_fa";
+import gregorian_en from "react-date-object/locales/gregorian_en";
+import { HiMinus, HiPlus } from "react-icons/hi2";
+import NavigationLink from "@/components/link/NavigationLink";
 
 export default function SingleTour() {
   const t = useTranslations();
@@ -31,13 +38,32 @@ export default function SingleTour() {
         }
       });
   }, []);
-  console.log(tourData);
+  //DatePicker
+  const [dateRange, setDateRange] = useState<Value[]>([
+    new DateObject().add(7, "days"),
+    new DateObject().add(12, "days"),
+  ]);
+  // Guest Number
+  const [guestEl, setGuestEl] = useState<boolean>(false);
+  const [guest, setGuest] = useState<{
+    adult: number;
+    children: number;
+    rooms: number;
+  }>({ adult: 2, children: 1, rooms: 1 });
+  useEffect(() => {
+    document.addEventListener("click", (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest(".guest-selection")) {
+        setGuestEl(false);
+      }
+    });
+  }, []);
+
   return (
     <div className="flex flex-col">
       {tourData && (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-12">
-            <div className="md:col-span-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-6 xl:gap-x-10">
+            <div className="lg:col-span-8">
               <h1 className="text-lg md:text-2xl xl:text-3xl font-semibold text-center mb-4 md:mb-8">
                 {tourData.attributes.title}
               </h1>
@@ -153,10 +179,163 @@ export default function SingleTour() {
                 </div>
               </div>
             </div>
-            <div className="md:col-span-4"></div>
+            <div className="lg:col-span-4 lg:pt-16 pb-3 lg:pb-0 mb-4 lg:mb-0 border-b lg:border-b-0 border-light">
+              <div className="h-auto rounded border border-border shadow-sm py-4 lg:py-6 px-3 lg:px-5 flex flex-col gap-6">
+                <p className="font-semibold text-base md:text-lg">
+                  <span className="text-light dark:text-lighter text-xs md:text-sm">
+                    {t("common.from")}
+                  </span>
+                  <span>{tourData.attributes.price}$</span>
+                </p>
+                <div className="rounded border border-border w-full flex flex-col gap-2 p-3">
+                  <span className="font-semibold  text-sm md:text-base">
+                    {t("common.date")}
+                  </span>
+                  <DatePicker
+                    locale={locale == "fa" ? persian_fa : gregorian_en}
+                    value={dateRange}
+                    onChange={setDateRange}
+                    format="MMMM DD"
+                    range
+                    numberOfMonths={2}
+                    inputClass=" outline-none border-none text-light dark:text-lighter dark:bg-dark text-xs md:text-sm p-0"
+                  />
+                </div>
+                <div className="guest-selection rounded border border-border w-full flex flex-col gap-2 relative p-3">
+                  <span className="font-semibold text-sm md:text-base">
+                    {t("tour.travelers_number")}
+                  </span>
+                  <span
+                    className="guest-selection text-light dark:text-lighter text-xs md:text-sm"
+                    onClick={() => setGuestEl(true)}
+                  >
+                    {guest.adult} {t("common.adults")} - {guest.children}{" "}
+                    {t("common.children")} - {guest.rooms} {t("common.rooms")}
+                  </span>
+                  <div
+                    className={`guest-selection absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
+                      guestEl ? "visible animate-fadeUp" : "invisible"
+                    }`}
+                  >
+                    <div className="flexBetween pb-4">
+                      <span>{t("common.adults")}</span>
+                      <div className="flexBetween w-32 ">
+                        <button
+                          type="button"
+                          className="border border-darkblue rounded p-2"
+                          onClick={() =>
+                            setGuest({
+                              ...guest,
+                              adult:
+                                guest.adult > 1 ? guest.adult - 1 : guest.adult,
+                            })
+                          }
+                        >
+                          <HiMinus
+                            size={18}
+                            className="text-darkblue dark:text-lightblue"
+                          />
+                        </button>
+                        <span className="text-lg">{guest.adult}</span>
+                        <button
+                          type="button"
+                          className="border border-darkblue rounded p-2"
+                          onClick={() =>
+                            setGuest({ ...guest, adult: guest.adult + 1 })
+                          }
+                        >
+                          <HiPlus
+                            size={18}
+                            className="text-darkblue dark:text-lightblue"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flexBetween py-4 border-y border-border">
+                      <span>{t("common.children")}</span>
+                      <div className="flexBetween w-32">
+                        <button
+                          type="button"
+                          className="border border-darkblue rounded p-2"
+                          onClick={() =>
+                            setGuest({
+                              ...guest,
+                              children:
+                                guest.children > 0
+                                  ? guest.children - 1
+                                  : guest.children,
+                            })
+                          }
+                        >
+                          <HiMinus
+                            size={18}
+                            className="text-darkblue dark:text-lightblue"
+                          />
+                        </button>
+                        <span className="text-lg">{guest.children}</span>
+                        <button
+                          type="button"
+                          className="border border-darkblue rounded p-2"
+                          onClick={() =>
+                            setGuest({ ...guest, children: guest.children + 1 })
+                          }
+                        >
+                          <HiPlus
+                            size={18}
+                            className="text-darkblue dark:text-lightblue"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flexBetween pt-4">
+                      <span>{t("common.rooms")}</span>
+                      <div className="flexBetween w-32">
+                        <button
+                          type="button"
+                          className="border border-darkblue rounded p-2"
+                          onClick={() =>
+                            setGuest({
+                              ...guest,
+                              rooms:
+                                guest.rooms > 1 ? guest.rooms - 1 : guest.rooms,
+                            })
+                          }
+                        >
+                          <HiMinus
+                            size={18}
+                            className="text-darkblue dark:text-lightblue"
+                          />
+                        </button>
+                        <span className="text-lg">{guest.rooms}</span>
+                        <button
+                          type="button"
+                          className="border border-darkblue rounded p-2"
+                          onClick={() =>
+                            setGuest({ ...guest, rooms: guest.rooms + 1 })
+                          }
+                        >
+                          <HiPlus
+                            size={18}
+                            className="text-darkblue dark:text-lightblue"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <NavigationLink
+                  href={"/booking"}
+                  className="w-full py-3 text-center transition-all duration-300 bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark rounded-md"
+                >
+                  {t("tour.book_now")}
+                </NavigationLink>
+              </div>
+            </div>
           </div>
           <div className="grid grid-cols-12 gap-8 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
-            <h4 className="col-span-12 font-semibold text-sm sm:text-base lg:text-lg">{t("tour.important_info")}</h4>
+            <h4 className="col-span-12 font-semibold text-sm sm:text-base lg:text-lg">
+              {t("tour.important_info")}
+            </h4>
             <div className="col-span-12 sm:col-span-6 lg:col-span-4">
               <h5 className="font-semibold">{t("tour.inclusions")}</h5>
               <ul className="list-disc list-inside mt-3">
@@ -206,6 +385,18 @@ export default function SingleTour() {
                   {t("tour.additional_info_3")}
                 </li>
               </ul>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-6 xl:gap-x-10">
+            <div className="lg:col-span-4"></div>
+            <div className="hidden lg:block lg:col-span-8">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47259.75457904058!2d-0.16978027898677037!3d51.49881486207125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4873e63b850af611%3A0x979170e2bcd3d2dd!2sStonehenge!5e0!3m2!1sen!2s!4v1728667377440!5m2!1sen!2s"
+                className="w-full aspect-video border-2 border-darkblue dark:border-lightblue rounded-md "
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </>
