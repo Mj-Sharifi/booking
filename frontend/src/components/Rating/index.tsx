@@ -19,7 +19,6 @@ export default function Rating({
 }: props) {
   const [value, setValue] = useState<number>(defaultValue);
   useEffect(() => {}, [defaultValue, precision]);
-  console.log("width-rating: ", width || "small");
   return (
     <div className="flex gap-1">
       {Array(5)

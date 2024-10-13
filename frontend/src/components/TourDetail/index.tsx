@@ -23,6 +23,8 @@ import { useRouter } from "@/navigation";
 import { locale } from "@/types/types";
 import { saveTour } from "@/lib/slices/bookSlice";
 import Rating from "../Rating";
+import Timeliner from "../Timeliner";
+import Image from "next/image";
 
 export default function TourDetail() {
   const t = useTranslations();
@@ -64,6 +66,148 @@ export default function TourDetail() {
       }
     });
   }, []);
+  // Timeliner Details
+  const [activeTimeline, setActiveTimeline] = useState<number[]>([]);
+  const [timelineDetailsHeight, setTimelineDetialHeight] = useState<number[]>(
+    []
+  );
+  const timelineDetails = [
+    <div className="flex flex-col gap-y-2 justify-start items-start">
+      <div
+        id="timeline-detail-0"
+        className="duration-300 flex flex-col gap-y-2 overflow-hidden"
+        style={{ maxHeight: `${activeTimeline.includes(0) ? timelineDetailsHeight[0]+"px" : "0"}` }}
+
+      >
+        <Image
+          src={"/assets/images/tour/winsdor-castle.jpg"}
+          alt="winsdor castle"
+          width={500}
+          height={290}
+        />
+        <p className="text-xs md:text-sm">{t("common.lorem_ipsum_long")}</p>
+      </div>
+      <button
+        type="button"
+        className=" text-darkblue dark:text-lightblue underline underline-offset-2 text-xs md:text-sm"
+        onClick={() => handleActiveTimeline(0)}
+      >
+        See details & photo
+      </button>
+    </div>,
+    <div className="flex flex-col gap-y-2 justify-start items-start">
+      <div
+        id="timeline-detail-1"
+        className="duration-300 flex flex-col gap-y-2 overflow-hidden"
+        style={{
+          maxHeight: `${
+            activeTimeline.includes(1) ? timelineDetailsHeight[1] + "px" : "0"
+          }`,
+        }}
+      >
+        <Image
+          src={"/assets/images/tour/st.george's-chapel.jpg"}
+          alt="winsdor castle"
+          width={500}
+          height={290}
+        />
+        <p className="text-xs md:text-sm">{t("common.lorem_ipsum_long")}</p>
+      </div>
+      <button
+        type="button"
+        className=" text-darkblue dark:text-lightblue underline underline-offset-2 text-xs md:text-sm"
+        onClick={() => handleActiveTimeline(1)}
+      >
+        See details & photo
+      </button>
+    </div>,
+    <div className="flex flex-col gap-y-2 justify-start items-start">
+      <div
+        id="timeline-detail-2"
+        className="duration-300 flex flex-col gap-y-2 overflow-hidden"
+        style={{
+          maxHeight: `${
+            activeTimeline.includes(2) ? timelineDetailsHeight[2] + "px" : "0"
+          }`,
+        }}
+      >
+        <Image
+          src={"/assets/images/tour/roman-baths.jpg"}
+          alt="winsdor castle"
+          width={500}
+          height={290}
+        />
+        <p className="text-xs md:text-sm">{t("common.lorem_ipsum_long")}</p>
+      </div>
+      <button
+        type="button"
+        className=" text-darkblue dark:text-lightblue underline underline-offset-2 text-xs md:text-sm"
+        onClick={() => handleActiveTimeline(2)}
+      >
+        See details & photo
+      </button>
+    </div>,
+    <div className="flex flex-col gap-y-2 justify-start items-start">
+      <div
+        id="timeline-detail-3"
+        className="duration-300 flex flex-col gap-y-2 overflow-hidden"
+        style={{
+          maxHeight: `${
+            activeTimeline.includes(3) ? timelineDetailsHeight[3] + "px" : "0"
+          }`,
+        }}
+      >
+        <Image
+          src={"/assets/images/tour/stonehenge.jpg"}
+          alt="winsdor castle"
+          width={500}
+          height={290}
+        />
+        <p className="text-xs md:text-sm">{t("common.lorem_ipsum_long")}</p>
+      </div>
+      <button
+        type="button"
+        className=" text-darkblue dark:text-lightblue underline underline-offset-2 text-xs md:text-sm"
+        onClick={() => handleActiveTimeline(3)}
+      >
+        See details & photo
+      </button>
+    </div>,
+  ];
+
+  const handleActiveTimeline = (detail: number) => {
+    if (activeTimeline.includes(detail)) {
+      const detailIndex = activeTimeline.indexOf(detail);
+      const newActiveTimeline = [
+        ...activeTimeline.slice(0, detailIndex),
+        ...activeTimeline.slice(detailIndex + 1),
+      ];
+      setActiveTimeline(newActiveTimeline);
+    } else {
+      setActiveTimeline((prev) => [...prev, detail]);
+    }
+  };
+  useEffect(() => {
+    console.log("height-useeffect", activeTimeline);
+    const calculateDetailHeight = () => {
+      let height: number[] = [];
+      for (let i = 0; i < timelineDetails.length; i++) {
+        if (activeTimeline.includes(i)) {
+          const detailEl = document.getElementById(`timeline-detail-${i}`);
+          height.push(detailEl?.scrollHeight as number);
+        } else {
+          height.push(0);
+        }
+      }
+      setTimelineDetialHeight(height);
+    };
+    calculateDetailHeight();
+    window.addEventListener("resize", calculateDetailHeight);
+    // return () => window.removeEventListener("resize", calculateDetailHeight);
+  }, [
+    JSON.stringify(activeTimeline),
+    typeof document.getElementById("timeline-detail-0") !== "undefined",
+  ]);
 
   return (
     <div className="flex flex-col">
@@ -75,7 +219,10 @@ export default function TourDetail() {
                 {tourData.attributes.title}
               </h1>
               <div className="mb-4 md:mb-8">
-                <Rating defaultValue={tourData.attributes.rating} width="20px" />
+                <Rating
+                  defaultValue={tourData.attributes.rating}
+                  width="20px"
+                />
               </div>
               <div className="mb-6 md:mb-12">
                 <Swiper
@@ -407,9 +554,25 @@ export default function TourDetail() {
               </ul>
             </div>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-6 xl:gap-x-10">
-            <div className="lg:col-span-4"></div>
-            <div className="hidden lg:block lg:col-span-8">
+          <div className="grid grid-cols-1 xl:grid-cols-12 xl:gap-x-6 2xl:gap-x-10">
+            <div className="lg:col-span-4">
+              <Timeliner
+                titles={[
+                  "Windsor Castle",
+                  "St. George's Chapel",
+                  "The Roman Baths",
+                  "Stonehenge",
+                ]}
+                subtitles={[
+                  "Stop: 60 minutes - Admission included",
+                  "Stop: 60 minutes - Admission included",
+                  "Stop: 60 minutes - Admission included",
+                  "Stop: 60 minutes - Admission included",
+                ]}
+                details={timelineDetails}
+              />
+            </div>
+            <div className="hidden xl:block xl:col-span-8">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47259.75457904058!2d-0.16978027898677037!3d51.49881486207125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4873e63b850af611%3A0x979170e2bcd3d2dd!2sStonehenge!5e0!3m2!1sen!2s!4v1728667377440!5m2!1sen!2s"
                 className="w-full aspect-video border-2 border-darkblue dark:border-lightblue rounded-md "
