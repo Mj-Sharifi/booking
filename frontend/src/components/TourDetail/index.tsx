@@ -22,6 +22,7 @@ import { useBookAppDispatch } from "@/hooks/redux";
 import { useRouter } from "@/navigation";
 import { locale } from "@/types/types";
 import { saveTour } from "@/lib/slices/bookSlice";
+import Rating from "../Rating";
 
 export default function TourDetail() {
   const t = useTranslations();
@@ -70,9 +71,12 @@ export default function TourDetail() {
         <>
           <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-6 xl:gap-x-10">
             <div className="lg:col-span-8">
-              <h1 className="text-lg md:text-2xl xl:text-3xl font-semibold text-center mb-4 md:mb-8">
+              <h1 className="text-lg md:text-2xl xl:text-3xl font-semibold text-center mb-2 md:mb-4">
                 {tourData.attributes.title}
               </h1>
+              <div className="mb-4 md:mb-8">
+                <Rating defaultValue={tourData.attributes.rating} width="20px" />
+              </div>
               <div className="mb-6 md:mb-12">
                 <Swiper
                   spaceBetween={20}
@@ -336,7 +340,9 @@ export default function TourDetail() {
                     dispatch(saveTour(tourData));
                     router.push("/booking", { locale });
                   }}
-                ></button>
+                >
+                  {t("tour.book_now")}
+                </button>
                 {/* <NavigationLink
                   href={"/booking"}
                   className="w-full py-3 text-center transition-all duration-300 bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark rounded-md"
