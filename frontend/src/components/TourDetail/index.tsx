@@ -16,7 +16,7 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
 import persian_fa from "react-date-object/locales/persian_fa";
 import gregorian_en from "react-date-object/locales/gregorian_en";
-import { HiMinus, HiPlus } from "react-icons/hi2";
+import { HiArrowRight, HiMinus, HiPlus } from "react-icons/hi2";
 import NavigationLink from "@/components/link/NavigationLink";
 import { useBookAppDispatch } from "@/hooks/redux";
 import { useRouter } from "@/navigation";
@@ -25,6 +25,9 @@ import { saveTour } from "@/lib/slices/bookSlice";
 import Rating from "../Rating";
 import Timeliner from "../Timeliner";
 import Image from "next/image";
+import { AiFillDislike, AiFillLike } from "react-icons/ai";
+import TextAreaInput from "../Form/TextAreaInput";
+import TextInput from "../Form/TextInput";
 
 export default function TourDetail() {
   const t = useTranslations();
@@ -76,8 +79,11 @@ export default function TourDetail() {
       <div
         id="timeline-detail-0"
         className="duration-300 flex flex-col gap-y-2 overflow-hidden"
-        style={{ maxHeight: `${activeTimeline.includes(0) ? timelineDetailsHeight[0]+"px" : "0"}` }}
-
+        style={{
+          maxHeight: `${
+            activeTimeline.includes(0) ? timelineDetailsHeight[0] + "px" : "0"
+          }`,
+        }}
       >
         <Image
           src={"/assets/images/tour/winsdor-castle.jpg"}
@@ -213,8 +219,8 @@ export default function TourDetail() {
     <div className="flex flex-col">
       {tourData && (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-6 xl:gap-x-10">
-            <div className="lg:col-span-8">
+          <div className="grid grid-cols-1 xl:grid-cols-12 lg:gap-x-6 xl:gap-x-10 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
+            <div className="xl:col-span-8">
               <h1 className="text-lg md:text-2xl xl:text-3xl font-semibold text-center mb-2 md:mb-4">
                 {tourData.attributes.title}
               </h1>
@@ -312,7 +318,7 @@ export default function TourDetail() {
                   </ul>
                 </div>
               </div>
-              <div className="flex flex-col gap-y-8 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
+              <div className="flex flex-col gap-y-8">
                 <h4 className="font-semibold text-sm sm:text-base lg:text-lg">
                   {t("tour.included")}
                 </h4>
@@ -336,7 +342,7 @@ export default function TourDetail() {
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-4 lg:pt-16 pb-3 lg:pb-0 mb-4 lg:mb-0 border-b lg:border-b-0 border-light">
+            <div className="xl:col-span-4 xl:pt-16 pb-3 lg:pb-0 mb-4 lg:mb-0 border-b lg:border-b-0 border-light">
               <div className="h-auto rounded border border-border shadow-sm py-4 lg:py-6 px-3 lg:px-5 flex flex-col gap-6">
                 <p className="font-semibold text-base md:text-lg">
                   <span className="text-light dark:text-lighter text-xs md:text-sm">
@@ -554,7 +560,7 @@ export default function TourDetail() {
               </ul>
             </div>
           </div>
-          <div className="grid grid-cols-1 xl:grid-cols-12 xl:gap-x-6 2xl:gap-x-10">
+          <div className="grid grid-cols-1 xl:grid-cols-12 xl:gap-x-6 2xl:gap-x-10 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
             <div className="lg:col-span-4">
               <Timeliner
                 titles={[
@@ -580,6 +586,98 @@ export default function TourDetail() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 xl:grid-cols-12 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
+            <div className="col-span-1 xl:col-span-4"></div>
+            <div className="col-span-1 xl:col-span-8 flex flex-col gap-y-10">
+              {Array(3)
+                .fill(true)
+                .map((_, i) => (
+                  <div key={i} className="flex flex-col gap-4">
+                    <div className="flex gap-4">
+                      <Image
+                        src={"/assets/images/blog/reviewer.png"}
+                        alt="reviewer"
+                        width={60}
+                        height={60}
+                      />
+                      <div className="flex flex-col gap-1">
+                        <span className="text-sm md:text-base">Tonko</span>
+                        <span className="text-light dark:text-lighter text-xs md:text-sm">
+                          {new Intl.DateTimeFormat(locale, {
+                            dateStyle: "medium",
+                          }).format(new Date("2022-02-15"))}
+                        </span>
+                      </div>
+                    </div>
+                    <h4 className="font-semibold md:text-lg text-darkblue dark:text-lightblue">
+                      9.2 {t("blog.superb")}
+                    </h4>
+                    <p className="text-sm md:text-base">
+                      {t("common.lorem_ipsum_long")}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {Array(4)
+                        .fill(true)
+                        .map((_, i) => (
+                          <Image
+                            key={i}
+                            src={`/assets/images/blog/review_${i + 1}.png`}
+                            alt="review_image"
+                            height={100}
+                            width={100}
+                            className="rounded-md"
+                          />
+                        ))}
+                    </div>
+                    <div className="flex gap-5">
+                      <button
+                        type="button"
+                        className="text-sm md:text-base flex gap-2 items-center text-darkblue dark:text-lightblue"
+                      >
+                        {t("blog.helpful")}
+                        <AiFillLike size={22} />{" "}
+                      </button>
+                      <button
+                        type="button"
+                        className="text-sm md:text-base flex gap-2 items-center text-light dark:text-lighter"
+                      >
+                        {t("blog.not_helpful")}
+                        <AiFillDislike size={22} />{" "}
+                      </button>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+          <div className="grid grid-cols-1 xl:grid-cols-12 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
+            <div className="col-span-1 xl:col-span-4"></div>
+            <div className="col-span-1 xl:col-span-8 flex flex-col gap-6">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="">
+                  <TextInput name="name" label={t("blog.your_display_name")} />
+                </div>
+                <div className="">
+                  <TextInput name="email" label={t("footer.your_email")} />
+                </div>
+                <div className="col-span-2">
+                  <TextAreaInput
+                    name={"comment"}
+                    label={t("blog.write_comment")}
+                  />
+                </div>
+              </div>
+              <button
+                type="button"
+                className="duration-300 flex w-fit gap-2 rounded-md mt-2 py-2 px-3 border-2 border-darkblue dark:border-lightblue bg-darkblue dark:bg-lightblue hover:border-dark hover:bg-dark text-white dark:hover:border-white dark:hover:bg-white dark:text-dark"
+              >
+                {t("blog.post_comment")}
+                <HiArrowRight
+                  className="-rotate-45 rtl:rotate-[-135deg]"
+                  size={24}
+                />
+              </button>
             </div>
           </div>
         </>
