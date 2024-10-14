@@ -3,14 +3,16 @@ import React from "react";
 type props = {
   title?: string;
   value: number;
+  progressPercent: number;
   height?: string;
   size?: "small" | "medium" | "large";
-  backgroundColor: string;
-  foregroundColor: string;
+  backgroundColor?: string;
+  foregroundColor?: string;
 };
 export default function ProgressBar({
   title,
   value,
+  progressPercent,
   size,
   height,
   backgroundColor = "#e5e0fd",
@@ -25,17 +27,20 @@ export default function ProgressBar({
         </div>
       )}
       <div
-        className="w-full relative rounded-full overflow-hidden z-[-1]"
+        className="w-full relative rounded-full overflow-hidden z-[-1] bg-border "
         style={{
           height:
             height ||
             `${size == "medium" ? "8px" : size == "small" ? "4px" : "12px"}`,
-          backgroundColor,
+          // backgroundColor,
         }}
       >
         <div
-          className="absolute right-0 left-0 top-0 bottom-0"
-          style={{ width: `${value + "%"}`, backgroundColor: foregroundColor }}
+          className="absolute right-0 left-0 top-0 bottom-0 bg-dark dark:bg-darkblue"
+          style={{
+            width: `${progressPercent + "%"}`,
+            //  backgroundColor: foregroundColor
+          }}
         ></div>
       </div>
     </div>

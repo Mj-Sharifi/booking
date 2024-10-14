@@ -96,7 +96,16 @@
     "additional_info_2": "استون هنج در 21 ژوئن به دلیل انقلاب تابستانی تعطیل است. در این مدت، به جای آن از دایره سنگی Avebury دیدن خواهیم کرد.",
     "additional_info_3": "لطفا توجه داشته باشید: برنامه سفر و ترتیب تور ممکن است تغییر کند",
     "book_now":"الان رزرو کن",
-    "travelers_number":"تعداد مسافران"
+    "travelers_number":"تعداد مسافران",
+    "reviews_count":"از {count} نقد",
+    "location":"موقعیت",
+    "staff": "کارکنان",
+    "cleanliness": "پاکیزگی",
+    "value_money": "ارزش نسبت به قیمت",
+    "comfort": "آسایش",
+    "facilities":"امکانات رفاهی",
+    "free_wiFi":"اینترنت رایگان",
+    "exceptional":"اسنثنائی"
 
   },
   "testimony": {

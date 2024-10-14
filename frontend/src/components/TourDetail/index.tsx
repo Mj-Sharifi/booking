@@ -28,6 +28,8 @@ import Image from "next/image";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import TextAreaInput from "../Form/TextAreaInput";
 import TextInput from "../Form/TextInput";
+import ProgressBar from "../ProgressBar";
+import { title } from "process";
 
 export default function TourDetail() {
   const t = useTranslations();
@@ -221,7 +223,7 @@ export default function TourDetail() {
         <>
           <div className="grid grid-cols-1 xl:grid-cols-12 lg:gap-x-6 xl:gap-x-10 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
             <div className="xl:col-span-8">
-              <h1 className="text-lg md:text-2xl xl:text-3xl font-semibold text-center mb-2 md:mb-4">
+              <h1 className="text-lg md:text-2xl xl:text-3xl font-semibold text-center mb-2 md:mb-3">
                 {tourData.attributes.title}
               </h1>
               <div className="mb-4 md:mb-8">
@@ -342,14 +344,14 @@ export default function TourDetail() {
                 </div>
               </div>
             </div>
-            <div className="xl:col-span-4 xl:pt-16 pb-3 lg:pb-0 mb-4 lg:mb-0 border-b lg:border-b-0 border-light">
+            <div className="xl:col-span-4 xl:pt-24 pb-3 lg:pb-0 mb-4 lg:mb-0 border-b lg:border-b-0 border-light">
               <div className="h-auto rounded border border-border shadow-sm py-4 lg:py-6 px-3 lg:px-5 flex flex-col gap-6">
-                <p className="font-semibold text-base md:text-lg">
-                  <span className="text-light dark:text-lighter text-xs md:text-sm">
+                <div className="font-semibold text-base md:text-lg flex justify-start items-center gap-x-1">
+                  <span className="text-light dark:text-lighter text-xs md:text-sm ">
                     {t("common.from")}
                   </span>
                   <span>{tourData.attributes.price}$</span>
-                </p>
+                </div>
                 <div className="rounded border border-border w-full flex flex-col gap-2 p-3">
                   <span className="font-semibold  text-sm md:text-base">
                     {t("common.date")}
@@ -588,8 +590,41 @@ export default function TourDetail() {
               />
             </div>
           </div>
-          <div className="grid grid-cols-1 xl:grid-cols-12 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
-            <div className="col-span-1 xl:col-span-4"></div>
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-y-8 xl:gap-x-16 2xl:gap-x-24 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
+            <div className="col-span-1 xl:col-span-4 flex flex-col gap-y-4">
+              <h4 className="md:text-lg font-semibold">
+                {t("blog.geust_reviews")}
+              </h4>
+              <div className="flex gap-x-4">
+                <div className="w-12 h-12 md:h-14 md:w-14 2xl:w-16 2xl:h-16 text-lg md:text-2xl xl:text-4xl font-semibold bg-darkblue text-white rounded-md flexCenter dark:bg-lightblue dark:text-darkblue">
+                  {tourData.attributes.rating}
+                </div>
+                <div className="h-full flex flex-col justify-evenly">
+                  <span className="font-semibold text-sm md:text-base">
+                    {t("tour.exceptional")}
+                  </span>
+                  <span className="text-nowrap text-xs md:text-sm text-light dark:text-lighter">
+                    {t("tour.reviews_count", { count: 3000 })}
+                  </span>
+                </div>
+              </div>
+              {[
+                { title: t("tour.location"), value: 9.4 },
+                { title: t("tour.staff"), value: 8.4 },
+                { title: t("tour.cleanliness"), value: 9.4 },
+                { title: t("tour.value_money"), value: 8 },
+                { title: t("tour.comfort"), value: 8.9 },
+                { title: t("tour.facilities"), value: 8 },
+                { title: t("tour.free_wiFi"), value: 9.6 },
+              ].map((p, i) => (
+                <ProgressBar
+                  title={p.title}
+                  value={p.value}
+                  progressPercent={p.value * 10}
+                  size="small"
+                />
+              ))}
+            </div>
             <div className="col-span-1 xl:col-span-8 flex flex-col gap-y-10">
               {Array(3)
                 .fill(true)
@@ -651,8 +686,32 @@ export default function TourDetail() {
                 ))}
             </div>
           </div>
-          <div className="grid grid-cols-1 xl:grid-cols-12 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
-            <div className="col-span-1 xl:col-span-4"></div>
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-y-8 xl:gap-x-16 2xl:gap-x-24 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
+            <div className="col-span-1 xl:col-span-4 grid grid-cols-2 gap-y-4 gap-x-8">
+              <div className="col-span-2 flex flex-col gap-y-2">
+                <h4 className="md:text-lg font-semibold">{t("blog.reply")}</h4>
+                <h6 className="text-xs md:text-sm text-light dark:text-lighter">
+                  {t("blog.email_not_show")}
+                </h6>
+              </div>
+              {[
+                { title: t("tour.location"), value: 4.7 },
+                { title: t("tour.staff"), value: 4.2 },
+                { title: t("tour.cleanliness"), value: 4.7 },
+                { title: t("tour.value_money"), value: 4 },
+                { title: t("tour.comfort"), value: 4.45 },
+                { title: t("tour.facilities"), value: 4 },
+                { title: t("tour.free_wiFi"), value: 4.8 },
+              ].map((p, i) => (
+                <div key={i} className="col-span-1">
+                  <Rating
+                    title={p.title}
+                    defaultValue={p.value}
+                  width="16px"
+                  />
+                </div>
+              ))}
+            </div>
             <div className="col-span-1 xl:col-span-8 flex flex-col gap-6">
               <div className="grid grid-cols-2 gap-6">
                 <div className="">
