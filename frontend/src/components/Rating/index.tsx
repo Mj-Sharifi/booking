@@ -65,7 +65,7 @@ export default function Rating({
               ></div>
               <div
                 key={i}
-                className="absolute"
+                className="absolute dark:!bg-yellow-100"
                 style={{
                   width: `${
                     i + 1 <= value
@@ -76,7 +76,7 @@ export default function Rating({
                   }`,
                   height: "100%",
                   zIndex: "3",
-                  backgroundColor,
+                  // backgroundColor,
                 }}
               ></div>
             </div>

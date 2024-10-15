@@ -211,7 +211,7 @@ export default function Banner() {
                 {t("common.children")} - {guest.rooms} {t("common.rooms")}
               </span>
               <div
-                className={`guest-selection absolute rounded-sm bg-white shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
+                className={`guest-selection absolute rounded-sm bg-white dark:bg-dark shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
                   guestEl ? "visible animate-fadeUp" : "invisible"
                 }`}
               >
