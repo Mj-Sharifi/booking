@@ -42,7 +42,7 @@ export type tourData = {
     title: string;
     updatedAt: string;
     createdAt: string;
-    duration: string;
+    duration: number;
     images: { data: imageData[] };
     imagePrimary: { data: imageData };
   };

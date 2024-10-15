@@ -5,7 +5,7 @@ import BlogSidebar from "../../../components/Blog/BlogSidebar";
 import axios from "axios";
 import PostCard from "../../../components/Blog/PostCard";
 import { blogData } from "@/types/response";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 export default function Blog() {
@@ -27,9 +27,7 @@ export default function Blog() {
     }
   };
   useEffect(() => {
-
     const filterQuery = () => {
-      console.log(category.length);
       const categoryQuery: string[] =
         category.length > 0
           ? category.map((e) =>
