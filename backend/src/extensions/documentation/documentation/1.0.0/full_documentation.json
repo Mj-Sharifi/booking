@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-15T04:15:16.050Z"
+    "x-generation-date": "2024-10-15T13:06:13.465Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -3405,7 +3405,7 @@
                         "price": {
                           "type": "integer"
                         },
-                        "duration": {
+                        "duratio": {
                           "type": "string"
                         },
                         "categories": {
@@ -3648,6 +3648,12 @@
                               }
                             }
                           }
+                        },
+                        "free_cancelation": {
+                          "type": "boolean"
+                        },
+                        "duration": {
+                          "type": "integer"
                         },
                         "createdAt": {
                           "type": "string",
@@ -5400,7 +5406,7 @@
           "price": {
             "type": "integer"
           },
-          "duration": {
+          "duratio": {
             "type": "string"
           },
           "categories": {
@@ -5416,6 +5422,12 @@
               ],
               "example": "string or id"
             }
+          },
+          "free_cancelation": {
+            "type": "boolean"
+          },
+          "duration": {
+            "type": "integer"
           },
           "locale": {
             "type": "string"
@@ -5474,7 +5486,7 @@
               "price": {
                 "type": "integer"
               },
-              "duration": {
+              "duratio": {
                 "type": "string"
               },
               "categories": {
@@ -5490,6 +5502,12 @@
                   ],
                   "example": "string or id"
                 }
+              },
+              "free_cancelation": {
+                "type": "boolean"
+              },
+              "duration": {
+                "type": "integer"
               },
               "locale": {
                 "type": "string"
@@ -6397,7 +6415,7 @@
           "price": {
             "type": "integer"
           },
-          "duration": {
+          "duratio": {
             "type": "string"
           },
           "categories": {
@@ -6727,7 +6745,7 @@
                                       "price": {
                                         "type": "integer"
                                       },
-                                      "duration": {
+                                      "duratio": {
                                         "type": "string"
                                       },
                                       "categories": {
@@ -6749,6 +6767,12 @@
                                             }
                                           }
                                         }
+                                      },
+                                      "free_cancelation": {
+                                        "type": "boolean"
+                                      },
+                                      "duration": {
+                                        "type": "integer"
                                       },
                                       "createdAt": {
                                         "type": "string",
@@ -7018,6 +7042,12 @@
                 }
               }
             }
+          },
+          "free_cancelation": {
+            "type": "boolean"
+          },
+          "duration": {
+            "type": "integer"
           },
           "createdAt": {
             "type": "string",

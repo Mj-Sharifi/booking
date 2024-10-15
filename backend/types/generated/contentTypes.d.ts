@@ -1159,7 +1159,7 @@ export interface ApiTourTour extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    duration: Attribute.String &
+    duratio: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1170,6 +1170,19 @@ export interface ApiTourTour extends Schema.CollectionType {
       'manyToMany',
       'api::category.category'
     >;
+    free_cancelation: Attribute.Boolean &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.DefaultTo<false>;
+    duration: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
