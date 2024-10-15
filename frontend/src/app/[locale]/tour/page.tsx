@@ -4,13 +4,22 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { tourData } from "@/types/response";
+import { tourCategoryData, tourData } from "@/types/response";
 import TourCard from "@/components/Tour/TourCard";
+import { FaFilter } from "react-icons/fa6";
+import { createPortal } from "react-dom";
 export default function Tours() {
   const { locale } = useParams();
   const [tours, setTours] = useState<tourData[]>();
+  const [filteredTours, setFilteredTours] = useState<tourData[]>();
   const t = useTranslations();
   // Handle Category
+  const [allCategories, setAllCategories] = useState<tourCategoryData[]>();
+  useEffect(() => {
+    axios
+      .get(process.env.NEXT_PUBLIC_API + `categories?locale=${locale}`)
+      .then((res) => setAllCategories(res.data.data));
+  }, []);
   const [category, setCategory] = useState<string[]>([]);
   const handleCategory = (c: string) => {
     if (c == "all") {
@@ -25,60 +34,133 @@ export default function Tours() {
     }
   };
   // Handle Duration
-  const [durationRange, setDurationRange] = useState<string>([]);
-  const handleDuration = (c: string) => {
-    if (c == "all") {
-      setCategory([]);
-    } else if (category.includes(c)) {
-      const newList = category.filter((e) => {
-        return !(e == c);
-      });
-      setCategory(newList);
+  const [durationRange, setDurationRange] = useState<string>("");
+  const handleDuration = (d: string) => {
+    if (durationRange == d) {
+      setDurationRange("");
     } else {
-      setCategory([c]);
+      setDurationRange(d);
     }
   };
+  // Handle Free Cancelation
+  const [freeCancelation, setFreeCancelation] = useState(false);
   useEffect(() => {
     const filterQuery = () => {
       const categoryQuery: string[] =
         category.length > 0
           ? category.map((e) => `&filters[categories][title][$contains]=${e}`)
           : [""];
-      const durationQuery: string =
-        category.length > 0
-          ? `&filters[duration][$gte]=${durationRange.split("-")[0]}${
-              durationRange.split("-")[1]
-                ? `&filters[duration][$lte]=${durationRange.split("-")[1]}`
-                : ""
-            }`
-          : "";
-      return categoryQuery.join("")+durationQuery;
+      const durationQuery: string = durationRange
+        ? `&filters[duration][$gte]=${durationRange.split("-")[0]}${
+            durationRange.split("-")[1]
+              ? `&filters[duration][$lte]=${durationRange.split("-")[1]}`
+              : ""
+          }`
+        : "";
+      return categoryQuery.join("") + durationQuery;
     };
     axios
       .get(
         process.env.NEXT_PUBLIC_API +
-          `tours?populate=*&locale=${locale}${filterQuery()}&filters[duration][$lte]=5`
+          `tours?populate=*&locale=${locale}${filterQuery()}`
       )
       .then((res) => setTours(res.data.data));
-  }, [category]);
+  }, [JSON.stringify(category), durationRange]);
+  useEffect(() => {
+    let newTours = tours;
+    if (freeCancelation) {
+      newTours = newTours?.filter((t) => t.attributes.free_cancelation);
+    }
+    setFilteredTours(newTours);
+  }, [JSON.stringify(tours), freeCancelation]);
+  // Show filter
+  const [showFilter, setShowFilters] = useState(false);
+  useEffect(() => {
+    const handleFilterResize = () => {
+      if (window.innerWidth > 768) {
+        setShowFilters(false);
+        document.body.classList.remove("body_wrapper");
+      }
+    };
+    const handleFilterClick = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest(".tour-mobile-filters")) {
+        setShowFilters(false);
+        document.body.classList.remove("body_wrapper");
+      }
+    };
+    window;
+    window.addEventListener("resize", handleFilterResize);
+    window.addEventListener("click", handleFilterClick);
+    return () => {
+      window.removeEventListener("resize", handleFilterResize);
+      window.removeEventListener("click", handleFilterClick);
+    };
+  }, []);
   console.log(tours);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 sm:gap-6 lg:gap-8">
-      <div className="col-span-1">
-        <TourSidebar handleCategory={handleCategory} handleDuration={handleDuration} category={category} />
-      </div>
-      <div className="col-span-1 md:col-span-3 flex flex-col gap-y-6 px-6 sm:px-2">
-        {tours &&
-          tours?.map(({ id, attributes }, i) => (
-            <TourCard
-              key={i}
-              id={id}
-              duration={attributes.duration}
-              title={attributes.title}
-              image={attributes.imagePrimary.data.attributes.url}
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-4 sm:gap-6 lg:gap-8">
+        <div className="hidden md:block col-span-1">
+          {allCategories && (
+            <TourSidebar
+              allCategories={allCategories}
+              handleCategory={handleCategory}
+              category={category}
+              handleDuration={handleDuration}
+              duration={durationRange}
+              freeCancelation={freeCancelation}
+              handleFreeCancelation={() => setFreeCancelation(!freeCancelation)}
             />
-          ))}
+          )}
+        </div>
+        <div className="col-span-1 md:col-span-3 px-6 sm:px-2">
+          <div className="flex">
+            <button
+              type="button"
+              className="tour-mobile-filters px-3 py-2 rounded-md flex gap-1 items-center bg-hoverlight text-darkblue md:hidden"
+              onClick={() => {
+                setShowFilters(true);
+                document.body.classList.add("body_wrapper");
+              }}
+            >
+              {t("common.filter")} <FaFilter size={18} />
+            </button>
+          </div>
+          <div className=" flex flex-col">
+            {filteredTours &&
+              filteredTours?.map(({ id, attributes }, i) => (
+                <TourCard
+                  key={i}
+                  id={id}
+                  duration={attributes.duration}
+                  title={attributes.title}
+                  image={attributes.imagePrimary.data.attributes.url}
+                  place={attributes.place}
+                  freeCancellation={attributes.free_cancelation}
+                  rating={attributes.rating}
+                  price={attributes.price}
+                />
+              ))}
+          </div>
+        </div>
       </div>
-    </div>
+      <div
+        className={`w-72 px-4 flex justify-center tour-mobile-filters duration-300 fixed bg-white dark:bg-dark top-0 bottom-0 z-[1000] min-h-screen ${
+          showFilter ? "ltr:left-0 rtl:right-0" : "ltr:-left-72 rtl:-right-72"
+        }`}
+      >
+        {allCategories && (
+          <TourSidebar
+            allCategories={allCategories}
+            handleCategory={handleCategory}
+            category={category}
+            handleDuration={handleDuration}
+            duration={durationRange}
+            freeCancelation={freeCancelation}
+            handleFreeCancelation={() => setFreeCancelation(!freeCancelation)}
+          />
+        )}
+      </div>
+    </>
   );
 }

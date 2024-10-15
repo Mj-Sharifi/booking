@@ -284,7 +284,7 @@ export default function SingleBlog() {
               </div>
               <button
                 type="button"
-                className="duration-300 flex w-fit gap-2 rounded-md mt-2 py-2 px-3 border-2 border-darkblue dark:border-lightblue bg-darkblue dark:bg-lightblue hover:border-dark hover:bg-dark text-white dark:hover:border-white dark:hover:bg-white dark:text-dark"
+                className="duration-300 flex w-fit gap-2 rounded-md mt-2 py-2 px-3 bg-darkblue dark:bg-lightblue hover:border-dark hover:bg-dark text-white dark:hover:border-white dark:hover:bg-white dark:text-dark"
               >
                 {t("blog.post_comment")}
                 <HiArrowRight

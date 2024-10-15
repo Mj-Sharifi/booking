@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, SetStateAction, Dispatch } from "react";
 import axios from "axios";
 import CheckboxInput from "@/components/Form/CheckboxInput";
 import Link from "next/link";
@@ -7,25 +7,35 @@ import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { tourCategoryData } from "@/types/response";
 type props = {
+  allCategories:tourCategoryData[]
   handleCategory: (c: string) => void;
-  handleDuration: (d: string) => void;
   category: string[];
+  handleDuration: (d: string) => void;
+  duration: string;
+  freeCancelation:boolean
+  handleFreeCancelation:()=>void
 };
-const durationOptions = [{title:"less_5d",value:"0-5"}, {title:"5d_10d",value:"6-10"}, {title:"more_10d",value:"11-"}];
-export default function TourSidebar({ handleCategory,handleDuration, category }: props) {
+export default function TourSidebar({
+  allCategories,
+  handleCategory,
+  handleDuration,
+  category,
+  duration,
+  freeCancelation,
+  handleFreeCancelation
+}: props) {
   const t = useTranslations();
   const { locale } = useParams();
-  const [allCategories, setAllCategories] = useState<tourCategoryData[]>();
-  useEffect(() => {
-    axios
-      .get(process.env.NEXT_PUBLIC_API + `categories?locale=${locale}`)
-      .then((res) => setAllCategories(res.data.data));
-  }, []);
+
+  const durationOptions = [
+    { title: t("tour.less_5d"), value: "0-5" },
+    { title: t("tour.6d_10d"), value: "6-10" },
+    { title: t("tour.more_10d"), value: "11-" },
+  ];
 
   return (
-    <div>
-      <div className="flex flex-col gap-6">
-        <div>
+      <div className="flex flex-col divide-y-2 w-full">
+        <div className="pb-6">
           <span className="font-semibold md:text-lg">
             {t("common.categories")}
           </span>
@@ -56,28 +66,37 @@ export default function TourSidebar({ handleCategory,handleDuration, category }:
             </ul>
           )}
         </div>
-        <div>
+        <div className="py-6">
           <span className="font-semibold md:text-lg">{t("tour.duration")}</span>
           {durationOptions && (
             <ul className="mt-2">
-              {durationOptions?.map((e,i) => (
+              {durationOptions?.map((e, i) => (
                 <li key={i}>
                   <CheckboxInput
-                    onChange={() =>
-                     handleDuration(e.value)
-                    }
+                    onChange={() => handleDuration(e.value)}
                     value={e.value}
-                    checked={category.includes(
-                      e.attributes.title.toLowerCase()
-                    )}
-                    label={e.attributes.title}
+                    checked={e.value == duration}
+                    label={e.title}
                   />
                 </li>
               ))}
             </ul>
           )}
         </div>
+        <div className="py-6">
+          <span className="font-semibold md:text-lg">{t("tour.other")}</span>
+
+          <ul className="mt-2">
+            <li>
+              <CheckboxInput
+                onChange={handleFreeCancelation}
+                value={""}
+                checked={freeCancelation}
+                label={t("tour.free_cancellation")}
+              />
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
   );
 }

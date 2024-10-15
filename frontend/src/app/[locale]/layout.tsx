@@ -29,7 +29,7 @@ export default async function RootLayout({
   const direction = getLangDir(locale);
   return (
     <html lang={locale} dir={direction}>
-      <body>
+      <body className="relative">
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           <main>{children}</main>

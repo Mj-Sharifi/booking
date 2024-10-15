@@ -65,7 +65,7 @@ export default function Rating({
               ></div>
               <div
                 key={i}
-                className="absolute dark:!bg-yellow-100"
+                className="absolute bg-yellow-400 dark:bg-yellow-200"
                 style={{
                   width: `${
                     i + 1 <= value

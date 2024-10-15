@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import NavigationLink from "../link/NavigationLink";
 
 export default function HamburgerMenu({
   open,
@@ -16,9 +17,9 @@ export default function HamburgerMenu({
   const t = useTranslations("common");
   return (
     <div
-      className={`hamburgerMenu absolute z-70 top-0 bottom-0 ${
+      className={`hamburgerMenu fixed z-70 top-0 bottom-0 ${
         open ? "ltr:left-0 rtl:right-0" : "ltr:-left-72 rtl:-right-72"
-      } transition-all duration-300 ltr:border-r rtl:border-l border-darkblue w-72 bg-white py-4 flex flex-col`}
+      } transition-all duration-300 ltr:border-r rtl:border-l border-darkblue w-72 bg-white dark:bg-dark py-4 flex flex-col`}
     >
       <div className="flexBetween px-3 pb-4 border-b border-border">
         <Image
@@ -47,12 +48,13 @@ export default function HamburgerMenu({
         <ul className="flex flex-col gap-5">
           {pages.map((page, index) => (
             <li key={index}>
-              <Link
+              <NavigationLink
+                // @ts-ignore
                 href={page === "home" ? "/" : "/" + page}
                 className="text-lg"
               >
                 {t(page)}
-              </Link>
+              </NavigationLink>
             </li>
           ))}
         </ul>
@@ -148,9 +150,12 @@ export default function HamburgerMenu({
             </li>
           </ul>
         </div>
-        <a className="w-full h-12 rounded-md bg-darkblue text-white text-sm flexCenter">
+        <NavigationLink
+          href={"/become-expert"}
+          className="cursor-pointer w-full py-2 rounded-md duration-300  bg-darkblue dark:bg-lightblue hover:border-dark hover:bg-dark text-white dark:hover:border-white dark:hover:bg-white dark:text-dark text-sm md:text-base flexCenter"
+        >
           Become An Expert
-        </a>
+        </NavigationLink>
       </div>
     </div>
   );

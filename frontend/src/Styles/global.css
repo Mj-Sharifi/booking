@@ -55,7 +55,7 @@
   .flexBetween {
     @apply flex justify-between items-center;
   }
-  .body-wrapper {
+  .body_wrapper {
     @apply max-h-screen overflow-y-hidden before:absolute before:top-0 before:bottom-0 before:right-0 before:left-0 before:z-50 before:bg-black/70;
   }
 

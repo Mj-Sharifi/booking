@@ -32,7 +32,9 @@
     "location_information": "Location Information",
     "apply": "Apply",
     "from": "From",
-    "date": "Date"
+    "date": "Date",
+    "filter":"Filter",
+    "sort":"Sort"
   },
   "banner": {
     "title": "Best Travel <span1>Experience<span2><img></img></span2></span1>",
@@ -105,7 +107,14 @@
     "comfort": "Comfort",
     "facilities":"Facilities",
     "free_wiFi":"Free WiFi",
-    "exceptional":"Exceptional"
+    "exceptional":"Exceptional",
+    "less_5d":"Less than 5 days",
+    "6d_10d":"5 to 10 days",
+    "more_10d":"More than 10 days",
+    "other":"Other",
+    "tour_detail":"View detail",
+    "per_adult": "per adult"
+
   },
   "testimony": {
     "customer_review": "Customer reviews"

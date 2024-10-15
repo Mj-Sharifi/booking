@@ -17,7 +17,7 @@ export default function CheckboxInput({
   checked,
 }: props) {
   return (
-    <label className={`${labelClassNames} text-light dark:text-lighter flex gap-2 duration-300 group`}>
+    <label className={`${labelClassNames} text-light dark:text-white flex gap-2 duration-300 group`}>
       <input
         hidden
         type="checkbox"

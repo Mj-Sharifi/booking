@@ -31,26 +31,26 @@ const config: Config = {
     animation: {
       fadeInUp: "fadeInUp 0.5s linear 0s forwards",
     },
-    colors: {
-      transparent: "transparent",
-      dark: "#051036",
-      black: "#000",
-      white: "#fff",
-      darkblue: "#3554d1",
-      lightblue: "#A4CAFE",
-      myyellow: "#f8d448",
-      violet: "#7e53f9",
-      lightgreen:"#ebfcea",
-      border: "#ddd",
-      light: "#697488",
-      lighter: "#B0B6C0",
-      hoverlight: "#F5F6FD",
-      glass: "#ffffff10",
-      profile_light:"#f5f5f5",
-      profile_dark:"#2E3B61"
-    },
 
     extend: {
+      colors: {
+        transparent: "transparent",
+        dark: "#051036",
+        black: "#000",
+        white: "#fff",
+        darkblue: "#3554d1",
+        lightblue: "#A4CAFE",
+        myyellow: "#f8d448",
+        violet: "#7e53f9",
+        lightgreen:"#ebfcea",
+        border: "#ddd",
+        light: "#697488",
+        lighter: "#B0B6C0",
+        hoverlight: "#F5F6FD",
+        glass: "#ffffff10",
+        profile_light:"#f5f5f5",
+        profile_dark:"#2E3B61"
+      },
       height: {
         "22": "5.5rem",
       },

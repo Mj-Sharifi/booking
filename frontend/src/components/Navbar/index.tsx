@@ -27,13 +27,13 @@ export default function Navbar() {
   const pathName = usePathname();
   // Handle Hamburger Menu
   const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
-  const openHamburgerMenu = (event: React.MouseEvent<SVGSVGElement>): void => {
+  const openHamburgerMenu = () => {
     setHamburgerMenu(true);
-    document.body.classList.add("body-wrapper");
+    document.body.classList.add("body_wrapper");
   };
   const closeHamburgerMenu = () => {
     setHamburgerMenu(false);
-    document.body.classList.remove("body-wrapper");
+    document.body.classList.remove("body_wrapper");
   };
   useEffect(() => {
     const clickEvent = (e: MouseEvent) => {
@@ -41,7 +41,7 @@ export default function Navbar() {
         closeHamburgerMenu();
       }
     };
-    document.addEventListener("click", (e) => clickEvent(e));
+    document.addEventListener("click",clickEvent);
     const resizeEvent = () => {
       if (window.innerWidth > 1024) {
         closeHamburgerMenu();
@@ -50,7 +50,7 @@ export default function Navbar() {
     document.addEventListener("resize", resizeEvent);
 
     return () => {
-      document.removeEventListener("click", (e) => clickEvent(e));
+      document.removeEventListener("click",clickEvent);
       document.removeEventListener("resize", resizeEvent);
     };
   }, []);
@@ -103,7 +103,7 @@ export default function Navbar() {
               strokeWidth="1.5"
               stroke="currentColor"
               className="hamburgerMenu hidden md:block lg:hidden w-7 h-7 cursor-pointer before:bg-dark"
-              onClick={(e) => openHamburgerMenu(e)}
+              onClick={() => openHamburgerMenu()}
             >
               <path
                 strokeLinecap="round"
@@ -224,7 +224,7 @@ export default function Navbar() {
               strokeWidth="1.5"
               stroke="currentColor"
               className="hamburgerMenu w-7 h-7 cursor-pointer"
-              onClick={(e) => openHamburgerMenu(e)}
+              onClick={() => openHamburgerMenu()}
             >
               <path
                 strokeLinecap="round"

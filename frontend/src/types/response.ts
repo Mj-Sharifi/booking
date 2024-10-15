@@ -43,6 +43,7 @@ export type tourData = {
     updatedAt: string;
     createdAt: string;
     duration: number;
+    free_cancelation:boolean
     images: { data: imageData[] };
     imagePrimary: { data: imageData };
   };
