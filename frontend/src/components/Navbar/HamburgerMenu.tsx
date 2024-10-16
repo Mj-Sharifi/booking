@@ -3,24 +3,26 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import NavigationLink from "../link/NavigationLink";
+import { FaXmark } from "react-icons/fa6";
 
 export default function HamburgerMenu({
-  open,
+  // open,
   pages,
-  closeHamburgerMenu,
+  // closeHamburgerMenu,
 }: {
-  open: boolean;
+  // open: boolean;
   // pages: {title:string,href:string}[];
   pages: string[];
-  closeHamburgerMenu: () => void;
+  // closeHamburgerMenu: () => void;
 }) {
   const t = useTranslations("common");
   return (
-    <div
-      className={`hamburgerMenu fixed z-70 top-0 bottom-0 ${
-        open ? "ltr:left-0 rtl:right-0" : "ltr:-left-72 rtl:-right-72"
-      } transition-all duration-300 ltr:border-r rtl:border-l border-darkblue w-72 bg-white dark:bg-dark py-4 flex flex-col`}
-    >
+    // <div
+    //   className={`hamburgerMenu fixed z-70 top-0 bottom-0 ${
+    //     open ? "ltr:left-0 rtl:right-0" : "ltr:-left-72 rtl:-right-72"
+    //   } transition-all duration-300 ltr:border-r rtl:border-l border-darkblue w-72 bg-white dark:bg-dark py-4 flex flex-col`}
+    // >
+    <div className="flex flex-col">
       <div className="flexBetween px-3 pb-4 border-b border-border">
         <Image
           src="/assets/images/navbar/tour-booking-logo-2.png"
@@ -28,21 +30,12 @@ export default function HamburgerMenu({
           width={70}
           height={70}
         />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="w-7 h-7 cursor-pointer "
-          onClick={closeHamburgerMenu}
+        <button
+          type="button"
+          className="duration-300 rounded-full p-1 hover:bg-red-600 hover:text-white"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6 18 18 6M6 6l12 12"
-          />
-        </svg>
+          <FaXmark size={20} />
+        </button>
       </div>
       <div className="py-5 px-3 border-b border-border text-lg">
         <ul className="flex flex-col gap-5">
@@ -158,5 +151,7 @@ export default function HamburgerMenu({
         </NavigationLink>
       </div>
     </div>
+
+    // </div>
   );
 }

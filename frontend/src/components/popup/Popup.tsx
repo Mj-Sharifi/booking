@@ -7,7 +7,6 @@ import {
   MouseEvent,
   ReactNode,
   SetStateAction,
-  useEffect,
 } from "react";
 import { createPortal } from "react-dom";
 import CloseBtn from "./CloseBtn";

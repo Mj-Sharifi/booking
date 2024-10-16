@@ -26,8 +26,8 @@ export default function TourCard({
 }: props) {
   const t = useTranslations();
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 overflow-hidden border-b py-5">
-      <div className="col-span-1 rounded-lg overflow-hidden">
+    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 overflow-hidden border-b-2 py-5">
+      <div className="col-span-1  md:col-span-1 rounded-lg overflow-hidden">
         <Image
           src={process.env.NEXT_PUBLIC_URL + image}
           alt={title}
@@ -36,7 +36,7 @@ export default function TourCard({
           className="w-full h-full object-cover hover:scale-110 duration-300 aspect-square"
         />
       </div>
-      <div className="md:col-span-2 flex flex-col justify-start gap-2 md:gap-4 md:py-1">
+      <div className="md:col-span-2 flex flex-col justify-start gap-2 sm:gap-4 sm:py-1">
         <span className="text-light dark:text-lighter text-xs md:text-sm">
           {duration} {t("tour.days")}
         </span>
@@ -44,14 +44,14 @@ export default function TourCard({
         <h3 className="md:text-lg text-light dark:text-lighter">
           {place}
         </h3>
-        <p className="text-sm md:text-base text-light dark:text-lighter">{t("common.lorem_ipsum_long")}</p>
+        <p className="hidden md:block text-sm md:text-base text-light dark:text-lighter">{t("common.lorem_ipsum_long")}</p>
         {freeCancellation && (
           <span className=" text-xs md:text-sm text-emerald-600 dark:text-emerald-300 font-semibold">
             {t("tour.free_cancellation")}
           </span>
         )}
       </div>
-      <div className="col-span-1 flex flex-col gap-2 justify-between md:items-center">
+      <div className="flex flex-col gap-2 justify-between sm:items-center ">
         <div className="flex flex-col">
           <Rating defaultValue={rating} width="16px" />
           <span className="text-xs md:text-sm text-light dark:text-lighter">

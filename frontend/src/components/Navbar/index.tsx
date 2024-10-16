@@ -12,6 +12,8 @@ import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import RadioInput from "../Form/RadioInput";
 import NavigationLink from "../link/NavigationLink";
 import { useCookies } from "react-cookie";
+import { HiBars3BottomRight, HiOutlineUserCircle } from "react-icons/hi2";
+import Drawer from "../Drawer";
 
 // const pages = [
 //   { title: "home", href: "/" },
@@ -41,7 +43,7 @@ export default function Navbar() {
         closeHamburgerMenu();
       }
     };
-    document.addEventListener("click",clickEvent);
+    document.addEventListener("click", clickEvent);
     const resizeEvent = () => {
       if (window.innerWidth > 1024) {
         closeHamburgerMenu();
@@ -50,7 +52,7 @@ export default function Navbar() {
     document.addEventListener("resize", resizeEvent);
 
     return () => {
-      document.removeEventListener("click",clickEvent);
+      document.removeEventListener("click", clickEvent);
       document.removeEventListener("resize", resizeEvent);
     };
   }, []);
@@ -92,7 +94,6 @@ export default function Navbar() {
             ? "bg-white dark:bg-dark dark:text-white"
             : "bg-transparent dark:bg-dark"
         }`}
-        // shadow-nav dark:shadow-md dark:shadow-lighter
       >
         <div className="container mx-auto h-full flexBetween px-2">
           <div className="flexCenter gap-4">
@@ -201,45 +202,25 @@ export default function Navbar() {
             </NavigationLink>
           </div>
           <div className="flexCenter gap-3 md:hidden">
-            <NavigationLink href={"/"}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-7 h-7 "
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-              </svg>
+            <NavigationLink href={"/profile/dashboard"}>
+              <HiOutlineUserCircle size={24} />
             </NavigationLink>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="hamburgerMenu w-7 h-7 cursor-pointer"
+            <button
+              type="button"
               onClick={() => openHamburgerMenu()}
+              className="hamburgerMenu"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
-              />
-            </svg>
+              <HiBars3BottomRight className="rtl:rotate-180" size={24} />
+            </button>
           </div>
         </div>
       </nav>
-      <HamburgerMenu
-        open={hamburgerMenu}
-        pages={pages}
-        closeHamburgerMenu={closeHamburgerMenu}
-      />
+      <Drawer show={hamburgerMenu} onClose={closeHamburgerMenu}>
+        <HamburgerMenu
+          pages={pages}
+        />
+      </Drawer>
+
       {showLangSwitcher && (
         <Popup show={showLangSwitcher} onClose={setShowLangSwitcher}>
           <LangSwitcher />

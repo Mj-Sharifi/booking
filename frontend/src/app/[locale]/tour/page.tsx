@@ -8,6 +8,7 @@ import { tourCategoryData, tourData } from "@/types/response";
 import TourCard from "@/components/Tour/TourCard";
 import { FaFilter } from "react-icons/fa6";
 import { createPortal } from "react-dom";
+import Drawer from "@/components/Drawer";
 export default function Tours() {
   const { locale } = useParams();
   const [tours, setTours] = useState<tourData[]>();
@@ -77,12 +78,14 @@ export default function Tours() {
   const [showFilter, setShowFilters] = useState(false);
   useEffect(() => {
     const handleFilterResize = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 1024) {
+        console.log("handleFilterResize");
         setShowFilters(false);
         document.body.classList.remove("body_wrapper");
       }
     };
     const handleFilterClick = (e: MouseEvent) => {
+      console.log("handleFilterClick");
       if (!(e.target as HTMLElement).closest(".tour-mobile-filters")) {
         setShowFilters(false);
         document.body.classList.remove("body_wrapper");
@@ -99,8 +102,8 @@ export default function Tours() {
   console.log(tours);
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-4 sm:gap-6 lg:gap-8">
-        <div className="hidden md:block col-span-1">
+      <div className="grid grid-cols-1 lg:grid-cols-4 sm:gap-6 lg:gap-8">
+        <div className="hidden lg:block col-span-1">
           {allCategories && (
             <TourSidebar
               allCategories={allCategories}
@@ -113,11 +116,11 @@ export default function Tours() {
             />
           )}
         </div>
-        <div className="col-span-1 md:col-span-3 px-6 sm:px-2">
+        <div className="col-span-1 lg:col-span-3 px-6 sm:px-2">
           <div className="flex">
             <button
               type="button"
-              className="tour-mobile-filters px-3 py-2 rounded-md flex gap-1 items-center bg-hoverlight text-darkblue md:hidden"
+              className="tour-mobile-filters px-3 py-2 rounded-md flex gap-1 items-center bg-hoverlight text-darkblue lg:hidden"
               onClick={() => {
                 setShowFilters(true);
                 document.body.classList.add("body_wrapper");
@@ -145,20 +148,22 @@ export default function Tours() {
         </div>
       </div>
       <div
-        className={`w-72 px-4 flex justify-center tour-mobile-filters duration-300 fixed bg-white dark:bg-dark top-0 bottom-0 z-[1000] min-h-screen ${
+        className={`w-72 px-4 flex justify-center tour-mobile-filters duration-300 fixed bg-white dark:bg-dark top-0 bottom-0 z-[1000] min-h-screen ltr:border-r rtl:border-l border-darkblue dark:border-lightblue ${
           showFilter ? "ltr:left-0 rtl:right-0" : "ltr:-left-72 rtl:-right-72"
         }`}
       >
         {allCategories && (
-          <TourSidebar
-            allCategories={allCategories}
-            handleCategory={handleCategory}
-            category={category}
-            handleDuration={handleDuration}
-            duration={durationRange}
-            freeCancelation={freeCancelation}
-            handleFreeCancelation={() => setFreeCancelation(!freeCancelation)}
-          />
+          <Drawer show={showFilter} onClose={()=>setShowFilters(false)}>
+            <TourSidebar
+              allCategories={allCategories}
+              handleCategory={handleCategory}
+              category={category}
+              handleDuration={handleDuration}
+              duration={durationRange}
+              freeCancelation={freeCancelation}
+              handleFreeCancelation={() => setFreeCancelation(!freeCancelation)}
+            />
+          </Drawer>
         )}
       </div>
     </>
