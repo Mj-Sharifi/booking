@@ -32,7 +32,7 @@ export default function page() {
           .put(
             process.env.NEXT_PUBLIC_API + `users/${user_info?.user?.id}`,
             {
-              address: e.address||null,
+              address: e.address || null,
               city: e.city || null,
               country: e.country || null,
               zipcode: e.zipcode || null,

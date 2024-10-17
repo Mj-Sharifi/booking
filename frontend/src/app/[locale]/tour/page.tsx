@@ -7,7 +7,6 @@ import { useTranslations } from "next-intl";
 import { tourCategoryData, tourData } from "@/types/response";
 import TourCard from "@/components/Tour/TourCard";
 import { FaFilter } from "react-icons/fa6";
-import { createPortal } from "react-dom";
 import Drawer from "@/components/Drawer";
 export default function Tours() {
   const { locale } = useParams();
@@ -34,6 +33,7 @@ export default function Tours() {
       setCategory([...category, c]);
     }
   };
+
   // Handle Duration
   const [durationRange, setDurationRange] = useState<string>("");
   const handleDuration = (d: string) => {
@@ -43,8 +43,12 @@ export default function Tours() {
       setDurationRange(d);
     }
   };
-  // Handle Free Cancelation
-  const [freeCancelation, setFreeCancelation] = useState(false);
+  // Handle Price
+  const [priceRange, setPriceRange] = useState<number[]>([0,2000])
+  const handlePrice = (newValue:number[]) => {
+    setPriceRange(newValue);
+  };
+  // Backend Filters
   useEffect(() => {
     const filterQuery = () => {
       const categoryQuery: string[] =
@@ -67,6 +71,10 @@ export default function Tours() {
       )
       .then((res) => setTours(res.data.data));
   }, [JSON.stringify(category), durationRange]);
+
+  // Handle Free Cancelation
+  const [freeCancelation, setFreeCancelation] = useState(false);
+  // Frontend Filters
   useEffect(() => {
     let newTours = tours;
     if (freeCancelation) {
@@ -113,6 +121,8 @@ export default function Tours() {
               duration={durationRange}
               freeCancelation={freeCancelation}
               handleFreeCancelation={() => setFreeCancelation(!freeCancelation)}
+              price={priceRange}
+              handlePrice={handlePrice}
             />
           )}
         </div>
@@ -153,7 +163,7 @@ export default function Tours() {
         }`}
       >
         {allCategories && (
-          <Drawer show={showFilter} onClose={()=>setShowFilters(false)}>
+          <Drawer show={showFilter} onClose={() => setShowFilters(false)}>
             <TourSidebar
               allCategories={allCategories}
               handleCategory={handleCategory}
@@ -162,6 +172,8 @@ export default function Tours() {
               duration={durationRange}
               freeCancelation={freeCancelation}
               handleFreeCancelation={() => setFreeCancelation(!freeCancelation)}
+              price={priceRange}
+              handlePrice={handlePrice}
             />
           </Drawer>
         )}

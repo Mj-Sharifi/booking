@@ -24,6 +24,7 @@ type props = {
   errorMessage?: string;
   onChange: (value: string | number) => void;
   onBlur?: (value: string | number) => void;
+  autoComplete?:React.HTMLInputAutoCompleteAttribute
 };
 export default function Select({
   id,
@@ -36,6 +37,7 @@ export default function Select({
   label,
   isToched,
   errorMessage,
+  autoComplete="off"
 }: props) {
   const t = useTranslations("error");
   const [open, setOpen] = useState(false);
@@ -80,6 +82,7 @@ export default function Select({
           setCurrentLi((prev) => (prev < 1 ? lastIndex : prev - 1));
           break;
         case "Enter":
+
           setOpen(false);
           setTitle(searchedOptions[currentLi].title);
           onChange(searchedOptions[currentLi].value);
@@ -114,7 +117,7 @@ export default function Select({
     return () => {
       selectRef.current?.removeEventListener("keydown", handleMove); // Clean up listener
     };
-  }, [currentLi, ulElement, selectRef]);
+  }, [currentLi, ulElement, selectRef,searchedOptions]);
 
   // Close by clicking outside
   useEffect(() => {
@@ -130,7 +133,7 @@ export default function Select({
     window.addEventListener("click", (e) => closeList(e));
     return () => window.removeEventListener("click", (e) => closeList(e));
   }, []);
-
+// console.log(label,"searchedOptions: ",searchedOptions)
   return (
     <div className={`relative`} id={`select_component-${id}`} ref={selectRef}>
       <div
@@ -157,6 +160,7 @@ export default function Select({
           value={value}
           onBlur={() => setFocus(false)}
           onChange={(e) => {
+            setOpen(true)
             setCurrentLi(0);
             setTitle("");
             setValue(e.target.value);
@@ -171,6 +175,7 @@ export default function Select({
               setSearchedOptions(options);
             }
           }}
+          autoComplete={autoComplete}
         />
         <label
           htmlFor={id || `select_component-${label}`}
