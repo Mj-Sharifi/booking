@@ -33,8 +33,8 @@
     "apply": "Apply",
     "from": "From",
     "date": "Date",
-    "filter":"Filter",
-    "sort":"Sort"
+    "filter": "Filter",
+    "sort": "Sort"
   },
   "banner": {
     "title": "Best Travel <span1>Experience<span2><img></img></span2></span1>",
@@ -99,22 +99,26 @@
     "additional_info_3": "Please note: the tour itinerary and order may change",
     "book_now": "Book now",
     "travelers_number": "Number of travelers",
-    "reviews_count":"{count} reviews",
+    "reviews_count": "{count} reviews",
     "location": "Location",
     "staff": "Staff",
     "cleanliness": "Cleanliness",
     "value_money": "Value for money",
     "comfort": "Comfort",
-    "facilities":"Facilities",
-    "free_wiFi":"Free WiFi",
-    "exceptional":"Exceptional",
-    "less_5d":"Less than 5 days",
-    "6d_10d":"5 to 10 days",
-    "more_10d":"More than 10 days",
-    "other":"Other",
-    "tour_detail":"View detail",
-    "per_adult": "per adult"
-
+    "facilities": "Facilities",
+    "free_wiFi": "Free WiFi",
+    "exceptional": "Exceptional",
+    "less_5d": "Less than 5 days",
+    "6d_10d": "5 to 10 days",
+    "more_10d": "More than 10 days",
+    "other": "Other",
+    "tour_detail": "View detail",
+    "per_adult": "per adult",
+    "no_filtered_tour": "There is no tours based on your selected filters.",
+    "price:asc":"Cheapest",
+    "price:desc":"Most Expensive",
+    "duration:asc":"Shortest",
+    "duration:desc":"Longest"
   },
   "testimony": {
     "customer_review": "Customer reviews"

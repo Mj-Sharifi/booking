@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-17T12:57:36.521Z"
+    "x-generation-date": "2024-10-18T08:52:28.097Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -2411,6 +2411,7 @@
       },
       "CategoryLocalizationRequest": {
         "required": [
+          "value",
           "locale"
         ],
         "type": "object",
@@ -2443,6 +2444,9 @@
             ],
             "example": "string or id"
           },
+          "value": {
+            "type": "string"
+          },
           "locale": {
             "type": "string"
           }
@@ -2455,6 +2459,9 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "value"
+            ],
             "type": "object",
             "properties": {
               "title": {
@@ -2484,6 +2491,9 @@
                   }
                 ],
                 "example": "string or id"
+              },
+              "value": {
+                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -2608,6 +2618,9 @@
       },
       "Category": {
         "type": "object",
+        "required": [
+          "value"
+        ],
         "properties": {
           "title": {
             "type": "string"
@@ -3584,6 +3597,9 @@
                                           }
                                         }
                                       },
+                                      "value": {
+                                        "type": "string"
+                                      },
                                       "createdAt": {
                                         "type": "string",
                                         "format": "date-time"
@@ -3858,6 +3874,9 @@
                 }
               }
             }
+          },
+          "value": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -6977,6 +6996,9 @@
                               }
                             }
                           }
+                        },
+                        "value": {
+                          "type": "string"
                         },
                         "createdAt": {
                           "type": "string",

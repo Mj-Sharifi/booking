@@ -41,7 +41,7 @@ export default function BecomeExpert() {
           height="400"
           className="object-cover w-full h-full top-0 absolute z-[-1]"
         />
-        <div className="container mx-auto px-2 md:px-4 xl:px-8 text-center text-white flex flex-col gap-y-6 justify-center items-center">
+        <div className="container mx-auto px-2 md:px-4 xl:px-8 text-center text-white flexCenter flex-col gap-y-6 ">
           <h1 className="font-bold text-xl md:text-3xl xl:text-5xl md:w-2/3 xl:w-1/2">
             {t("become-expert.main_title")}
           </h1>
@@ -65,8 +65,8 @@ export default function BecomeExpert() {
         </h4>
         <div className="flex gap-y-8 flex-col sm:flex-row items-center sm:justify-around">
           <div className="font-semibold">
-            <div className="relative rounded-full w-28 h-28 flex justify-center items-center bg-lightgreen ">
-              <span className="absolute text-xs md:text-sm rounded-full top-0 ltr:left-0 rtl:right-0 w-8 h-8 flex justify-center items-center bg-myyellow z-[1]">
+            <div className="relative rounded-full w-28 h-28 flexCenter bg-lightgreen ">
+              <span className="absolute text-xs md:text-sm rounded-full top-0 ltr:left-0 rtl:right-0 w-8 h-8 flexCenter bg-myyellow z-[1]">
                 01
               </span>
               <Image

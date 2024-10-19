@@ -15,11 +15,6 @@ import { useCookies } from "react-cookie";
 import { HiBars3BottomRight, HiOutlineUserCircle } from "react-icons/hi2";
 import Drawer from "../Drawer";
 
-// const pages = [
-//   { title: "home", href: "/" },
-//   { title: "tour", href: "tour" },
-//   { title: "blog", href: "blog" },
-// ];'
 const pages = ["home", "tour", "blog"];
 export default function Navbar() {
   4;

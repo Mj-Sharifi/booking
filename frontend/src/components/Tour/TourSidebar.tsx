@@ -58,10 +58,10 @@ export default function TourSidebar({
               <li key={e.id}>
                 <CheckboxInput
                   onChange={() =>
-                    handleCategory(e.attributes.title.toLowerCase())
+                    handleCategory(e.attributes.value)
                   }
-                  value={e.attributes.title.toLowerCase()}
-                  checked={category.includes(e.attributes.title.toLowerCase())}
+                  value={e.attributes.value}
+                  checked={category.includes(e.attributes.value)}
                   label={e.attributes.title}
                 />
               </li>
@@ -102,7 +102,7 @@ export default function TourSidebar({
       <div className="py-6">
         <span className="font-semibold md:text-lg">{t("tour.other")}</span>
         <div className="mt-2">
-          <RangeSlider min={0} max={2000} value={price} onChange={handlePrice} />
+          <RangeSlider min={0} max={2000} onChange={handlePrice} />
         </div>
       </div>
     </div>

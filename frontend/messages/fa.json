@@ -113,7 +113,12 @@
     "tour_detail": "مشاهده جزییات",
     "per_adult": "برای هر بزرگسال",
     "filter": "فیلتر",
-    "sort": "ترتیب"
+    "sort": "ترتیب",
+    "no_filtered_tour": "توری مطابق فیلتر های انتخابی یافت نشد.",
+    "price:asc":"ارزان‌ترین",
+    "price:desc":"گران‌ترین",
+    "duration:asc":"کوتاه‌ترین",
+    "duration:desc":"طولانی‌ترین"
   },
   "testimony": {
     "customer_review": "نظرات مشتریان"

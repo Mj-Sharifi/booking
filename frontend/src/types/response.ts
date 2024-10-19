@@ -56,6 +56,7 @@ export type tourCategoryData = {
     publishedAt: string;
     title: string;
     tours: { data: tourData[] };
+    value:string
     updatedAt: string;
   };
 };
