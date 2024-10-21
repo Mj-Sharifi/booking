@@ -3,12 +3,12 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 type dropdownProps = {
   label: string;
   animation?: string;
-  renderElement: ReactNode;
+  children?: ReactNode;
 };
 export default function Dropdown({
   label,
   animation,
-  renderElement,
+  children,
 }: dropdownProps) {
   const dropdownButton = useRef<HTMLSpanElement>(null);
   const dropdownList = useRef<HTMLDivElement>(null);
@@ -59,11 +59,11 @@ export default function Dropdown({
       </span>
       <div
         ref={dropdownList}
-        className={`dropdown ${
+        className={`dropdown absolute top-1 ${
           dropdown ? `${animation} visible` : "invisible"
         } bg-transparent overflow-hidden `}
       >
-        {renderElement}
+        {children}
       </div>
     </div>
   );

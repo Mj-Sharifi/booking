@@ -82,7 +82,6 @@ export default function Select({
           setCurrentLi((prev) => (prev < 1 ? lastIndex : prev - 1));
           break;
         case "Enter":
-
           setOpen(false);
           setTitle(searchedOptions[currentLi].title);
           onChange(searchedOptions[currentLi].value);
@@ -110,7 +109,6 @@ export default function Select({
         });
       }
     }
-
     if (selectRef.current) {
       selectRef.current.addEventListener("keydown", handleMove);
     }
@@ -196,7 +194,6 @@ export default function Select({
           ""
         )}
       </div>
-
       <ul
         ref={ulElement}
         className={`text-sm md:text-base absolute z-20 top-full duration-300 transition-height overflow-y-auto overflow-x-hidden bg-transparent right-0 left-0 flex flex-col bg-white dark:bg-dark shadow-md rounded-b-lg ${

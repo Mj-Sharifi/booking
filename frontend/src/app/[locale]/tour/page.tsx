@@ -12,6 +12,7 @@ import { loading_status } from "@/types/types";
 import Loader from "@/components/Loader";
 import useTheme from "@/hooks/useTheme";
 import TourSorting from "@/components/Tour/TourSorting";
+import Dropdown from "@/components/Dropdown";
 export default function Tours() {
   const { locale } = useParams();
   const [tours, setTours] = useState<tourData[]>();
@@ -244,7 +245,30 @@ export default function Tours() {
             </div>
             <div className="col-span-1 lg:col-span-3 px-6 sm:px-2">
               <div className="flex justify-between lg:justify-end">
-                <TourSorting
+                <Dropdown label={t("tour.sort")}>
+                  <div className="flexCenter flex-col gap-y-2 text-xs md:text-sm shadow-md rounded-md">
+                    {[
+                      { title: t("tour.price:asc"), value: "price:asc" },
+                      { title: t("tour.price:desc"), value: "price:desc" },
+                      { title: t("tour.duration:asc"), value: "duration:asc" },
+                      {
+                        title: t("tour.duration:desc"),
+                        value: "duration:desc",
+                      },
+                    ].map((op, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        className="py-1 px-2 rounded-md "
+                        // @ts-ignore
+                        onClick={() => handleSorting(op.value)}
+                      >
+                        {op.title}
+                      </button>
+                    ))}
+                  </div>
+                </Dropdown>
+                {/* <TourSorting
                   handleSorting={handleSorting}
                   options={[
                     "price:asc",
@@ -252,7 +276,7 @@ export default function Tours() {
                     "duration:asc",
                     "duration:desc",
                   ]}
-                />
+                /> */}
                 <button
                   type="button"
                   className="tour-mobile-filters px-3 py-2 rounded-md flex gap-1 items-center bg-hoverlight text-darkblue lg:hidden"

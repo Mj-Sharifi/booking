@@ -33,8 +33,7 @@
     "apply": "Apply",
     "from": "From",
     "date": "Date",
-    "filter": "Filter",
-    "sort": "Sort"
+    "filter": "Filter"
   },
   "banner": {
     "title": "Best Travel <span1>Experience<span2><img></img></span2></span1>",
@@ -115,6 +114,7 @@
     "tour_detail": "View detail",
     "per_adult": "per adult",
     "no_filtered_tour": "There is no tours based on your selected filters.",
+    "sort":"Sort",
     "price:asc":"Cheapest",
     "price:desc":"Most Expensive",
     "duration:asc":"Shortest",
