@@ -26,55 +26,62 @@ export default function TourCard({
 }: props) {
   const t = useTranslations();
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 overflow-hidden border-b-2 py-5">
-      <div className="col-span-1  md:col-span-1 rounded-lg overflow-hidden">
-        <Image
-          src={process.env.NEXT_PUBLIC_URL + image}
-          alt={title}
-          width={300}
-          height={300}
-          className="w-full h-full object-cover hover:scale-110 duration-300 aspect-square"
-        />
-      </div>
-      <div className="md:col-span-2 flex flex-col justify-start gap-2 sm:gap-4 sm:py-1">
-        <span className="text-light dark:text-lighter text-xs md:text-sm">
-          {duration} {t("tour.days")}
-        </span>
-        <h2 className="font-semibold md:text-lg">{title}</h2>
-        <h3 className="md:text-lg text-light dark:text-lighter">
-          {place}
-        </h3>
-        <p className="hidden md:block text-sm md:text-base text-light dark:text-lighter">{t("common.lorem_ipsum_long")}</p>
-        {freeCancellation && (
-          <span className=" text-xs md:text-sm text-emerald-600 dark:text-emerald-300 font-semibold">
-            {t("tour.free_cancellation")}
-          </span>
-        )}
-      </div>
-      <div className="flex flex-col gap-2 justify-between sm:items-center ">
-        <div className="flex flex-col">
-          <Rating defaultValue={rating} width="16px" />
-          <span className="text-xs md:text-sm text-light dark:text-lighter">
-            {t("tour.reviews_count", {
-              count: Math.round((price * rating) / 4),
-            })}
-          </span>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 overflow-hidden border-b-2 py-5">
+        <div className="col-span-1  md:col-span-1 rounded-lg overflow-hidden">
+          <Image
+            src={process.env.NEXT_PUBLIC_URL + image}
+            alt={title}
+            width={300}
+            height={300}
+            className="w-full h-full object-cover hover:scale-110 duration-300 aspect-square"
+          />
         </div>
-        <div className="flex flex-col">
-          <span className="text-xs md:text-sm text-light dark:text-lighter">{t("common.from")}</span>
-          <span className="text-sm md:text-base font-semibold">{price} {t("footer.usd")}</span>
-          <span className="text-xs md:text-sm text-light dark:text-lighter">{t("tour.per_adult")}</span>
+        <div className="md:col-span-2 flex flex-col justify-start gap-2 sm:gap-4 sm:py-1">
+          <span className="text-light dark:text-lighter text-xs md:text-sm">
+            {duration} {t("tour.days")}
+          </span>
+          <h2 className="font-semibold md:text-lg">{title}</h2>
+          <h3 className="md:text-lg text-light dark:text-lighter">{place}</h3>
+          <p className="hidden md:block text-sm md:text-base text-light dark:text-lighter">
+            {t("common.lorem_ipsum_long")}
+          </p>
+          {freeCancellation && (
+            <span className=" text-xs md:text-sm text-emerald-600 dark:text-emerald-300 font-semibold">
+              {t("tour.free_cancellation")}
+            </span>
+          )}
         </div>
-        <NavigationLink
-          href={{
-            pathname: "/tour/[id]/[title]",
-            params: { id, title: title.trim().replaceAll(" ", "-") },
-          }}
-          className="w-full py-2 text-center transition-all duration-300 bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark rounded-md"
-        >
-          {t("tour.tour_detail")}
-        </NavigationLink>
+        <div className="flex flex-col gap-2 justify-between sm:items-center ">
+          <div className="flex flex-col">
+            <Rating defaultValue={rating} width="16px" />
+            <span className="text-xs md:text-sm text-light dark:text-lighter">
+              {t("tour.reviews_count", {
+                count: Math.round((price * rating) / 4),
+              })}
+            </span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xs md:text-sm text-light dark:text-lighter">
+              {t("common.from")}
+            </span>
+            <span className="text-sm md:text-base font-semibold">
+              {price} {t("footer.usd")}
+            </span>
+            <span className="text-xs md:text-sm text-light dark:text-lighter">
+              {t("tour.per_adult")}
+            </span>
+          </div>
+          <NavigationLink
+            href={{
+              pathname: "/tour/[id]/[title]",
+              params: { id, title: title.trim().replaceAll(" ", "-") },
+            }}
+            className="w-full py-2 text-center transition-all duration-300 bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark rounded-md"
+          >
+            {t("tour.tour_detail")}
+          </NavigationLink>
+        </div>
       </div>
-    </div>
   );
 }

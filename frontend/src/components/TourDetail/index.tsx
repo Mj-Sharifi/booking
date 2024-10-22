@@ -29,7 +29,6 @@ import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import TextAreaInput from "../Form/TextAreaInput";
 import TextInput from "../Form/TextInput";
 import ProgressBar from "../ProgressBar";
-import { title } from "process";
 
 export default function TourDetail() {
   const t = useTranslations();
@@ -64,6 +63,11 @@ export default function TourDetail() {
     children: number;
     rooms: number;
   }>({ adult: 2, children: 1, rooms: 1 });
+  const handleGuest = (name:"adult"|"children"|"rooms")=>{
+    if(name=="adult"){
+
+    }
+  }
   useEffect(() => {
     document.addEventListener("click", (e: MouseEvent) => {
       if (!(e.target as HTMLElement).closest(".guest-selection")) {
@@ -196,7 +200,6 @@ export default function TourDetail() {
     }
   };
   useEffect(() => {
-    console.log("height-useeffect", activeTimeline);
     const calculateDetailHeight = () => {
       let height: number[] = [];
       for (let i = 0; i < timelineDetails.length; i++) {
@@ -216,7 +219,17 @@ export default function TourDetail() {
     JSON.stringify(activeTimeline),
     typeof document.getElementById("timeline-detail-0") !== "undefined",
   ]);
-
+  console.log("guest: ", guest);
+  console.log("dateRange: ", dateRange[0]?.toString());
+  const handleBookingPath = () => {
+    const dateQuery = `?depart=${dateRange[0]?.toString()}&return=${dateRange[1]?.toString}`
+    let psQuery = `&adult=${guest.adult}`
+    if(guest.children){
+      psQuery = psQuery+`&children=${guest.children}`
+    }
+    psQuery = psQuery+`&rooms=${guest.rooms}`
+    return dateQuery+psQuery
+  };
   return (
     <div className="flex flex-col">
       {tourData && (
@@ -493,7 +506,7 @@ export default function TourDetail() {
                   className="w-full py-3 text-center transition-all duration-300 bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark rounded-md"
                   onClick={() => {
                     dispatch(saveTour(tourData));
-                    router.push("/booking", { locale });
+                    router.push(`/booking`, { locale });
                   }}
                 >
                   {t("tour.book_now")}
@@ -704,11 +717,7 @@ export default function TourDetail() {
                 { title: t("tour.free_wiFi"), value: 4.8 },
               ].map((p, i) => (
                 <div key={i} className="col-span-1">
-                  <Rating
-                    title={p.title}
-                    defaultValue={p.value}
-                  width="16px"
-                  />
+                  <Rating title={p.title} defaultValue={p.value} width="16px" />
                 </div>
               ))}
             </div>

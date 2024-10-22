@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { tourCategoryData } from "@/types/response";
 import { useTranslations } from "next-intl";
+import NavigationLink from "@/components/link/NavigationLink";
 
 export default function TourTypeSelection() {
   const t = useTranslations()
@@ -67,8 +68,9 @@ export default function TourTypeSelection() {
                     opacity: `${startAnimation ? "1" : "0"}`,
                   }}
                 >
-                  <Link
-                    href=""
+                  <NavigationLink
+                  // @ts-ignore
+                    href={`/tour?category=${e.attributes.value}`}
                     className="flex flex-col items-center gap-2 overflow-hidden duration-300 py-8 hover:py-6"
                   >
                     <img
@@ -81,7 +83,7 @@ export default function TourTypeSelection() {
                     />
                     <h2>{e.attributes.title}</h2>
                     <h4>{e.attributes.tours.data.length} {t("tour.tours")}</h4>
-                  </Link>
+                  </NavigationLink>
                 </div>
               </SwiperSlide>
             ))}

@@ -1,5 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
-import { leftArrowSVG, rightArrowSVG } from "@/utils/svg";
+import React, { ReactNode, useState } from "react";
 
 //Import Swiper
 import { Swiper, useSwiper } from "swiper/react";
@@ -7,6 +6,7 @@ import { SwiperOptions } from "swiper/types";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
 import "./style.css";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 const SwiperButtonNext = ({
   activeIndex,
   lastSlideIndex,
@@ -26,13 +26,13 @@ const SwiperButtonNext = ({
       }`}
       onClick={() => swiper.slideNext()}
     >
-      {rightArrowSVG(
-        `rtl:rotate-180 duration-200 w-6 h-6 text-dark hover:text-violet ${
+      <HiChevronRight
+        className={`rtl:rotate-180 duration-200 w-6 h-6 text-dark hover:text-violet ${
           activeIndex === lastSlideIndex
             ? "text-light dark:text-light/80 hover:text-light"
             : "text-dark dark:text-light hover:text-violet"
-        }`
-      )}
+        }`}
+      />
     </button>
   );
 };
@@ -49,13 +49,13 @@ const SwiperButtonPrev = ({ activeIndex }: { activeIndex: number }) => {
       }`}
       onClick={() => swiper.slidePrev()}
     >
-      {leftArrowSVG(
-        `rtl:rotate-180 duration-200 w-6 h-6 ${
+      <HiChevronLeft
+        className={`rtl:rotate-180 duration-200 w-6 h-6 ${
           activeIndex === 0
             ? "text-light dark:text-light/80 hover:text-light"
             : " text-dark dark:text-light hover:text-violet"
-        }`
-      )}
+        }`}
+      />
     </button>
   );
 };

@@ -1,3 +1,4 @@
+"use client"
 import BookingContent from "@/components/Booking/BookingContent";
 import { bookStore, persistedBookReducer } from "@/lib/store/bookStore";
 import React from "react";

@@ -120,6 +120,7 @@
     "duration:asc":"Shortest",
     "duration:desc":"Longest"
   },
+
   "testimony": {
     "customer_review": "Customer reviews"
   },
@@ -196,7 +197,8 @@
     "avatar": "Avatar",
     "browse": "Browse",
     "avatar_title": "Your avatar",
-    "avatar_description": "JPG no bigger than 800px wide and tall."
+    "avatar_description": "JPG no bigger than 800px wide and tall.",
+    "payment_detail":"Payment Detail"
   },
   "error": {
     "is_required": "{field} is required",
