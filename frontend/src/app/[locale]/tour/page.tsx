@@ -57,6 +57,24 @@ export default function Tours() {
   };
   // Handle Free Cancelation
   const [freeCancelation, setFreeCancelation] = useState<boolean>();
+  // Sorting
+  const [sort, setSort] = useState<
+    "price:asc" | "price:desc" | "duration:asc" | "duration:desc" | ""
+  >("");
+  const handleSorting = (
+    s: "price:asc" | "price:desc" | "duration:asc" | "duration:desc"
+  ) => {
+    if (sort == s) {
+      setSort("");
+    } else {
+      setSort(s);
+    }
+  };
+  // Pagination
+  // const [page, setPage] = useState(1);
+  // const handlePagination = (p: number) => {
+  //   setPage(p);
+  // };
   // Setting Filters from URL
   const searchParams = useSearchParams();
   useEffect(() => {
@@ -84,25 +102,18 @@ export default function Tours() {
     } else {
       setFreeCancelation(false);
     }
-  }, []);
-  // Sorting
-  const [sort, setSort] = useState<
-    "price:asc" | "price:desc" | "duration:asc" | "duration:desc" | ""
-  >("");
-  const handleSorting = (
-    s: "price:asc" | "price:desc" | "duration:asc" | "duration:desc"
-  ) => {
-    if (sort == "") {
-      setSort(s);
-    } else {
-      setSort("");
+    let sort = searchParams.get("sort");
+    if (sort) {
+      setSort(
+        sort as "price:asc" | "price:desc" | "duration:asc" | "duration:desc"
+      );
     }
-  };
-  // Pagination
-  const [page, setPage] = useState(1);
-  const handlePagination = (p: number) => {
-    setPage(p);
-  };
+    // let page = searchParams.get("page");
+    // if (page) {
+    //   setPage(+page);
+    // }
+  }, []);
+
   // Backend Filters
   useEffect(() => {
     if (priceRange && category && typeof durationRange == "string") {
@@ -129,7 +140,7 @@ export default function Tours() {
           process.env.NEXT_PUBLIC_API +
             `tours?populate=*&locale=${locale}${filterQuery()}${
               sort ? "&" + sort : ""
-            }&pagination[page]=${page}&pagination[pageSize]=10`
+            }`
         )
         .then((res) => {
           if (res.status == 200) {
@@ -145,7 +156,6 @@ export default function Tours() {
     JSON.stringify(category),
     durationRange,
     JSON.stringify(priceRange),
-    page,
   ]);
   // Frontend Filters
   useEffect(() => {
@@ -153,8 +163,9 @@ export default function Tours() {
     let categoryURL = "";
     let durationURL = "";
     let priceURL = "";
-    if (category && durationRange && priceRange) {
+    if (category && typeof durationRange == "string" && priceRange) {
       if (category.length > 0) {
+  
         categoryURL = `category=${category.join(",")}`;
       }
       if (durationRange) {
@@ -164,7 +175,6 @@ export default function Tours() {
         priceURL = `price=${priceRange.join(",")}`;
       }
     }
-
     const backQuery = [categoryURL, durationURL, priceURL]
       .filter(Boolean)
       .join("&");
@@ -173,6 +183,33 @@ export default function Tours() {
     if (freeCancelation) {
       newTours = newTours?.filter((t) => t.attributes.free_cancelation);
       frontQuery = "freeCancel=1";
+    }
+    if (sort !== "") {
+      switch (sort) {
+        case "price:asc":
+          newTours = newTours.sort(
+            (a, b) => a.attributes.price - b.attributes.price
+          );
+          break;
+        case "price:desc":
+          newTours = newTours.sort(
+            (a, b) => b.attributes.price - a.attributes.price
+          );
+          break;
+        case "duration:asc":
+          newTours = newTours.sort(
+            (a, b) => a.attributes.duration - b.attributes.duration
+          );
+          break;
+        case "duration:desc":
+          newTours = newTours.sort(
+            (a, b) => b.attributes.duration - a.attributes.duration
+          );
+          break;
+        default:
+          break;
+      }
+      frontQuery = frontQuery ? frontQuery + `&sort=${sort}` : `sort=${sort}`;
     }
     setFilteredTours(newTours);
     // Calculate final Query
@@ -190,7 +227,7 @@ export default function Tours() {
       "",
       window.location.pathname + finalQuery
     );
-  }, [JSON.stringify(tours), freeCancelation]);
+  }, [JSON.stringify(tours), freeCancelation, sort]);
   // Show filter
   const [showFilter, setShowFilters] = useState(false);
   useEffect(() => {
@@ -245,38 +282,38 @@ export default function Tours() {
             </div>
             <div className="col-span-1 lg:col-span-3 px-6 sm:px-2">
               <div className="flex justify-between lg:justify-end">
-                <Dropdown label={t("tour.sort")}>
-                  <div className="flexCenter flex-col gap-y-2 text-xs md:text-sm shadow-md rounded-md">
-                    {[
-                      { title: t("tour.price:asc"), value: "price:asc" },
-                      { title: t("tour.price:desc"), value: "price:desc" },
-                      { title: t("tour.duration:asc"), value: "duration:asc" },
-                      {
-                        title: t("tour.duration:desc"),
-                        value: "duration:desc",
-                      },
-                    ].map((op, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        className="py-1 px-2 rounded-md "
-                        // @ts-ignore
-                        onClick={() => handleSorting(op.value)}
-                      >
-                        {op.title}
-                      </button>
-                    ))}
-                  </div>
-                </Dropdown>
-                {/* <TourSorting
-                  handleSorting={handleSorting}
-                  options={[
-                    "price:asc",
-                    "price:desc",
-                    "duration:asc",
-                    "duration:desc",
-                  ]}
-                /> */}
+                <div className="px-8">
+                  <Dropdown label={t("tour.sort")}>
+                    <div className="flexCenter flex-col gap-y-2 text-xs md:text-sm rounded-md bg-white">
+                      {[
+                        { title: t("tour.price:asc"), value: "price:asc" },
+                        { title: t("tour.price:desc"), value: "price:desc" },
+                        {
+                          title: t("tour.duration:asc"),
+                          value: "duration:asc",
+                        },
+                        {
+                          title: t("tour.duration:desc"),
+                          value: "duration:desc",
+                        },
+                      ].map((op, i) => (
+                        <button
+                          key={i}
+                          type="button"
+                          className={`py-1 px-2 duration-300 w-full text-nowrap ${
+                            sort == op.value
+                              ? "bg-darkblue/90 text-white dark:bg-lightblue/90 dark:text-dark"
+                              : ""
+                          } hover:bg-darkblue hover:text-white dark:hover:bg-lightblue dark:hover:text-dark rounded`}
+                          // @ts-ignore
+                          onClick={() => handleSorting(op.value)}
+                        >
+                          {op.title}
+                        </button>
+                      ))}
+                    </div>
+                  </Dropdown>
+                </div>
                 <button
                   type="button"
                   className="tour-mobile-filters px-3 py-2 rounded-md flex gap-1 items-center bg-hoverlight text-darkblue lg:hidden"

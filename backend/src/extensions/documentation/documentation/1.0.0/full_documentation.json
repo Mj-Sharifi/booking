@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-21T05:38:57.814Z"
+    "x-generation-date": "2024-10-21T16:06:50.366Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -1042,6 +1042,9 @@
                             }
                           }
                         },
+                        "value": {
+                          "type": "string"
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -1336,6 +1339,7 @@
       },
       "BlogCategoryLocalizationRequest": {
         "required": [
+          "value",
           "locale"
         ],
         "type": "object",
@@ -1357,6 +1361,9 @@
               "example": "string or id"
             }
           },
+          "value": {
+            "type": "string"
+          },
           "locale": {
             "type": "string"
           }
@@ -1369,6 +1376,9 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "value"
+            ],
             "type": "object",
             "properties": {
               "title": {
@@ -1387,6 +1397,9 @@
                   ],
                   "example": "string or id"
                 }
+              },
+              "value": {
+                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -1511,6 +1524,9 @@
       },
       "BlogCategory": {
         "type": "object",
+        "required": [
+          "value"
+        ],
         "properties": {
           "title": {
             "type": "string"
@@ -1568,6 +1584,9 @@
                                             }
                                           }
                                         }
+                                      },
+                                      "value": {
+                                        "type": "string"
                                       },
                                       "createdAt": {
                                         "type": "string",
@@ -2324,6 +2343,9 @@
                 }
               }
             }
+          },
+          "value": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",

@@ -882,6 +882,13 @@ export interface ApiBlogCategoryBlogCategory extends Schema.CollectionType {
       'manyToMany',
       'api::blog.blog'
     >;
+    value: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

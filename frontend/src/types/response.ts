@@ -80,6 +80,7 @@ export type blogCategoryData = {
     publishedAt: string;
     title: string;
     updatedAt: string;
+    value:string
   };
 };
 export type blogData = {

@@ -49,11 +49,11 @@ export default function BlogSidebar({ handleCategory, category }: props) {
                 <li key={e.id}>
                   <CheckboxInput
                     onChange={() =>
-                      handleCategory(e.attributes.title.toLowerCase())
+                      handleCategory(e.attributes.value)
                     }
-                    value={e.attributes.title.toLowerCase()}
+                    value={e.attributes.value}
                     checked={category.includes(
-                      e.attributes.title.toLowerCase()
+                      e.attributes.value
                     )}
                     label={e.attributes.title}
                   />
