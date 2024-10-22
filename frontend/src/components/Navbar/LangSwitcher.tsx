@@ -3,7 +3,7 @@ import { locale } from "@/types/types";
 import { locales } from "@/utils/utils";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import React, { useTransition } from "react";
 import { FiCheckCircle, FiCircle } from "react-icons/fi";
 
@@ -13,14 +13,15 @@ export default function LangSwitcher() {
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const params = useParams();
-
+  const searchParams = useSearchParams()
   const onSelectChange = (nextLocale: locale) => {
+    const newPathname= pathname+"?"+searchParams.toString()
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
         // are used in combination with a given `pathname`. Since the two will
         // always match for the current route, we can skip runtime checks.
-        { pathname, params },
+        { pathname:newPathname, params },
         { locale: nextLocale }
       );
     });

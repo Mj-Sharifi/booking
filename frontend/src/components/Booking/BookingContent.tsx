@@ -1,14 +1,13 @@
-import { useBookAppSelector } from "@/hooks/redux";
 import React, { useState } from "react";
 import Stepper from "../Stepper";
 import { useTranslations } from "next-intl";
 import useTheme from "@/hooks/useTheme";
 import BookingPayment from "./BookingPayment";
 import BookingFinal from "./BookingFinal";
+import BookingPassengers from "./BookingPassengers";
 
 export default function BookingContent() {
   const t = useTranslations();
-  const { tourData } = useBookAppSelector((state) => state.book);
   const [step, setStep] = useState(0);
   const dark = useTheme();
   return (
@@ -45,9 +44,9 @@ export default function BookingContent() {
         stepStyles={{ activeColor: dark ? "#A4CAFE" : "#3554d1" }}
         dividerStyles={{ activeColor: dark ? "#A4CAFE" : "#3554d1" }}
       />
-      {step == 1 ? (
-        <BookingContent />
-      ) : step == 2 ? (
+      {step == 0 ? (
+        <BookingPassengers />
+      ) : step == 1 ? (
         <BookingPayment />
       ) : (
         <BookingFinal />

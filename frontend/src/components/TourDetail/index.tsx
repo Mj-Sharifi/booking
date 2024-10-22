@@ -29,6 +29,7 @@ import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import TextAreaInput from "../Form/TextAreaInput";
 import TextInput from "../Form/TextInput";
 import ProgressBar from "../ProgressBar";
+import GuestSelection from "../GuestSelection";
 
 export default function TourDetail() {
   const t = useTranslations();
@@ -57,24 +58,12 @@ export default function TourDetail() {
     new DateObject().add(12, "days"),
   ]);
   // Guest Number
-  const [guestEl, setGuestEl] = useState<boolean>(false);
   const [guest, setGuest] = useState<{
     adult: number;
     children: number;
     rooms: number;
   }>({ adult: 2, children: 1, rooms: 1 });
-  const handleGuest = (name:"adult"|"children"|"rooms")=>{
-    if(name=="adult"){
 
-    }
-  }
-  useEffect(() => {
-    document.addEventListener("click", (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).closest(".guest-selection")) {
-        setGuestEl(false);
-      }
-    });
-  }, []);
   // Timeliner Details
   const [activeTimeline, setActiveTimeline] = useState<number[]>([]);
   const [timelineDetailsHeight, setTimelineDetialHeight] = useState<number[]>(
@@ -219,22 +208,18 @@ export default function TourDetail() {
     JSON.stringify(activeTimeline),
     typeof document.getElementById("timeline-detail-0") !== "undefined",
   ]);
-  console.log("guest: ", guest);
-  console.log("dateRange: ", dateRange[0]?.toString());
+
   const handleBookingPath = () => {
-    const dateQuery = `?depart=${dateRange[0]?.toString()}&return=${dateRange[1]?.toString}`
-    let psQuery = `&adult=${guest.adult}`
-    if(guest.children){
-      psQuery = psQuery+`&children=${guest.children}`
-    }
-    psQuery = psQuery+`&rooms=${guest.rooms}`
-    return dateQuery+psQuery
+    return `?checkin=${dateRange[0]?.toString()}&checkout=${dateRange[1]?.toString()}&adult=${
+      guest.adult
+    }&children=${guest.children}&rooms=${guest.rooms}`;
   };
+
   return (
     <div className="flex flex-col">
       {tourData && (
         <>
-          <div className="grid grid-cols-1 xl:grid-cols-12 lg:gap-x-6 xl:gap-x-10 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-y-10 lg:gap-x-6 xl:gap-x-10 pb-3 md:pb-6 mb-4 md:mb-8 border-b border-light dark:border-lighter">
             <div className="xl:col-span-8">
               <h1 className="text-lg md:text-2xl xl:text-3xl font-semibold text-center mb-2 md:mb-3">
                 {tourData.attributes.title}
@@ -373,140 +358,21 @@ export default function TourDetail() {
                     locale={locale == "fa" ? persian_fa : gregorian_en}
                     value={dateRange}
                     onChange={setDateRange}
-                    format="MMMM DD"
+                    format="YYYY-MM-DD"
                     range
                     numberOfMonths={2}
                     inputClass="outline-none border-none !text-light dark:!text-lighter dark:!bg-dark text-xs md:text-sm p-0"
                   />
                 </div>
-                <div className="guest-selection rounded border border-border w-full flex flex-col gap-2 relative p-3">
-                  <span className="font-semibold text-sm md:text-base">
-                    {t("tour.travelers_number")}
-                  </span>
-                  <span
-                    className="guest-selection text-light dark:text-lighter text-xs md:text-sm"
-                    onClick={() => setGuestEl(true)}
-                  >
-                    {guest.adult} {t("common.adults")} - {guest.children}{" "}
-                    {t("common.children")} - {guest.rooms} {t("common.rooms")}
-                  </span>
-                  <div
-                    className={`guest-selection absolute rounded-sm bg-white dark:bg-dark shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
-                      guestEl ? "visible animate-fadeUp" : "invisible"
-                    }`}
-                  >
-                    <div className="flexBetween pb-4">
-                      <span>{t("common.adults")}</span>
-                      <div className="flexBetween w-32 ">
-                        <button
-                          type="button"
-                          className="border border-darkblue rounded p-2"
-                          onClick={() =>
-                            setGuest({
-                              ...guest,
-                              adult:
-                                guest.adult > 1 ? guest.adult - 1 : guest.adult,
-                            })
-                          }
-                        >
-                          <HiMinus
-                            size={18}
-                            className="text-darkblue dark:text-lightblue"
-                          />
-                        </button>
-                        <span className="text-lg">{guest.adult}</span>
-                        <button
-                          type="button"
-                          className="border border-darkblue rounded p-2"
-                          onClick={() =>
-                            setGuest({ ...guest, adult: guest.adult + 1 })
-                          }
-                        >
-                          <HiPlus
-                            size={18}
-                            className="text-darkblue dark:text-lightblue"
-                          />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="flexBetween py-4 border-y border-border">
-                      <span>{t("common.children")}</span>
-                      <div className="flexBetween w-32">
-                        <button
-                          type="button"
-                          className="border border-darkblue rounded p-2"
-                          onClick={() =>
-                            setGuest({
-                              ...guest,
-                              children:
-                                guest.children > 0
-                                  ? guest.children - 1
-                                  : guest.children,
-                            })
-                          }
-                        >
-                          <HiMinus
-                            size={18}
-                            className="text-darkblue dark:text-lightblue"
-                          />
-                        </button>
-                        <span className="text-lg">{guest.children}</span>
-                        <button
-                          type="button"
-                          className="border border-darkblue rounded p-2"
-                          onClick={() =>
-                            setGuest({ ...guest, children: guest.children + 1 })
-                          }
-                        >
-                          <HiPlus
-                            size={18}
-                            className="text-darkblue dark:text-lightblue"
-                          />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="flexBetween pt-4">
-                      <span>{t("common.rooms")}</span>
-                      <div className="flexBetween w-32">
-                        <button
-                          type="button"
-                          className="border border-darkblue rounded p-2"
-                          onClick={() =>
-                            setGuest({
-                              ...guest,
-                              rooms:
-                                guest.rooms > 1 ? guest.rooms - 1 : guest.rooms,
-                            })
-                          }
-                        >
-                          <HiMinus
-                            size={18}
-                            className="text-darkblue dark:text-lightblue"
-                          />
-                        </button>
-                        <span className="text-lg">{guest.rooms}</span>
-                        <button
-                          type="button"
-                          className="border border-darkblue rounded p-2"
-                          onClick={() =>
-                            setGuest({ ...guest, rooms: guest.rooms + 1 })
-                          }
-                        >
-                          <HiPlus
-                            size={18}
-                            className="text-darkblue dark:text-lightblue"
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <GuestSelection value={guest} onChange={(g) => setGuest(g)} />
+
                 <button
                   type="button"
                   className="w-full py-3 text-center transition-all duration-300 bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark rounded-md"
                   onClick={() => {
                     dispatch(saveTour(tourData));
-                    router.push(`/booking`, { locale });
+                    // @ts-ignore
+                    router.push("/booking" + handleBookingPath(), { locale });
                   }}
                 >
                   {t("tour.book_now")}

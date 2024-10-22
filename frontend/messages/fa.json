@@ -8,6 +8,7 @@
     "guest": "مهمان",
     "adults": "بزرگسال",
     "children": "کودک",
+    "child": "کودک",
     "rooms": "اتاق",
     "checkin": "ورود",
     "checkout": "خروج",
@@ -115,10 +116,14 @@
     "filter": "فیلتر",
     "sort": "ترتیب",
     "no_filtered_tour": "توری مطابق فیلتر های انتخابی یافت نشد.",
-    "price:asc":"ارزان‌ترین",
-    "price:desc":"گران‌ترین",
-    "duration:asc":"کوتاه‌ترین",
-    "duration:desc":"طولانی‌ترین"
+    "price:asc": "ارزان‌ترین",
+    "price:desc": "گران‌ترین",
+    "duration:asc": "کوتاه‌ترین",
+    "duration:desc": "طولانی‌ترین",
+    "you_selected": "شما انتخاب کردید",
+    "how_wanna_pay": "لطفا روش پرداخت را انتخاب نمایید.",
+    "debit_credit": "Credit/Debit Card",
+    "digital_payment": "پرداخت دیجیتال"
   },
   "testimony": {
     "customer_review": "نظرات مشتریان"

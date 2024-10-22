@@ -6,9 +6,10 @@
     "dark_mode": "Dark Mode",
     "location": "Location",
     "guest": "Guest",
-    "adults": "Adults",
+    "adults": "Adult{plural}",
     "children": "Children",
-    "rooms": "Rooms",
+    "child": "Child",
+    "rooms": "Room{plural}",
     "search": "search",
     "checkin": "Check-in",
     "checkout": "Check-out",
@@ -114,11 +115,15 @@
     "tour_detail": "View detail",
     "per_adult": "per adult",
     "no_filtered_tour": "There is no tours based on your selected filters.",
-    "sort":"Sort",
-    "price:asc":"Cheapest",
-    "price:desc":"Most Expensive",
-    "duration:asc":"Shortest",
-    "duration:desc":"Longest"
+    "sort": "Sort",
+    "price:asc": "Cheapest",
+    "price:desc": "Most Expensive",
+    "duration:asc": "Shortest",
+    "duration:desc": "Longest",
+    "you_selected": "You selected",
+    "how_wanna_pay": "How do you want to pay?",
+    "debit_credit":"Credit/Debit Card",
+    "digital_payment":"Digital Payment"
   },
 
   "testimony": {
@@ -198,7 +203,7 @@
     "browse": "Browse",
     "avatar_title": "Your avatar",
     "avatar_description": "JPG no bigger than 800px wide and tall.",
-    "payment_detail":"Payment Detail"
+    "payment_detail": "Payment Detail"
   },
   "error": {
     "is_required": "{field} is required",
