@@ -1,5 +1,5 @@
-import { checkedSVG } from "@/utils/svg";
 import React, { ReactNode } from "react";
+import { HiCheck } from "react-icons/hi2";
 
 type props = {
   value: string | string[] | number;
@@ -31,7 +31,7 @@ export default function CheckboxInput({
           checked ? "bg-darkblue/50 dark:bg-lightblue/50" : ""
         }`}
       >
-        {checked ? checkedSVG("text-white") : ""}
+        {checked ? <HiCheck className="text-white" size={18}/> : ""}
       </div>
       {label}
     </label>

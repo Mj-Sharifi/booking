@@ -24,15 +24,15 @@ export default function Blog() {
       });
       setCategory(newList);
     } else {
+      // @ts-ignore
       setCategory([...category, c]);
     }
   };
   // Handle Pagination
   const [pageCount, setPageCount] = useState<number>();
   const [page, setPage] = useState(1);
-  const handlePagination = (p: number) => {
-    setPage(p);
-  };
+  
+  // Setting Filters from URL
   const searchParams = useSearchParams();
   useEffect(() => {
     let category = searchParams.get("category");
@@ -55,7 +55,7 @@ export default function Blog() {
       }
       let paginationURL = "";
       if (page > 1) {
-        categoryURL ? (paginationURL = `&page=${page}`) : `page=${page}`;
+        categoryURL ? (paginationURL = `&page=${page}`) : paginationURL=`page=${page}`;
       }
       window.history.pushState(
         undefined,
@@ -84,7 +84,6 @@ export default function Blog() {
         });
     }
   }, [category, page]);
-  console.log(page);
   return (
     <>
       <h3 className="text-center font-semibold text-lg sm:text-xl lg:text-2xl xl:text-3xl">

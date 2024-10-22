@@ -144,8 +144,8 @@ export default function Pagination({
             } disabled:opacity-20 enabled:hover:scale-110 border border-transparent enabled:hover:border-emerald-400 ltr:rotate-180`}
             disabled={page === 1}
             onClick={() => {
-              console.log("decrease");
-              onChange(page--);
+              const p = page-1
+              onChange(p);
               if (updateUrl) {
                 handleUpdateUrl(page--);
               }
@@ -196,8 +196,8 @@ export default function Pagination({
             } disabled:opacity-20 enabled:hover:scale-110 border border-transparent enabled:hover:border-emerald-400 ltr:rotate-180`}
             disabled={page === count}
             onClick={() => {
-              console.log("increase");
-              onChange(page++);
+              const p = page+1
+              onChange(p);
               if (updateUrl) {
                 handleUpdateUrl(page++);
               }
