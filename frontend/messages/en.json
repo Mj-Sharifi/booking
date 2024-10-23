@@ -188,6 +188,7 @@
     "dont_have_account": "Don't have an account yet?",
     "free_register": "Register for free",
     "username": "Username",
+    "fullname":"Fullname",
     "old_password": "Old password",
     "new_password": "New password",
     "change_password": "Change Password",
@@ -196,6 +197,8 @@
     "country": "Country",
     "zipcode": "ZIP Code",
     "gender": "Gender",
+    "male":"Male",
+    "female":"Female",
     "phone": "Phone Number",
     "birthday": "Birthday",
     "about_yourself": "About yourself",
@@ -203,7 +206,8 @@
     "browse": "Browse",
     "avatar_title": "Your avatar",
     "avatar_description": "JPG no bigger than 800px wide and tall.",
-    "payment_detail": "Payment Detail"
+    "payment_detail": "Payment Detail",
+    "special_request":""
   },
   "error": {
     "is_required": "{field} is required",

@@ -364,7 +364,7 @@ export default function TourDetail() {
                     inputClass="outline-none border-none !text-light dark:!text-lighter dark:!bg-dark text-xs md:text-sm p-0"
                   />
                 </div>
-                <GuestSelection value={guest} onChange={(g) => setGuest(g)} />
+                <div className=" border border-border rounded p-3"><GuestSelection value={guest} onChange={(g) => setGuest(g)} /></div>
 
                 <button
                   type="button"

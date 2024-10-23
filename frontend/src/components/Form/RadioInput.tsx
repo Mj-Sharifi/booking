@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 type props = {
   values: [string, string];
   initialValue?: string;
-  onChange: Function;
+  onChange: (v:string)=>void;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   rightLabel?: string;

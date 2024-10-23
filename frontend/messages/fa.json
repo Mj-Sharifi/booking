@@ -123,7 +123,8 @@
     "you_selected": "شما انتخاب کردید",
     "how_wanna_pay": "لطفا روش پرداخت را انتخاب نمایید.",
     "debit_credit": "Credit/Debit Card",
-    "digital_payment": "پرداخت دیجیتال"
+    "digital_payment": "پرداخت دیجیتال",
+    "special_request":"درخواست‌های اضافی"
   },
   "testimony": {
     "customer_review": "نظرات مشتریان"
@@ -180,6 +181,7 @@
     "firstname": "نام",
     "lastname": "نام خانوادگی",
     "username": "نام کاربری",
+    "fullname":"نام کامل",
     "email": "ایمیل",
     "password": "گذرواژه",
     "confirm_password": "تکرار گذرواژه",

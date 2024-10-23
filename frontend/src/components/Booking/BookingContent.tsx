@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import useTheme from "@/hooks/useTheme";
 import BookingPayment from "./BookingPayment";
 import BookingFinal from "./BookingFinal";
-import BookingPassengers from "./BookingPassengers";
+import BookingTravellers from "./BookingTravellers";
 
 export default function BookingContent() {
   const t = useTranslations();
@@ -45,7 +45,7 @@ export default function BookingContent() {
         dividerStyles={{ activeColor: dark ? "#A4CAFE" : "#3554d1" }}
       />
       {step == 0 ? (
-        <BookingPassengers />
+        <BookingTravellers />
       ) : step == 1 ? (
         <BookingPayment />
       ) : (

@@ -140,7 +140,7 @@ export default function Navbar() {
             <RadioInput
               values={["light", "dark"]}
               initialValue={localStorage.getItem("theme") || "light"}
-              onChange={themeSwitcher}
+              onChange={(v)=>themeSwitcher(v as "light"|"dark")}
               rightLabel={t("light_mode")}
               leftLabel={t("dark_mode")}
               rightIcon={<MdOutlineLightMode size={22} />}

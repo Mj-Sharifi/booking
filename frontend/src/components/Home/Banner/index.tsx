@@ -6,35 +6,15 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { locationData } from "@/types/response";
 import { useParams } from "next/navigation";
-import { HiMagnifyingGlass, HiMinus, HiPlus } from "react-icons/hi2";
+import { HiMagnifyingGlass, HiMapPin, HiMinus, HiPlus } from "react-icons/hi2";
 
 // React Multi Date Picker
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian_fa from "react-date-object/locales/persian_fa";
 import gregorian_en from "react-date-object/locales/gregorian_en";
 import type { Value } from "react-multi-date-picker";
-const locationSVG = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className="w-6 h-6"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-    />
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-    />
-  </svg>
-);
-
+import { FiMapPin } from "react-icons/fi";
+import GuestSelection from "@/components/GuestSelection";
 
 export default function Banner() {
   // Translation
@@ -66,19 +46,24 @@ export default function Banner() {
     new DateObject().add(12, "days"),
   ]);
   // Guest Number
-  const [guestEl, setGuestEl] = useState<boolean>(false);
   const [guest, setGuest] = useState<{
     adult: number;
     children: number;
     rooms: number;
   }>({ adult: 2, children: 1, rooms: 1 });
-  useEffect(() => {
-    document.addEventListener("click", (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).closest(".guest-selection")) {
-        setGuestEl(false);
-      }
-    });
-  }, []);
+  // const [guestEl, setGuestEl] = useState<boolean>(false);
+  // const [guest, setGuest] = useState<{
+  //   adult: number;
+  //   children: number;
+  //   rooms: number;
+  // }>({ adult: 2, children: 1, rooms: 1 });
+  // useEffect(() => {
+  //   document.addEventListener("click", (e: MouseEvent) => {
+  //     if (!(e.target as HTMLElement).closest(".guest-selection")) {
+  //       setGuestEl(false);
+  //     }
+  //   });
+  // }, []);
   // Entrance Animation
   const [startAnimation, setStartAnimation] = useState<boolean>(false);
   const banner = useRef<HTMLDivElement>(null);
@@ -170,7 +155,7 @@ export default function Banner() {
                       className="flex align-top justify-start gap-2 hover:bg-hoverlight py-2 px-3 transition-colors duration-300"
                       onClick={() => setDestination(e?.attributes.city)}
                     >
-                      {locationSVG}
+                      <FiMapPin size={18} />
                       <div className="flex flex-col gap-1">
                         <span className="text-black">
                           {e?.attributes?.city}
@@ -201,7 +186,10 @@ export default function Banner() {
               />
             </div>
             {/* Number of Guest */}
-            <div className="lg:col-span-4 flex flex-col gap-2 relative py-4 lg:py-0 lg:px-8">
+            <div className="lg:col-span-4 flex flex-col align-top gap-2 relative py-4 lg:py-0 lg:px-8">
+              <GuestSelection value={guest} onChange={(g) => setGuest(g)} />
+            </div>
+            {/* <div className="lg:col-span-4 flex flex-col gap-2 relative py-4 lg:py-0 lg:px-8">
               <span className="font-semibold">{t("common.guest")}</span>
               <span
                 className="guest-selection text-light dark:text-lighter text-sm"
@@ -302,7 +290,7 @@ export default function Banner() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* Search Button */}
             <div className="lg:col-span-2">
               <button

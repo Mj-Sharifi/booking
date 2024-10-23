@@ -130,5 +130,6 @@ export type userInfo = {
     provider: string
     createdAt:string
     updatedAt: string
+    zipcode:string
   }
 }

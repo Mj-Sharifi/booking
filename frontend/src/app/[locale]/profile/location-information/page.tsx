@@ -1,6 +1,7 @@
 "use client";
 import Select from "@/components/Form/Select";
 import TextInput from "@/components/Form/TextInput";
+import { userInfo } from "@/types/response";
 import { userLocationVldSchema } from "@/utils/auth";
 import { countries } from "@/utils/location";
 import { updateUser } from "@/utils/utils";
@@ -9,7 +10,6 @@ import { Form, Formik } from "formik";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { userInfo } from "os";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { FaLocationDot } from "react-icons/fa6";
@@ -17,7 +17,7 @@ import { FaLocationDot } from "react-icons/fa6";
 export default function page() {
   const { locale } = useParams();
   const t = useTranslations();
-  const [{ user_info }] = useCookies(["user_info"]);
+  const [{ user_info }] = useCookies<"user_info", { user_info: userInfo }>(["user_info"]);
   return (
     <Formik
       initialValues={{
