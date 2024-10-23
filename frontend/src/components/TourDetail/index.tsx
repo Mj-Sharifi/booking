@@ -1,5 +1,5 @@
 "use client";
-import { tourData } from "@/types/response";
+import { tourData, userInfo } from "@/types/response";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState, useTransition } from "react";
@@ -16,12 +16,12 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
 import persian_fa from "react-date-object/locales/persian_fa";
 import gregorian_en from "react-date-object/locales/gregorian_en";
-import { HiArrowRight, HiMinus, HiPlus } from "react-icons/hi2";
+import { HiArrowRight } from "react-icons/hi2";
 import NavigationLink from "@/components/link/NavigationLink";
 import { useBookAppDispatch } from "@/hooks/redux";
 import { useRouter } from "@/navigation";
 import { locale } from "@/types/types";
-import { saveTour } from "@/lib/slices/bookSlice";
+import { clearTourData, saveTour } from "@/lib/slices/bookSlice";
 import Rating from "../Rating";
 import Timeliner from "../Timeliner";
 import Image from "next/image";
@@ -30,9 +30,15 @@ import TextAreaInput from "../Form/TextAreaInput";
 import TextInput from "../Form/TextInput";
 import ProgressBar from "../ProgressBar";
 import GuestSelection from "../GuestSelection";
+import { useCookies } from "react-cookie";
 
 export default function TourDetail() {
   const t = useTranslations();
+  const dispatch = useBookAppDispatch();
+
+  const [{ user_info }] = useCookies<"user_info", { user_info: userInfo }>([
+    "user_info",
+  ]);
   const { tourParams, locale } = useParams<{
     locale: locale;
     tourParams: string[];
@@ -40,6 +46,7 @@ export default function TourDetail() {
   const router = useRouter();
   const [tourData, setTourData] = useState<tourData>();
   useEffect(() => {
+    dispatch(clearTourData())
     axios
       .get(
         process.env.NEXT_PUBLIC_API +
@@ -51,7 +58,7 @@ export default function TourDetail() {
         }
       });
   }, []);
-  const dispatch = useBookAppDispatch();
+
   //DatePicker
   const [dateRange, setDateRange] = useState<Value[]>([
     new DateObject().add(7, "days"),
@@ -364,15 +371,21 @@ export default function TourDetail() {
                     inputClass="outline-none border-none !text-light dark:!text-lighter dark:!bg-dark text-xs md:text-sm p-0"
                   />
                 </div>
-                <div className=" border border-border rounded p-3"><GuestSelection value={guest} onChange={(g) => setGuest(g)} /></div>
+                <div className=" border border-border rounded p-3">
+                  <GuestSelection value={guest} onChange={(g) => setGuest(g)} />
+                </div>
 
                 <button
                   type="button"
                   className="w-full py-3 text-center transition-all duration-300 bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark rounded-md"
                   onClick={() => {
-                    dispatch(saveTour(tourData));
-                    // @ts-ignore
-                    router.push("/booking" + handleBookingPath(), { locale });
+                    if (user_info?.jwt) {
+                      dispatch(saveTour(tourData));
+                      // @ts-ignore
+                      router.push("/booking" + handleBookingPath(), { locale });
+                    }else{
+                      router.push("/login",{locale})
+                    }
                   }}
                 >
                   {t("tour.book_now")}

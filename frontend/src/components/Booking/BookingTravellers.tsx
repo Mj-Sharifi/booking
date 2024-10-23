@@ -124,6 +124,7 @@ export default function BookingTravellers() {
                       leftLabel={t("profile.female")}
                       rightIcon={<FaMale size={22} />}
                       leftIcon={<FaFemale size={22} />}
+                      size="medium"
                     />
                     <div className="col-span-2">
                       <TextAreaInput
@@ -154,7 +155,7 @@ export default function BookingTravellers() {
               )}
             </Formik>
           </div>
-          <div className="flex flex-col gap-y-6 border rounded-md p-6 lg:p-3 text-sm md:text-base">
+          <div className="flex flex-col gap-y-6 border rounded-md p-6 lg:p-3 text-sm md:text-base h-fit">
             <h5 className="text-base md:text-lg xl:text-xl font-semibold text-center">
               Your booking details
             </h5>

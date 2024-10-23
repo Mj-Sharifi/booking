@@ -11,16 +11,20 @@ type dropdownProps = {
   animation?: string;
   children?: ReactNode;
   btnStyle?: CSSProperties;
+  btnClassNames?:string
   dropElementStyle?: CSSProperties;
   closeOnClick?: boolean;
+  OpenMode?: "hover" | "click";
 };
 export default function Dropdown({
   label,
   animation = "animate-fadeInUp",
   children,
   btnStyle,
+  btnClassNames,
   dropElementStyle,
   closeOnClick = true,
+  OpenMode = "click",
 }: dropdownProps) {
   const dropdownButton = useRef<HTMLButtonElement>(null);
   const dropdownList = useRef<HTMLDivElement>(null);
@@ -64,12 +68,13 @@ export default function Dropdown({
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 relative ">
+    <div className="flex flex-col gap-2 relative " onMouseLeave={()=>OpenMode=="hover"&&setDropdown(false)}>
       <button
         type="button"
         ref={dropdownButton}
-        className="dropdown duration-300 flex w-fit gap-2 rounded-md text-sm md:text-base py-1 px-2 md:px-3 border-2 border-darkblue dark:border-lightblue bg-darkblue dark:bg-lightblue hover:border-dark hover:bg-dark text-white dark:hover:border-white dark:hover:bg-white dark:text-dark"
-        onClick={() => setDropdown(true)}
+        className={`dropdown ${btnClassNames} `}
+        onClick={() => OpenMode == "click" && setDropdown(true)}
+        onMouseEnter={() => OpenMode == "hover" && setDropdown(true)}
         style={btnStyle}
       >
         {label}
@@ -79,7 +84,7 @@ export default function Dropdown({
         id="dropdown-list-element"
         className={`dropdown duration-0 absolute right-1/2 !translate-x-1/2 ${
           dropdown ? `${animation} visible opacity-100` : "invisible opacity-0"
-        } bg-transparent shadow-md overflow-hidden`}
+        } bg-transparent shadow-md`}
         style={dropElementStyle}
         onClick={() => {
           if (closeOnClick) {

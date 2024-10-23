@@ -11,7 +11,6 @@ import Drawer from "@/components/Drawer";
 import { loading_status } from "@/types/types";
 import Loader from "@/components/Loader";
 import useTheme from "@/hooks/useTheme";
-import TourSorting from "@/components/Tour/TourSorting";
 import Dropdown from "@/components/Dropdown";
 export default function Tours() {
   const { locale } = useParams();
@@ -88,7 +87,7 @@ export default function Tours() {
     if (price) {
       setPriceRange(price.split("-").map(Number));
     } else {
-      setPriceRange([0, 2000]);
+      setPriceRange([0, 2500]);
     }
     let duration = searchParams.get("duration");
     if (duration) {
@@ -152,11 +151,7 @@ export default function Tours() {
         })
         .catch(() => setLoading("failed"));
     }
-  }, [
-    JSON.stringify(category),
-    durationRange,
-    JSON.stringify(priceRange),
-  ]);
+  }, [JSON.stringify(category), durationRange, JSON.stringify(priceRange)]);
   // Frontend Filters
   useEffect(() => {
     // Backend URL Query
@@ -165,13 +160,12 @@ export default function Tours() {
     let priceURL = "";
     if (category && typeof durationRange == "string" && priceRange) {
       if (category.length > 0) {
-  
         categoryURL = `category=${category.join(",")}`;
       }
       if (durationRange) {
         durationURL = `duration=${durationRange}`;
       }
-      if (priceRange[0] !== 0 || priceRange[1] !== 2000) {
+      if (priceRange[0] !== 0 || priceRange[1] !== 4000) {
         priceURL = `price=${priceRange.join(",")}`;
       }
     }
@@ -273,7 +267,6 @@ export default function Tours() {
                   handleFreeCancelation={() =>
                     setFreeCancelation(!freeCancelation)
                   }
-                  price={priceRange}
                   handlePrice={handlePrice}
                 />
               ) : (
@@ -283,7 +276,10 @@ export default function Tours() {
             <div className="col-span-1 lg:col-span-3 px-6 sm:px-2">
               <div className="flex justify-between lg:justify-end">
                 <div className="px-8">
-                  <Dropdown label={t("tour.sort")}>
+                  <Dropdown
+                    label={t("tour.sort")}
+                    btnClassNames="duration-300 flex w-fit gap-2 rounded-md text-sm md:text-base py-1 px-2 md:px-3 border-2 border-darkblue dark:border-lightblue bg-darkblue dark:bg-lightblue hover:border-dark hover:bg-dark text-white dark:hover:border-white dark:hover:bg-white dark:text-dark"
+                  >
                     <div className="flexCenter flex-col gap-y-2 text-xs md:text-sm rounded-md bg-white">
                       {[
                         { title: t("tour.price:asc"), value: "price:asc" },
@@ -370,7 +366,6 @@ export default function Tours() {
                     handleFreeCancelation={() =>
                       setFreeCancelation(!freeCancelation)
                     }
-                    price={priceRange}
                     handlePrice={(v) => handlePrice(v)}
                   />
                 </Drawer>

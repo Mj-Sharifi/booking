@@ -14,14 +14,20 @@ import NavigationLink from "../link/NavigationLink";
 import { useCookies } from "react-cookie";
 import { HiBars3BottomRight, HiOutlineUserCircle } from "react-icons/hi2";
 import Drawer from "../Drawer";
+import Dropdown from "../Dropdown";
+import { useRouter } from "@/navigation";
+import { locale } from "@/types/types";
+import { userInfo } from "@/types/response";
 
 const pages = ["home", "tour", "blog"];
+
 export default function Navbar() {
   4;
-  const [{ user_info }] = useCookies(["user_info"]);
-  const { locale } = useParams();
+  const [{ user_info },_,removeCookie] = useCookies<"user_info",{user_info:userInfo}>(["user_info"]);
+  const { locale } = useParams<{ locale: locale }>();
   const t = useTranslations("common");
   const pathName = usePathname();
+  const router = useRouter();
   // Handle Hamburger Menu
   const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
   const openHamburgerMenu = () => {
@@ -79,6 +85,15 @@ export default function Navbar() {
       } else {
         document.body.classList.remove("dark");
       }
+    }
+  };
+  const logoutUser = () => {
+    if (pathName.includes("/booking")) {
+    } else if (pathName.includes("/profile/")) {
+      removeCookie("user_info", { path: "/" });
+      router.push("/", { locale });
+    } else {
+      removeCookie("user_info", { path: "/" });
     }
   };
   return (
@@ -140,11 +155,12 @@ export default function Navbar() {
             <RadioInput
               values={["light", "dark"]}
               initialValue={localStorage.getItem("theme") || "light"}
-              onChange={(v)=>themeSwitcher(v as "light"|"dark")}
+              onChange={(v) => themeSwitcher(v as "light" | "dark")}
               rightLabel={t("light_mode")}
               leftLabel={t("dark_mode")}
               rightIcon={<MdOutlineLightMode size={22} />}
               leftIcon={<MdOutlineDarkMode size={22} />}
+              size="small"
             />
           </div>
           <ul className="hidden lg:flexCenter gap-8 text-lg">
@@ -183,18 +199,48 @@ export default function Navbar() {
             >
               {t("become_expert")}
             </NavigationLink>
-            <NavigationLink
-              href={user_info?.jwt ? "/profile/dashboard" : "/register"}
-              className={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-4 ${
-                bgEffect
-                  ? "text-dark dark:text-white dark:hover:text-dark dark:border-white dark:hover:bg-white border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"
-                  : "text-white border-white hover:bg-white hover:text-dark"
-              } text-md font-normal`}
-            >
-              {user_info?.jwt
-                ? t("profile")
-                : `${t("login") + " / " + t("register")}`}
-            </NavigationLink>
+            {user_info?.jwt ? (
+              <Dropdown
+                label={user_info.user.username||user_info.user.email}
+                OpenMode="hover"
+                btnClassNames={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-4 ${
+                  bgEffect
+                    ? "text-dark dark:text-white dark:hover:text-dark dark:border-white dark:hover:bg-white border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"
+                    : "text-white border-white hover:bg-white hover:text-dark"
+                } text-md font-normal`}
+              >
+                <div className="flexCenter flex-col gap-y-2 rounded-md bg-white shadow-md shadow-light dark:shadow-lighter">
+                  {["profile", "logout"].map((e, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className="py-1 px-3 duration-300 w-full text-nowrap hover:bg-darkblue hover:text-white dark:hover:bg-lightblue dark:hover:text-dark rounded"
+                      // @ts-ignore
+                      onClick={() => {
+                        if (e == "profile") {
+                          router.push("/profile/dashboard", { locale });
+                        } else {
+                          logoutUser();
+                        }
+                      }}
+                    >
+                      {t(`${e}`)}
+                    </button>
+                  ))}
+                </div>
+              </Dropdown>
+            ) : (
+              <NavigationLink
+                href="/register"
+                className={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-4 ${
+                  bgEffect
+                    ? "text-dark dark:text-white dark:hover:text-dark dark:border-white dark:hover:bg-white border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"
+                    : "text-white border-white hover:bg-white hover:text-dark"
+                } text-md font-normal`}
+              >
+                {t("login") + " / " + t("register")}
+              </NavigationLink>
+            )}
           </div>
           <div className="flexCenter gap-3 md:hidden">
             <NavigationLink href={"/profile/dashboard"}>
@@ -211,9 +257,7 @@ export default function Navbar() {
         </div>
       </nav>
       <Drawer show={hamburgerMenu} onClose={closeHamburgerMenu}>
-        <HamburgerMenu
-          pages={pages}
-        />
+        <HamburgerMenu pages={pages} />
       </Drawer>
 
       {showLangSwitcher && (

@@ -102,6 +102,11 @@
     },
     "phone": {
       "type": "string"
+    },
+    "wallet": {
+      "type": "integer",
+      "required": true,
+      "default": 0
     }
   }
 }

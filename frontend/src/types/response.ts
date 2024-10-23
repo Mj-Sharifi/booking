@@ -131,5 +131,6 @@ export type userInfo = {
     createdAt:string
     updatedAt: string
     zipcode:string
+    wallet:number
   }
 }

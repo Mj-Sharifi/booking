@@ -7,6 +7,7 @@ export const localeFlag = {
   "en": "en.svg",
   "fa": "fa.svg"
 }
+export const protectedRoutes = ["/profile/","/booking"]
 export const isTarget = (e: any, classnames: Array<string> = []) => {
   for (const classname of classnames) {
     const targets = document.getElementsByClassName(classname);

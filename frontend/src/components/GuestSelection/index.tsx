@@ -30,7 +30,7 @@ export default function GuestSelection({ value, onChange }: props) {
       newGuest.rooms = value > 1 ? value : 1;
     }
     if (newGuest.rooms > newGuest.adult) {
-        newGuest.rooms = newGuest.adult
+      newGuest.rooms = newGuest.adult;
     }
     setGuest(newGuest);
   };
@@ -53,8 +53,9 @@ export default function GuestSelection({ value, onChange }: props) {
         className="guest-selection text-light dark:text-lighter text-xs md:text-sm"
         onClick={() => setGuestEl(true)}
       >
-        {guest.adult} {t("common.adults",{plural:"s"})} - {guest.children}{" "}
-        {t("common.children")} - {guest.rooms} {t("common.rooms",{plural:"s"})}
+        {guest.adult} {t("common.adults", { plural: "s" })} - {guest.children}{" "}
+        {t("common.children")} - {guest.rooms}{" "}
+        {t("common.rooms", { plural: "s" })}
       </span>
       <div
         className={`guest-selection absolute rounded-sm bg-white dark:bg-dark shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
@@ -62,17 +63,12 @@ export default function GuestSelection({ value, onChange }: props) {
         }`}
       >
         <div className="flexBetween pb-4">
-          <span>{t("common.adults",{plural:"s"})}</span>
+          <span>{t("common.adults", { plural: "s" })}</span>
           <div className="flexBetween w-32 ">
             <button
               type="button"
-              className="border border-darkblue rounded p-2"
-              //   onClick={() =>
-              //     setGuest({
-              //       ...guest,
-              //       adult: guest.adult > 1 ? guest.adult - 1 : guest.adult,
-              //     })
-              //   }
+              className="border-2 border-darkblue dark:border-lightblue rounded w-9 h-9 flexCenter disabled:opacity-40"
+              disabled={guest.adult == 1}
               onClick={() => handleGuest("adult", guest.adult - 1)}
             >
               <HiMinus
@@ -87,12 +83,11 @@ export default function GuestSelection({ value, onChange }: props) {
                 console.log(e.target.value);
                 handleGuest("adult", onlyNumbers(e.target.value));
               }}
-              className="w-8 h-8 flexCenter text-center outline-none border-none"
+              className="w-9 h-9 flexCenter text-center outline-none border-0 rounded dark:bg-dark dark:text-white dark:border-2 dark:border-white"
             />
             <button
               type="button"
-              className="border border-darkblue rounded p-2"
-              //   onClick={() => setGuest({ ...guest, adult: guest.adult + 1 })}
+              className="border-2 border-darkblue dark:border-lightblue rounded w-9 h-9 flexCenter disabled:opacity-40"
               onClick={() => handleGuest("adult", guest.adult + 1)}
             >
               <HiPlus size={18} className="text-darkblue dark:text-lightblue" />
@@ -104,14 +99,7 @@ export default function GuestSelection({ value, onChange }: props) {
           <div className="flexBetween w-32">
             <button
               type="button"
-              className="border border-darkblue rounded p-2"
-              //   onClick={() =>
-              //     setGuest({
-              //       ...guest,
-              //       children:
-              //         guest.children > 0 ? guest.children - 1 : guest.children,
-              //     })
-              //   }
+              className="border-2 border-darkblue dark:border-lightblue rounded w-9 h-9 flexCenter disabled:opacity-40"
               onClick={() => handleGuest("children", guest.children - 1)}
             >
               <HiMinus
@@ -124,15 +112,11 @@ export default function GuestSelection({ value, onChange }: props) {
               onChange={(e) => {
                 handleGuest("children", onlyNumbers(e.target.value));
               }}
-              className="w-8 h-8 flexCenter text-center outline-none border-none"
+              className="w-9 h-9 flexCenter text-center outline-none border-0 rounded dark:bg-dark dark:text-white dark:border-2 dark:border-white"
             />
-            {/* <span className="text-lg">{guest.children}</span> */}
             <button
               type="button"
-              className="border border-darkblue rounded p-2"
-              //   onClick={() =>
-              //     setGuest({ ...guest, children: guest.children + 1 })
-              //   }
+              className="border-2 border-darkblue dark:border-lightblue rounded w-9 h-9 flexCenter disabled:opacity-40"
               onClick={() => handleGuest("children", guest.children + 1)}
             >
               <HiPlus size={18} className="text-darkblue dark:text-lightblue" />
@@ -140,19 +124,13 @@ export default function GuestSelection({ value, onChange }: props) {
           </div>
         </div>
         <div className="flexBetween pt-4">
-          <span>{t("common.rooms",{plural:"s"})}</span>
+          <span>{t("common.rooms", { plural: "s" })}</span>
           <div className="flexBetween w-32">
             <button
               type="button"
-              className="border border-darkblue rounded p-2"
+              disabled={guest.rooms == 1}
+              className="border-2 border-darkblue dark:border-lightblue rounded w-9 h-9 flexCenter disabled:opacity-40"
               onClick={() => handleGuest("rooms", guest.rooms - 1)}
-
-              //   onClick={() =>
-              //     setGuest({
-              //       ...guest,
-              //       rooms: guest.rooms > 1 ? guest.rooms - 1 : guest.rooms,
-              //     })
-              //   }
             >
               <HiMinus
                 size={18}
@@ -164,13 +142,12 @@ export default function GuestSelection({ value, onChange }: props) {
               onChange={(e) => {
                 handleGuest("rooms", onlyNumbers(e.target.value));
               }}
-              className="w-8 h-8 flexCenter text-center outline-none border-none"
+              className="w-9 h-9 flexCenter text-center outline-none border-0 rounded dark:bg-dark dark:text-white dark:border-2 dark:border-white"
             />
-            {/* <span className="text-lg">{guest.rooms}</span> */}
             <button
               type="button"
-              className="border border-darkblue rounded p-2"
-              //   onClick={() => setGuest({ ...guest, rooms: guest.rooms + 1 })}
+              className="border-2 border-darkblue dark:border-lightblue rounded w-9 h-9 flexCenter disabled:opacity-40"
+              disabled={guest.rooms == guest.adult}
               onClick={() => handleGuest("rooms", guest.rooms + 1)}
             >
               <HiPlus size={18} className="text-darkblue dark:text-lightblue" />

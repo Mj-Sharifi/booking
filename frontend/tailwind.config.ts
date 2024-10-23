@@ -62,6 +62,7 @@ const config: Config = {
         "1000": "1000",
       },
       spacing: {
+        "18":"4.5rem",
         "22": "5.5rem",
         "100": "25rem",
         "112": "28rem",

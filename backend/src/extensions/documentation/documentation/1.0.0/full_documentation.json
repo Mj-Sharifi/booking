@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-23T12:12:50.537Z"
+    "x-generation-date": "2024-10-23T15:41:21.570Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -3693,6 +3693,9 @@
                         "duration": {
                           "type": "integer"
                         },
+                        "chd_price": {
+                          "type": "integer"
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -5403,6 +5406,7 @@
       "TourLocalizationRequest": {
         "required": [
           "imagePrimary",
+          "chd_price",
           "locale"
         ],
         "type": "object",
@@ -5470,6 +5474,9 @@
           "duration": {
             "type": "integer"
           },
+          "chd_price": {
+            "type": "integer"
+          },
           "locale": {
             "type": "string"
           }
@@ -5483,7 +5490,8 @@
         "properties": {
           "data": {
             "required": [
-              "imagePrimary"
+              "imagePrimary",
+              "chd_price"
             ],
             "type": "object",
             "properties": {
@@ -5548,6 +5556,9 @@
                 "type": "boolean"
               },
               "duration": {
+                "type": "integer"
+              },
+              "chd_price": {
                 "type": "integer"
               },
               "locale": {
@@ -5674,7 +5685,8 @@
       "Tour": {
         "type": "object",
         "required": [
-          "imagePrimary"
+          "imagePrimary",
+          "chd_price"
         ],
         "properties": {
           "title": {
@@ -6815,6 +6827,9 @@
                                       "duration": {
                                         "type": "integer"
                                       },
+                                      "chd_price": {
+                                        "type": "integer"
+                                      },
                                       "createdAt": {
                                         "type": "string",
                                         "format": "date-time"
@@ -7091,6 +7106,9 @@
             "type": "boolean"
           },
           "duration": {
+            "type": "integer"
+          },
+          "chd_price": {
             "type": "integer"
           },
           "createdAt": {

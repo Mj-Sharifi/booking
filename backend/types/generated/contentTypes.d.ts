@@ -781,6 +781,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     city: Attribute.String;
     gender: Attribute.Boolean;
     phone: Attribute.String;
+    wallet: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<0>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1192,6 +1193,13 @@ export interface ApiTourTour extends Schema.CollectionType {
       }> &
       Attribute.DefaultTo<false>;
     duration: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    chd_price: Attribute.Integer &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

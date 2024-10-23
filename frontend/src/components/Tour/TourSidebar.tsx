@@ -15,7 +15,6 @@ type props = {
   duration: string;
   freeCancelation: boolean;
   handleFreeCancelation: () => void;
-  price: number[];
   handlePrice: (p: number[]) => void;
 };
 export default function TourSidebar({
@@ -26,11 +25,9 @@ export default function TourSidebar({
   duration,
   freeCancelation,
   handleFreeCancelation,
-  price,
   handlePrice,
 }: props) {
   const t = useTranslations();
-  const { locale } = useParams();
 
   const durationOptions = [
     { title: t("tour.less_5d"), value: "0-5" },
@@ -102,7 +99,7 @@ export default function TourSidebar({
       <div className="py-6">
         <span className="font-semibold md:text-lg">{t("tour.other")}</span>
         <div className="mt-2">
-          <RangeSlider min={0} max={2000} onChange={handlePrice} />
+          <RangeSlider min={0} max={4000} onChange={handlePrice} />
         </div>
       </div>
     </div>

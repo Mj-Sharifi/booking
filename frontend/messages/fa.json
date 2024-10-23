@@ -19,6 +19,7 @@
     "tour": "تور",
     "home": "خانه",
     "login": "ورود",
+    "logout": "خروج",
     "register": "ثبت نام",
     "profile": "پنل کاربری",
     "categories": "دسته‌بندی‌ها",
@@ -122,9 +123,10 @@
     "duration:desc": "طولانی‌ترین",
     "you_selected": "شما انتخاب کردید",
     "how_wanna_pay": "لطفا روش پرداخت را انتخاب نمایید.",
-    "debit_credit": "Credit/Debit Card",
-    "digital_payment": "پرداخت دیجیتال",
-    "special_request":"درخواست‌های اضافی"
+    "cash": "نقدی",
+    "credit_card": "اعتباری",
+    "wallet": "کیف پول",
+    "special_request": "درخواست‌های اضافی"
   },
   "testimony": {
     "customer_review": "نظرات مشتریان"
@@ -181,7 +183,7 @@
     "firstname": "نام",
     "lastname": "نام خانوادگی",
     "username": "نام کاربری",
-    "fullname":"نام کامل",
+    "fullname": "نام کامل",
     "email": "ایمیل",
     "password": "گذرواژه",
     "confirm_password": "تکرار گذرواژه",

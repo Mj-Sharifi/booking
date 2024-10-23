@@ -17,7 +17,7 @@ export default function Register() {
   const t = useTranslations();
   const {locale} = useParams<{locale:locale}>()
   const router = useRouter()
-  const [cookie, setCookie] = useCookies();
+  const [_, setCookie] = useCookies();
   return (
     <>
       <Formik
