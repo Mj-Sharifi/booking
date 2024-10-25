@@ -53,9 +53,9 @@ export default function GuestSelection({ value, onChange }: props) {
         className="guest-selection text-light dark:text-lighter text-xs md:text-sm"
         onClick={() => setGuestEl(true)}
       >
-        {guest.adult} {t("common.adults", { plural: "s" })} - {guest.children}{" "}
+        {guest.adult} {t("common.adult", { plural: "s" })} - {guest.children}{" "}
         {t("common.children")} - {guest.rooms}{" "}
-        {t("common.rooms", { plural: "s" })}
+        {t("common.room", { plural: "s" })}
       </span>
       <div
         className={`guest-selection absolute rounded-sm bg-white dark:bg-dark shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
@@ -63,7 +63,7 @@ export default function GuestSelection({ value, onChange }: props) {
         }`}
       >
         <div className="flexBetween pb-4">
-          <span>{t("common.adults", { plural: "s" })}</span>
+          <span>{t("common.adult", { plural: "s" })}</span>
           <div className="flexBetween w-32 ">
             <button
               type="button"
@@ -124,7 +124,7 @@ export default function GuestSelection({ value, onChange }: props) {
           </div>
         </div>
         <div className="flexBetween pt-4">
-          <span>{t("common.rooms", { plural: "s" })}</span>
+          <span>{t("common.room", { plural: "s" })}</span>
           <div className="flexBetween w-32">
             <button
               type="button"

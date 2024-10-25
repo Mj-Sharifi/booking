@@ -1,7 +1,7 @@
 "use client";
 import { tourData, userInfo } from "@/types/response";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import React, { useEffect, useState, useTransition } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -44,9 +44,10 @@ export default function TourDetail() {
     tourParams: string[];
   }>();
   const router = useRouter();
+  const pathname = usePathname();
   const [tourData, setTourData] = useState<tourData>();
   useEffect(() => {
-    dispatch(clearTourData())
+    dispatch(clearTourData());
     axios
       .get(
         process.env.NEXT_PUBLIC_API +
@@ -58,7 +59,17 @@ export default function TourDetail() {
         }
       });
   }, []);
-
+  // Book Tour
+  const bookTour = () => {
+    if (user_info?.jwt) {
+      dispatch(saveTour(tourData as tourData));
+      // @ts-ignore
+      router.push("/booking" + handleBookingPath(), { locale });
+    } else {
+      // @ts-ignore
+      router.push("/login" + `?redirect=${pathname}`, { locale });
+    }
+  };
   //DatePicker
   const [dateRange, setDateRange] = useState<Value[]>([
     new DateObject().add(7, "days"),
@@ -378,15 +389,7 @@ export default function TourDetail() {
                 <button
                   type="button"
                   className="w-full py-3 text-center transition-all duration-300 bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark rounded-md"
-                  onClick={() => {
-                    if (user_info?.jwt) {
-                      dispatch(saveTour(tourData));
-                      // @ts-ignore
-                      router.push("/booking" + handleBookingPath(), { locale });
-                    }else{
-                      router.push("/login",{locale})
-                    }
-                  }}
+                  onClick={() => bookTour()}
                 >
                   {t("tour.book_now")}
                 </button>

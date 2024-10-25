@@ -6,7 +6,7 @@ const cookie = new Cookies()
 const generateError = (errText: string, title?: string): string => {
     return title ? `${title}_${errText}` : errText
 }
-const validationRules = {
+export const validationRules = {
     username: yup.string().trim().required("username_required").min(5, "username_min_limit").max(20, "username_max_limit"),
     name: (name: string, required = false) => {
         return yup.lazy((value) => {
@@ -57,50 +57,7 @@ const validationRules = {
         })
 
     },
-    // image: (name: string, supportedFormats: string[], maxSize: number, maxWidth?: number, maxHeight?: number, required = false) => {
-    //     return (yup.lazy(value => {
-    //         let valid = yup.mixed<File>()
-  
-    //         if (required || (!required && !!value)) {
-    //             valid = valid.test('fileSize', generateError("size_too_large", name), (file?: File) => {
 
-    //                 return file ? file.size <= maxSize : false;
-    //             }).test('fileFormat', generateError("must_be_jpg", name), (file?: File) => {
-
-    //                 return file ? supportedFormats.includes("." + file?.name?.split(".")[1]) : false;
-    //             })
-    //             if (maxWidth && maxHeight) {
-    //                 valid = valid.test('fileDimensions', generateError("dimension_too_large", name), (file?: File) => {
-    //                     if (!file) return Promise.resolve(false);
-
-    //                     const image = new Image();
-    //                     const url = URL?.createObjectURL(file);
-
-    //                     return new Promise<boolean>((resolve) => {
-    //                         image.onload = () => {
-    //                             URL.revokeObjectURL(url);
-    //                             // Check if dimensions are valid
-    //                             if (image.width <= maxWidth && image.height <= maxHeight) {
-    //                                 resolve(true);
-    //                             } else {
-    //                                 resolve(false);
-    //                             }
-    //                         };
-    //                         image.onerror = () => {
-    //                             URL.revokeObjectURL(url);
-    //                             resolve(false); // reject invalid images
-    //                         };
-    //                         image.src = url;
-    //                     });
-    //                 })
-    //             }
-    //         }
-    //         if (required) {
-    //             valid = valid.required("image_required")
-    //         }
-    //         return valid
-    //     }))
-    // },
     image: (name: string, supportedFormats: string[], maxSize: number, maxWidth?: number, maxHeight?: number, required = false) => {
         return yup.lazy(value => {
             let valid = yup.mixed<File>().nullable();
@@ -203,7 +160,7 @@ export const userLocationInitVals = {
     zipcode: ""
 }
 export const userLocationVldSchema = () => {
-    const lang = cookie.get("NEXT_LOCALE")
+    // const lang = cookie.get("NEXT_LOCALE")
     const countriesValue = countries.map(cn => cn.value)
     return yup.object().shape({
         address: validationRules.string,

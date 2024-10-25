@@ -6,10 +6,10 @@
     "dark_mode": "Dark Mode",
     "location": "Location",
     "guest": "Guest",
-    "adults": "Adult{plural}",
+    "adult": "Adult{plural}",
     "children": "Children",
     "child": "Child",
-    "rooms": "Room{plural}",
+    "room": "Room{plural}",
     "search": "search",
     "checkin": "Check-in",
     "checkout": "Check-out",
@@ -191,6 +191,7 @@
     "free_register": "Register for free",
     "username": "Username",
     "fullname":"Fullname",
+    "passportNumber":"Passport Number",
     "old_password": "Old password",
     "new_password": "New password",
     "change_password": "Change Password",
@@ -209,12 +210,15 @@
     "avatar_title": "Your avatar",
     "avatar_description": "JPG no bigger than 800px wide and tall.",
     "payment_detail": "Payment Detail",
-    "special_request":""
+    "special_request":"Special Request",
+    "major_traveller":"Major traveller"
+
   },
   "error": {
     "is_required": "{field} is required",
     "firstname_required": "Firstname is required",
     "lastname_required": "Lastname is required",
+    "fullname_required":"Fullname is required",
     "email_required": "Email is required",
     "username_required": "Username is required",
     "password_required": "Password is required",

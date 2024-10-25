@@ -8,15 +8,16 @@ import { showNotif } from "@/utils/notification";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import React from "react";
 import { useCookies } from "react-cookie";
 
 export default function Login() {
   const t = useTranslations();
-  const [cookie, setCookie] = useCookies();
+  const [_, setCookie] = useCookies();
   const { locale } = useParams<{ locale: locale }>();
   const router = useRouter();
+  const searchParams = useSearchParams();
   return (
     <>
       <Formik
@@ -24,15 +25,23 @@ export default function Login() {
         validationSchema={loginVldSchema}
         onSubmit={(e) =>
           axios
-            .post(process.env.NEXT_PUBLIC_API + "auth/local?populate=*&locale=fa", {
-              identifier: e.email,
-              password: e.password,
-            })
+            .post(
+              process.env.NEXT_PUBLIC_API + "auth/local?populate=*&locale=fa",
+              {
+                identifier: e.email,
+                password: e.password,
+              }
+            )
             .then((res) => {
               if (res && res.data) {
                 setCookie("user_info", res.data, { path: "/" });
                 showNotif(t(`notif.login_successful`), "success");
-                router.replace("/profile/dashboard", { locale });
+                if (searchParams.get("redirect")) {
+                  // @ts-ignore
+                  router.push(searchParams.get("redirect"), { locale });
+                } else {
+                  router.push("/profile/dashboard", { locale });
+                }
               }
             })
             .catch((err) => showNotif(err.response.data.error.message))

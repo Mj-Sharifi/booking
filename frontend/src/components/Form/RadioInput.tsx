@@ -47,17 +47,17 @@ export default function RadioInput({
         data-value={value}
         className={`duration-300 ${
           size == "small"
-            ? "w-14 h-7 border"
+            ? "w-14 h-7"
             : size == "medium"
-            ? "w-16 h-8 border"
-            : "w-20 h-10 border-2"
-        } rounded-full relative bg-white border-solid border-darkblue`}
+            ? "w-16 h-8"
+            : "w-20 h-10"
+        } rounded-full relative bg-white dark:bg-dark border-solid border-2 border-darkblue dark:border-lightblue`}
         onClick={() => {
           setValue(value == values[0] ? values[1] : values[0]);
         }}
       >
         <div
-          className={`duration-300 z-[1] shadow-sm-light shadow-darkblue bg-darkblue ${
+          className={`duration-300 z-[1] shadow shadow-darkblue bg-darkblue dark:shadow-lightblue dark:bg-lightblue ${
             size == "small"
               ? "w-5 h-5"
               : size == "medium"
@@ -73,7 +73,7 @@ export default function RadioInput({
           className={`${
             value == values[0]
               ? "hidden"
-              : "absolute top-1/2 -translate-y-1/2 right-[2px] text-dark"
+              : "absolute top-1/2 -translate-y-1/2 right-[2px] text-dark dark:text-white"
           }`}
         >
           {rightIcon}
@@ -82,7 +82,7 @@ export default function RadioInput({
           className={`${
             value == values[1]
               ? "hidden"
-              : "absolute top-1/2 -translate-y-1/2 right-full translate-x-[calc(100%+2px)] text-dark"
+              : "absolute top-1/2 -translate-y-1/2 right-full translate-x-[calc(100%+2px)] text-dark dark:text-white"
           }`}
         >
           {leftIcon}

@@ -17,7 +17,7 @@ export default function BookingContent() {
           {
             title: "Passengers",
             icon: (
-              <span className="rounded-full text-white bg-darkblue w-7 h-7 flexCenter">
+              <span className="rounded-full text-white bg-darkblue dark:text-dark dark:bg-lightblue w-7 h-7 flexCenter">
                 1
               </span>
             ),
@@ -25,7 +25,7 @@ export default function BookingContent() {
           {
             title: "Payment",
             icon: (
-              <span className="rounded-full text-white bg-darkblue w-7 h-7 flexCenter">
+              <span className="rounded-full text-white bg-darkblue dark:text-dark dark:bg-lightblue w-7 h-7 flexCenter">
                 2
               </span>
             ),
@@ -33,7 +33,7 @@ export default function BookingContent() {
           {
             title: "Final Step",
             icon: (
-              <span className="rounded-full text-white bg-darkblue w-7 h-7 flexCenter">
+              <span className="rounded-full text-white bg-darkblue dark:text-dark dark:bg-lightblue w-7 h-7 flexCenter">
                 3
               </span>
             ),
