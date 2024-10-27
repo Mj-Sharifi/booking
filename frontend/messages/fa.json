@@ -127,7 +127,11 @@
     "credit_card": "اعتباری",
     "wallet": "کیف پول",
     "special_request": "درخواست‌های اضافی",
-    "major_traveller":"سرپرست مسافرین"
+    "major_traveller": "سرپرست مسافرین",
+    "tax_fee": "مالیات و عوارض",
+    "have_promo_code":"آیا کد تخفیف دارید؟",
+    "enter_promo_code":"کد تخفیف را وارد کنید.",
+    "total_price":"قیمت کل"
   },
   "testimony": {
     "customer_review": "نظرات مشتریان"
@@ -195,7 +199,7 @@
     "old_password": "پسورد قدیمی",
     "new_password": "پسورد جدید",
     "change_password": "تغییر گذرواژه",
-    "passportNumber":"شماره گذرنامه",
+    "passportNumber": "شماره گذرنامه",
     "address": "آدرس",
     "city": "شهر",
     "country": "کشور",
@@ -213,7 +217,7 @@
     "is_required": "{field} الزامی است",
     "firstname_required": "نام الزامی است.",
     "lastname_required": "نام خانوادگی الزامی است.",
-    "fullname_required":"نام و نام خانوادگی الزامی است.",
+    "fullname_required": "نام و نام خانوادگی الزامی است.",
     "email_required": "ایمیل الزامی است.",
     "username_required": "نام کاربری الزامی است.",
     "password_required": "گذرواژه الزامی است.",
@@ -236,7 +240,9 @@
     "no_item_found": "چیزی یافت نشد",
     "avatar_size_too_large": "حجم عکس زیاد است و باید کمتر از 120 کیلوبایت باشد.",
     "avatar_must_bg_jpg": "فرمت عکس باید jpg باشد.",
-    "avatar_dimension_too_large": "طول و عرض عکس باید از 800 پیکسل کوچکتر باشد."
+    "avatar_dimension_too_large": "طول و عرض عکس باید از 800 پیکسل کوچکتر باشد.",
+    "passport_only_letter_number": "فقط باید شامل حروف و اعداد باشد.",
+    "passport_required": "شماره گذرنامه الزامی است."
   },
   "notif": {
     "login_successful": "با موفقیت وارد شدید.",

@@ -8,6 +8,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { FaChevronDown } from "react-icons/fa6";
 
 type props = {
   id?: string;
@@ -24,7 +25,7 @@ type props = {
   errorMessage?: string;
   onChange: (value: string | number) => void;
   onBlur?: (value: string | number) => void;
-  autoComplete?:React.HTMLInputAutoCompleteAttribute
+  autoComplete?: React.HTMLInputAutoCompleteAttribute;
 };
 export default function Select({
   id,
@@ -33,11 +34,11 @@ export default function Select({
   options,
   onChange,
   onBlur,
-  height=160,
+  height = 160,
   label,
   isToched,
   errorMessage,
-  autoComplete="off"
+  autoComplete = "off",
 }: props) {
   const t = useTranslations("error");
   const [open, setOpen] = useState(false);
@@ -53,11 +54,11 @@ export default function Select({
   >([]);
   // const selectRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    setTitle((
+    setTitle(
       initialValue && !!options.filter((cn) => cn.value == initialValue).length
         ? options.filter((cn) => cn.value == initialValue)[0]?.title
         : ""
-    ))
+    );
     options ? setSearchedOptions(options) : setSearchedOptions([]);
   }, [options]);
   // console.log(label,searchedOptions)
@@ -69,7 +70,7 @@ export default function Select({
     setTimeout(() => {
       if (["ArrowDown", "ArrowUp", "Enter", "Escape"].includes(e.key)) {
         e.preventDefault();
-        ulElement.current?.focus()
+        ulElement.current?.focus();
       }
       const lastIndex = searchedOptions?.length - 1;
       switch (e.key) {
@@ -115,7 +116,7 @@ export default function Select({
     return () => {
       selectRef.current?.removeEventListener("keydown", handleMove); // Clean up listener
     };
-  }, [currentLi, ulElement, selectRef,searchedOptions]);
+  }, [currentLi, ulElement, selectRef, searchedOptions]);
 
   // Close by clicking outside
   useEffect(() => {
@@ -131,7 +132,7 @@ export default function Select({
     window.addEventListener("click", (e) => closeList(e));
     return () => window.removeEventListener("click", (e) => closeList(e));
   }, []);
-// console.log(label,"searchedOptions: ",searchedOptions)
+  // console.log(label,"searchedOptions: ",searchedOptions)
   return (
     <div className={`relative`} id={`select_component-${id}`} ref={selectRef}>
       <div
@@ -158,7 +159,7 @@ export default function Select({
           value={value}
           onBlur={() => setFocus(false)}
           onChange={(e) => {
-            setOpen(true)
+            setOpen(true);
             setCurrentLi(0);
             setTitle("");
             setValue(e.target.value);
@@ -186,6 +187,12 @@ export default function Select({
         {title && (
           <span className="absolute rtl:right-6 ltr:left-6 top-7">{title}</span>
         )}
+        <FaChevronDown
+          className={`duration-300 absolute top-1/2 -translate-y-1/2 ltr:right-1 rtl:left-1 ${
+            open ? "rotate-180" : ""
+          }`}
+          size={16}
+        />
         {isToched && errorMessage ? (
           <span className="absolute z-[2] top-[calc(100%+6px)] ltr:left-1 rtl:right-1 text-xs lg:text-sm text-red-600 dark:text-red-400">
             {errorMessage}

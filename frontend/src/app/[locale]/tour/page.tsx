@@ -69,11 +69,7 @@ export default function Tours() {
       setSort(s);
     }
   };
-  // Pagination
-  // const [page, setPage] = useState(1);
-  // const handlePagination = (p: number) => {
-  //   setPage(p);
-  // };
+
   // Setting Filters from URL
   const searchParams = useSearchParams();
   useEffect(() => {
@@ -87,7 +83,7 @@ export default function Tours() {
     if (price) {
       setPriceRange(price.split("-").map(Number));
     } else {
-      setPriceRange([0, 2500]);
+      setPriceRange([0, 4000]);
     }
     let duration = searchParams.get("duration");
     if (duration) {
@@ -107,10 +103,6 @@ export default function Tours() {
         sort as "price:asc" | "price:desc" | "duration:asc" | "duration:desc"
       );
     }
-    // let page = searchParams.get("page");
-    // if (page) {
-    //   setPage(+page);
-    // }
   }, []);
 
   // Backend Filters

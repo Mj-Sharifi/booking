@@ -73,8 +73,8 @@ export default function BookingTravellers() {
     // Formik ValidationSchema
     let vldSchema: { [key: string]: any } = {
       fullname_adl_1: validationRules.name("fullname", true),
-      gender_adl_1: "",
-      passportNumber_adl_1: "",
+      // gender_adl_1: "",
+      passportNumber_adl_1: validationRules.passportNumber(true),
       email: validationRules.email(true),
       phone: validationRules.phone(true),
       zipcode: validationRules.number(),
@@ -85,16 +85,16 @@ export default function BookingTravellers() {
         `fullname`,
         true
       );
-      vldSchema[`gender_adl_${i + 2}`] = "";
-      vldSchema[`passportNumber_adl_${i + 2}`] = "";
+      // vldSchema[`gender_adl_${i + 2}`] = "";
+      vldSchema[`passportNumber_adl_${i + 2}`] = validationRules.passportNumber(true);
     }
     for (let i = 0; i < chd; i++) {
       vldSchema[`fullname_chd_${i + 2}`] = validationRules.name(
         `fullname`,
         true
       );
-      vldSchema[`gender_chd_${i + 2}`] = "";
-      vldSchema[`passportNumber_chd_${i + 2}`] = "";
+      // vldSchema[`gender_chd_${i + 2}`] = ;
+      vldSchema[`passportNumber_chd_${i + 2}`] = validationRules.passportNumber(true);
     }
     return { initVals, vldSchema: yup.object().shape(vldSchema) };
   }, [JSON.stringify(psInfo)]);
@@ -122,7 +122,7 @@ export default function BookingTravellers() {
                 <Form className="flex flex-col items-center gap-y-10">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                     <h5 className=" sm:col-span-2 font-semibold text-xm md:text-base text-start w-full">
-                    {t("tour.additional_info")}:
+                    {t("tour.major_traveller")}:
                     </h5>
                     <TextInput
                       name="fullname_adl_1"

@@ -1,8 +1,12 @@
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import TextInput from "../Form/TextInput";
+import { useBookAppSelector } from "@/hooks/redux";
+import { useSearchParams } from "next/navigation";
 
 export default function BookingPayment() {
+  const { tourData } = useBookAppSelector((state) => state.book);
+  const searchParams = useSearchParams();
   const t = useTranslations();
   const [payMethod, setPayMethod] = useState<"cash" | "wallet">("wallet");
   return (
@@ -37,13 +41,57 @@ export default function BookingPayment() {
         </div>
       </div>
       <div className="flex flex-col gap-y-6 text-sm md:text-base h-fit">
-        <div className="flex flex-col gap-y-4 border rounded-md p-6 lg:p-3">
-        <h5 className="text-base md:text-lg xl:text-xl font-semibold text-center">Your price summary</h5>
+        <div className="flex flex-col gap-y-2 border rounded-md p-6 lg:p-3">
+          <h5 className="text-base md:text-lg xl:text-xl font-semibold text-center mb-2">
+            Your price summary
+          </h5>
+          <div className="flex justify-between ">
+            <span>{t("common.adult", { plural: "s" })}:</span>
+            <span>
+              {`${searchParams.get("adult")}×`}{" "}
+              {(
+                Number(tourData?.attributes.price) *
+                Number(searchParams.get("adult"))
+              )
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </span>
+          </div>
+          {searchParams.get("children")!=="0" && (
+            <div className="flex justify-between">
+              <span>{t("common.children")}:</span>
+              <span>
+                {`${searchParams.get("children")}×`}{" "}
+                {(
+                  Number(tourData?.attributes.chd_price) *
+                  Number(searchParams.get("children"))
+                )
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </span>
+            </div>
+          )}
+          <div className="flex justify-between">
+            <span>{t("tour.tax_fee")}:</span>
+            <span>50</span>
+          </div>
+          <div className="flex justify-between py-2 px-4 font-semibold md:text-lg bg-lightblue dark:bg-darkblue rounded-md mt-4">
+            <span>{t("tour.total_price")}:</span>
+            <span>
+              {50 +
+                Number(tourData?.attributes.price) *
+                  Number(searchParams.get("adult")) +
+                Number(tourData?.attributes.chd_price) *
+                  Number(searchParams.get("children"))}
+            </span>
+          </div>
         </div>
         <div className="flex flex-col gap-y-4 border rounded-md p-6 lg:p-3">
-          <h5 className="text-base md:text-lg xl:text-xl font-semibold text-center">Do you have a promo code?</h5>
-          <TextInput/>
-          <button></button>
+          <h5 className="text-base md:text-lg font-semibold">
+            {t("tour.have_promo_code")}
+          </h5>
+          <TextInput label={t("tour.enter_promo_code")}/>
+          <button>{t("common.apply")}</button>
         </div>
       </div>
     </div>

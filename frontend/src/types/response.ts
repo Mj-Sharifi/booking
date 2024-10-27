@@ -37,6 +37,7 @@ export type tourData = {
     isPopular: boolean;
     place: string;
     price: number;
+    chd_price:number
     publishedAt: string;
     rating: number;
     title: string;
