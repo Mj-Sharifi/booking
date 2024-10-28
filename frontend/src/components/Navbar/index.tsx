@@ -231,7 +231,7 @@ export default function Navbar() {
               </Dropdown>
             ) : (
               <NavigationLink
-                href="/register"
+                href="/login"
                 className={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-4 ${
                   bgEffect
                     ? "text-dark dark:text-white dark:hover:text-dark dark:border-white dark:hover:bg-white border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"

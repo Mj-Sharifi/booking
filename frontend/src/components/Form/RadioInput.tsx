@@ -65,15 +65,15 @@ export default function RadioInput({
               : "w-8 h-8"
           } rounded-full absolute top-1/2 -translate-y-1/2 ${
             values[0] == value
-              ? "right-[2px]"
-              : "right-full translate-x-[calc(100%+2px)]"
+              ? "ltr:right-[2px] rtl:left-[2px]"
+              : "ltr:right-full ltr:translate-x-[calc(100%+2px)] rtl:left-full rtl:-translate-x-[calc(100%+2px)]"
           }`}
         />
         <div
           className={`${
             value == values[0]
               ? "hidden"
-              : "absolute top-1/2 -translate-y-1/2 right-[2px] text-dark dark:text-white"
+              : "absolute top-1/2 -translate-y-1/2 ltr:right-[2px] rtl:left-[2px] text-dark dark:text-white"
           }`}
         >
           {rightIcon}
@@ -82,7 +82,7 @@ export default function RadioInput({
           className={`${
             value == values[1]
               ? "hidden"
-              : "absolute top-1/2 -translate-y-1/2 right-full translate-x-[calc(100%+2px)] text-dark dark:text-white"
+              : "absolute top-1/2 -translate-y-1/2 ltr:right-full ltr:translate-x-[calc(100%+2px)] rtl:right-[2px] text-dark dark:text-white"
           }`}
         >
           {leftIcon}

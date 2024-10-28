@@ -781,7 +781,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     city: Attribute.String;
     gender: Attribute.Boolean;
     phone: Attribute.String;
-    wallet: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<0>;
+    wallet: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<2000>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

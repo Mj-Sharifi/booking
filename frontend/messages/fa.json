@@ -6,10 +6,10 @@
     "dark_mode": "تم تاریک",
     "location": "مکان",
     "guest": "مهمان",
-    "adults": "بزرگسال",
+    "adult": "بزرگسال",
     "children": "کودک",
     "child": "کودک",
-    "rooms": "اتاق",
+    "room": "اتاق",
     "checkin": "ورود",
     "checkout": "خروج",
     "search": "جست و جو",
@@ -131,7 +131,10 @@
     "tax_fee": "مالیات و عوارض",
     "have_promo_code":"آیا کد تخفیف دارید؟",
     "enter_promo_code":"کد تخفیف را وارد کنید.",
-    "total_price":"قیمت کل"
+    "total_price":"قیمت کل",
+    "wallet_deduction": "<span1></span1> از کیف پول شما کم می‌شود.",
+    "wallet_remaining": "مبلغ باقیمانده در کیف پول شما <span1></span1> است.",
+    "wallet_no_money": "مبلغ خرید از اعتبار کیف پول شما بیشتر است. لطفا ابتدا کیف پول خود را شارژ کنید."
   },
   "testimony": {
     "customer_review": "نظرات مشتریان"
@@ -211,7 +214,9 @@
     "avatar": "آواتار",
     "browse": "جست‌وجو",
     "avatar_title": "آواتار شما",
-    "avatar_description": "فرمت JPG و حداکثر طول و عرض 800 پیکسل"
+    "avatar_description": "فرمت JPG و حداکثر طول و عرض 800 پیکسل",
+    "male": "مرد",
+    "female": "زن"
   },
   "error": {
     "is_required": "{field} الزامی است",

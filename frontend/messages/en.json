@@ -130,7 +130,10 @@
     "major_traveller": "Major traveller",
     "have_promo_code":"Do you have a promo code?",
     "enter_promo_code":"Enter promo code",
-    "total_price":"Total price"
+    "total_price":"Total price",
+    "wallet_no_money": "The purchase amount exceeds your wallet credit. Please charge your wallet first.",
+    "wallet_deduction": "<span1></span1> will be deducted from your wallet.",
+    "wallet_remaining": "The remaining amount in your wallet will be <span1></span1>."
   },
 
   "testimony": {

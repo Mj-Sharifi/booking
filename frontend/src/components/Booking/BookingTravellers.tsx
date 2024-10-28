@@ -231,7 +231,7 @@ export default function BookingTravellers() {
                         />
                         <RadioInput
                           values={["male", "female"]}
-                          initialValue={values.gender ? "male" : "female"}
+                          initialValue={values[`gender_adl_${i + 2}`] ? "male" : "female"}
                           onChange={(v) =>
                             setFieldValue("gender", v == "male" ? true : false)
                           }
@@ -295,7 +295,7 @@ export default function BookingTravellers() {
                         />
                         <RadioInput
                           values={["male", "female"]}
-                          initialValue={values.gender ? "male" : "female"}
+                          initialValue={values.gender[`gender_chd_${i + 1}`] ? "male" : "female"}
                           onChange={(v) =>
                             setFieldValue("gender", v == "male" ? true : false)
                           }
@@ -389,7 +389,7 @@ export default function BookingTravellers() {
                 </p>
               </div>
             </div>
-            <hr className="w-full bg-border" />
+            <hr className="w-full bg-border"/>
             <div className="flexBetween gap-x-6 flex-wrap">
               <div className="flex flex-col gap-y-2">
                 <span>{t("common.checkin")}</span>
@@ -400,7 +400,7 @@ export default function BookingTravellers() {
                       }).format(new Date(psInfo.checkin))
                     : ""}
                 </span>
-                <span className="text-lighter dark:text-light">
+                <span dir="ltr" className="text-lighter dark:text-light text-right">
                   15:00 - 23:00
                 </span>
               </div>
@@ -413,12 +413,12 @@ export default function BookingTravellers() {
                       }).format(new Date(psInfo.checkout))
                     : ""}
                 </span>
-                <span className="text-lighter dark:text-light">
+                <span dir="ltr" className="text-lighter dark:text-light text-right">
                   01:00 - 11:00
                 </span>
               </div>
             </div>
-            <hr className="w-full bg-border" />
+            <hr className="w-full bg-border"/>
             <div className="flexBetween gap-y-2">
               <p>{t("tour.you_selected")}:</p>
               <div className="">
