@@ -243,7 +243,7 @@ export default function Tours() {
       <div className="grid grid-cols-1 lg:grid-cols-4 sm:gap-6 lg:gap-8">
         {loading == "success" ? (
           <>
-            <div className="hidden lg:block col-span-1">
+            <div className="hidden lg:block col-span-1 lg:sticky lg:top-0 lg:bottom-auto">
               {allCategories &&
               priceRange &&
               category &&
@@ -336,7 +336,7 @@ export default function Tours() {
               </div>
             </div>
             <div
-              className={`w-72 px-4 flex justify-center tour-mobile-filters duration-300 fixed bg-white dark:bg-dark top-0 bottom-0 z-[1000] min-h-screen ltr:border-r rtl:border-l border-darkblue dark:border-lightblue ${
+              className={` w-72 p-4 flexCenter tour-mobile-filters duration-300 fixed bg-white dark:bg-dark top-0 bottom-0 z-[1000] min-h-screen ltr:border-r rtl:border-l border-darkblue dark:border-lightblue ${
                 showFilter
                   ? "ltr:left-0 rtl:right-0"
                   : "ltr:-left-72 rtl:-right-72"

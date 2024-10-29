@@ -51,3 +51,6 @@ export const updateUser = () => {
       }
     });
 }
+export const capitalizaWords=(str:string)=>{
+return(str[0].toUpperCase()+str.slice(1))
+}

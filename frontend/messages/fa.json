@@ -142,7 +142,12 @@
     "pay_cash":"پرداخت نقدی",
     "card_holder":"نام دارنده کارت",
     "card_number":"شماره کارت",
-    "cvv2":"CVV2"
+    "cvv2":"CVV2",
+    "travellers":"مسافرین",
+    "order_number":"شماره سفارش",
+    "submitted_successfully":"سفارش شما با موفقیت ثبت شد.",
+    "booking_details_sent_to":"اطلاعات رزرو به <span></span> ارسال گردید."
+
   },
   "testimony": {
     "customer_review": "نظرات مشتریان"

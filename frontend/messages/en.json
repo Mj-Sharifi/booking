@@ -123,7 +123,7 @@
     "duration:desc": "Longest",
     "you_selected": "You selected",
     "how_wanna_pay": "How do you want to pay?",
-    "pay_method":"Payment method",
+    "pay_method": "Payment method",
     "credit_card": "Credit card",
     "wallet": "Wallet",
     "cash": "Cash",
@@ -138,11 +138,15 @@
     "wallet_current_charge": "Your current wallet charge: <span1></span1>",
     "wallet_remaining": "The remaining amount in your wallet will be <span1></span1>.",
     "charge_wallet": "I want to charge my wallet",
-    "pay_wallet":"I want to pay with my wallet",
-    "pay_cash":"Pay in cash",
-    "card_holder":"Card holder name",
-    "card_number":"Credit/debit card number",
-    "cvv2":"CVV2"
+    "pay_wallet": "I want to pay with my wallet",
+    "pay_cash": "Pay in cash",
+    "card_holder": "Card holder name",
+    "card_number": "Credit/debit card number",
+    "cvv2": "CVV2",
+    "travellers": "Travellers",
+    "order_number": "Order Number",
+    "submitted_successfully":"your order was submitted successfully!",
+    "booking_details_sent_to":"Booking details has been sent to <span></span>"
   },
 
   "testimony": {

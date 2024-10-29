@@ -453,7 +453,7 @@ export default function BookingTravellers() {
                     ,{" "}
                     <span>
                       {psInfo?.children}{" "}
-                      {+psInfo > 1 ? t("common.children") : t("common.child")}
+                      {+psInfo.children > 1 ? t("common.children") : t("common.child")}
                     </span>
                   </>
                 ) : (

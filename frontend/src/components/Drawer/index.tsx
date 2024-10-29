@@ -14,7 +14,7 @@ export default function Drawer({
   onClose,
   allowOutsideClick = true,
 }: props) {
-  const handleWindowClick = (e: MouseEvent) => {
+  const handleWindowClick = (e: MouseEventHandler<HTMLDivElement>) => {
     if (allowOutsideClick && !isTarget(e, ["drawer-el"])) {
       setTimeout(() => onClose(false), 0);
     }
@@ -25,9 +25,9 @@ export default function Drawer({
         onClose();
       }
     };
-    document.addEventListener("resize", resizeEvent);
+    window.addEventListener("resize", resizeEvent);
 
-    return () => document.removeEventListener("resize", resizeEvent);
+    return () => window.removeEventListener("resize", resizeEvent);
   }, []);
     return (
       <div

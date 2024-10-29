@@ -4,18 +4,19 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import NavigationLink from "../link/NavigationLink";
 import { FaXmark } from "react-icons/fa6";
+import { useCookies } from "react-cookie";
+import { userInfo } from "@/types/response";
+import { capitalizaWords } from "@/utils/utils";
 
-export default function HamburgerMenu({
-  // open,
-  pages,
-  // closeHamburgerMenu,
-}: {
-  // open: boolean;
-  // pages: {title:string,href:string}[];
+type props = {
   pages: string[];
-  // closeHamburgerMenu: () => void;
-}) {
-  const t = useTranslations("common");
+  logout: Function;
+};
+export default function HamburgerMenu({ pages, logout }: props) {
+  const t = useTranslations();
+  const [{ user_info }] = useCookies<"user_info", { user_info: userInfo }>([
+    "user_info",
+  ]);
   return (
     // <div
     //   className={`hamburgerMenu fixed z-70 top-0 bottom-0 ${
@@ -44,15 +45,21 @@ export default function HamburgerMenu({
               <NavigationLink
                 // @ts-ignore
                 href={page === "home" ? "/" : "/" + page}
-                className="text-lg"
+                className="text-lg first-letter:uppercase"
               >
-                {t(page)}
+                {capitalizaWords(t(`common.${page}`))}
               </NavigationLink>
             </li>
           ))}
         </ul>
       </div>
       <div className="py-4 px-3">
+        <div className="mb-5 flex gap-2">
+          <span>{t("tour.wallet")}:</span>
+          <span className="font-semibold">
+            {user_info.user.wallet} {t("footer.usd")}
+          </span>
+        </div>
         <div className="mb-5">
           <span className="block">Toll Free Customer Care</span>
           <Link href={""} className="font-semibold">
@@ -147,8 +154,15 @@ export default function HamburgerMenu({
           href={"/become-expert"}
           className="cursor-pointer w-full py-2 rounded-md duration-300  bg-darkblue dark:bg-lightblue hover:border-dark hover:bg-dark text-white dark:hover:border-white dark:hover:bg-white dark:text-dark text-sm md:text-base flexCenter"
         >
-          Become An Expert
+          {t("common.become_expert")}
         </NavigationLink>
+        <button
+          type="button"
+          className="mt-5 text-sm md:text-base w-full py-2 duration-300 border rounded-md text-darkblue dark:text-white dark:hover:text-dark dark:border-lightblue dark:hover:bg-lightblue border-darkblue hover:bg-darkblue hover:text-white"
+          onClick={()=>logout()}
+        >
+          {t("common.logout")}
+        </button>
       </div>
     </div>
 

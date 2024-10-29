@@ -4,7 +4,7 @@ import { useParams, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import HamburgerMenu from "./HamburgerMenu";
 import { useTranslations } from "next-intl";
-import { localeFlag, locales } from "@/utils/utils";
+import { capitalizaWords, localeFlag, locales } from "@/utils/utils";
 import { HiChevronDown } from "react-icons/hi";
 import Popup from "../Popup/Popup";
 import LangSwitcher from "./LangSwitcher";
@@ -25,7 +25,7 @@ export default function Navbar() {
   4;
   const [{ user_info },_,removeCookie] = useCookies<"user_info",{user_info:userInfo}>(["user_info"]);
   const { locale } = useParams<{ locale: locale }>();
-  const t = useTranslations("common");
+  const t = useTranslations("");
   const pathName = usePathname();
   const router = useRouter();
   // Handle Hamburger Menu
@@ -96,6 +96,7 @@ export default function Navbar() {
       removeCookie("user_info", { path: "/" });
     }
   };
+
   return (
     <>
       <nav
@@ -140,7 +141,7 @@ export default function Navbar() {
               } text-dark dark:text-white`}
               onClick={() => setShowLangSwitcher(true)}
             >
-              {t(`${locale}`)}{" "}
+              {t(`common.${locale}`)}{" "}
               <Image
                 src={`/assets/images/navbar/${
                   localeFlag[locale as "en" | "fa"]
@@ -156,8 +157,8 @@ export default function Navbar() {
               values={["light", "dark"]}
               initialValue={localStorage.getItem("theme") || "light"}
               onChange={(v) => themeSwitcher(v as "light" | "dark")}
-              rightLabel={t("light_mode")}
-              leftLabel={t("dark_mode")}
+              rightLabel={t("common.light_mode")}
+              leftLabel={t("common.dark_mode")}
               rightIcon={<MdOutlineLightMode size={22} />}
               leftIcon={<MdOutlineDarkMode size={22} />}
               size="small"
@@ -183,12 +184,12 @@ export default function Navbar() {
                   // @ts-ignore
                   href={page === "home" ? "/" : "/" + page}
                 >
-                  {t(page)}
+                  {capitalizaWords(t(`common.${page}`))}
                 </NavigationLink>
               </li>
             ))}
           </ul>
-          <div className="hidden md:flexCenter gap-2">
+          <div className="hidden md:flexCenter gap-2 rtl:ml-6 ltr:mr-6">
             <NavigationLink
               href={"/become-expert"}
               className={`flexCenter duration-300 rounded-md ${
@@ -197,7 +198,7 @@ export default function Navbar() {
                   : "bg-white hover:bg-darkblue text-dark hover:text-white"
               }   h-12 px-4 text-md font-normal`}
             >
-              {t("become_expert")}
+              {t("common.become_expert")}
             </NavigationLink>
             {user_info?.jwt ? (
               <Dropdown
@@ -210,6 +211,7 @@ export default function Navbar() {
                 } text-md font-normal`}
               >
                 <div className="flexCenter flex-col gap-y-2 rounded-md bg-white shadow-md shadow-light dark:shadow-lighter">
+                  <div className="flexBetween gap-x-2 text-nowrap py-1 px-3 text-sm border-b-2"><span>{t("tour.wallet")}:</span><span>{user_info.user.wallet} {t("footer.usd")}</span></div>
                   {["profile", "logout"].map((e, i) => (
                     <button
                       key={i}
@@ -224,7 +226,7 @@ export default function Navbar() {
                         }
                       }}
                     >
-                      {t(`${e}`)}
+                      {t(`common.${e}`)}
                     </button>
                   ))}
                 </div>
@@ -238,7 +240,7 @@ export default function Navbar() {
                     : "text-white border-white hover:bg-white hover:text-dark"
                 } text-md font-normal`}
               >
-                {t("login") + " / " + t("register")}
+                {t("common.login") + " / " + t("common.register")}
               </NavigationLink>
             )}
           </div>
@@ -257,7 +259,7 @@ export default function Navbar() {
         </div>
       </nav>
       <Drawer show={hamburgerMenu} onClose={closeHamburgerMenu}>
-        <HamburgerMenu pages={pages} />
+        <HamburgerMenu pages={pages} logout={logoutUser}/>
       </Drawer>
 
       {showLangSwitcher && (

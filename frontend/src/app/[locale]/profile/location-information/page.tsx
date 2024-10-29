@@ -27,7 +27,7 @@ export default function page() {
         zipcode: (user_info?.user?.zipcode as string) || "",
       }}
       validationSchema={userLocationVldSchema}
-      onSubmit={(e, f) => {
+      onSubmit={(e) => {
         axios
           .put(
             process.env.NEXT_PUBLIC_API + `users/${user_info?.user?.id}`,
