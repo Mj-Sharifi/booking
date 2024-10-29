@@ -86,19 +86,20 @@ export default function BookingTravellers() {
         true
       );
       // vldSchema[`gender_adl_${i + 2}`] = "";
-      vldSchema[`passportNumber_adl_${i + 2}`] = validationRules.passportNumber(true);
+      vldSchema[`passportNumber_adl_${i + 2}`] =
+        validationRules.passportNumber(true);
     }
     for (let i = 0; i < chd; i++) {
-      vldSchema[`fullname_chd_${i + 2}`] = validationRules.name(
+      vldSchema[`fullname_chd_${i + 1}`] = validationRules.name(
         `fullname`,
         true
       );
       // vldSchema[`gender_chd_${i + 2}`] = ;
-      vldSchema[`passportNumber_chd_${i + 2}`] = validationRules.passportNumber(true);
+      vldSchema[`passportNumber_chd_${i + 1}`] =
+        validationRules.passportNumber(true);
     }
     return { initVals, vldSchema: yup.object().shape(vldSchema) };
   }, [JSON.stringify(psInfo)]);
-
   return (
     <>
       {tourData && psInfo ? (
@@ -122,7 +123,7 @@ export default function BookingTravellers() {
                 <Form className="flex flex-col items-center gap-y-10">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                     <h5 className=" sm:col-span-2 font-semibold text-xm md:text-base text-start w-full">
-                    {t("tour.major_traveller")}:
+                      {t("tour.major_traveller")}:
                     </h5>
                     <TextInput
                       name="fullname_adl_1"
@@ -231,7 +232,9 @@ export default function BookingTravellers() {
                         />
                         <RadioInput
                           values={["male", "female"]}
-                          initialValue={values[`gender_adl_${i + 2}`] ? "male" : "female"}
+                          initialValue={
+                            values[`gender_adl_${i + 2}`] ? "male" : "female"
+                          }
                           onChange={(v) =>
                             setFieldValue("gender", v == "male" ? true : false)
                           }
@@ -243,70 +246,81 @@ export default function BookingTravellers() {
                         />
                       </div>
                     ))}
-                  {Array(+psInfo?.children || 0)
-                    .fill(true)
-                    .map((_, i) => (
-                      <div
-                        key={i}
-                        className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full"
-                      >
-                        <h5 className=" sm:col-span-2 font-semibold text-xm md:text-base text-start w-full">
-                          {t("common.child", { plural: "" })} {i + 1}:
-                        </h5>
-                        <TextInput
-                          name={`fullname_chd_${i + 1}`}
-                          label={t("profile.fullname")}
-                          touched={
-                            touched[`fullname_chd_${i + 1}`] ? true : false
-                          }
-                          value={values[`fullname_chd_${i + 1}`]}
-                          onChange={(e) =>
-                            setFieldValue(`fullname_chd_${i + 1}`, e)
-                          }
-                          errorMessage={
-                            errors[`fullname_chd_${i + 2}`]
-                              ? t(`error.${errors[`fullname_chd_${i + 1}`]}`)
-                              : ""
-                          }
-                          onBlur={() =>
-                            setFieldTouched(`fullname_chd_${i + 1}`, true)
-                          }
-                        />
-                        <TextInput
-                          name={`passportNumber_chd_${i + 1}`}
-                          label={t("profile.passportNumber")}
-                          touched={
-                            touched[`passportNumber_chd_${i + 1}`]
-                              ? true
-                              : false
-                          }
-                          value={values[`passportNumber_chd_${i + 1}`]}
-                          onChange={(e) =>
-                            setFieldValue(`passportNumber_chd_${i + 1}`, e)
-                          }
-                          errorMessage={
-                            errors[`passportNumber_chd_${i + 1}`]
-                              ? t(`error.${errors.passportNumber}`)
-                              : ""
-                          }
-                          onBlur={() =>
-                            setFieldTouched(`passportNumber_chd_${i + 1}`, true)
-                          }
-                        />
-                        <RadioInput
-                          values={["male", "female"]}
-                          initialValue={values.gender[`gender_chd_${i + 1}`] ? "male" : "female"}
-                          onChange={(v) =>
-                            setFieldValue("gender", v == "male" ? true : false)
-                          }
-                          rightLabel={t("profile.male")}
-                          leftLabel={t("profile.female")}
-                          rightIcon={<FaMale size={22} />}
-                          leftIcon={<FaFemale size={22} />}
-                          size="medium"
-                        />
-                      </div>
-                    ))}
+                  {psInfo.children &&
+                    Array(+psInfo?.children || 0)
+                      .fill(true)
+                      .map((_, i) => (
+                        <div
+                          key={i}
+                          className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full"
+                        >
+                          <h5 className=" sm:col-span-2 font-semibold text-xm md:text-base text-start w-full">
+                            {t("common.child", { plural: "" })} {i + 1}:
+                          </h5>
+                          <TextInput
+                            name={`fullname_chd_${i + 1}`}
+                            label={t("profile.fullname")}
+                            touched={
+                              touched[`fullname_chd_${i + 1}`] ? true : false
+                            }
+                            value={values[`fullname_chd_${i + 1}`]}
+                            onChange={(e) =>
+                              setFieldValue(`fullname_chd_${i + 1}`, e)
+                            }
+                            errorMessage={
+                              errors[`fullname_chd_${i + 2}`]
+                                ? t(`error.${errors[`fullname_chd_${i + 1}`]}`)
+                                : ""
+                            }
+                            onBlur={() =>
+                              setFieldTouched(`fullname_chd_${i + 1}`, true)
+                            }
+                          />
+                          <TextInput
+                            name={`passportNumber_chd_${i + 1}`}
+                            label={t("profile.passportNumber")}
+                            touched={
+                              touched[`passportNumber_chd_${i + 1}`]
+                                ? true
+                                : false
+                            }
+                            value={values[`passportNumber_chd_${i + 1}`]}
+                            onChange={(e) =>
+                              setFieldValue(`passportNumber_chd_${i + 1}`, e)
+                            }
+                            errorMessage={
+                              errors[`passportNumber_chd_${i + 1}`]
+                                ? t(`error.${errors.passportNumber}`)
+                                : ""
+                            }
+                            onBlur={() =>
+                              setFieldTouched(
+                                `passportNumber_chd_${i + 1}`,
+                                true
+                              )
+                            }
+                          />
+                          <RadioInput
+                            values={["male", "female"]}
+                            initialValue={
+                              values[`gender_chd_${i + 1}`]
+                                ? "male"
+                                : "female"
+                            }
+                            onChange={(v) =>
+                              setFieldValue(
+                                "gender",
+                                v == "male" ? true : false
+                              )
+                            }
+                            rightLabel={t("profile.male")}
+                            leftLabel={t("profile.female")}
+                            rightIcon={<FaMale size={22} />}
+                            leftIcon={<FaFemale size={22} />}
+                            size="medium"
+                          />
+                        </div>
+                      ))}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                     <h5 className=" sm:col-span-2 font-semibold text-xm md:text-base text-start w-full">
                       {t("tour.additional_info")}:
@@ -389,7 +403,7 @@ export default function BookingTravellers() {
                 </p>
               </div>
             </div>
-            <hr className="w-full bg-border"/>
+            <hr className="w-full bg-border" />
             <div className="flexBetween gap-x-6 flex-wrap">
               <div className="flex flex-col gap-y-2">
                 <span>{t("common.checkin")}</span>
@@ -400,7 +414,10 @@ export default function BookingTravellers() {
                       }).format(new Date(psInfo.checkin))
                     : ""}
                 </span>
-                <span dir="ltr" className="text-lighter dark:text-light text-right">
+                <span
+                  dir="ltr"
+                  className="text-lighter dark:text-light text-right"
+                >
                   15:00 - 23:00
                 </span>
               </div>
@@ -413,12 +430,15 @@ export default function BookingTravellers() {
                       }).format(new Date(psInfo.checkout))
                     : ""}
                 </span>
-                <span dir="ltr" className="text-lighter dark:text-light text-right">
+                <span
+                  dir="ltr"
+                  className="text-lighter dark:text-light text-right"
+                >
                   01:00 - 11:00
                 </span>
               </div>
             </div>
-            <hr className="w-full bg-border"/>
+            <hr className="w-full bg-border" />
             <div className="flexBetween gap-y-2">
               <p>{t("tour.you_selected")}:</p>
               <div className="">

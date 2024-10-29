@@ -1,7 +1,94 @@
-import React from 'react'
+import { userInfo } from "@/types/response";
+import { useTranslations } from "next-intl";
+import React from "react";
+import { useCookies } from "react-cookie";
+import { HiCheck } from "react-icons/hi2";
 
 export default function BookingFinal() {
+  const t = useTranslations();
+  const [{ user_info }] = useCookies<"user_info", { user_info: userInfo }>([
+    "user_info",
+  ]);
   return (
-    <div>BookingFinal</div>
-  )
+    <div className="flexCenter flex-col gap-y-2">
+      <div className="flexCenter w-12 h-12 md:w-16 md:h-16 p-1 rounded-full overflow-hidden bg-darkblue dark:bg-lightblue mb-4">
+        <HiCheck size={52} className=" text-white  dark:text-dark" />
+      </div>
+      <p className="md:text-lg text-center font-semibold">
+        System, your order was submitted successfully!
+      </p>
+      <p className="text-light dark:text-lighter text-xs md:text-sm text-center">
+        Booking details has been sent to: mj.sharifimanesh@gmail.com
+      </p>
+      <div className="border-2 border-dashed border-darkblue dark:border-lightblue rounded-md grid grid-cols-2 sm:grid-cols-4 gap-6 p-4 md:p-6 text-sm md:text-base">
+        <div className="flexCenter flex-col">
+          <span className="text-darkblue dark:text-lightblue text-center">
+            Order Number
+          </span>
+          <span className="text-center">13119</span>
+        </div>
+        <div className="flexCenter flex-col">
+          <span className="text-darkblue dark:text-lightblue text-center">
+            {t("common.date")}
+          </span>{" "}
+          <span className="text-center">{new Date().toLocaleDateString()}</span>
+        </div>
+        <div className="flexCenter flex-col">
+          <span className="text-darkblue dark:text-lightblue text-center">
+            {t("tour.total_price")}
+          </span>
+          <span className="text-center">2500 {t("footer.usd")}</span>
+        </div>
+        <div className="flexCenter flex-col">
+          <span className="text-darkblue dark:text-lightblue text-center">
+            {t("tour.pay_method")}
+          </span>
+          <span className="text-center">{t("tour.wallet")}</span>
+        </div>
+      </div>
+      <div className="border-2 border-light dark:border-lighter rounded-md p-2 md:p-4 flex flex-col text-sm md:text-base divide-y-2 w-full sm:w-11/12 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-1/2 mx-auto">
+        <div className="flexBetween py-2 gap-x-4">
+          <span>{t("profile.firstname")}</span>
+          <span className="text-dakblue dark:text-lightblue">
+            {user_info.user.firstname}
+          </span>
+        </div>
+        <div className="flexBetween py-2 gap-x-4">
+          <span>{t("profile.lastname")}</span>
+          <span className="text-dakblue dark:text-lightblue">
+            {user_info.user.lastname}
+          </span>
+        </div>
+        <div className="flexBetween py-2 gap-x-4">
+          <span>{t("profile.email")}</span>
+          <span className="text-dakblue dark:text-lightblue">{user_info.user.email}</span>
+        </div>
+        <div className="flexBetween py-2 gap-x-4">
+          <span>{t("profile.phone")}</span>
+          <span className="text-dakblue dark:text-lightblue">{user_info.user.phone}</span>
+        </div>
+        <div className="flexBetween py-2 gap-x-4">
+          <span>{t("profile.address")}</span>
+          <span className="text-dakblue dark:text-lightblue">{user_info.user.address}</span>
+        </div>
+        <div className="flexBetween py-2 gap-x-4">
+          <span>{t("profile.city")}</span>
+          <span className="text-dakblue dark:text-lightblue">{user_info.user.city}</span>
+        </div>
+        <div className="flexBetween py-2 gap-x-4">
+          <span>{t("profile.country")}</span>
+          <span className="text-dakblue dark:text-lightblue">{user_info.user.country}</span>
+        </div>
+        <div className="flexBetween py-2 gap-x-4">
+          <span>{t("profile.zipcode")}</span>
+          <span className="text-dakblue dark:text-lightblue">{user_info.user.zipcode}</span>
+        </div>
+
+        <div className="flexBetween py-2 gap-x-4">
+          <span>{t("profile.special_request")}</span>
+          <span className="text-dakblue dark:text-lightblue">{t("common.lorem_ipsum_short")}</span>
+        </div>
+      </div>
+    </div>
+  );
 }

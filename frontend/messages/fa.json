@@ -128,13 +128,21 @@
     "wallet": "کیف پول",
     "special_request": "درخواست‌های اضافی",
     "major_traveller": "سرپرست مسافرین",
+    "price_per_traveller":"قیمت هر مسافر",
     "tax_fee": "مالیات و عوارض",
     "have_promo_code":"آیا کد تخفیف دارید؟",
     "enter_promo_code":"کد تخفیف را وارد کنید.",
     "total_price":"قیمت کل",
     "wallet_deduction": "<span1></span1> از کیف پول شما کم می‌شود.",
     "wallet_remaining": "مبلغ باقیمانده در کیف پول شما <span1></span1> است.",
-    "wallet_no_money": "مبلغ خرید از اعتبار کیف پول شما بیشتر است. لطفا ابتدا کیف پول خود را شارژ کنید."
+    "wallet_current_charge":"اعتبار فعلی کیف پول شما",
+    "wallet_no_money": "مبلغ خرید از اعتبار کیف پول شما بیشتر است. لطفا ابتدا کیف پول خود را شارژ کنید.",
+    "charge_wallet":"می‌خواهم اعتبار کیف پولم را افزایش بدهم",
+    "pay_wallet":"میخواهم با کیف پولم پرداخت کنم",
+    "pay_cash":"پرداخت نقدی",
+    "card_holder":"نام دارنده کارت",
+    "card_number":"شماره کارت",
+    "cvv2":"CVV2"
   },
   "testimony": {
     "customer_review": "نظرات مشتریان"

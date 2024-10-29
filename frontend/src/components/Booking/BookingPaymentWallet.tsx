@@ -16,12 +16,12 @@ export default function BookingPaymentWallet({ totalPrice }: props) {
   const t = useTranslations();
   console.log("totalPrice: ", totalPrice);
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2">
-      <div className="flex flex-col gap-y-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2">
+      <div className="flex flex-col gap-y-3">
         {walletCharge > totalPrice ? (
           <>
             <p className="md:text-lg">
-            {t.rich("tour.wallet_deduction", {
+              {t.rich("tour.wallet_deduction", {
                 span1: (chunks) => (
                   <span className="font-semibold">
                     {totalPrice} {t("footer.usd")}
@@ -38,9 +38,32 @@ export default function BookingPaymentWallet({ totalPrice }: props) {
                 ),
               })}
             </p>
+            <button
+              type="button"
+              className="md:text-lg px-6 py-2 w-fit duration-300 border rounded-md text-darkblue dark:text-white dark:hover:text-dark dark:border-lightblue dark:hover:bg-lightblue border-darkblue hover:bg-darkblue hover:text-white"
+            >
+              {t("tour.pay_wallet")}
+            </button>
           </>
         ) : (
-          <p>{t("wallet_no_money")}</p>
+          <>
+            <p className="md:text-lg">{t("tour.wallet_no_money")}</p>
+            <p className="md:text-lg">
+              {t.rich("tour.wallet_current_charge", {
+                span1: () => (
+                  <span className="font-semibold">
+                    {walletCharge} {t("footer.usd")}
+                  </span>
+                ),
+              })}
+            </p>
+            <button
+              type="button"
+              className="md:text-lg px-6 py-2 w-fit duration-300 border rounded-md text-darkblue dark:text-white dark:hover:text-dark dark:border-lightblue dark:hover:bg-lightblue border-darkblue hover:bg-darkblue hover:text-white"
+            >
+              {t("tour.charge_wallet")}
+            </button>
+          </>
         )}
       </div>
       <div className="">

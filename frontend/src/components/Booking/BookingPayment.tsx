@@ -46,7 +46,7 @@ export default function BookingPayment() {
             {t("tour.wallet")}
           </button>
         </div>
-        <div>
+        <div className="mt-10">
           {payMethod == "wallet" ? (
             <BookingPaymentWallet totalPrice={totalPrice} />
           ) : (
@@ -56,8 +56,8 @@ export default function BookingPayment() {
       </div>
       <div className="flex flex-col gap-y-6 text-sm md:text-base h-fit">
         <div className="flex flex-col gap-y-2 border rounded-md p-6 lg:p-3">
-          <h5 className="text-base md:text-lg xl:text-xl font-semibold text-center mb-2">
-            Your price summary
+          <h5 className="text-base md:text-lg xl:text-xl font-semibold text-start mb-2">
+            {t("tour.price_per_traveller")}
           </h5>
           <div className="flex justify-between ">
             <span>{t("common.adult", { plural: "s" })}:</span>
