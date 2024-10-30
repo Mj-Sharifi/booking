@@ -141,7 +141,7 @@ export default function Pagination({
           <button
             className={`duration-300 hover:shadow-none ${btnSize} flexCenter ${
               variant === "circle" ? "rounded-full" : "rounded"
-            } disabled:opacity-20 enabled:hover:scale-110 border border-transparent enabled:hover:border-emerald-400 ltr:rotate-180`}
+            } disabled:opacity-20 enabled:hover:scale-110 border border-transparent enabled:hover:border-sky-400 ltr:rotate-180`}
             disabled={page === 1}
             onClick={() => {
               const p = page-1
@@ -169,11 +169,11 @@ export default function Pagination({
               return (
                 <li key={i}>
                   <button
-                    className={`duration-200 dark:bg-emerald-950  px-1 ${btnSize} inline-flex justify-center items-center ${
+                    className={`duration-200 dark:bg-sky-950  px-1 ${btnSize} inline-flex justify-center items-center ${
                       variant === "circle" ? "rounded-full" : "rounded"
                     } ${
-                      e === page ? "bg-emerald-200 dark:!bg-emerald-600" : ""
-                    } border-2 border-emerald-400 dark:border-emerald-700 text-emerald-900 dark:text-emerald-50 hover:scale-105 hover:shadow-emerald-800`}
+                      e === page ? "bg-sky-200 dark:!bg-sky-600" : ""
+                    } border-2 border-sky-400 dark:border-sky-700 text-sky-900 dark:text-sky-50 hover:scale-105 hover:shadow-sky-800`}
                     style={style}
                     onClick={() => {
                       onChange(e as number);
@@ -193,7 +193,7 @@ export default function Pagination({
           <button
             className={`duration-300 hover:shadow-none ${btnSize} flexCenter ${
               variant === "circle" ? "rounded-full" : "rounded"
-            } disabled:opacity-20 enabled:hover:scale-110 border border-transparent enabled:hover:border-emerald-400 ltr:rotate-180`}
+            } disabled:opacity-20 enabled:hover:scale-110 border border-transparent enabled:hover:border-sky-400 ltr:rotate-180`}
             disabled={page === count}
             onClick={() => {
               const p = page+1
@@ -214,14 +214,14 @@ export default function Pagination({
                   e.stopPropagation();
                   setShowOptions(!showOptions);
                 }}
-                className="group w-full duration-300 flex justify-between items-center rounded px-2 py-1 overflow-x-hidden whitespace-nowrap text-ellipsis text-lg border-2 dark:bg-gray-700 border-gray-600 hover:border-emerald-500"
+                className="group w-full duration-300 flex justify-between items-center rounded px-2 py-1 overflow-x-hidden whitespace-nowrap text-ellipsis text-lg border-2 dark:bg-gray-700 border-gray-600 hover:border-sky-500"
               >
                 {page}
                 <BiChevronDown
                   size={26}
                   className={`duration-300 ${
                     showOptions ? "rotate-180" : ""
-                  } group-hover:text-emerald-700`}
+                  } group-hover:text-sky-700`}
                 />
               </button>
               <div
@@ -243,7 +243,7 @@ export default function Pagination({
                       });
                       setSearchedOptions(newOptions);
                     }}
-                    className="bg-transparent duration-300 w-full rounded-md px-3 py-2 outline-none border border-emerald-500 dark:border-emerald-400 focus:border-emerald-600 dark:focus:border-emerald-500 focus:outline"
+                    className="bg-transparent duration-300 w-full rounded-md px-3 py-2 outline-none border border-sky-500 dark:border-sky-400 focus:border-sky-600 dark:focus:border-sky-500 focus:outline"
                   />
                 </div>
                 <hr className="my-1 w-full" />
@@ -251,7 +251,7 @@ export default function Pagination({
                   {searchedOptions.map((e, i) => (
                     <li
                       key={i}
-                      className={`group cursor-pointer flex gap-4 items-center px-4 py-2 hover:bg-emerald-100 hover:text-emerald-700 `}
+                      className={`group cursor-pointer flex gap-4 items-center px-4 py-2 hover:bg-sky-100 hover:text-sky-700 `}
                       onClick={() => {
                         onChange(e);
                         if (updateUrl) {

@@ -132,6 +132,7 @@
     "price_per_traveller": "Price per traveller",
     "have_promo_code": "Do you have a promo code?",
     "enter_promo_code": "Enter promo code",
+    "price":"Price",
     "total_price": "Total price",
     "wallet_no_money": "The purchase amount exceeds your wallet credit. Please charge your wallet first.",
     "wallet_deduction": "<span1></span1> will be deducted from your wallet.",

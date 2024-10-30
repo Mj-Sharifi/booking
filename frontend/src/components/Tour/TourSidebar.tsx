@@ -97,7 +97,7 @@ export default function TourSidebar({
         </ul>
       </div>
       <div className="py-6">
-        <span className="font-semibold md:text-lg">{t("tour.other")}</span>
+        <span className="font-semibold md:text-lg">{t("tour.price")}</span>
         <div className="mt-2">
           <RangeSlider min={0} max={4000} onChange={handlePrice} />
         </div>

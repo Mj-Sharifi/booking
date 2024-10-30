@@ -189,14 +189,14 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="hidden md:flexCenter gap-2 rtl:ml-6 ltr:mr-6">
+          <div className="hidden md:flexCenter text-sm lg:text-base gap-2 rtl:ml-6 ltr:mr-6">
             <NavigationLink
               href={"/become-expert"}
               className={`flexCenter duration-300 rounded-md ${
                 bgEffect
                   ? "bg-dark dark:bg-white hover:bg-darkblue dark:hover:text-white text-white dark:text-dark"
                   : "bg-white hover:bg-darkblue text-dark hover:text-white"
-              }   h-12 px-4 text-md font-normal`}
+              }   h-12 px-3 text-md font-normal`}
             >
               {t("common.become_expert")}
             </NavigationLink>
@@ -204,7 +204,7 @@ export default function Navbar() {
               <Dropdown
                 label={user_info.user.username||user_info.user.email}
                 OpenMode="hover"
-                btnClassNames={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-4 ${
+                btnClassNames={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-3 ${
                   bgEffect
                     ? "text-dark dark:text-white dark:hover:text-dark dark:border-white dark:hover:bg-white border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"
                     : "text-white border-white hover:bg-white hover:text-dark"
@@ -234,7 +234,7 @@ export default function Navbar() {
             ) : (
               <NavigationLink
                 href="/login"
-                className={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-4 ${
+                className={`flexCenter duration-300 rounded-md border bg-transparent h-12 px-3 ${
                   bgEffect
                     ? "text-dark dark:text-white dark:hover:text-dark dark:border-white dark:hover:bg-white border-dark hover:bg-darkblue hover:border-darkblue hover:text-white"
                     : "text-white border-white hover:bg-white hover:text-dark"
@@ -244,7 +244,7 @@ export default function Navbar() {
               </NavigationLink>
             )}
           </div>
-          <div className="flexCenter gap-3 md:hidden">
+          <div className="flexCenter gap-3 md:hidden dark:text-white">
             <NavigationLink href={"/profile/dashboard"}>
               <HiOutlineUserCircle size={24} />
             </NavigationLink>

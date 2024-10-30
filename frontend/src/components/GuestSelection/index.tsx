@@ -1,7 +1,7 @@
 "use client";
 import { onlyNumbers } from "@/utils/utils";
 import { useTranslations } from "next-intl";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi2";
 
 type props = {
@@ -10,16 +10,13 @@ type props = {
 };
 export default function GuestSelection({ value, onChange }: props) {
   const t = useTranslations();
+  const guestSelectionDiv = useRef<HTMLDivElement>(null);
   const [guestEl, setGuestEl] = useState<boolean>(false);
   const [guest, setGuest] = useState<{
     adult: number;
     children: number;
     rooms: number;
-  }>({
-    adult: 2,
-    children: 0,
-    rooms: 1,
-  });
+  }>(value);
   const handleGuest = (name: "adult" | "children" | "rooms", value: number) => {
     let newGuest = { ...guest };
     if (name == "adult") {
@@ -35,12 +32,34 @@ export default function GuestSelection({ value, onChange }: props) {
     setGuest(newGuest);
   };
   useEffect(() => {
+    if(guestSelectionDiv){
+      setTimeout(()=>guestSelectionDiv.current?.classList.remove("hidden"),500)
+    }
     document.addEventListener("click", (e: MouseEvent) => {
       if (!(e.target as HTMLElement).closest(".guest-selection")) {
         setGuestEl(false);
       }
     });
   }, []);
+  useEffect(() => {
+    if (guestSelectionDiv.current) {
+      if (guestEl) {
+        guestSelectionDiv.current?.classList.remove("animate-fadeInDown");
+        guestSelectionDiv.current?.classList.remove("invisible");
+        guestSelectionDiv.current?.classList.add("animate-fadeInUp");
+        setTimeout(() => {
+          guestSelectionDiv.current?.classList.add("visible");
+        }, 500);
+      } else {
+        guestSelectionDiv.current?.classList.remove("visible");
+        guestSelectionDiv.current?.classList.remove("animate-fadeInUp");
+        guestSelectionDiv.current?.classList.add("animate-fadeInDown");
+        setTimeout(() => {
+          guestSelectionDiv.current?.classList.add("invisible");
+        }, 500);
+      }
+    }
+  }, [guestEl]);
   useEffect(() => {
     onChange(guest);
   }, [JSON.stringify(guest)]);
@@ -50,7 +69,7 @@ export default function GuestSelection({ value, onChange }: props) {
         {t("tour.travelers_number")}
       </span>
       <span
-        className="guest-selection text-light dark:text-lighter text-xs md:text-sm"
+        className="guest-selection text-light dark:text-lighter text-xs md:text-sm cursor-pointer"
         onClick={() => setGuestEl(true)}
       >
         {guest.adult} {t("common.adult", { plural: "s" })} - {guest.children}{" "}
@@ -58,9 +77,8 @@ export default function GuestSelection({ value, onChange }: props) {
         {t("common.room", { plural: "s" })}
       </span>
       <div
-        className={`guest-selection absolute rounded-sm bg-white dark:bg-dark shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
-          guestEl ? "visible animate-fadeUp" : "invisible"
-        }`}
+        ref={guestSelectionDiv}
+        className={`guest-selection absolute rounded-sm bg-white dark:bg-dark shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden hidden`}
       >
         <div className="flexBetween pb-4">
           <span>{t("common.adult", { plural: "s" })}</span>
@@ -76,7 +94,6 @@ export default function GuestSelection({ value, onChange }: props) {
                 className="text-darkblue dark:text-lightblue"
               />
             </button>
-            {/* <span className="text-lg">{guest.adult}</span> */}
             <input
               value={guest.adult}
               onChange={(e) => {

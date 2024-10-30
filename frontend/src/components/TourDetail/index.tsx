@@ -2,7 +2,7 @@
 import { tourData, userInfo } from "@/types/response";
 import axios from "axios";
 import { useParams, usePathname } from "next/navigation";
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -16,8 +16,11 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
 import persian_fa from "react-date-object/locales/persian_fa";
 import gregorian_en from "react-date-object/locales/gregorian_en";
+import transition from "react-element-popper/animations/transition"
+import opacity from "react-element-popper/animations/opacity"
+import "react-element-popper/build/element_popper.css"
+// 
 import { HiArrowRight } from "react-icons/hi2";
-import NavigationLink from "@/components/link/NavigationLink";
 import { useBookAppDispatch } from "@/hooks/redux";
 import { useRouter } from "@/navigation";
 import { locale } from "@/types/types";
@@ -380,6 +383,10 @@ export default function TourDetail() {
                     range
                     numberOfMonths={2}
                     inputClass="outline-none border-none !text-light dark:!text-lighter dark:!bg-dark text-xs md:text-sm p-0"
+                    animations={[
+                      opacity(), 
+                      transition({ from: 50, duration: 500 })
+                    ]}
                   />
                 </div>
                 <div className=" border border-border rounded p-3">

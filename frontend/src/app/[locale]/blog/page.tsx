@@ -92,13 +92,13 @@ export default function Blog() {
       <p className="text-center md:text-lg xl:text-xl text-light dark:text-lighter mb-8 md:mb-12 xl:mb-16">
         {t("common.lorem_ipsum_short")}
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-4 sm:gap-6 lg:gap-8">
-        <div className="col-span-1 md:order-2">
+      <div className="grid grid-cols-1 lg:grid-cols-4 sm:gap-6 lg:gap-8">
+        <div className="col-span-1 lg:order-2 lg:sticky lg:top-28 lg:h-fit">
           {category && (
             <BlogSidebar handleCategory={handleCategory} category={category} />
           )}
         </div>
-        <div className="col-span-1 md:col-span-3 flex flex-col gap-y-6 px-6 sm:px-2">
+        <div className="col-span-1 lg:col-span-3 flex flex-col gap-y-6 px-6 sm:px-2">
           {blog &&
             blog?.map((e, i) => (
               <PostCard

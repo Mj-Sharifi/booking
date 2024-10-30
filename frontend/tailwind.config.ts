@@ -23,15 +23,18 @@ const config: Config = {
 
     keyframes: {
       fadeInUp: {
-        from: { transform: "translateY(60px)", opacity: "0.2",visibility:"visible" },
-        to: { transform: "translateY(0)", opacity: "1", },
+        from: { transform: "translateY(50px)", opacity: "0",visibility:"visible"  },
+        to: { transform: "translateY(0)", opacity: "1",},
       },
-
+      fadeInDown: {
+        from:  { transform: "translateY(0)", opacity: "1", },
+        to:{ transform: "translateY(50px)", opacity: "0",visibility:"invisible" },
+      },
     },
     animation: {
       fadeInUp: "fadeInUp 0.5s linear 0s forwards",
+      fadeInDown:"fadeInDown 0.5s linear 0s forwards"
     },
-
     extend: {
       colors: {
         transparent: "transparent",

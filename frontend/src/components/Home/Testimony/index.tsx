@@ -38,7 +38,7 @@ export default function Testimony() {
     }
   }, []);
   return (
-    <section className="relative flexCenter pt-12">
+    <section className="relative flexCenter py-12">
       <Image
         src="/assets/images/home/testimony/testimony-bg.png"
         className="absolute top-0 h-full w-full object-cover"

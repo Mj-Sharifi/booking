@@ -243,7 +243,7 @@ export default function Tours() {
       <div className="grid grid-cols-1 lg:grid-cols-4 sm:gap-6 lg:gap-8">
         {loading == "success" ? (
           <>
-            <div className="hidden lg:block col-span-1 lg:sticky lg:top-0 lg:bottom-auto">
+            <div className="hidden lg:block col-span-1 lg:sticky lg:top-28 h-fit">
               {allCategories &&
               priceRange &&
               category &&
@@ -313,7 +313,7 @@ export default function Tours() {
                   {t("common.filter")} <FaFilter size={18} />
                 </button>
               </div>
-              <div className=" flex flex-col">
+              <div className="flex flex-col">
                 {filteredTours?.length ? (
                   filteredTours?.map(({ id, attributes }, i) => (
                     <TourCard

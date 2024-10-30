@@ -18,7 +18,7 @@ export default function Home({ params }: props) {
         media={<Image loading="lazy" src="/assets/images/home/5.webp" alt="locale expert" width={640} height={537}/>}
       />
       <Testimony />
-      <section className="container mx-auto flex flex-col gap-y-4 lg:flexBetween pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24 md:pb-32 px-4 sm:px-6 md:px-8">
+      {/* <section className="container mx-auto flex flex-col gap-y-4 lg:flexBetween pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24 md:pb-32 px-4 sm:px-6 md:px-8">
         <div>
           <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
             Not a Member Yet?
@@ -44,7 +44,7 @@ export default function Home({ params }: props) {
             <HiArrowUpRight size={18}/>
           </Link>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

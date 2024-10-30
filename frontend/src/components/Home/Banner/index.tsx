@@ -6,15 +6,17 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { locationData } from "@/types/response";
 import { useParams } from "next/navigation";
-import { HiMagnifyingGlass, HiMapPin, HiMinus, HiPlus } from "react-icons/hi2";
-
+import { HiMagnifyingGlass} from "react-icons/hi2";
+import { FiMapPin } from "react-icons/fi";
+import GuestSelection from "@/components/GuestSelection";
 // React Multi Date Picker
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian_fa from "react-date-object/locales/persian_fa";
 import gregorian_en from "react-date-object/locales/gregorian_en";
 import type { Value } from "react-multi-date-picker";
-import { FiMapPin } from "react-icons/fi";
-import GuestSelection from "@/components/GuestSelection";
+import transition from "react-element-popper/animations/transition"
+import opacity from "react-element-popper/animations/opacity"
+import "react-element-popper/build/element_popper.css"
 
 export default function Banner() {
   // Translation
@@ -51,19 +53,6 @@ export default function Banner() {
     children: number;
     rooms: number;
   }>({ adult: 2, children: 1, rooms: 1 });
-  // const [guestEl, setGuestEl] = useState<boolean>(false);
-  // const [guest, setGuest] = useState<{
-  //   adult: number;
-  //   children: number;
-  //   rooms: number;
-  // }>({ adult: 2, children: 1, rooms: 1 });
-  // useEffect(() => {
-  //   document.addEventListener("click", (e: MouseEvent) => {
-  //     if (!(e.target as HTMLElement).closest(".guest-selection")) {
-  //       setGuestEl(false);
-  //     }
-  //   });
-  // }, []);
   // Entrance Animation
   const [startAnimation, setStartAnimation] = useState<boolean>(false);
   const banner = useRef<HTMLDivElement>(null);
@@ -144,11 +133,11 @@ export default function Banner() {
                 {destination}
               </span>
               <div
-                className={`absolute rounded-sm bg-white shadow-nav p-7 ltr:left-0 rtl:right-0 top-full min-w-80 sm:min-w-96 overflow-hidden ${
-                  locationEl ? "animate-fadeInUp" : "invisible"
+                className={`absolute rounded-sm bg-white shadow-nav p-7 ltr:left-0 rtl:right-0 top-full min-w-72 sm:min-w-80 overflow-hidden ${
+                  locationEl ? "animate-fadeInUp" : "animate-fadeInDown"
                 } z-20`}
               >
-                <ul className="flex flex-col gap-3 max-h-64 md:max-h-96 overflow-y-scroll scroller text-dark">
+                <ul className="flex flex-col gap-3 max-h-60 md:max-h-80 overflow-y-scroll scroller text-dark">
                   {locations?.map((e) => (
                     <li
                       key={e?.id}
@@ -175,7 +164,6 @@ export default function Banner() {
                 {t("common.checkin")} - {t("common.checkout")}
               </span>
               <DatePicker
-                // calendar={persian}
                 locale={locale == "fa" ? persian_fa : gregorian_en}
                 value={dateRange}
                 onChange={setDateRange}
@@ -183,6 +171,10 @@ export default function Banner() {
                 range
                 numberOfMonths={2}
                 inputClass="duration-700 delay-500 transition-all outline-none border-none text-light dark:text-lighter dark:bg-dark text-sm p-0"
+                animations={[
+                  opacity(), 
+                  transition({ from: 50, duration: 500 })
+                ]}
               />
             </div>
             {/* Number of Guest */}
