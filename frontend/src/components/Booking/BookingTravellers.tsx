@@ -106,7 +106,7 @@ export default function BookingTravellers() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-10 xl:gap-x-7 2xl:gap-x-10">
           <div className="lg:col-span-2 border rounded-md p-6 lg:p-3">
             <h4 className="font-semibold md:text-lg 2xl:text-xl mb-6">
-              Let us know who you are
+              {t("tour.let_know_you")}
             </h4>
             <Formik
               initialValues={psValues.initVals}
@@ -378,7 +378,7 @@ export default function BookingTravellers() {
           </div>
           <div className="flex flex-col gap-y-6 border rounded-md p-6 lg:p-3 text-sm md:text-base h-fit">
             <h5 className="text-base md:text-lg xl:text-xl font-semibold text-center">
-              Your booking details
+              {t("tour.booking_details")}
             </h5>
             <div className="flex gap-x-3">
               <Image

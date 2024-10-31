@@ -12,7 +12,7 @@ import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import RadioInput from "../Form/RadioInput";
 import NavigationLink from "../link/NavigationLink";
 import { useCookies } from "react-cookie";
-import { HiBars3BottomRight, HiOutlineUserCircle } from "react-icons/hi2";
+import { HiBars3BottomLeft, HiBars3BottomRight, HiOutlineUserCircle } from "react-icons/hi2";
 import Drawer from "../Drawer";
 import Dropdown from "../Dropdown";
 import { useRouter } from "@/navigation";
@@ -22,7 +22,6 @@ import { userInfo } from "@/types/response";
 const pages = ["home", "tour", "blog"];
 
 export default function Navbar() {
-  4;
   const [{ user_info },_,removeCookie] = useCookies<"user_info",{user_info:userInfo}>(["user_info"]);
   const { locale } = useParams<{ locale: locale }>();
   const t = useTranslations("");
@@ -108,34 +107,26 @@ export default function Navbar() {
       >
         <div className="container mx-auto h-full flexBetween px-2">
           <div className="flexCenter gap-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="hamburgerMenu hidden md:block lg:hidden w-7 h-7 cursor-pointer before:bg-dark"
+          <button
+              type="button"
               onClick={() => openHamburgerMenu()}
+              className="hamburgerMenu hidden md:block lg:hidden"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
-              />
-            </svg>
+              <HiBars3BottomLeft className="rtl:rotate-180" size={24} />
+            </button>
             <NavigationLink href={"/"}>
               <Image
                 src="/assets/images/navbar/tour-booking-logo-2.png"
                 alt="logo"
-                width={70}
-                height={70}
+                width={60}
+                height={60}
               />
             </NavigationLink>
             <button
               type="button"
-              disabled={pathName.includes("/blog/")}
+              disabled={["/blog/","/tour/"].includes(pathName)}
               className={`duration-300 border-none px-2 py-1 flex gap-1 items-center text-xs md:text-sm ${
-                pathName.includes("/blog/")
+                ["/blog/","/tour/"].includes(pathName)
                   ? ""
                   : "hover:text-darkblue dark:hover:text-lightblue"
               } text-dark dark:text-white`}
@@ -151,7 +142,7 @@ export default function Navbar() {
                 height={20}
                 className="rounded"
               />
-              {!pathName.includes("/blog/") && <HiChevronDown size={20} />}
+              {!["/blog/","/tour/"].includes(pathName) && <HiChevronDown size={20} />}
             </button>
             <RadioInput
               values={["light", "dark"]}

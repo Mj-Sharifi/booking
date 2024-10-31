@@ -88,6 +88,7 @@ export const config = {
     // Match routes with locale prefixes (e.g. /en/...)
     "/(en|fa)/:path*",
     // Match any route not excluded (e.g. static assets)
-    "/((?!_next|_vercel|.*\\..*).*)",
+    // "/((?!_next|_vercel|.*\\..*).*)",
+    "/((?!_next|_vercel|favicon\\.ico|.*\\..*).*)",
   ],
 };

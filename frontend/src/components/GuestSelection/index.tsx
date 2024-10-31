@@ -32,34 +32,13 @@ export default function GuestSelection({ value, onChange }: props) {
     setGuest(newGuest);
   };
   useEffect(() => {
-    if(guestSelectionDiv){
-      setTimeout(()=>guestSelectionDiv.current?.classList.remove("hidden"),500)
-    }
+      
     document.addEventListener("click", (e: MouseEvent) => {
       if (!(e.target as HTMLElement).closest(".guest-selection")) {
         setGuestEl(false);
       }
     });
   }, []);
-  useEffect(() => {
-    if (guestSelectionDiv.current) {
-      if (guestEl) {
-        guestSelectionDiv.current?.classList.remove("animate-fadeInDown");
-        guestSelectionDiv.current?.classList.remove("invisible");
-        guestSelectionDiv.current?.classList.add("animate-fadeInUp");
-        setTimeout(() => {
-          guestSelectionDiv.current?.classList.add("visible");
-        }, 500);
-      } else {
-        guestSelectionDiv.current?.classList.remove("visible");
-        guestSelectionDiv.current?.classList.remove("animate-fadeInUp");
-        guestSelectionDiv.current?.classList.add("animate-fadeInDown");
-        setTimeout(() => {
-          guestSelectionDiv.current?.classList.add("invisible");
-        }, 500);
-      }
-    }
-  }, [guestEl]);
   useEffect(() => {
     onChange(guest);
   }, [JSON.stringify(guest)]);
@@ -78,7 +57,9 @@ export default function GuestSelection({ value, onChange }: props) {
       </span>
       <div
         ref={guestSelectionDiv}
-        className={`guest-selection absolute rounded-sm bg-white dark:bg-dark shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden hidden`}
+        className={`guest-selection absolute rounded-sm bg-white dark:bg-dark shadow-nav p-7 left-0 top-full min-w-80 sm:min-w-96 duration-300 overflow-hidden ${
+          guestEl ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
+        }`}
       >
         <div className="flexBetween pb-4">
           <span>{t("common.adult", { plural: "s" })}</span>

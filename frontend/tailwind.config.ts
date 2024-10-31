@@ -1,3 +1,4 @@
+import opacity from "react-element-popper/animations/opacity";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -23,17 +24,17 @@ const config: Config = {
 
     keyframes: {
       fadeInUp: {
-        from: { transform: "translateY(50px)", opacity: "0",visibility:"visible"  },
+        from: { transform: "translateY(100%)",opacity:"0" },
         to: { transform: "translateY(0)", opacity: "1",},
       },
-      fadeInDown: {
-        from:  { transform: "translateY(0)", opacity: "1", },
-        to:{ transform: "translateY(50px)", opacity: "0",visibility:"invisible" },
+      fadeOutDown: {
+        from:  { opacity:"1" },
+        to:{ transform: "translateY(100%)", opacity: "0" },
       },
     },
     animation: {
-      fadeInUp: "fadeInUp 0.5s linear 0s forwards",
-      fadeInDown:"fadeInDown 0.5s linear 0s forwards"
+      fadeInUp: "fadeInUp 0.5s linear 0s ",
+      fadeInDown:"fadeOutDown 0.5s linear 0s forwards"
     },
     extend: {
       colors: {
@@ -80,6 +81,9 @@ const config: Config = {
       listStyleImage:{
         "checkmark":'url("/assets/images/check-regular-16.png")',
         "xmark":"url('/assets/images/x-regular-16.png')"
+      },
+      backgroundImage:{
+        "auth":"url('/assets/images/auth.jpg')"
       }
     },
   },

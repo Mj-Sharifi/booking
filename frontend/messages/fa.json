@@ -147,7 +147,9 @@
     "travellers":"مسافرین",
     "order_number":"شماره سفارش",
     "submitted_successfully":"سفارش شما با موفقیت ثبت شد.",
-    "booking_details_sent_to":"اطلاعات رزرو به <span></span> ارسال گردید."
+    "booking_details_sent_to":"اطلاعات رزرو به <span></span> ارسال گردید.",
+    "booking_details":"جزییات رزرو شما",
+    "Let_know_you":"بزار بیشتر با مسافرینمون آشنا شیم"
 
   },
   "testimony": {
