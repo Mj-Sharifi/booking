@@ -82,63 +82,68 @@ export const validationRules = {
     required = false
   ) => {
     return yup.lazy((value) => {
+      console.log("value: ", value);
       let valid = yup.mixed<File>().nullable();
+      if (typeof value !== "string") {
 
-      if (required || (!required && !!value)) {
-        valid = valid
-          .test(
-            "fileSize",
-            generateError("size_too_large", name),
-            (file?: File | null) => {
-              if (!file) return !required; // Allow null/undefined when not required
-              return file.size <= maxSize;
-            }
-          )
-          .test(
-            "fileFormat",
-            generateError("must_be_jpg", name),
-            (file?: File | null) => {
-              if (!file) return !required; // Allow null/undefined when not required
-              return supportedFormats.includes("." + file?.name?.split(".")[1]);
-            }
-          );
+        if (required || (!required && !!value)) {
+          valid = valid
+            .test(
+              "fileSize",
+              generateError("size_too_large", name),
+              (file?: File | null) => {
+                if (!file) return !required; // Allow null/undefined when not required
+                return file.size <= maxSize;
+              }
+            )
+            .test(
+              "fileFormat",
+              generateError("must_be_jpg", name),
+              (file?: File | null) => {
+                if (!file) return !required; // Allow null/undefined when not required
+                return supportedFormats.includes("." + file?.name?.split(".")[1]);
+              }
+            );
 
-        if (maxWidth && maxHeight) {
-          valid = valid.test(
-            "fileDimensions",
-            generateError("dimension_too_large", name),
-            (file?: File | null) => {
-              if (!file) return !required; // Allow null/undefined when not required
+          if (maxWidth && maxHeight) {
+            valid = valid.test(
+              "fileDimensions",
+              generateError("dimension_too_large", name),
+              (file?: File | null) => {
+                if (!file) return !required; // Allow null/undefined when not required
 
-              const image = new Image();
-              const url = URL?.createObjectURL(file);
+                console.log("vlSchema-file: ", file);
+                const image = new Image();
+                const url = URL?.createObjectURL(file);
+                console.log("vlSchema-url: ", url);
+                return new Promise<boolean>((resolve) => {
+                  image.onload = () => {
+                    URL.revokeObjectURL(url);
+                    // Check if dimensions are valid
+                    if (image.width <= maxWidth && image.height <= maxHeight) {
+                      resolve(true);
+                    } else {
+                      resolve(false);
+                    }
+                  };
+                  image.onerror = () => {
+                    URL.revokeObjectURL(url);
+                    resolve(false); // reject invalid images
+                  };
+                  image.src = url;
+                });
+              }
+            );
+          }
+        }
 
-              return new Promise<boolean>((resolve) => {
-                image.onload = () => {
-                  URL.revokeObjectURL(url);
-                  // Check if dimensions are valid
-                  if (image.width <= maxWidth && image.height <= maxHeight) {
-                    resolve(true);
-                  } else {
-                    resolve(false);
-                  }
-                };
-                image.onerror = () => {
-                  URL.revokeObjectURL(url);
-                  resolve(false); // reject invalid images
-                };
-                image.src = url;
-              });
-            }
-          );
+        if (required) {
+          valid = valid.required("image_required");
         }
       }
 
-      if (required) {
-        valid = valid.required("image_required");
-      }
-
       return valid.nullable(); // Allow null values when not required
+
     });
   },
   string: yup.string().trim(),
@@ -153,17 +158,17 @@ export const validationRules = {
   },
   passportNumber: (required = true) => {
     return yup.lazy((value) => {
-        let valid = yup
-          .string()
-          .trim()
-        if (required || (!required && value?.length > 0)) {
-          valid = valid.matches( /^[A-Za-z0-9]*$/,"only_letter_number")
-        }
-        if (required) {
-          valid = valid.required("passport_required");
-        }
-        return valid;
-      });
+      let valid = yup
+        .string()
+        .trim()
+      if (required || (!required && value?.length > 0)) {
+        valid = valid.matches(/^[A-Za-z0-9]*$/, "only_letter_number")
+      }
+      if (required) {
+        valid = valid.required("passport_required");
+      }
+      return valid;
+    });
   },
 };
 

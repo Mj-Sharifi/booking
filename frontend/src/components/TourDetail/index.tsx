@@ -16,10 +16,10 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
 import persian_fa from "react-date-object/locales/persian_fa";
 import gregorian_en from "react-date-object/locales/gregorian_en";
-import transition from "react-element-popper/animations/transition"
-import opacity from "react-element-popper/animations/opacity"
-import "react-element-popper/build/element_popper.css"
-// 
+import transition from "react-element-popper/animations/transition";
+import opacity from "react-element-popper/animations/opacity";
+import "react-element-popper/build/element_popper.css";
+//
 import { HiArrowRight } from "react-icons/hi2";
 import { useBookAppDispatch } from "@/hooks/redux";
 import { useRouter } from "@/navigation";
@@ -114,7 +114,7 @@ export default function TourDetail() {
         className=" text-darkblue dark:text-lightblue underline underline-offset-2 text-xs md:text-sm"
         onClick={() => handleActiveTimeline(0)}
       >
-        See details & photo
+        {t("tour.see_details")}
       </button>
     </div>,
     <div className="flex flex-col gap-y-2 justify-start items-start">
@@ -140,7 +140,7 @@ export default function TourDetail() {
         className=" text-darkblue dark:text-lightblue underline underline-offset-2 text-xs md:text-sm"
         onClick={() => handleActiveTimeline(1)}
       >
-        See details & photo
+        {t("tour.see_details")}
       </button>
     </div>,
     <div className="flex flex-col gap-y-2 justify-start items-start">
@@ -166,7 +166,7 @@ export default function TourDetail() {
         className=" text-darkblue dark:text-lightblue underline underline-offset-2 text-xs md:text-sm"
         onClick={() => handleActiveTimeline(2)}
       >
-        See details & photo
+        {t("tour.see_details")}
       </button>
     </div>,
     <div className="flex flex-col gap-y-2 justify-start items-start">
@@ -192,7 +192,7 @@ export default function TourDetail() {
         className=" text-darkblue dark:text-lightblue underline underline-offset-2 text-xs md:text-sm"
         onClick={() => handleActiveTimeline(3)}
       >
-        See details & photo
+        {t("tour.see_details")}
       </button>
     </div>,
   ];
@@ -369,7 +369,7 @@ export default function TourDetail() {
                   <span className="text-light dark:text-lighter text-xs md:text-sm ">
                     {t("common.from")}
                   </span>
-                  <span>{tourData.attributes.price}$</span>
+                  <span>{tourData.attributes.price} {t("footer.usd")}</span>
                 </div>
                 <div className="rounded border border-border w-full flex flex-col gap-2 p-3">
                   <span className="font-semibold  text-sm md:text-base">
@@ -384,8 +384,8 @@ export default function TourDetail() {
                     numberOfMonths={2}
                     inputClass="outline-none border-none !text-light dark:!text-lighter dark:!bg-dark text-xs md:text-sm p-0"
                     animations={[
-                      opacity(), 
-                      transition({ from: 50, duration: 500 })
+                      opacity(),
+                      transition({ from: 50, duration: 500 }),
                     ]}
                   />
                 </div>
@@ -400,12 +400,6 @@ export default function TourDetail() {
                 >
                   {t("tour.book_now")}
                 </button>
-                {/* <NavigationLink
-                  href={"/booking"}
-                  className="w-full py-3 text-center transition-all duration-300 bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark rounded-md"
-                >
-                  {t("tour.book_now")}
-                </NavigationLink> */}
               </div>
             </div>
           </div>
@@ -468,16 +462,24 @@ export default function TourDetail() {
             <div className="lg:col-span-4">
               <Timeliner
                 titles={[
-                  "Windsor Castle",
-                  "St. George's Chapel",
-                  "The Roman Baths",
-                  "Stonehenge",
+                  t("tour.winsdor_castle"),
+                  t("tour.george_chapel"),
+                  t("tour.roman_baths"),
+                  t("tour.stonehenge"),
                 ]}
                 subtitles={[
-                  "Stop: 60 minutes - Admission included",
-                  "Stop: 60 minutes - Admission included",
-                  "Stop: 60 minutes - Admission included",
-                  "Stop: 60 minutes - Admission included",
+                  t("tour.stop_min", { min: "60" }) +
+                    " - " +
+                    t("tour.admission_included"),
+                  t("tour.stop_min", { min: "60" }) +
+                    " - " +
+                    t("tour.admission_included"),
+                  t("tour.stop_min", { min: "60" }) +
+                    " - " +
+                    t("tour.admission_included"),
+                  t("tour.stop_min", { min: "60" }) +
+                    " - " +
+                    t("tour.admission_included"),
                 ]}
                 details={timelineDetails}
               />

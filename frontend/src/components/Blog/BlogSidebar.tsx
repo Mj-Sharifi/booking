@@ -6,19 +6,19 @@ import Link from "next/link";
 import { blogCategoryData, blogData } from "@/types/response";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import NavigationLink from "../link/NavigationLink";
 type props = {
   handleCategory: (c: string) => void;
   category: string[];
 };
 export default function BlogSidebar({ handleCategory, category }: props) {
-  const t = useTranslations()
-  const {locale}=useParams()
+  const t = useTranslations();
+  const { locale } = useParams();
   const [allCategories, setAllCategories] = useState<blogCategoryData[]>();
   useEffect(() => {
     axios
       .get(process.env.NEXT_PUBLIC_API + `blog-categories?locale=${locale}`)
       .then((res) => setAllCategories(res.data.data));
-
   }, []);
   const [recentPosts, setRecentPost] = useState<blogData[]>();
   useEffect(() => {
@@ -29,12 +29,14 @@ export default function BlogSidebar({ handleCategory, category }: props) {
       )
       .then((res) => setRecentPost(res.data.data));
   }, []);
-  
+
   return (
     <div>
       <div className="flex flex-col gap-6">
         <div>
-          <span className="font-semibold md:text-lg">{t("common.categories")}</span>
+          <span className="font-semibold md:text-lg">
+            {t("common.categories")}
+          </span>
           {allCategories && (
             <ul className="mt-2">
               <li>
@@ -48,13 +50,9 @@ export default function BlogSidebar({ handleCategory, category }: props) {
               {allCategories?.map((e) => (
                 <li key={e.id}>
                   <CheckboxInput
-                    onChange={() =>
-                      handleCategory(e.attributes.value)
-                    }
+                    onChange={() => handleCategory(e.attributes.value)}
                     value={e.attributes.value}
-                    checked={category.includes(
-                      e.attributes.value
-                    )}
+                    checked={category.includes(e.attributes.value)}
                     label={e.attributes.title}
                   />
                 </li>
@@ -63,11 +61,20 @@ export default function BlogSidebar({ handleCategory, category }: props) {
           )}
         </div>
         <div>
-          <span className="font-semibold md:text-lg mb-2">{t("blog.recent_posts")}</span>
-          <ul className="mt-2"> 
+          <span className="font-semibold md:text-lg mb-2">
+            {t("blog.recent_posts")}
+          </span>
+          <ul className="mt-2">
             {recentPosts?.slice(0, 5)?.map((e) => (
               <li key={e.id} className="mb-4 text-light dark:text-lighter">
-               <Link href={""}>{e.attributes.title}</Link> 
+                <NavigationLink
+                  href={{
+                    pathname: "/blog/[id]",
+                    params: { id:e.id },
+                  }}
+                >
+                  {e.attributes.title}
+                </NavigationLink>
               </li>
             ))}
           </ul>

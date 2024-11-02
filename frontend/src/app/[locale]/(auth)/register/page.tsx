@@ -45,11 +45,11 @@ export default function Register() {
         }
       >
         {({ values, touched, errors, setFieldValue, setFieldTouched }) => (
-          <Form className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-8 lg:gap-y-12 w-11/12 sm:w-96 lg:w-128 py-6 px-4 sm:p-6 lg:p-10">
-            <span className="md:text-lg xl:text-xl font-semibold">
+          <Form className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-6 w-11/12 sm:w-96 lg:w-128 p-4 lg:p-8">
+            <span className="md:text-lg xl:text-xl font-semibold -mb-6 sm:-mb-2">
               {t("common.welcome")}
             </span>
-            <span className="text-light dark:text-lighter text-xs md:text-sm">
+            <span className="text-light dark:text-lighter text-xs md:text-sm -mb-2  sm:-mb-0">
               {t("profile.already_have_account")}{" "}
               <NavigationLink
                 href={"/login"}

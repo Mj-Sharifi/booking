@@ -29,7 +29,6 @@ export default function FileUploader({
   errorMessage,
 }: props) {
   const t = useTranslations("profile");
-  // console.log("imgurl: ",imageURL);
   return (
     <div className={"flex flex-col md:flex-row gap-3"}>
       <div className="flex flex-col gap-y-2 text-justify">
@@ -50,7 +49,7 @@ export default function FileUploader({
         />
         <label
           htmlFor={id || `image_uploder_${name}`}
-          className="duration-300 px-3 py-2 rounded-md bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark flexCenter gap-2 w-fit"
+          className="duration-300 cursor-pointer px-3 py-2 rounded-md bg-darkblue hover:bg-dark dark:bg-lightblue dark:hover:bg-white text-white dark:text-dark flexCenter gap-2 w-fit"
         >
           {t("browse")} <FaUpload size={16} />
         </label>

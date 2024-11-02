@@ -55,9 +55,6 @@ export default function SingleBlog() {
             className="mx-auto w-3/4 mb-8"
           />
           <div className="mx-auto w-11/12 lg:w-3/5">
-            <h4 className="font-semibold text-sm sm:text-base lg:text-xl">
-              What makes a good brand book?
-            </h4>
             <p className="text-justify text-xs sm:text-sm lg:text-base my-4">
               {t("blog.p1")}
             </p>

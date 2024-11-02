@@ -13,7 +13,7 @@ export default function layout({
 }>) {
   return (
     <>
-      <Navbar />
+  
       <main>{children}</main>
       <Footer locale={locale as "en" | "fa"} />
     </>

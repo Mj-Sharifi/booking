@@ -48,11 +48,11 @@ export default function Login() {
         }
       >
         {({ values, errors, touched, setFieldTouched, setFieldValue }) => (
-          <Form className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-8 lg:gap-y-12 w-80 sm:w-96 lg:w-100 p-2 sm:p-6 lg:p-10">
-            <span className="md:text-lg xl:text-xl font-semibold">
+          <Form className="duration-300 rounded-md bg-white text-dark dark:bg-profile_dark dark:text-white flex flex-col gap-y-10 sm:gap-y-6 w-80 sm:w-96 lg:w-100 p-2 sm:p-5 lg:p-8">
+            <span className="md:text-lg xl:text-xl font-semibold -mb-6 sm:-mb-2">
               {t("common.welcome_back")}
             </span>
-            <span className="text-light dark:text-lighter text-xs md:text-sm">
+            <span className="text-light dark:text-lighter text-xs md:text-sm -mb-2 sm:-mb-0">
               {t("profile.dont_have_account")}{" "}
               <NavigationLink
                 href={"/register"}

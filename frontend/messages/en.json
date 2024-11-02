@@ -149,7 +149,14 @@
     "submitted_successfully":"your order was submitted successfully!",
     "booking_details_sent_to":"Booking details has been sent to <span></span>",
     "booking_details":"Your booking details",
-    "Let_know_you":"Let us know who you are"
+    "Let_know_you":"Let us know who you are",
+    "see_details":"See details & photo",
+    "stop_min":"Stop: {min} minutes",
+    "admission_included":"Admission included",
+    "windsor_castle":"Windsor Castle",
+    "george_chapel":"St. George's Chapel",
+    "roman_baths":"The Roman Baths",
+    "stonehenge":"Stonehenge"
   },
 
   "testimony": {
