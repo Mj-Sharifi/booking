@@ -1,5 +1,6 @@
 "use client";
 import FileUploader from "@/components/Form/FileUploader";
+import RadioInput from "@/components/Form/RadioInput";
 import TextAreaInput from "@/components/Form/TextAreaInput";
 import TextInput from "@/components/Form/TextInput";
 import { userInfo } from "@/types/response";
@@ -10,6 +11,7 @@ import { Form, Formik } from "formik";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { FaFemale, FaMale } from "react-icons/fa";
 import { FaClipboardUser } from "react-icons/fa6";
 
 export default function page() {
@@ -21,7 +23,7 @@ export default function page() {
     axios.get(process.env.NEXT_PUBLIC_API + "users/me?populate=*", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${user_info.jwt}`,
+        Authorization: `Bearer ${user_info?.jwt}`,
       },
     });
   }, [user_info]);
@@ -46,71 +48,71 @@ export default function page() {
       onSubmit={(e) => {
         const formData = new FormData();
         formData.append("files", e.avatar);
-        // if (e.avatar) {
-        //   axios
-        //     .post(process.env.NEXT_PUBLIC_API + "upload", formData)
-        //     .then((res) => {
-        //       const imageId = res.data[0].id;
-        //       axios
-        //         .put(
-        //           process.env.NEXT_PUBLIC_API +
-        //             `users/${user_info?.user?.id}?populate=*`,
-        //           {
-        //             username: e.username,
-        //             firstname: e.firstname,
-        //             lastname: e.lastname,
-        //             email: e.email || null,
-        //             phone: e.phone || null,
-        //             birthday: e.birthday || null,
-        //             about: e.about,
-        //             avatar: imageId,
-        //           },
-        //           {
-        //             headers: {
-        //               "Content-Type": "application/json",
-        //               Authorization: `Bearer ${user_info?.jwt}`,
-        //             },
-        //           }
-        //         )
-        //         .then((res) => {
-        //           if (res && res.data) {
-        //             updateUser();
-        //           }
-        //         })
-        //         .catch((err) => console.log(err));
-        //     })
-        //     .catch((error) => {
-        //       //handle error
-        //     });
-        // } else {
-        //   axios
-        //     .put(
-        //       process.env.NEXT_PUBLIC_API +
-        //         `users/${user_info?.user?.id}?populate=*`,
-        //       {
-        //         username: e.username || null,
-        //         firstname: e.firstname || null,
-        //         lastname: e.lastname || null,
-        //         email: e.email || null,
-        //         phone: e.phone || null,
-        //         birthday: e.birthday || null,
-        //         about: e.about || null,
-        //         avatar: null,
-        //       },
-        //       {
-        //         headers: {
-        //           "Content-Type": "application/json",
-        //           Authorization: `Bearer ${user_info?.jwt}`,
-        //         },
-        //       }
-        //     )
-        //     .then((res) => {
-        //       if (res && res.data) {
-        //         updateUser();
-        //       }
-        //     })
-        //     .catch((err) => console.log(err));
-        // }
+        if (e.avatar) {
+          axios
+            .post(process.env.NEXT_PUBLIC_API + "upload", formData)
+            .then((res) => {
+              const imageId = res.data[0].id;
+              axios
+                .put(
+                  process.env.NEXT_PUBLIC_API +
+                    `users/${user_info?.user?.id}?populate=*`,
+                  {
+                    username: e.username,
+                    firstname: e.firstname,
+                    lastname: e.lastname,
+                    email: e.email || null,
+                    phone: e.phone || null,
+                    birthday: e.birthday || null,
+                    about: e.about,
+                    avatar: imageId,
+                  },
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${user_info?.jwt}`,
+                    },
+                  }
+                )
+                .then((res) => {
+                  if (res && res.data) {
+                    updateUser();
+                  }
+                })
+                .catch((err) => console.log(err));
+            })
+            .catch((error) => {
+              //handle error
+            });
+        } else {
+          axios
+            .put(
+              process.env.NEXT_PUBLIC_API +
+                `users/${user_info?.user?.id}?populate=*`,
+              {
+                username: e.username || null,
+                firstname: e.firstname || null,
+                lastname: e.lastname || null,
+                email: e.email || null,
+                phone: e.phone || null,
+                birthday: e.birthday || null,
+                about: e.about || null,
+                avatar: null,
+              },
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${user_info?.jwt}`,
+                },
+              }
+            )
+            .then((res) => {
+              if (res && res.data) {
+                updateUser();
+              }
+            })
+            .catch((err) => console.log(err));
+        }
         if (user_info?.user?.avatar && e.avatar == null) {
           // Remove image from database
           axios
@@ -146,8 +148,7 @@ export default function page() {
                     setFieldTouched("avatar", true);
                     setImageForm(v[0]);
                   } else {
-                    setFieldValue(
-                      "avatar",null);
+                    setFieldValue("avatar", null);
                     setImageForm(undefined);
                   }
                 }}
@@ -169,7 +170,19 @@ export default function page() {
                 }
                 onBlur={() => setFieldTouched("old_password", true)}
               />
-              <div></div>
+              <RadioInput
+                values={["male", "female"]}
+                initialValue={values.gender ? "male" : "female"}
+                onChange={(v) =>
+                  setFieldValue("gender", v == "male" ? true : false)
+                }
+                rightLabel={t("profile.male")}
+                leftLabel={t("profile.female")}
+                rightIcon={<FaMale size={22} />}
+                leftIcon={<FaFemale size={22} />}
+                hideLabel="never"
+                size="medium"
+              />
               <TextInput
                 name="firstname"
                 label={t("profile.firstname")}
@@ -226,10 +239,10 @@ export default function page() {
             <button
               type="submit"
               className="duration-300 px-6 py-2 rounded-md bg-darkblue dark:bg-lightblue text-white dark:text-dark hover:bg-dark dark:hover:bg-white"
-              onClick={(e) => {
-                console.log("errors: ", errors);
-                console.log("values: ", values);
-              }}
+              // onClick={(e) => {
+              //   console.log("errors: ", errors);
+              //   console.log("values: ", values);
+              // }}
             >
               {t("common.apply")}
             </button>

@@ -8,7 +8,7 @@ type props = {
   rightIcon?: ReactNode;
   rightLabel?: string;
   leftLabel?: string;
-  hideLabel?: "sm" | "md" | "lg" | "xl" | "2xl" | "hide";
+  hideLabel?: "sm" | "md" | "lg" | "xl" | "2xl" | "hide" | "never";
   size?: "small" | "medium" | "large";
 };
 export default function RadioInput({
@@ -31,7 +31,11 @@ export default function RadioInput({
       <button
         type="button"
         className={`${
-          hideLabel == "hide" ? "hidden" : `hidden ${hideLabel}:block`
+          hideLabel == "hide"
+            ? "hidden"
+            : hideLabel == "never"
+            ? "block"
+            : `hidden ${hideLabel}:block`
         } ${
           size == "small"
             ? "text-xs"
@@ -91,7 +95,11 @@ export default function RadioInput({
       <button
         type="button"
         className={`${
-          hideLabel == "hide" ? "hidden" : `hidden ${hideLabel}:block`
+          hideLabel == "hide"
+            ? "hidden"
+            : hideLabel == "never"
+            ? "block"
+            : `hidden ${hideLabel}:block`
         } ${
           size == "small"
             ? "text-xs"

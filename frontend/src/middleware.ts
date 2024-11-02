@@ -1,5 +1,5 @@
 import createMiddleware from "next-intl/middleware";
-import { defaultLocale, locales, protectedRoutes } from "./utils/utils";
+import { defaultLocale } from "./utils/utils";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ const validateToken = async (request: NextRequest) => {
   // Create a response object so we can set cookies on it
   if (user_info) {
     try {
-      const { jwt } = JSON.parse(user_info.value);
+      const { jwt } = JSON.parse(user_info?.value);
       // Validate token via API call
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API}users/me?populate=*`,
@@ -49,7 +49,7 @@ const validateToken = async (request: NextRequest) => {
       // Token validation failed, so delete the 'user_info' cookie
       response.cookies.delete("user_info");
 
-      if (protectedRoutes.includes(pathname)) {
+      if (pathname.includes("/profile/")||pathname.includes("/booking")) {
         return NextResponse.redirect(
           new URL(`/${locale === "en" ? "" : locale}`, request.url)
         );
@@ -57,9 +57,9 @@ const validateToken = async (request: NextRequest) => {
       return response;
     }
   }
-
   // No user_info present or path is protected
-  if (protectedRoutes.includes(pathname)) {
+  if (pathname.includes("/profile/") || pathname.includes("/booking")) {
+    console.log("1111");
     return NextResponse.redirect(
       new URL(`/${locale === "en" ? "" : locale}`, request.url)
     );
@@ -75,7 +75,7 @@ export default async function middleware(request: NextRequest) {
   const response = await validateToken(request);
 
   // Handle restricted paths and ensure rewrites are handled at the end
-  if (protectedRoutes.includes(pathname) && !userInfo) {
+  if ((pathname.includes("/profile/") || pathname.includes("/booking")) && !userInfo) {
     return NextResponse.redirect(new URL("/", request.url));
   }
   return response; // Return the final response from validateToken
