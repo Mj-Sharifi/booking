@@ -273,7 +273,8 @@
   },
   "notif": {
     "login_successful": "با موفقیت وارد شدید.",
-    "register_successful": "ثبت نام با موفقیت انجام شد."
+    "register_successful": "ثبت نام با موفقیت انجام شد.",
+    "cant_logout":"شما نمی‌توانید در این صفحه خارج شوید."
   },
   "country": {
     "iri": "ایران",

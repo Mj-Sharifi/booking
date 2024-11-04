@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
 import NavigationLink from "../link/NavigationLink";
 import {
   FaFacebookF,

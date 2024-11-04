@@ -16,8 +16,8 @@ export const isTarget = (e: any, classnames: Array<string> = []) => {
     }
   }
 };
-export const onlyNumbers = (value: string): number => {
-  return +value.replace(/[^0-9]/g, "");
+export const onlyNumbers = (value: string): string => {
+  return value.replace(/[^0-9]/g, "");
 
 }
 export const getCookie = (cname: string) => {

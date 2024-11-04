@@ -14,7 +14,7 @@ export default function Drawer({
   onClose,
   allowOutsideClick = true,
 }: props) {
-  const handleWindowClick = (e: MouseEventHandler<HTMLDivElement>) => {
+  const handleWindowClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (allowOutsideClick && !isTarget(e, ["drawer-el"])) {
       setTimeout(() => onClose(false), 0);
     }
@@ -32,7 +32,7 @@ export default function Drawer({
     return (
       <div
         className={`${show?"body-black-wrapper fixed top-0 right-0 bottom-0 left-0 z-[999] min-h-screen h-full min-w-full w-full overflow-y-auto overflow-x-hidden grid items-center place-items-center p-4 bg-fade-popup":""}`}
-        onClick={handleWindowClick}
+        onClick={(e)=>handleWindowClick(e)}
       >
         <div
           className={`drawer-el w-72 px-4 flex justify-center tour-mobile-filters duration-300 fixed bg-white dark:bg-dark top-0 bottom-0 z-[1000] min-h-screen ltr:border-r rtl:border-l border-darkblue dark:border-lightblue ${

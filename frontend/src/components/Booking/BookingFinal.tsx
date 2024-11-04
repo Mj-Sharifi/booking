@@ -126,7 +126,11 @@ export default function BookingFinal() {
         <div className="flexBetween py-2 gap-x-4">
           <span>{t("profile.city")}</span>
           <span className="text-dakblue dark:text-lightblue first-letter:uppercase">
-            {user_info.user.city}
+            {countries
+          .filter((cn) => cn.value == user_info.user.country)[0]
+          .cities.filter((ct) => ct.value == user_info.user.city)[0][
+          locale == "fa" ? "name_fa" : "name_en"
+        ]}
           </span>
         </div>
         <div className="flexBetween py-2 gap-x-4">

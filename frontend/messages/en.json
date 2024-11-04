@@ -276,7 +276,8 @@
   },
   "notif": {
     "login_successful": "You have logged in successfully",
-    "register_successful": "You have registered in successfully"
+    "register_successful": "You have registered in successfully",
+    "cant_logout":"You are not allowed to log out on this page."
   },
   "country": {
     "iri": "Iran",

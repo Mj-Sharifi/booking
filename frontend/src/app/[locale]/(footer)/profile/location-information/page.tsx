@@ -17,7 +17,10 @@ import { FaLocationDot } from "react-icons/fa6";
 export default function page() {
   const { locale } = useParams();
   const t = useTranslations();
-  const [{ user_info }] = useCookies<"user_info", { user_info: userInfo }>(["user_info"]);
+  const [{ user_info }] = useCookies<"user_info", { user_info: userInfo }>([
+    "user_info",
+  ]);
+
   return (
     <Formik
       initialValues={{

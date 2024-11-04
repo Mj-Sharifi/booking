@@ -18,6 +18,7 @@ import Dropdown from "../Dropdown";
 import { useRouter } from "@/navigation";
 import { locale } from "@/types/types";
 import { userInfo } from "@/types/response";
+import { showNotif } from "@/utils/notification";
 
 const pages = ["home", "tour", "blog"];
 
@@ -88,6 +89,7 @@ export default function Navbar() {
   };
   const logoutUser = () => {
     if (pathName.includes("/booking")) {
+      showNotif(t(`notif.cant_logout`), "info");
     } else if (pathName.includes("/profile/")) {
       removeCookie("user_info", { path: "/" });
       router.push("/", { locale });

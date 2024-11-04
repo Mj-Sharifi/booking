@@ -32,13 +32,25 @@ export default function GuestSelection({ value, onChange }: props) {
     setGuest(newGuest);
   };
   useEffect(() => {
-      
     document.addEventListener("click", (e: MouseEvent) => {
       if (!(e.target as HTMLElement).closest(".guest-selection")) {
         setGuestEl(false);
       }
     });
   }, []);
+  useEffect(() => {
+    if (guestSelectionDiv.current) {
+      if (guestEl) {
+        guestSelectionDiv.current.style.zIndex = "10";
+      } else {
+        setTimeout(() => {
+          guestSelectionDiv.current
+            ? (guestSelectionDiv.current.style.zIndex = "-1")
+            : undefined;
+        }, 500);
+      }
+    }
+  }, [guestEl]);
   useEffect(() => {
     onChange(guest);
   }, [JSON.stringify(guest)]);
@@ -79,7 +91,7 @@ export default function GuestSelection({ value, onChange }: props) {
               value={guest.adult}
               onChange={(e) => {
                 console.log(e.target.value);
-                handleGuest("adult", onlyNumbers(e.target.value));
+                handleGuest("adult", +onlyNumbers(e.target.value));
               }}
               className="w-9 h-9 flexCenter text-center outline-none border-0 rounded dark:bg-dark dark:text-white dark:border-2 dark:border-white"
             />
@@ -108,7 +120,7 @@ export default function GuestSelection({ value, onChange }: props) {
             <input
               value={guest.children}
               onChange={(e) => {
-                handleGuest("children", onlyNumbers(e.target.value));
+                handleGuest("children", +onlyNumbers(e.target.value));
               }}
               className="w-9 h-9 flexCenter text-center outline-none border-0 rounded dark:bg-dark dark:text-white dark:border-2 dark:border-white"
             />
@@ -138,7 +150,7 @@ export default function GuestSelection({ value, onChange }: props) {
             <input
               value={guest.rooms}
               onChange={(e) => {
-                handleGuest("rooms", onlyNumbers(e.target.value));
+                handleGuest("rooms", +onlyNumbers(e.target.value));
               }}
               className="w-9 h-9 flexCenter text-center outline-none border-0 rounded dark:bg-dark dark:text-white dark:border-2 dark:border-white"
             />
