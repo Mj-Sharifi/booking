@@ -37,6 +37,9 @@ export default function Tours() {
     } else {
       // @ts-ignore
       setCategory([...category, c]);
+      if (category && category.length == 4) {
+        setCategory([]);
+      }
     }
   };
 
@@ -50,8 +53,9 @@ export default function Tours() {
     }
   };
   // Handle Price
-  const [priceRange, setPriceRange] = useState<number[]>();
-  const handlePrice = (newValue: number[]) => {
+  const [priceRange, setPriceRange] = useState<[number, number]>();
+  const handlePrice = (newValue: [number, number]) => {
+    console.log("handlePrice");
     setPriceRange(newValue);
   };
   // Handle Free Cancelation
@@ -81,7 +85,7 @@ export default function Tours() {
     }
     let price = searchParams.get("price");
     if (price) {
-      setPriceRange(price.split("-").map(Number));
+      setPriceRange(price.split(",").map(Number) as [number, number]);
     } else {
       setPriceRange([0, 4000]);
     }
@@ -104,10 +108,10 @@ export default function Tours() {
       );
     }
   }, []);
-
   // Backend Filters
   useEffect(() => {
     if (priceRange && category && typeof durationRange == "string") {
+      // setLoading("loading");
       const filterQuery = () => {
         // Category Filter
         let categoryQuery =
@@ -260,6 +264,7 @@ export default function Tours() {
                     setFreeCancelation(!freeCancelation)
                   }
                   handlePrice={handlePrice}
+                  priceRange={priceRange}
                 />
               ) : (
                 ""
@@ -359,6 +364,7 @@ export default function Tours() {
                       setFreeCancelation(!freeCancelation)
                     }
                     handlePrice={(v) => handlePrice(v)}
+                    priceRange={priceRange}
                   />
                 </Drawer>
               ) : (

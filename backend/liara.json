@@ -2,19 +2,11 @@
   "disks": [
     {
       "name": "database",
-      "mountTo": "/.tmp"
+      "mountTo": "/app/.tmp"
     },
     {
       "name": "media",
-      "mountTo": "/public/uploads"
+      "mountTo": "/app/public/uploads"
     }
-  ],
-  "port": 3000,
-  "healthCheck": {
-    "command": "CMD curl --fail http://localhost:3000 || exit 1",
-    "interval": 30,
-    "timeout": 15,
-    "retries": 2,
-    "startPeriod": 5
-  }
+  ]
 }

@@ -25,9 +25,9 @@ export default function PostCard({ id, release_Date, image, title }: props) {
         params: { id },
       }}
     > 
-      <div className="flex flex-col items-center sm:flex-row gap-4 lg:max-h-60 overflow-hidden">
-        <div className="rounded-lg overflow-hidden md:min-w-40 lg:min-w-60 aspect-square">
-          <Image
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 overflow-hidden border-b-2 py-5">
+      <div className="col-span-1 md:col-span-1 rounded-lg overflow-hidden">
+      <Image
             src={process.env.NEXT_PUBLIC_URL + image}
             alt={title}
             width={300}
@@ -35,7 +35,7 @@ export default function PostCard({ id, release_Date, image, title }: props) {
             className="w-full h-full object-cover hover:scale-110 duration-300"
           />
         </div>
-        <div className="flex flex-col gap-2 md:gap-4">
+        <div className="sm:col-span-2 md:col-span-3 flex flex-col justify-start gap-2 sm:gap-4 sm:py-1">
           <span>{formattedDate}</span>
           <h2 className="font-semibold text-lg md:text-xl">{title}</h2>
           <p className="text-sm md:text-base text-light dark:text-lighter">
@@ -46,3 +46,21 @@ export default function PostCard({ id, release_Date, image, title }: props) {
     </NavigationLink>
   );
 }
+{/* <div className="flex flex-col items-center sm:flex-row gap-4 lg:max-h-60 overflow-hidden border-b-2 py-5">
+<div className="rounded-lg overflow-hidden md:min-w-40 lg:min-w-60 aspect-square">
+  <Image
+    src={process.env.NEXT_PUBLIC_URL + image}
+    alt={title}
+    width={300}
+    height={300}
+    className="w-full h-full object-cover hover:scale-110 duration-300"
+  />
+</div>
+<div className="flex flex-col gap-2 md:gap-4">
+  <span>{formattedDate}</span>
+  <h2 className="font-semibold text-lg md:text-xl">{title}</h2>
+  <p className="text-sm md:text-base text-light dark:text-lighter">
+    {t("lorem_ipsum_long")}
+  </p>
+</div>
+</div> */}

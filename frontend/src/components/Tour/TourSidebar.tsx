@@ -1,9 +1,6 @@
 "use client";
-import React, { useState, useEffect, SetStateAction, Dispatch } from "react";
-import axios from "axios";
+import React from "react";
 import CheckboxInput from "@/components/Form/CheckboxInput";
-import Link from "next/link";
-import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { tourCategoryData } from "@/types/response";
 import RangeSlider from "../Form/RangeSlider";
@@ -15,7 +12,8 @@ type props = {
   duration: string;
   freeCancelation: boolean;
   handleFreeCancelation: () => void;
-  handlePrice: (p: number[]) => void;
+  handlePrice: ([p1,p2]:[number,number]) => void;
+  priceRange:[number,number]
 };
 export default function TourSidebar({
   allCategories,
@@ -26,6 +24,7 @@ export default function TourSidebar({
   freeCancelation,
   handleFreeCancelation,
   handlePrice,
+  priceRange
 }: props) {
   const t = useTranslations();
 
@@ -99,7 +98,7 @@ export default function TourSidebar({
       <div className="py-6">
         <span className="font-semibold md:text-lg">{t("tour.price")}</span>
         <div className="mt-2">
-          <RangeSlider min={0} max={4000} onChange={handlePrice} />
+          <RangeSlider min={0} max={4000} onChange={handlePrice} values={priceRange} step={200}/>
         </div>
       </div>
     </div>

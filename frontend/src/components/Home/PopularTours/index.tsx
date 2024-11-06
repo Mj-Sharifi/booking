@@ -10,7 +10,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 // import "./style.css";
-import "@/styles/popularTourSlider.css"
+import "@/Styles/popularTourSlider.css"
 import { tourData } from "@/types/response";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";

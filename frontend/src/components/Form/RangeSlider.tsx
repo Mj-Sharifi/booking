@@ -1,12 +1,13 @@
 import { ChangeEvent, useCallback, useEffect, useState, useRef } from "react";
-import "@/styles/rangeSlider.css";
+import "@/Styles/rangeSlider.css";
 
 type props = {
   min: number;
   max: number;
   size?: "small" | "medium" | "large";
-  values?:number[]
-  onChange: (v: number[]) => void;
+  values?:[number,number]
+  onChange: ([v1,v2]: [number,number]) => void;
+  step?:number
 };
 
 import React from "react";
@@ -15,12 +16,13 @@ export default function RangeSlider({
   min,
   max,
   size = "small",
-  values=[1,50,100],
+  values=[min,max],
   onChange,
+  step
 }: props) {
-  const [vals,setVals]=useState<number[]>(values)
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
+  // const [vals,setVals]=useState<number[]>(values)
+  const [minVal, setMinVal] = useState(values[0]);
+  const [maxVal, setMaxVal] = useState(values[1]);
   const minValRef = useRef<HTMLInputElement>(null);
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
@@ -81,6 +83,7 @@ export default function RangeSlider({
             ? "thumb-medium"
             : "thumb-large"
         } z-[3]  ${minVal > max - 100 ? "z-[5]" : ""}`}
+        step={step||1}
       />
       <input
         type="range"
@@ -100,6 +103,7 @@ export default function RangeSlider({
             ? "thumb-medium"
             : "thumb-large"
         } z-[4]`}
+        step={step||1}
       />
       <div className="relative w-full">
         <div

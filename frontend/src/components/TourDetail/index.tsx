@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import "@/styles/popularTourSlider.css";
+import "@/Styles/popularTourSlider.css";
 import { FaBus, FaRegClock, FaUsers } from "react-icons/fa6";
 import { TiCancel } from "react-icons/ti";
 import { useTranslations } from "next-intl";

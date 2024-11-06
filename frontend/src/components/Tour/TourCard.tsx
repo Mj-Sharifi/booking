@@ -26,9 +26,8 @@ export default function TourCard({
 }: props) {
   const t = useTranslations();
   return (
-
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 overflow-hidden border-b-2 py-5">
-        <div className="col-span-1  md:col-span-1 rounded-lg overflow-hidden">
+        <div className="col-span-1 md:col-span-1 rounded-lg overflow-hidden">
           <Image
             src={process.env.NEXT_PUBLIC_URL + image}
             alt={title}

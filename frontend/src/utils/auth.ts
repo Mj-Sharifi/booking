@@ -1,8 +1,6 @@
 import * as yup from "yup";
 import { countries } from "./location";
-import { Cookies } from "react-cookie";
 
-const cookie = new Cookies();
 const generateError = (errText: string, title?: string): string => {
   return title ? `${title}_${errText}` : errText;
 };

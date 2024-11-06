@@ -1,6 +1,6 @@
 "use client";
 import NavigationLink from "@/components/link/NavigationLink";
-import "@/styles/global.css";
+import "@/Styles/global.css";
 import { locale } from "@/types/types";
 import { NextIntlClientProvider } from "next-intl";
 import Image from "next/image";

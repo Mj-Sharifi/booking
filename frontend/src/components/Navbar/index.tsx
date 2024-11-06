@@ -97,7 +97,7 @@ export default function Navbar() {
       removeCookie("user_info", { path: "/" });
     }
   };
-
+  
   return (
     <>
       <nav

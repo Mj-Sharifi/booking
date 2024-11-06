@@ -1,5 +1,6 @@
 import { Pathnames, LocalePrefix } from 'next-intl/routing';
 import { locales } from './utils/utils';
+// import { locales } from './utils/utils';
 
 
 export const pathnames = {
