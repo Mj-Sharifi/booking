@@ -6,7 +6,6 @@ import HamburgerMenu from "./HamburgerMenu";
 import { useTranslations } from "next-intl";
 import { capitalizaWords, localeFlag, locales } from "@/utils/utils";
 import { HiChevronDown } from "react-icons/hi";
-import Popup from "../Popup/Popup";
 import LangSwitcher from "./LangSwitcher";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import RadioInput from "../Form/RadioInput";
@@ -18,7 +17,8 @@ import Dropdown from "../Dropdown";
 import { useRouter } from "@/navigation";
 import { locale } from "@/types/types";
 import { userInfo } from "@/types/response";
-import { showNotif } from "@/utils/notification";
+import { showNotif } from "@/Utils/notification";
+import Popup from "../popup/Popup";
 
 const pages = ["home", "tour", "blog"];
 
